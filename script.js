@@ -21,8 +21,8 @@ const FIREBASE_CONFIG = {
 };
 
 const siteData = {
-  whatsappNumber: "919999999999",
-  phoneNumber: "+919999999999",
+  whatsappNumber: "919880281879",
+  phoneNumber: "+919880281879",
   ticker: "Saturday, 8 August 2026 · 9:00 AM: Mega procession from Shri Kadasiddeshwar Temple to Chennamma Circle. Saradi hunger Satyagraha begins thereafter.",
   initialPosts: [
     {
