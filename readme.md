@@ -1,43 +1,39 @@
 # Banahatti Abhivruddhi – Praja Soudha Movement Website
 
-## Simple Google login for the Committee Editor
+## Committee editor authentication
 
-The editor is hidden until the authorised Google account signs in.
+The photo/video/update editor is hidden until the authorised account signs in.
 
-**Authorised Gmail account:** `shiddu@gmail.com`
+**Authorised email:** `shiddu@gmail.com`
 
-This version uses **Google Sign-In through Firebase Authentication**. There is no OTP to type and no separate password. Click **Sign in with Google**, choose `shiddu@gmail.com`, and the editor opens.
+Authentication uses Supabase email OTP / magic-link login. No password is stored in the website.
 
 ### One-time setup
 
-1. Open Firebase Console and create a project.
-2. Add a **Web app** to the project.
-3. Open **Authentication → Sign-in method** and enable **Google**.
-4. Open **Authentication → Settings → Authorized domains** and add the domain where this website will be hosted.
-5. Copy the Firebase configuration shown for the web app.
-6. Open `script.js` and replace:
+1. Create a Supabase project.
+2. In Supabase, open **Authentication → Providers → Email** and enable email OTP/magic-link login.
+3. Under **Authentication → URL Configuration**, add the website's final public URL to the allowed redirect URLs.
+4. Open `script.js` and replace:
 
 ```js
-const FIREBASE_CONFIG = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  appId: "YOUR_FIREBASE_APP_ID"
-};
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
 ```
+
+Use the Project URL and public anon key found in **Project Settings → API**.
 
 ### Access behaviour
 
-- Only `shiddu@gmail.com` is accepted.
-- Any other Google account is immediately signed out and denied access.
-- The Committee Editor becomes visible only after successful sign-in.
-- Use the **Sign out** button when finished.
+- Only `shiddu@gmail.com` is accepted by the website editor.
+- A login code or secure sign-in link is sent to that inbox.
+- Any other authenticated Supabase account is automatically signed out and denied access.
+- The editor becomes visible only after successful authentication.
 
-### Important limitation
+### Important security note
 
-New photo/video posts are currently stored in IndexedDB on the signed-in browser only. They are not visible to visitors using other phones or computers. Public multi-device publishing requires cloud storage/database and server-side security rules.
+The client-side email check protects the editor interface, but server-side security must also be enforced before public cloud publishing is added. When posts are moved to Supabase Database/Storage, enable Row Level Security and write policies that permit insert/update/delete only when `auth.jwt()->>'email' = 'shiddu@gmail.com'`.
 
-An authenticator-app code cannot be implemented securely inside a static HTML/JavaScript website because the secret would be exposed in the website code. Google login is the simpler and safer option for this version.
+The present version stores newly added posts in IndexedDB on the signed-in browser only. They are not automatically visible on other devices.
 
 ## Other edits
 

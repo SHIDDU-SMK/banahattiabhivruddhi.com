@@ -8,20 +8,18 @@
   5. Posts are still stored in this browser using IndexedDB. Public multi-device
      publishing requires cloud database/storage with server-side access rules.
 */
+
 const AUTHORIZED_EDITOR_EMAIL = "shiddu@gmail.com";
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyAYWEeL1wwZIaTBYXedYewlRq9z3Fbe_9E",
-  authDomain: "banahattiabhivruddhi.firebaseapp.com",
-  projectId: "banahattiabhivruddhi",
-  storageBucket: "banahattiabhivruddhi.firebasestorage.app",
-  messagingSenderId: "761371982615",
-  appId: "1:761371982615:web:03b4763122b4c21b7a5552",
-  measurementId: "G-TMBFE8NV43"
+  apiKey: "YOUR_FIREBASE_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  appId: "YOUR_FIREBASE_APP_ID"
 };
 
 const siteData = {
-  whatsappNumber: "919880281879",
-  phoneNumber: "+919880281879",
+  whatsappNumber: "919999999999",
+  phoneNumber: "+919999999999",
   ticker: "Saturday, 8 August 2026 · 9:00 AM: Mega procession from Shri Kadasiddeshwar Temple to Chennamma Circle. Saradi hunger Satyagraha begins thereafter.",
   initialPosts: [
     {
@@ -124,11 +122,21 @@ function updateEditorAccess(user) {
   session.hidden = !authorised;
   access.classList.toggle("authenticated", authorised);
 
+  const eyebrow = $("#editorAccessEyebrow");
+  const title = $("#editorAccessTitle");
+  const message = $("#editorAccessMessage");
+
   if (authorised) {
     $("#signedInEmail").textContent = user.email;
-    $("#authStatus").textContent = "Google sign-in successful.";
+    $("#authStatus").textContent = "";
+    eyebrow.textContent = "Authorised committee access";
+    title.textContent = "Committee editor unlocked";
+    message.textContent = "You are securely signed in. Use the editor below to publish a photo, video or movement update.";
   } else {
     $("#signedInEmail").textContent = "";
+    eyebrow.textContent = "Restricted committee access";
+    title.textContent = "Committee editor";
+    message.textContent = "Sign in with the authorised Google account to open the publishing form. Only shiddu@gmail.com is permitted.";
   }
 }
 

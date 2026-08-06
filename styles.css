@@ -304,6 +304,15 @@ button { cursor: pointer; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
+
+/* Ensure authentication states are mutually exclusive.
+   Author display rules otherwise override the browser's hidden attribute. */
+#otpForm[hidden],
+#authSession[hidden],
+#publisherPanel[hidden] {
+  display: none !important;
+}
+
 /* Restricted committee editor authentication */
 .editor-access {
   display: grid;
