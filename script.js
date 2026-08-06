@@ -8,18 +8,20 @@
   5. Posts are still stored in this browser using IndexedDB. Public multi-device
      publishing requires cloud database/storage with server-side access rules.
 */
-
 const AUTHORIZED_EDITOR_EMAIL = "shiddu@gmail.com";
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyAYWEeL1wwZIaTBYXedYewlRq9z3Fbe_9E",
   authDomain: "banahattiabhivruddhi.firebaseapp.com",
   projectId: "banahattiabhivruddhi",
-  appId: "1:761371982615:web:03b4763122b4c21b7a5552"
+  storageBucket: "banahattiabhivruddhi.firebasestorage.app",
+  messagingSenderId: "761371982615",
+  appId: "1:761371982615:web:03b4763122b4c21b7a5552",
+  measurementId: "G-TMBFE8NV43"
 };
 
 const siteData = {
-  whatsappNumber: "919999999999",
-  phoneNumber: "+919999999999",
+  whatsappNumber: "919880281879",
+  phoneNumber: "+919880281879",
   ticker: "Saturday, 8 August 2026 · 9:00 AM: Mega procession from Shri Kadasiddeshwar Temple to Chennamma Circle. Saradi hunger Satyagraha begins thereafter.",
   initialPosts: [
     {
