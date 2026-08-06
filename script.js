@@ -11,10 +11,13 @@
 
 const AUTHORIZED_EDITOR_EMAIL = "shiddu@gmail.com";
 const FIREBASE_CONFIG = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  appId: "YOUR_FIREBASE_APP_ID"
+  apiKey: "AIzaSyAYWEeL1wwZIaTBYXedYewlRq9z3Fbe_9E",
+  authDomain: "banahattiabhivruddhi.firebaseapp.com",
+  projectId: "banahattiabhivruddhi",
+  storageBucket: "banahattiabhivruddhi.firebasestorage.app",
+  messagingSenderId: "761371982615",
+  appId: "1:761371982615:web:03b4763122b4c21b7a5552",
+  measurementId: "G-TMBFE8NV43"
 };
 
 const siteData = {
