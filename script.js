@@ -11,20 +11,28 @@
 
 const AUTHORIZED_EDITOR_EMAIL = "shiddu@gmail.com";
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyAYWEeL1wwZIaTBYXedYewlRq9z3Fbe_9E",
-  authDomain: "banahattiabhivruddhi.firebaseapp.com",
-  projectId: "banahattiabhivruddhi",
-  storageBucket: "banahattiabhivruddhi.firebasestorage.app",
-  messagingSenderId: "761371982615",
-  appId: "1:761371982615:web:03b4763122b4c21b7a5552",
-  measurementId: "G-TMBFE8NV43"
+  apiKey: "YOUR_FIREBASE_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  appId: "YOUR_FIREBASE_APP_ID"
 };
 
 const siteData = {
-  whatsappNumber: "919880281879",
-  phoneNumber: "+919880281879",
+  whatsappNumber: "919999999999",
+  phoneNumber: "+919999999999",
   ticker: "Saturday, 8 August 2026 · 9:00 AM: Mega procession from Shri Kadasiddeshwar Temple to Chennamma Circle. Saradi hunger Satyagraha begins thereafter.",
   initialPosts: [
+    {
+      id: "paper-cut-2",
+      type: "Paper Cut",
+      date: "2026-08-07",
+      title: "Newspaper coverage: Banahatti bandh for Praja Soudha demand",
+      text: "This newspaper clipping reports on the Banahatti Praja Soudha movement, the call for a bandh and the public campaign demanding that the Praja Soudha be constructed in Banahatti. The clipping is published here as part of the movement's media record.",
+      mediaKind: "image",
+      mediaUrl: "assets/praja-soudha-paper-cut-2.jpg",
+      link: "",
+      local: false
+    },
     {
       id: "whatsapp-status-1",
       type: "Announcement",

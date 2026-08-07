@@ -365,3 +365,30 @@ button:disabled { opacity: .58; cursor: not-allowed; }
   .reason-grid-four, .status-panels, .principles-grid { grid-template-columns: 1fr; }
   .status-panel { padding: 24px; }
 }
+
+
+/* Terms and Conditions pages */
+.legal-nav { display:flex; align-items:center; gap:1.25rem; }
+.legal-nav a { color:var(--ink); font-weight:700; text-decoration:none; }
+.legal-nav a:hover { color:var(--primary); }
+.legal-main { background:#fffaf9; min-height:70vh; }
+.legal-hero { padding:5.5rem 0 3rem; background:linear-gradient(135deg,#fff 0%,#f9e9ec 100%); border-bottom:1px solid #ead4d8; }
+.legal-hero-inner { max-width:900px; }
+.legal-hero h1 { margin:.55rem 0 1rem; font-size:clamp(2.2rem,5vw,4.4rem); line-height:1.05; color:#74182a; }
+.legal-hero p { max-width:760px; font-size:1.08rem; color:#654b50; }
+.legal-updated { margin-top:1.25rem; font-size:.95rem !important; }
+.legal-layout { display:grid; grid-template-columns:260px minmax(0,820px); gap:3.5rem; align-items:start; padding-top:3.5rem; padding-bottom:5rem; }
+.legal-note { position:sticky; top:100px; padding:1.35rem; border:1px solid #e6c3ca; border-radius:18px; background:#fff; box-shadow:0 12px 30px rgba(83,19,32,.07); }
+.legal-note strong { display:block; color:#961f33; margin-bottom:.5rem; }
+.legal-note p { margin:0; color:#6f565b; font-size:.92rem; line-height:1.65; }
+.legal-content { background:#fff; border:1px solid #edd8dc; border-radius:24px; padding:clamp(1.4rem,4vw,3rem); box-shadow:0 18px 50px rgba(83,19,32,.06); }
+.legal-section + .legal-section { margin-top:2rem; padding-top:2rem; border-top:1px solid #f0dfe2; }
+.legal-section h2 { margin:0 0 .75rem; color:#74182a; font-size:1.3rem; }
+.legal-section p { margin:0; color:#4f4245; line-height:1.8; }
+html[lang="kn"] .legal-content, html[lang="kn"] .legal-hero { font-family:"Noto Sans Kannada",sans-serif; }
+@media (max-width:800px) {
+  .legal-layout { grid-template-columns:1fr; gap:1.5rem; padding-top:2rem; }
+  .legal-note { position:static; }
+  .legal-nav { gap:.8rem; font-size:.88rem; }
+  .legal-hero { padding:3.5rem 0 2.4rem; }
+}

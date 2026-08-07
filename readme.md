@@ -40,3 +40,9 @@ The present version stores newly added posts in IndexedDB on the signed-in brows
 - Replace WhatsApp and phone placeholders in `script.js`.
 - Edit `siteData.initialPosts` for permanent public posts.
 - Photos are stored under `assets/`.
+
+
+## Terms and Conditions pages
+- `terms-en.html` — English Terms and Conditions
+- `terms-kn.html` — Kannada Terms and Conditions
+- Both pages are linked in the website footer.
