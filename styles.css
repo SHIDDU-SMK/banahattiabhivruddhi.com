@@ -466,3 +466,265 @@ html[lang="kn"] .legal-content, html[lang="kn"] .legal-hero { font-family:"Noto 
 @media (max-width: 860px) {
   .main-nav a small { display: inline; margin-left: .35rem; }
 }
+
+
+
+/* =========================================================
+   KANNADA-FIRST BILINGUAL DESIGN — FINAL
+   Kannada is the primary reading layer; English is supporting.
+   ========================================================= */
+html [hidden] { display:none !important; }
+body { font-family:"Noto Sans Kannada", Inter, sans-serif; }
+
+.kn-heading,.kn-card-title,.kn-text,.kn-quote,.kannada-line,.committee-kannada,.hero-kannada,.kn-inline { font-family:"Noto Sans Kannada",sans-serif; }
+.kn-heading { color:var(--red-950); font-size:clamp(1.7rem,3vw,2.55rem); line-height:1.28; font-weight:800; margin:0 0 .35rem; letter-spacing:-.015em; }
+.kn-card-title { color:var(--red-900); font-size:1.2rem; line-height:1.45; font-weight:800; margin:0 0 .25rem; }
+.kn-text { color:#3d3235; font-size:1rem; line-height:1.78; font-weight:550; margin:0 0 .35rem; }
+.kn-quote { display:block; font-size:1.14em; line-height:1.65; font-weight:800; }
+.kn-inline { display:block; color:inherit; font-size:.98rem; line-height:1.45; font-weight:750; }
+.en-inline { display:block; margin-top:2px; font:500 .75rem/1.4 Inter,sans-serif; opacity:.67; }
+
+/* English translations — deliberately smaller and quieter */
+.hero-copy > h1,.section-heading h2,.reason-card > h3,.status-panel > h3,.procession-copy > h2,.satyagraha-copy > h2,.committee-intro > h2,.join-copy > h2,.participation-card > h3,.committee-card h3 {
+  font:600 .84rem/1.45 Inter,sans-serif; color:#877a7d; margin:0 0 1.05rem;
+}
+.hero-intro,.section-heading.split > p:not(.kn-text),.reason-card > p:not(.kn-text),.status-panel > p:not(.kn-text),.procession-copy > p:not(.kn-text):not(.kannada-line),.satyagraha-copy > p:not(.kn-text),.committee-intro > p:not(.kn-text):not(.committee-kannada),.participation-card > p:not(.kn-text),.join-copy > p:not(.kn-text),.join-message > p:not(.kn-text),.campaign-card > p:not(.kn-text) {
+  font:400 .80rem/1.55 Inter,sans-serif; color:#8f8285; margin:0 0 1.2rem;
+}
+
+/* Labels: Kannada on top, English beneath */
+.eyebrow { display:flex; flex-direction:column; gap:2px; font-family:"Noto Sans Kannada",sans-serif; font-weight:800; letter-spacing:.05em; }
+.eyebrow small { font:600 .66rem/1.25 Inter,sans-serif; opacity:.60; letter-spacing:.08em; text-transform:uppercase; }
+.brand strong { font-family:"Noto Sans Kannada",sans-serif; font-weight:800; }
+.brand small { font:500 .68rem/1.2 Inter,sans-serif; opacity:.62; }
+.main-nav > a { font-family:"Noto Sans Kannada",sans-serif; font-size:.91rem; font-weight:800; line-height:1.12; }
+.main-nav > a small { display:block; margin-top:3px; font:500 .60rem/1.15 Inter,sans-serif; opacity:.55; }
+.btn { font-family:"Noto Sans Kannada",sans-serif; }
+.btn small { display:block; margin-top:2px; font:500 .66rem/1.15 Inter,sans-serif; opacity:.66; }
+
+/* Hero — Kannada is unmistakably the headline */
+.hero-copy { max-width:720px; }
+.hero-kannada { color:var(--red-700); font-size:1.08rem; line-height:1.5; font-weight:800; margin-bottom:10px; }
+.hero-copy .kn-heading { font-size:clamp(2.45rem,5.1vw,4.65rem); line-height:1.08; max-width:760px; margin-bottom:.4rem; }
+.hero-copy > h1 { font-size:.88rem; margin-bottom:1.15rem; }
+.hero-copy .kn-text { max-width:680px; font-size:1.06rem; }
+.hero-intro { max-width:650px; }
+.hero-points span { font-family:"Noto Sans Kannada",sans-serif; font-weight:700; }
+
+/* Main cards */
+.reason-card,.status-panel,.participation-card,.committee-card { overflow:hidden; }
+.reason-card .kn-text,.status-panel .kn-text { margin-bottom:.3rem; }
+.support-tags span { display:flex; flex-direction:column; gap:1px; }
+
+/* Campaign announcement */
+.campaign-card .kn-text { color:#fff; font-size:1rem; }
+.campaign-card > p:not(.kn-text) { color:rgba(255,255,255,.68); }
+.campaign-card .event-facts dt { font-family:"Noto Sans Kannada",sans-serif; }
+.campaign-card .event-facts dd { color:#fff; }
+.campaign-card .event-facts small { font-family:"Noto Sans Kannada",sans-serif; color:rgba(255,255,255,.88); }
+
+/* Dark procession area — correct the contrast */
+.section-red { color:#fff; }
+.section-red .kn-heading,.section-red .kn-card-title,.section-red .kn-text,.section-red .kannada-line,.section-red .kn-inline { color:#fff !important; }
+.section-red .procession-copy > h2,.section-red .procession-copy > p:not(.kn-text):not(.kannada-line),.section-red .participation-card > h3,.section-red .participation-card > p:not(.kn-text),.section-red .en-inline { color:rgba(255,255,255,.68)!important; }
+.section-red .eyebrow { color:#ffd977; }
+.section-red .eyebrow small { color:rgba(255,255,255,.68); }
+.section-red .kannada-line { font-size:1.13rem; line-height:1.75; font-weight:750; margin:0 0 1.3rem; }
+.participation-card { background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.20); backdrop-filter:blur(4px); }
+.participation-card .kn-card-title { font-size:1.5rem; margin-bottom:.9rem; }
+.participation-list span { color:#fff; background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.13); }
+.participation-list .en-inline { color:rgba(255,255,255,.68)!important; }
+
+/* Key message red card */
+.status-panel-accent .eyebrow,.status-panel-accent .kn-quote { color:#fff; }
+.status-panel-accent blockquote { color:rgba(255,255,255,.68); font:500 .86rem/1.55 Inter,sans-serif; }
+.status-panel-accent .kn-quote { margin-bottom:.5rem; font-size:1.35rem; line-height:1.55; }
+
+/* Principles */
+.principles-list span { display:flex; flex-direction:column; }
+.principles-list .kn-inline { color:var(--ink); font-size:1rem; }
+.principles-list .en-inline { color:#7e7275; }
+.principles-list div { min-height:88px; }
+
+/* Satyagraha steps */
+.movement-steps b { display:block; }
+.kn-step-title { display:block; font:750 1rem/1.45 "Noto Sans Kannada",sans-serif; color:var(--ink); }
+.en-step-title { display:block; font:500 .72rem/1.35 Inter,sans-serif; color:#8a7e81; margin-top:2px; }
+.kn-step-text { display:block; font:550 .88rem/1.55 "Noto Sans Kannada",sans-serif; color:#514548; }
+.en-step-text { display:block; font:400 .70rem/1.45 Inter,sans-serif; color:#94888b; margin-top:3px; }
+
+/* Feed posts */
+.post-card h3:not(.post-title-kn),.modal-copy > h3:not(.post-title-kn) { font:600 .76rem/1.4 Inter,sans-serif; color:#8b7d80; margin:.15rem 0 .25rem; }
+.post-title-kn,.modal-copy .post-title-kn { font:800 1.16rem/1.48 "Noto Sans Kannada",sans-serif; color:var(--red-900); margin:0 0 .4rem; }
+.post-card p:not(.post-text-kn),.modal-copy > p:not(.post-text-kn) { font:400 .75rem/1.5 Inter,sans-serif; color:#8c7f82; }
+.post-text-kn { font:550 .92rem/1.68 "Noto Sans Kannada",sans-serif; color:#463a3d; margin:.15rem 0 0!important; }
+
+/* Committee */
+.committee-kannada { color:var(--red-900)!important; font-size:clamp(1.65rem,2.8vw,2.3rem)!important; line-height:1.35!important; font-weight:800!important; margin:0 0 .3rem!important; }
+.committee-intro > h2 { margin-bottom:1rem; }
+.committee-card .kn-card-title { margin-bottom:.7rem; }
+.committee-card li { color:#3f3437; font-family:"Noto Sans Kannada",sans-serif; }
+.committee-card li small { display:block; color:#8b7e81; font:500 .72rem/1.45 Inter,sans-serif; margin-top:2px; }
+
+/* Join section */
+.join-section .kn-heading,.join-section .kn-text { color:#fff!important; }
+.join-section .join-copy > h2,.join-section .join-copy > p:not(.kn-text),.join-message > p:not(.kn-text) { color:rgba(255,255,255,.66); }
+.join-section .eyebrow { color:#ffd977; }
+.join-message span { font-family:"Noto Sans Kannada",sans-serif; }
+
+/* Discreet committee access and elegant Google sign-in */
+.committee-access-trigger { position:fixed; right:9px; bottom:9px; z-index:70; width:16px; height:16px; border:0; padding:0; border-radius:50%; background:transparent; color:rgba(150,31,51,.18); cursor:pointer; font-size:8px; line-height:16px; }
+.committee-access-trigger:hover,.committee-access-trigger:focus-visible { color:var(--red-700); outline:2px solid rgba(150,31,51,.18); outline-offset:3px; }
+.editor-access { margin-top:18px; }
+.google-signin { display:grid; grid-template-columns:38px auto; grid-template-rows:auto auto; column-gap:10px; align-items:center; min-width:230px; padding:10px 16px 10px 10px; border:1px solid #e4d8da; border-radius:14px; background:#fff; color:#2d2527; box-shadow:0 7px 20px rgba(73,38,45,.08); cursor:pointer; text-align:left; }
+.google-g { grid-row:1/3; display:grid; place-items:center; width:36px; height:36px; border-radius:50%; background:#f5f6f7; font:700 1rem Inter,sans-serif; color:#4285f4; }
+.google-signin > span:not(.google-g) { font:750 .92rem/1.25 "Noto Sans Kannada",sans-serif; }
+.google-signin > small { font:500 .67rem/1.2 Inter,sans-serif; color:#8b7d80; }
+
+/* Footer — wide, balanced columns, no squeezed paragraph */
+.site-footer { padding-top:0; }
+.footer-main-clean { display:grid; grid-template-columns:260px minmax(260px,1fr); grid-template-areas:"brand about" "brand links"; column-gap:70px; row-gap:18px; align-items:center; padding:44px 0 34px; }
+.footer-main-clean .footer-brand { grid-area:brand; }
+.footer-about { grid-area:about; display:flex; flex-direction:column; gap:4px; max-width:620px; }
+.footer-about strong { color:#fff; font:750 1rem/1.55 "Noto Sans Kannada",sans-serif; }
+.footer-about small { color:#bfa5aa; font:400 .77rem/1.5 Inter,sans-serif; }
+.footer-links { grid-area:links; display:flex!important; flex-wrap:wrap; gap:12px 22px!important; }
+.footer-links a { display:flex; flex-direction:column; color:#f2dce1; font:700 .88rem/1.3 "Noto Sans Kannada",sans-serif; }
+.footer-links a small { color:#9f858a; font:500 .65rem/1.3 Inter,sans-serif; margin-top:2px; }
+.footer-bottom-clean { min-height:72px; display:grid; grid-template-columns:1fr 1.4fr 1fr; gap:28px; align-items:center; }
+.footer-trust { display:flex; flex-direction:column; text-align:center; }
+.footer-trust strong { color:#e6cbd0; font:650 .77rem/1.45 "Noto Sans Kannada",sans-serif; }
+.footer-trust small { color:#947b80; font:400 .64rem/1.35 Inter,sans-serif; margin-top:2px; }
+.footer-bottom-clean .developer-credit { text-align:right; }
+
+/* Prevent narrow text columns in bilingual sections */
+.section-heading.split { grid-template-columns:minmax(320px,.85fr) minmax(360px,1.15fr); }
+.procession-grid { grid-template-columns:minmax(0,1.05fr) minmax(410px,.95fr); }
+.principles-grid { grid-template-columns:minmax(300px,.76fr) minmax(470px,1.24fr); }
+
+@media (max-width:1050px) {
+  .section-heading.split,.procession-grid,.principles-grid { grid-template-columns:1fr; gap:28px; }
+  .footer-main-clean { grid-template-columns:220px 1fr; column-gap:40px; }
+}
+@media (max-width:840px) {
+  .main-nav a small { display:inline; margin-left:.35rem; }
+  .footer-main-clean { grid-template-columns:1fr; grid-template-areas:"brand" "about" "links"; gap:18px; }
+  .footer-bottom-clean { grid-template-columns:1fr; gap:8px; padding:18px 0; }
+  .footer-trust { text-align:left; }
+  .footer-bottom-clean .developer-credit { text-align:left; }
+}
+@media (max-width:580px) {
+  .hero-copy .kn-heading { font-size:clamp(2.05rem,11vw,3.3rem); }
+  .kn-heading { font-size:1.7rem; }
+  .kn-text { font-size:.96rem; }
+  .participation-card .kn-card-title { font-size:1.3rem; }
+  .footer-links { gap:14px 20px!important; }
+  .google-signin { min-width:100%; }
+}
+.kn-fact { display:block; font:750 .92rem/1.35 "Noto Sans Kannada",sans-serif; color:#fff; }
+.en-fact { display:block; margin-top:2px; font:500 .67rem/1.3 Inter,sans-serif; color:rgba(255,255,255,.67)!important; }
+.satyagraha-visual > small { font-family:"Noto Sans Kannada",sans-serif; font-weight:700; }
+.satyagraha-visual .en-visual { font:500 .68rem/1.3 Inter,sans-serif; opacity:.68; }
+
+/* =========================================================
+   BILINGUAL SPACING & RHYTHM REFINEMENT
+   ========================================================= */
+/* Give each language layer its own visual breathing room */
+.eyebrow { margin-bottom: 14px; }
+.kn-heading { margin: 0 0 10px; }
+.kn-heading + h2 { margin-top: 0; margin-bottom: 24px; }
+.kn-card-title + h3 { margin-top: 0; margin-bottom: 14px; }
+.kn-text + p:not(.kn-text),
+.kn-text + .en-text { margin-top: 8px; }
+
+/* Split headings: keep Kannada + English body copy together in one column */
+.section-heading.split {
+  align-items: start;
+  column-gap: clamp(42px, 5vw, 78px);
+  row-gap: 18px;
+}
+.section-copy-bilingual {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 5px;
+  max-width: 650px;
+}
+.section-copy-bilingual .kn-text,
+.section-copy-bilingual .en-text { margin: 0; }
+.section-copy-bilingual .kn-text {
+  font-size: 1.03rem;
+  line-height: 1.78;
+}
+.section-copy-bilingual .en-text {
+  color: #8f8285;
+  font: 400 .79rem/1.58 Inter, sans-serif;
+}
+
+/* Section title blocks */
+.section-heading:not(.split) .eyebrow { margin-bottom: 16px; }
+.section-heading:not(.split) .kn-heading { margin-bottom: 9px; }
+.section-heading:not(.split) .kn-heading + h2 { margin-bottom: 26px; }
+.section-heading:not(.split) .kn-text { margin-bottom: 10px; }
+
+/* Updates title: avoid an unnecessarily tall two-line block */
+#updates .section-heading .kn-heading {
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1.18;
+  max-width: 560px;
+}
+
+/* Principles: clear separation between heading and explanatory copy */
+.principles-grid .section-heading { margin-bottom: 0; padding-top: 4px; }
+.principles-grid .section-heading .kn-heading {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.18;
+}
+.principles-grid .section-heading > h2 { margin-bottom: 26px; }
+.principles-grid .section-heading .kn-text { margin-bottom: 10px; }
+.principles-list div { padding-top: 22px; padding-bottom: 22px; }
+.principles-list .kn-inline { margin-bottom: 5px; }
+
+/* Dark procession/join sections need larger vertical gaps */
+.section-red .eyebrow,
+.join-section .eyebrow { margin-bottom: 16px; }
+.procession-copy .kn-heading,
+.join-copy .kn-heading { margin-bottom: 10px; }
+.procession-copy .kn-heading + h2,
+.join-copy .kn-heading + h2 { margin-bottom: 26px; }
+.procession-copy .kannada-line { margin-top: 2px; margin-bottom: 24px; }
+.procession-copy .kn-text,
+.join-copy .kn-text { margin-bottom: 10px; }
+.procession-actions,
+.join-actions { margin-top: 30px; }
+
+/* Join block: avoid the headline sitting against its English translation */
+.join-copy .kn-heading {
+  font-size: clamp(2.15rem, 4vw, 3.35rem);
+  line-height: 1.15;
+}
+.join-copy > h2 { margin-bottom: 26px !important; }
+.join-message > strong { margin: 10px 0 14px; }
+
+/* Cards: a little more horizontal room for Kannada */
+.reason-card,
+.status-panel,
+.participation-card,
+.committee-card { padding-left: clamp(22px, 2.2vw, 32px); padding-right: clamp(22px, 2.2vw, 32px); }
+
+@media (max-width:1050px) {
+  .section-copy-bilingual { max-width: 760px; padding-top: 0; }
+  .section-heading.split { row-gap: 4px; }
+}
+
+@media (max-width:580px) {
+  .section-pad { padding-top: 62px; padding-bottom: 62px; }
+  .section-heading { margin-bottom: 34px; }
+  .eyebrow { margin-bottom: 12px; }
+  .kn-heading + h2 { margin-bottom: 20px; }
+  .section-copy-bilingual { gap: 8px; }
+  #updates .section-heading .kn-heading,
+  .principles-grid .section-heading .kn-heading { font-size: 2rem; }
+  .join-copy .kn-heading { font-size: 2.15rem; }
+  .principles-list div { padding: 19px 18px; }
+}

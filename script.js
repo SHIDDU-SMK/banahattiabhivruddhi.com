@@ -23,7 +23,7 @@ const FIREBASE_CONFIG = {
 const siteData = {
   whatsappNumber: "919880281879",
   phoneNumber: "+919880281879",
-  ticker: "Saturday, 8 August 2026 · 9:00 AM: Mega procession from Shri Kadasiddeshwar Temple to Chennamma Circle. Saradi hunger Satyagraha begins thereafter. · ಶನಿವಾರ, 8 ಆಗಸ್ಟ್ 2026 ಬೆಳಿಗ್ಗೆ 9:00ಕ್ಕೆ ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ ಚೆನ್ನಮ್ಮ ವೃತ್ತದವರೆಗೆ ಬೃಹತ್ ಮೆರವಣಿಗೆ. ನಂತರ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭವಾಗುತ್ತದೆ.",
+  ticker: "ಶನಿವಾರ, 8 ಆಗಸ್ಟ್ 2026 · ಬೆಳಿಗ್ಗೆ 9:00: ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ ಚೆನ್ನಮ್ಮ ವೃತ್ತದವರೆಗೆ ಬೃಹತ್ ಮೆರವಣಿಗೆ. ನಂತರ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭ. · Saturday, 8 August 2026 · 9:00 AM: Mega procession from Shri Kadasiddeshwar Temple to Chennamma Circle; Saradi hunger Satyagraha follows. · ಶನಿವಾರ, 8 ಆಗಸ್ಟ್ 2026 ಬೆಳಿಗ್ಗೆ 9:00ಕ್ಕೆ ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ ಚೆನ್ನಮ್ಮ ವೃತ್ತದವರೆಗೆ ಬೃಹತ್ ಮೆರವಣಿಗೆ. ನಂತರ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭವಾಗುತ್ತದೆ.",
   initialPosts: [
     {
       id: "paper-cut-2",
@@ -119,6 +119,19 @@ let authenticatedUser = null;
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 
+function setupCommitteeAccessTrigger() {
+  const trigger = $("#committeeAccessTrigger");
+  const access = $("#editorAccess");
+  if (!trigger || !access) return;
+  trigger.addEventListener("click", () => {
+    access.hidden = !access.hidden;
+    if (!access.hidden) {
+      access.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(() => $("#googleSignInButton")?.focus(), 350);
+    }
+  });
+}
+
 
 function isFirebaseConfigured() {
   return FIREBASE_CONFIG.apiKey &&
@@ -155,14 +168,14 @@ function updateEditorAccess(user) {
   if (authorised) {
     $("#signedInEmail").textContent = user.email;
     $("#authStatus").textContent = "";
-    eyebrow.textContent = "Authorised committee access · ಅನುಮತಿಸಿದ ಸಮಿತಿ ಪ್ರವೇಶ";
-    title.textContent = "Committee editor unlocked · ಸಮಿತಿ ಸಂಪಾದಕ ತೆರೆಯಲಾಗಿದೆ";
-    message.textContent = "You are securely signed in. Use the editor below to publish a photo, video or movement update. · ನೀವು ಸುರಕ್ಷಿತವಾಗಿ ಲಾಗಿನ್ ಆಗಿದ್ದೀರಿ. ಕೆಳಗಿನ ಸಂಪಾದಕವನ್ನು ಬಳಸಿ ಚಿತ್ರ, ವೀಡಿಯೊ ಅಥವಾ ಹೋರಾಟದ ಮಾಹಿತಿ ಪ್ರಕಟಿಸಿ.";
+    eyebrow.textContent = "ಅನುಮತಿಸಿದ ಸಮಿತಿ ಪ್ರವೇಶ · Authorised access";
+    title.textContent = "ಸಮಿತಿ ಸಂಪಾದಕ ತೆರೆಯಲಾಗಿದೆ · Editor unlocked";
+    message.textContent = "ನೀವು ಸುರಕ್ಷಿತವಾಗಿ ಲಾಗಿನ್ ಆಗಿದ್ದೀರಿ. ಕೆಳಗಿನ ಸಂಪಾದಕದಿಂದ ಚಿತ್ರ, ವೀಡಿಯೊ ಅಥವಾ ಹೋರಾಟದ ಮಾಹಿತಿ ಪ್ರಕಟಿಸಿ. · You are securely signed in.";
   } else {
     $("#signedInEmail").textContent = "";
-    eyebrow.textContent = "Restricted committee access · ಸಮಿತಿ ಸದಸ್ಯರಿಗೆ ಮಾತ್ರ";
-    title.textContent = "Committee editor · ಸಮಿತಿ ಸಂಪಾದಕ";
-    message.textContent = "Sign in with the authorised Google account to open the publishing form. Only shiddu@gmail.com is permitted. · ಪೋಸ್ಟ್ ಮಾಡುವ ಫಾರ್ಮ್ ತೆರೆಯಲು ಅನುಮತಿಸಿದ Google ಖಾತೆಯಿಂದ ಲಾಗಿನ್ ಮಾಡಿ. shiddu@gmail.com ಖಾತೆಗೆ ಮಾತ್ರ ಅನುಮತಿ ಇದೆ.";
+    eyebrow.textContent = "ಸಮಿತಿ ಪ್ರವೇಶ · Committee access";
+    title.textContent = "ಸಮಿತಿ ಸಂಪಾದಕ · Committee editor";
+    message.textContent = "ಪೋಸ್ಟ್ ಮಾಡಲು ಅನುಮತಿಸಿದ Google ಖಾತೆಯಿಂದ ಲಾಗಿನ್ ಮಾಡಿ. · Sign in with the authorised Google account.";
   }
 }
 
@@ -415,7 +428,7 @@ function renderPosts() {
     readMore.textContent = post.mediaKind === "video" ? "Watch video · ವೀಡಿಯೊ ನೋಡಿ →" : "View update · ಮಾಹಿತಿ ನೋಡಿ →";
     actions.append(readMore);
 
-    body.append(meta, title, titleKn, text, textKn, actions);
+    body.append(meta, titleKn, title, textKn, text, actions);
     card.append(body);
     card.addEventListener("click", () => openPostModal(post));
     feed.append(card);
@@ -437,7 +450,7 @@ function openPostModal(post) {
     modalTitleKn = document.createElement("div");
     modalTitleKn.id = "modalTitleKn";
     modalTitleKn.className = "post-title-kn";
-    modalTitle.insertAdjacentElement("afterend", modalTitleKn);
+    modalTitle.insertAdjacentElement("beforebegin", modalTitleKn);
   }
   modalTitleKn.textContent = post.titleKn || "";
   modalTitleKn.hidden = !post.titleKn;
@@ -448,7 +461,7 @@ function openPostModal(post) {
     modalTextKn = document.createElement("p");
     modalTextKn.id = "modalTextKn";
     modalTextKn.className = "post-text-kn";
-    modalText.insertAdjacentElement("afterend", modalTextKn);
+    modalText.insertAdjacentElement("beforebegin", modalTextKn);
   }
   modalTextKn.textContent = post.textKn || "";
   modalTextKn.hidden = !post.textKn;
@@ -591,7 +604,8 @@ async function init() {
   setupLinks();
   setupMediaPreview();
   setupPostForm();
-  await setupAuthentication();
+  await setupCommitteeAccessTrigger();
+  setupAuthentication();
 
   try {
     localPosts = (await getLocalPosts()).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
