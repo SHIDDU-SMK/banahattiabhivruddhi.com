@@ -99,12 +99,14 @@ button { cursor: pointer; }
   color: rgba(255,255,255,.78);
   font-family: "Noto Sans Kannada", sans-serif;
 }
-.event-banners-grid {
+.event-banners-list { display: grid; gap: 26px; }
+.event-banner-row {
   display: grid;
-  grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr);
-  gap: 22px;
-  align-items: start;
+  grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+  gap: 30px;
+  align-items: center;
 }
+.event-banner-row-reverse { grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); }
 .event-banner-card {
   margin: 0;
   padding: 8px;
@@ -119,6 +121,45 @@ button { cursor: pointer; }
   height: auto;
   border-radius: 17px;
 }
+.event-banner-copy {
+  position: relative;
+  padding: 28px 30px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 24px;
+  background: rgba(255,255,255,.09);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+.event-banner-number {
+  position: absolute;
+  top: 19px;
+  right: 23px;
+  color: rgba(255,255,255,.14);
+  font-size: 3.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.event-banner-kicker {
+  margin: 0 54px 8px 0;
+  color: var(--gold-light);
+  font: 800 .78rem/1.5 "Noto Sans Kannada", sans-serif;
+  letter-spacing: .05em;
+}
+.event-banner-copy h3 {
+  margin: 0 45px 14px 0;
+  font: 800 clamp(1.45rem, 2.6vw, 2.25rem)/1.28 "Noto Sans Kannada", sans-serif;
+  letter-spacing: -.025em;
+}
+.event-banner-copy p { margin: 0 0 12px; }
+.event-banner-copy .kn-text { color: rgba(255,255,255,.94); }
+.event-banner-en { color: rgba(255,255,255,.73); font-size: .92rem; }
+.event-banner-link {
+  display: inline-flex;
+  margin-top: 6px;
+  color: var(--gold-light);
+  font-weight: 800;
+  font-size: .88rem;
+}
+.event-banner-link:hover { color: #fff; }
 
 .hero {
   min-height: 760px;
@@ -326,7 +367,9 @@ button { cursor: pointer; }
   .nav-cta { text-align: center; margin-top: 7px; }
   .hero { padding: 56px 0; }
   .event-banners { padding: 32px 0 36px; }
-  .event-banners-grid { grid-template-columns: 1fr; gap: 18px; }
+  .event-banner-row, .event-banner-row-reverse { grid-template-columns: 1fr; gap: 18px; }
+  .event-banner-row-reverse .event-banner-card { grid-row: 1; }
+  .event-banner-row-reverse .event-banner-copy { grid-row: 2; }
   .hero-grid, .movement-grid, .procession-grid, .satyagraha-grid, .committee-layout, .join-grid { grid-template-columns: 1fr; }
   .campaign-card { max-width: 620px; }
   .section-heading.split { grid-template-columns: 1fr; gap: 14px; }
@@ -344,6 +387,11 @@ button { cursor: pointer; }
   .event-banners-heading p { font-size: .9rem; line-height: 1.65; }
   .event-banner-card { padding: 5px; border-radius: 17px; }
   .event-banner-card img { border-radius: 12px; }
+  .event-banners-list { gap: 22px; }
+  .event-banner-copy { padding: 23px 20px; border-radius: 17px; }
+  .event-banner-number { top: 17px; right: 17px; font-size: 2.65rem; }
+  .event-banner-copy h3 { margin-right: 32px; font-size: 1.42rem; }
+  .event-banner-copy .kn-text, .event-banner-en { font-size: .88rem; }
   .brand strong { font-size: .9rem; }
   .brand small { font-size: .72rem; }
   .hero-copy h1 { font-size: clamp(2.65rem, 14vw, 4rem); }
@@ -416,7 +464,14 @@ button:disabled { opacity: .58; cursor: not-allowed; }
 .status-panel { padding: 32px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); }
 .status-panel h3 { margin: 10px 0 14px; font-size: 1.45rem; }
 .status-panel p { color: var(--muted); margin: 17px 0 0; }
-.status-panel-accent { background: var(--red); color: var(--white); border-color: transparent; display: flex; flex-direction: column; justify-content: center; }
+.status-panel-accent {
+  background: linear-gradient(145deg, var(--red-950), var(--red-800));
+  color: var(--white);
+  border-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .status-panel-accent blockquote { margin: 15px 0 0; font-size: clamp(1.35rem, 2.4vw, 2rem); line-height: 1.38; font-weight: 700; }
 .support-tags { display: flex; flex-wrap: wrap; gap: 9px; }
 .support-tags span { border: 1px solid var(--line); border-radius: 999px; padding: 8px 13px; font-size: .9rem; font-weight: 650; background: var(--soft); }
@@ -430,7 +485,10 @@ button:disabled { opacity: .58; cursor: not-allowed; }
 @media (max-width: 1050px) { .reason-grid-four { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 760px) {
   .reason-grid-four, .status-panels, .principles-grid { grid-template-columns: 1fr; }
-  .status-panel { padding: 24px; }
+  .status-panels { gap: 12px; margin-top: 12px; }
+  .status-panel { padding: 20px; }
+  .status-panel p { margin-top: 11px; }
+  .status-panel-accent blockquote { margin-top: 10px; }
 }
 
 
