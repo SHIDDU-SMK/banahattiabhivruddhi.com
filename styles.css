@@ -61,6 +61,65 @@ button { cursor: pointer; }
 .menu-toggle { display: none; border: 0; background: transparent; width: 42px; height: 42px; padding: 9px; }
 .menu-toggle span { display: block; height: 2px; background: var(--ink); margin: 5px 0; }
 
+.event-banners {
+  position: relative;
+  overflow: hidden;
+  padding: 50px 0 58px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 100% 0, rgba(216,154,53,.22), transparent 34%),
+    linear-gradient(135deg, var(--red-950), #74182a 62%, var(--red-900));
+}
+.event-banners::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .12;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+.event-banners > .container { position: relative; z-index: 1; }
+.event-banners-heading { max-width: 880px; margin-bottom: 28px; }
+.event-banners-label {
+  display: inline-flex;
+  margin-bottom: 10px;
+  color: var(--gold-light);
+  font: 800 .78rem/1.4 "Noto Sans Kannada", sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.event-banners-heading h2 {
+  margin: 0 0 7px;
+  font: 800 clamp(1.75rem, 3.7vw, 3.15rem)/1.2 "Noto Sans Kannada", sans-serif;
+  letter-spacing: -.035em;
+}
+.event-banners-heading p {
+  margin: 0;
+  color: rgba(255,255,255,.78);
+  font-family: "Noto Sans Kannada", sans-serif;
+}
+.event-banners-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr);
+  gap: 22px;
+  align-items: start;
+}
+.event-banner-card {
+  margin: 0;
+  padding: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 24px;
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 24px 56px rgba(28,4,10,.32);
+}
+.event-banner-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 17px;
+}
+
 .hero {
   min-height: 760px;
   position: relative;
@@ -266,6 +325,8 @@ button { cursor: pointer; }
   .main-nav a { padding: 12px 6px; }
   .nav-cta { text-align: center; margin-top: 7px; }
   .hero { padding: 72px 0; }
+  .event-banners { padding: 40px 0 46px; }
+  .event-banners-grid { grid-template-columns: 1fr; gap: 18px; }
   .hero-grid, .movement-grid, .procession-grid, .satyagraha-grid, .committee-layout, .join-grid { grid-template-columns: 1fr; }
   .campaign-card { max-width: 620px; }
   .section-heading.split { grid-template-columns: 1fr; gap: 14px; }
@@ -277,6 +338,12 @@ button { cursor: pointer; }
 @media (max-width: 580px) {
   .container { width: min(calc(100% - 24px), var(--container)); }
   .section-pad { padding: 70px 0; }
+  .event-banners { padding: 30px 0 34px; }
+  .event-banners-heading { margin-bottom: 20px; }
+  .event-banners-heading h2 { font-size: 1.65rem; }
+  .event-banners-heading p { font-size: .9rem; line-height: 1.65; }
+  .event-banner-card { padding: 5px; border-radius: 17px; }
+  .event-banner-card img { border-radius: 12px; }
   .brand strong { font-size: .9rem; }
   .brand small { font-size: .72rem; }
   .hero-copy h1 { font-size: clamp(2.65rem, 14vw, 4rem); }
