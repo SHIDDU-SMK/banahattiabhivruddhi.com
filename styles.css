@@ -392,3 +392,77 @@ html[lang="kn"] .legal-content, html[lang="kn"] .legal-hero { font-family:"Noto 
   .legal-nav { gap:.8rem; font-size:.88rem; }
   .legal-hero { padding:3.5rem 0 2.4rem; }
 }
+
+/* Bilingual Kannada additions */
+.kn-text,
+.kn-heading,
+.kn-card-title,
+.kn-quote,
+.main-nav small,
+.eyebrow small,
+.participation-list small,
+.committee-card small,
+.principles-list small {
+  font-family: "Noto Sans Kannada", sans-serif;
+}
+.kn-text {
+  margin-top: .45rem;
+  line-height: 1.75;
+  color: #6f5558;
+}
+.kn-heading {
+  margin-top: .35rem;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.55;
+  color: #8b1d31;
+}
+.kn-card-title {
+  margin: .15rem 0 .5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #8b1d31;
+}
+.kn-quote {
+  display: block;
+  margin-top: .65rem;
+  font-size: .92em;
+  line-height: 1.7;
+}
+.light-text { color: rgba(255,255,255,.94) !important; }
+.main-nav a small {
+  display: block;
+  font-size: .68rem;
+  line-height: 1.2;
+  margin-top: 2px;
+  opacity: .78;
+  font-weight: 500;
+}
+.nav-cta small { color: inherit; opacity: .9 !important; }
+.eyebrow small { font-size: .78em; font-weight: 600; }
+.participation-list small,
+.committee-card li small,
+.principles-list small {
+  display: block;
+  margin-top: 3px;
+  line-height: 1.55;
+  opacity: .82;
+  font-weight: 500;
+}
+.post-title-kn {
+  margin: .3rem 0 .45rem;
+  font-family: "Noto Sans Kannada", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #8b1d31;
+  font-weight: 700;
+}
+.post-text-kn {
+  margin-top: .45rem !important;
+  font-family: "Noto Sans Kannada", sans-serif;
+  line-height: 1.75 !important;
+  color: #6f5558;
+}
+.modal-copy .post-title-kn { font-size: 1.08rem; }
+@media (max-width: 860px) {
+  .main-nav a small { display: inline; margin-left: .35rem; }
+}

@@ -46,3 +46,7 @@ The present version stores newly added posts in IndexedDB on the signed-in brows
 - `terms-en.html` — English Terms and Conditions
 - `terms-kn.html` — Kannada Terms and Conditions
 - Both pages are linked in the website footer.
+
+
+## Bilingual content
+The homepage now shows the main public content in both English and simple Kannada. Movement updates also include Kannada summaries for the built-in posts.

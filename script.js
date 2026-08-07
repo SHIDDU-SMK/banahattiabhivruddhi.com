@@ -23,14 +23,16 @@ const FIREBASE_CONFIG = {
 const siteData = {
   whatsappNumber: "919880281879",
   phoneNumber: "+919880281879",
-  ticker: "Saturday, 8 August 2026 · 9:00 AM: Mega procession from Shri Kadasiddeshwar Temple to Chennamma Circle. Saradi hunger Satyagraha begins thereafter.",
+  ticker: "Saturday, 8 August 2026 · 9:00 AM: Mega procession from Shri Kadasiddeshwar Temple to Chennamma Circle. Saradi hunger Satyagraha begins thereafter. · ಶನಿವಾರ, 8 ಆಗಸ್ಟ್ 2026 ಬೆಳಿಗ್ಗೆ 9:00ಕ್ಕೆ ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ ಚೆನ್ನಮ್ಮ ವೃತ್ತದವರೆಗೆ ಬೃಹತ್ ಮೆರವಣಿಗೆ. ನಂತರ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭವಾಗುತ್ತದೆ.",
   initialPosts: [
     {
       id: "paper-cut-2",
       type: "Paper Cut",
       date: "2026-08-07",
       title: "Newspaper coverage: Banahatti bandh for Praja Soudha demand",
+      titleKn: "ಪ್ರಜಾ ಸೌಧ ಬೇಡಿಕೆಗೆ ಬನಹಟ್ಟಿ ಬಂದ್ — ಪತ್ರಿಕಾ ವರದಿ",
       text: "This newspaper clipping reports on the Banahatti Praja Soudha movement, the call for a bandh and the public campaign demanding that the Praja Soudha be constructed in Banahatti. The clipping is published here as part of the movement's media record.",
+      textKn: "ಈ ಪತ್ರಿಕಾ ಕತ್ತರಣೆಯಲ್ಲಿ ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟ, ಬಂದ್ ಕರೆ ಮತ್ತು ಪ್ರಜಾ ಸೌಧವನ್ನು ಬನಹಟ್ಟಿಯಲ್ಲೇ ನಿರ್ಮಿಸಬೇಕು ಎಂಬ ಜನರ ಬೇಡಿಕೆಯ ಬಗ್ಗೆ ವರದಿ ಮಾಡಲಾಗಿದೆ. ಹೋರಾಟದ ಮಾಧ್ಯಮ ದಾಖಲೆಯಾಗಿ ಇದನ್ನು ಇಲ್ಲಿ ಪ್ರಕಟಿಸಲಾಗಿದೆ.",
       mediaKind: "image",
       mediaUrl: "assets/praja-soudha-paper-cut-2.jpg",
       link: "",
@@ -41,7 +43,9 @@ const siteData = {
       type: "Announcement",
       date: "2026-08-06",
       title: "WhatsApp group shows town-wide support for the movement",
+      titleKn: "ವಾಟ್ಸ್ಆಪ್ ಗುಂಪಿನಲ್ಲಿ ಪಟ್ಟಣದ ವ್ಯಾಪಕ ಬೆಂಬಲ",
       text: "The Banahatti Praja Soudha Horata Samiti's group discussion reflects strong participation from citizens, traders, youth volunteers, social organisations, senior citizens, media representatives and public representatives. Members have appealed for a peaceful, democratic and non-political campaign and pledged to continue until the demand is fulfilled.",
+      textKn: "ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟ ಸಮಿತಿಯ ವಾಟ್ಸ್ಆಪ್ ಚರ್ಚೆಯಲ್ಲಿ ನಾಗರಿಕರು, ವ್ಯಾಪಾರಿಗಳು, ಯುವ ಸ್ವಯಂಸೇವಕರು, ಸಾಮಾಜಿಕ ಸಂಘಟನೆಗಳು, ಹಿರಿಯ ನಾಗರಿಕರು, ಮಾಧ್ಯಮ ಪ್ರತಿನಿಧಿಗಳು ಮತ್ತು ಜನಪ್ರತಿನಿಧಿಗಳ ಬೆಂಬಲ ಸ್ಪಷ್ಟವಾಗಿದೆ. ಹೋರಾಟವನ್ನು ಶಾಂತಿಯುತ, ಪ್ರಜಾಸತ್ತಾತ್ಮಕ ಮತ್ತು ಪಕ್ಷಾತೀತವಾಗಿ ನಡೆಸಿ, ಬೇಡಿಕೆ ಈಡೇರುವವರೆಗೆ ಮುಂದುವರಿಸಲು ಸದಸ್ಯರು ಕರೆ ನೀಡಿದ್ದಾರೆ.",
       mediaKind: "image",
       mediaUrl: "assets/whatsapp-town-support.png",
       link: "",
@@ -52,7 +56,9 @@ const siteData = {
       type: "Paper Cut",
       date: "2026-08-06",
       title: "Samyukta Karnataka reports major Praja Soudha struggle",
+      titleKn: "ಬನಹಟ್ಟಿಯ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟಕ್ಕೆ ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ವರದಿ",
       text: "The report states that Banahatti has called for a complete bandh on Saturday. A mega protest procession will begin at 9:00 AM from Shri Kadasiddeshwar Temple, travel through the town’s main roads and reach Chennamma Circle, where the Saradi hunger Satyagraha will begin.",
+      textKn: "ವರದಿಯ ಪ್ರಕಾರ ಶನಿವಾರ ಬನಹಟ್ಟಿ ಸಂಪೂರ್ಣ ಬಂದ್‌ಗೆ ಕರೆ ನೀಡಲಾಗಿದೆ. ಬೆಳಿಗ್ಗೆ 9:00ಕ್ಕೆ ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ ಬೃಹತ್ ಪ್ರತಿಭಟನಾ ಮೆರವಣಿಗೆ ಆರಂಭವಾಗಿ ಪಟ್ಟಣದ ಮುಖ್ಯ ರಸ್ತೆಗಳಲ್ಲಿ ಸಾಗುತ್ತಾ ಚೆನ್ನಮ್ಮ ವೃತ್ತ ತಲುಪಲಿದೆ. ಅಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭವಾಗಲಿದೆ.",
       mediaKind: "image",
       mediaUrl: "assets/praja-soudha-committee-meeting.jpg",
       link: "https://samyuktakarnataka.in/districts/baglkot/a-major-struggle-for-the-construction-of-the-prajasoudha-in-banahatti-itself/",
@@ -63,7 +69,9 @@ const siteData = {
       type: "Announcement",
       date: "2026-08-06",
       title: "Complete Banahatti bandh in support of Praja Soudha",
+      titleKn: "ಪ್ರಜಾ ಸೌಧ ಬೆಂಬಲಕ್ಕೆ ಸಂಪೂರ್ಣ ಬನಹಟ್ಟಿ ಬಂದ್",
       text: "Shops, weaving industries, banks, private and public transport, school vehicles, the weekly market and most commercial and public activities are expected to support the bandh. Ambulance and fire-service movement will be permitted.",
+      textKn: "ಅಂಗಡಿಗಳು, ನೇಕಾರಿಕೆ ಉದ್ಯಮಗಳು, ಬ್ಯಾಂಕುಗಳು, ಖಾಸಗಿ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಸಾರಿಗೆ, ಶಾಲಾ ವಾಹನಗಳು, ವಾರದ ಸಂತೆ ಹಾಗೂ ಬಹುತೇಕ ವ್ಯಾಪಾರ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಚಟುವಟಿಕೆಗಳು ಬಂದ್‌ಗೆ ಬೆಂಬಲ ನೀಡುವ ನಿರೀಕ್ಷೆಯಿದೆ. ಆಂಬ್ಯುಲೆನ್ಸ್ ಮತ್ತು ಅಗ್ನಿಶಾಮಕ ವಾಹನಗಳಿಗೆ ಸಂಚಾರಕ್ಕೆ ಅವಕಾಶ ಇರುತ್ತದೆ.",
       mediaKind: "image",
       mediaUrl: "assets/banahatti-bandh-visual.png",
       link: "https://samyuktakarnataka.in/districts/baglkot/a-major-struggle-for-the-construction-of-the-prajasoudha-in-banahatti-itself/",
@@ -74,7 +82,9 @@ const siteData = {
       type: "Announcement",
       date: "2026-08-06",
       title: "Mega procession route and time announced",
+      titleKn: "ಬೃಹತ್ ಮೆರವಣಿಗೆಯ ಸಮಯ ಮತ್ತು ಮಾರ್ಗ ಪ್ರಕಟಣೆ",
       text: "The peaceful procession is scheduled for Saturday, 8 August 2026 at 9:00 AM. It will start from Shri Kadasiddeshwar Temple, pass through the main roads of Banahatti and conclude at Chennamma Circle.",
+      textKn: "ಶಾಂತಿಯುತ ಬೃಹತ್ ಮೆರವಣಿಗೆ ಶನಿವಾರ, 8 ಆಗಸ್ಟ್ 2026 ರಂದು ಬೆಳಿಗ್ಗೆ 9:00ಕ್ಕೆ ನಡೆಯಲಿದೆ. ಇದು ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ ಆರಂಭವಾಗಿ ಬನಹಟ್ಟಿಯ ಮುಖ್ಯ ರಸ್ತೆಗಳಲ್ಲಿ ಸಾಗುತ್ತಾ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಮುಕ್ತಾಯವಾಗಲಿದೆ.",
       mediaKind: "image",
       mediaUrl: "assets/mega-procession-route.png",
       link: "https://samyuktakarnataka.in/districts/baglkot/a-major-struggle-for-the-construction-of-the-prajasoudha-in-banahatti-itself/",
@@ -85,7 +95,9 @@ const siteData = {
       type: "Announcement",
       date: "2026-08-06",
       title: "Saradi hunger Satyagraha begins at Chennamma Circle",
+      titleKn: "ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭ",
       text: "After the procession, leaders of different organisations, citizens and movement participants will formally begin the Saradi hunger Satyagraha. The committee says the struggle will continue until the Praja Soudha is constructed in Banahatti.",
+      textKn: "ಮೆರವಣಿಗೆಯ ನಂತರ ವಿವಿಧ ಸಂಘಟನೆಗಳ ಮುಖಂಡರು, ನಾಗರಿಕರು ಮತ್ತು ಹೋರಾಟಗಾರರು ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹವನ್ನು ಅಧಿಕೃತವಾಗಿ ಆರಂಭಿಸಲಿದ್ದಾರೆ. ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣವಾಗುವವರೆಗೆ ಹೋರಾಟ ಮುಂದುವರಿಯುತ್ತದೆ ಎಂದು ಸಮಿತಿ ತಿಳಿಸಿದೆ.",
       mediaKind: "image",
       mediaUrl: "assets/saradi-satyagraha-stage.png",
       link: "https://samyuktakarnataka.in/districts/baglkot/a-major-struggle-for-the-construction-of-the-prajasoudha-in-banahatti-itself/",
@@ -143,14 +155,14 @@ function updateEditorAccess(user) {
   if (authorised) {
     $("#signedInEmail").textContent = user.email;
     $("#authStatus").textContent = "";
-    eyebrow.textContent = "Authorised committee access";
-    title.textContent = "Committee editor unlocked";
-    message.textContent = "You are securely signed in. Use the editor below to publish a photo, video or movement update.";
+    eyebrow.textContent = "Authorised committee access · ಅನುಮತಿಸಿದ ಸಮಿತಿ ಪ್ರವೇಶ";
+    title.textContent = "Committee editor unlocked · ಸಮಿತಿ ಸಂಪಾದಕ ತೆರೆಯಲಾಗಿದೆ";
+    message.textContent = "You are securely signed in. Use the editor below to publish a photo, video or movement update. · ನೀವು ಸುರಕ್ಷಿತವಾಗಿ ಲಾಗಿನ್ ಆಗಿದ್ದೀರಿ. ಕೆಳಗಿನ ಸಂಪಾದಕವನ್ನು ಬಳಸಿ ಚಿತ್ರ, ವೀಡಿಯೊ ಅಥವಾ ಹೋರಾಟದ ಮಾಹಿತಿ ಪ್ರಕಟಿಸಿ.";
   } else {
     $("#signedInEmail").textContent = "";
-    eyebrow.textContent = "Restricted committee access";
-    title.textContent = "Committee editor";
-    message.textContent = "Sign in with the authorised Google account to open the publishing form. Only shiddu@gmail.com is permitted.";
+    eyebrow.textContent = "Restricted committee access · ಸಮಿತಿ ಸದಸ್ಯರಿಗೆ ಮಾತ್ರ";
+    title.textContent = "Committee editor · ಸಮಿತಿ ಸಂಪಾದಕ";
+    message.textContent = "Sign in with the authorised Google account to open the publishing form. Only shiddu@gmail.com is permitted. · ಪೋಸ್ಟ್ ಮಾಡುವ ಫಾರ್ಮ್ ತೆರೆಯಲು ಅನುಮತಿಸಿದ Google ಖಾತೆಯಿಂದ ಲಾಗಿನ್ ಮಾಡಿ. shiddu@gmail.com ಖಾತೆಗೆ ಮಾತ್ರ ಅನುಮತಿ ಇದೆ.";
   }
 }
 
@@ -324,13 +336,14 @@ function createMediaElement(post, forModal = false) {
 
 function renderFilters() {
   const types = ["All", ...new Set(allPosts().map(post => post.type))];
+  const filterLabels = { All: "All · ಎಲ್ಲ", Announcement: "Announcement · ಪ್ರಕಟಣೆ", Photo: "Photo · ಚಿತ್ರ", Video: "Video · ವೀಡಿಯೊ", "Paper Cut": "Paper Cut · ಪತ್ರಿಕಾ ಕತ್ತರಣೆ", Instagram: "Instagram", Facebook: "Facebook" };
   const filter = $("#updatesFilter");
   filter.replaceChildren();
   types.forEach(type => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `filter-btn${activeFilter === type ? " active" : ""}`;
-    button.textContent = type;
+    button.textContent = filterLabels[type] || type;
     button.addEventListener("click", () => {
       activeFilter = type;
       renderFilters();
@@ -384,17 +397,25 @@ function renderPosts() {
 
     const title = document.createElement("h3");
     title.textContent = post.title;
+    const titleKn = document.createElement("div");
+    titleKn.className = "post-title-kn";
+    titleKn.textContent = post.titleKn || "";
+    titleKn.hidden = !post.titleKn;
     const text = document.createElement("p");
     text.textContent = post.text;
+    const textKn = document.createElement("p");
+    textKn.className = "post-text-kn";
+    textKn.textContent = post.textKn || "";
+    textKn.hidden = !post.textKn;
 
     const actions = document.createElement("div");
     actions.className = "post-actions";
     const readMore = document.createElement("span");
     readMore.className = "read-more";
-    readMore.textContent = post.mediaKind === "video" ? "Watch video →" : "View update →";
+    readMore.textContent = post.mediaKind === "video" ? "Watch video · ವೀಡಿಯೊ ನೋಡಿ →" : "View update · ಮಾಹಿತಿ ನೋಡಿ →";
     actions.append(readMore);
 
-    body.append(meta, title, text, actions);
+    body.append(meta, title, titleKn, text, textKn, actions);
     card.append(body);
     card.addEventListener("click", () => openPostModal(post));
     feed.append(card);
@@ -410,7 +431,27 @@ function openPostModal(post) {
   $("#modalDate").textContent = formatDate(post.date);
   $("#modalDate").dateTime = post.date;
   $("#modalTitle").textContent = post.title;
+  const modalTitle = $("#modalTitle");
+  let modalTitleKn = $("#modalTitleKn");
+  if (!modalTitleKn) {
+    modalTitleKn = document.createElement("div");
+    modalTitleKn.id = "modalTitleKn";
+    modalTitleKn.className = "post-title-kn";
+    modalTitle.insertAdjacentElement("afterend", modalTitleKn);
+  }
+  modalTitleKn.textContent = post.titleKn || "";
+  modalTitleKn.hidden = !post.titleKn;
   $("#modalText").textContent = post.text;
+  const modalText = $("#modalText");
+  let modalTextKn = $("#modalTextKn");
+  if (!modalTextKn) {
+    modalTextKn = document.createElement("p");
+    modalTextKn.id = "modalTextKn";
+    modalTextKn.className = "post-text-kn";
+    modalText.insertAdjacentElement("afterend", modalTextKn);
+  }
+  modalTextKn.textContent = post.textKn || "";
+  modalTextKn.hidden = !post.textKn;
   const link = safeExternalUrl(post.link);
   $("#modalLink").href = link || "#";
   $("#modalLink").hidden = !link;
@@ -534,9 +575,9 @@ function setupReveal() {
 }
 
 function setupLinks() {
-  const shareText = encodeURIComponent("ಬನಹಟ್ಟಿಗೆ ಪ್ರಜಾ ಸೌಧ ಬೇಕು. Saturday, 8 August 2026: Join the mega procession for Banahatti Praja Soudha. Please follow official committee announcements.");
+  const shareText = encodeURIComponent("ಬನಹಟ್ಟಿಗೆ ಪ್ರಜಾ ಸೌಧ ಬೇಕು. ಶನಿವಾರ, 8 ಆಗಸ್ಟ್ 2026: ಬೃಹತ್ ಮೆರವಣಿಗೆಯಲ್ಲಿ ಭಾಗವಹಿಸಿ. Banahatti needs its Praja Soudha. Please follow official committee announcements.");
   $("#shareMovement").href = `https://wa.me/?text=${shareText}`;
-  $("#joinWhatsApp").href = `https://wa.me/${siteData.whatsappNumber}?text=${encodeURIComponent("I would like to participate in the Banahatti Praja Soudha movement. Please share the official procession and Saradi Satyagraha details.")}`;
+  $("#joinWhatsApp").href = `https://wa.me/${siteData.whatsappNumber}?text=${encodeURIComponent("I would like to participate in the Banahatti Praja Soudha movement. ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದಲ್ಲಿ ಭಾಗವಹಿಸಲು ಇಷ್ಟಪಡುತ್ತೇನೆ. ದಯವಿಟ್ಟು ಅಧಿಕೃತ ಮೆರವಣಿಗೆ ಮತ್ತು ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಮಾಹಿತಿಯನ್ನು ಹಂಚಿ.")}`;
   $("#joinWhatsApp").target = "_blank";
   $("#joinWhatsApp").rel = "noopener";
   $$("a[href='tel:+919999999999']").forEach(link => { link.href = `tel:${siteData.phoneNumber}`; });
