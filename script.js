@@ -11,15 +11,18 @@
 
 const AUTHORIZED_EDITOR_EMAIL = "shiddu@gmail.com";
 const FIREBASE_CONFIG = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  appId: "YOUR_FIREBASE_APP_ID"
+  apiKey: "AIzaSyAYWEeL1wwZIaTBYXedYewlRq9z3Fbe_9E",
+  authDomain: "banahattiabhivruddhi.firebaseapp.com",
+  projectId: "banahattiabhivruddhi",
+  storageBucket: "banahattiabhivruddhi.firebasestorage.app",
+  messagingSenderId: "761371982615",
+  appId: "1:761371982615:web:03b4763122b4c21b7a5552",
+  measurementId: "G-TMBFE8NV43"
 };
 
 const siteData = {
-  whatsappNumber: "919999999999",
-  phoneNumber: "+919999999999",
+  whatsappNumber: "919880281879",
+  phoneNumber: "+919880281879",
   ticker: "Saturday, 8 August 2026 · 9:00 AM: Mega procession from Shri Kadasiddeshwar Temple to Chennamma Circle. Saradi hunger Satyagraha begins thereafter.",
   initialPosts: [
     {
@@ -39,8 +42,8 @@ const siteData = {
       date: "2026-08-06",
       title: "WhatsApp group shows town-wide support for the movement",
       text: "The Banahatti Praja Soudha Horata Samiti's group discussion reflects strong participation from citizens, traders, youth volunteers, social organisations, senior citizens, media representatives and public representatives. Members have appealed for a peaceful, democratic and non-political campaign and pledged to continue until the demand is fulfilled.",
-      mediaKind: "",
-      mediaUrl: "",
+      mediaKind: "image",
+      mediaUrl: "assets/whatsapp-town-support.png",
       link: "",
       local: false
     },
@@ -62,7 +65,7 @@ const siteData = {
       title: "Complete Banahatti bandh in support of Praja Soudha",
       text: "Shops, weaving industries, banks, private and public transport, school vehicles, the weekly market and most commercial and public activities are expected to support the bandh. Ambulance and fire-service movement will be permitted.",
       mediaKind: "image",
-      mediaUrl: "assets/media-facebook.svg",
+      mediaUrl: "assets/banahatti-bandh-visual.png",
       link: "https://samyuktakarnataka.in/districts/baglkot/a-major-struggle-for-the-construction-of-the-prajasoudha-in-banahatti-itself/",
       local: false
     },
@@ -73,7 +76,7 @@ const siteData = {
       title: "Mega procession route and time announced",
       text: "The peaceful procession is scheduled for Saturday, 8 August 2026 at 9:00 AM. It will start from Shri Kadasiddeshwar Temple, pass through the main roads of Banahatti and conclude at Chennamma Circle.",
       mediaKind: "image",
-      mediaUrl: "assets/media-instagram.svg",
+      mediaUrl: "assets/mega-procession-route.png",
       link: "https://samyuktakarnataka.in/districts/baglkot/a-major-struggle-for-the-construction-of-the-prajasoudha-in-banahatti-itself/",
       local: false
     },
@@ -84,7 +87,7 @@ const siteData = {
       title: "Saradi hunger Satyagraha begins at Chennamma Circle",
       text: "After the procession, leaders of different organisations, citizens and movement participants will formally begin the Saradi hunger Satyagraha. The committee says the struggle will continue until the Praja Soudha is constructed in Banahatti.",
       mediaKind: "image",
-      mediaUrl: "assets/media-paper-2.svg",
+      mediaUrl: "assets/saradi-satyagraha-stage.png",
       link: "https://samyuktakarnataka.in/districts/baglkot/a-major-struggle-for-the-construction-of-the-prajasoudha-in-banahatti-itself/",
       local: false
     }
