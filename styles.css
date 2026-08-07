@@ -35,7 +35,7 @@ a { color: inherit; text-decoration: none; }
 button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
 .container { width: min(calc(100% - 36px), var(--container)); margin-inline: auto; }
-.section-pad { padding: 96px 0; }
+.section-pad { padding: 68px 0; }
 .section-soft { background: var(--soft); }
 .skip-link { position: absolute; left: -999px; top: 10px; z-index: 999; background: #fff; padding: 10px; }
 .skip-link:focus { left: 10px; }
@@ -64,7 +64,7 @@ button { cursor: pointer; }
 .event-banners {
   position: relative;
   overflow: hidden;
-  padding: 50px 0 58px;
+  padding: 38px 0 42px;
   color: #fff;
   background:
     radial-gradient(circle at 100% 0, rgba(216,154,53,.22), transparent 34%),
@@ -80,7 +80,7 @@ button { cursor: pointer; }
   pointer-events: none;
 }
 .event-banners > .container { position: relative; z-index: 1; }
-.event-banners-heading { max-width: 880px; margin-bottom: 28px; }
+.event-banners-heading { max-width: 880px; margin-bottom: 20px; }
 .event-banners-label {
   display: inline-flex;
   margin-bottom: 10px;
@@ -126,7 +126,7 @@ button { cursor: pointer; }
   overflow: hidden;
   display: grid;
   align-items: center;
-  padding: 96px 0;
+  padding: 72px 0;
   background:
     linear-gradient(115deg, rgba(255,255,255,.98) 0%, rgba(255,247,248,.95) 56%, rgba(255,237,240,.94) 100%);
 }
@@ -185,7 +185,7 @@ button { cursor: pointer; }
 
 .eyebrow { color: var(--red-700); text-transform: uppercase; letter-spacing: .14em; font-size: .76rem; font-weight: 850; }
 .eyebrow.light { color: #f4bec8; }
-.section-heading { margin-bottom: 46px; }
+.section-heading { margin-bottom: 32px; }
 .section-heading.split { display: grid; grid-template-columns: 1fr .74fr; align-items: end; gap: 55px; }
 .section-heading h2, .committee-intro h2, .satyagraha-copy h2, .procession-copy h2, .join-copy h2 { font-size: clamp(2.2rem, 4.5vw, 3.7rem); line-height: 1.07; letter-spacing: -.05em; margin: 13px 0 16px; }
 .section-heading p, .committee-intro > p, .satyagraha-copy > p { color: var(--muted); margin: 0; }
@@ -324,8 +324,8 @@ button { cursor: pointer; }
   .main-nav.open { display: flex; }
   .main-nav a { padding: 12px 6px; }
   .nav-cta { text-align: center; margin-top: 7px; }
-  .hero { padding: 72px 0; }
-  .event-banners { padding: 40px 0 46px; }
+  .hero { padding: 56px 0; }
+  .event-banners { padding: 32px 0 36px; }
   .event-banners-grid { grid-template-columns: 1fr; gap: 18px; }
   .hero-grid, .movement-grid, .procession-grid, .satyagraha-grid, .committee-layout, .join-grid { grid-template-columns: 1fr; }
   .campaign-card { max-width: 620px; }
@@ -337,9 +337,9 @@ button { cursor: pointer; }
 
 @media (max-width: 580px) {
   .container { width: min(calc(100% - 24px), var(--container)); }
-  .section-pad { padding: 70px 0; }
-  .event-banners { padding: 30px 0 34px; }
-  .event-banners-heading { margin-bottom: 20px; }
+  .section-pad { padding: 48px 0; }
+  .event-banners { padding: 24px 0 28px; }
+  .event-banners-heading { margin-bottom: 16px; }
   .event-banners-heading h2 { font-size: 1.65rem; }
   .event-banners-heading p { font-size: .9rem; line-height: 1.65; }
   .event-banner-card { padding: 5px; border-radius: 17px; }
@@ -785,8 +785,8 @@ body { font-family:"Noto Sans Kannada", Inter, sans-serif; }
 }
 
 @media (max-width:580px) {
-  .section-pad { padding-top: 62px; padding-bottom: 62px; }
-  .section-heading { margin-bottom: 34px; }
+  .section-pad { padding-top: 48px; padding-bottom: 48px; }
+  .section-heading { margin-bottom: 26px; }
   .eyebrow { margin-bottom: 12px; }
   .kn-heading + h2 { margin-bottom: 20px; }
   .section-copy-bilingual { gap: 8px; }
