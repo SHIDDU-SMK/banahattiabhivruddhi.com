@@ -23,7 +23,7 @@ const FIREBASE_CONFIG = {
 const siteData = {
   whatsappNumber: "919880281879",
   phoneNumber: "+919880281879",
-  ticker: "ಶನಿವಾರ, 8 ಆಗಸ್ಟ್ 2026 · ಬೆಳಿಗ್ಗೆ 9:00: ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ ಚೆನ್ನಮ್ಮ ವೃತ್ತದವರೆಗೆ ಬೃಹತ್ ಮೆರವಣಿಗೆ. ನಂತರ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭ. · Saturday, 8 August 2026 · 9:00 AM: Mega procession from Shri Kadasiddeshwar Temple to Chennamma Circle; Saradi hunger Satyagraha follows. · ಶನಿವಾರ, 8 ಆಗಸ್ಟ್ 2026 ಬೆಳಿಗ್ಗೆ 9:00ಕ್ಕೆ ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ ಚೆನ್ನಮ್ಮ ವೃತ್ತದವರೆಗೆ ಬೃಹತ್ ಮೆರವಣಿಗೆ. ನಂತರ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭವಾಗುತ್ತದೆ.",
+  ticker: "8 ಆಗಸ್ಟ್ 2026 · ಬನಹಟ್ಟಿಯಲ್ಲಿ ಬೃಹತ್ ಮೆರವಣಿಗೆ ನಡೆಯಿತು; ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಚಾಲನೆ ನೀಡಲಾಯಿತು. · 8 August 2026 · Banahatti's mega procession was held and the relay hunger Satyagraha began at Chennamma Circle.",
   initialPosts: [
     {
       id: "paper-cut-2",
