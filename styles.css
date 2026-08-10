@@ -1114,3 +1114,87 @@ body { font-family:"Noto Sans Kannada", Inter, sans-serif; }
   .join-copy .kn-heading { font-size: 2.15rem; }
   .principles-list div { padding: 19px 18px; }
 }
+
+
+/* Compact latest information: designed to fit in the first page view */
+.latest-highlight {
+  padding: 12px 0 18px;
+  background: linear-gradient(180deg, #fff8e8 0%, #ffffff 100%);
+}
+.latest-strip-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.latest-strip-head h2 {
+  margin: 0;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  line-height: 1.25;
+}
+.latest-highlight-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #961f33;
+  color: #fff;
+  font-weight: 700;
+  font-size: .78rem;
+  white-space: nowrap;
+}
+.latest-photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.latest-photo-item {
+  margin: 0;
+  background: #fff;
+  border: 1px solid rgba(150,31,51,.15);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(56,34,20,.08);
+}
+.latest-photo-item img {
+  display: block;
+  width: 100%;
+  height: clamp(190px, 30vh, 290px);
+  object-fit: cover;
+  object-position: center;
+}
+.latest-photo-item figcaption {
+  padding: 8px 10px;
+  font-weight: 700;
+  font-size: .88rem;
+  line-height: 1.35;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .latest-strip-head {
+    display: block;
+  }
+  .latest-strip-head h2 {
+    margin-top: 7px;
+  }
+  .latest-photo-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .latest-photo-item img {
+    height: 150px;
+  }
+  .latest-photo-item figcaption {
+    padding: 7px 6px;
+    font-size: .72rem;
+  }
+}
+
+
+/* Keep the WhatsApp town-support illustration fully visible */
+img[src*="whatsapp-town-support"] {
+  object-fit: contain !important;
+  object-position: center !important;
+  height: auto !important;
+  max-height: none !important;
+  width: 100% !important;
+}
