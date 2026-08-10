@@ -1,0 +1,23 @@
+name: ChatGPT Remote Update
+on:
+  repository_dispatch:
+    types: [chatgpt_update]
+
+jobs:
+  update-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Write File Data
+        run: |
+          echo "${{ github.event.client_payload.file_content }}" > ${{ github.event.client_payload.file_path }}
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "chatgpt-ci-bot"
+          git config --global user.email "bot@chatgpt.internal"
+          git add .
+          git commit -m "${{ github.event.client_payload.commit_message }}"
+          git push origin main
