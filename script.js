@@ -1,3 +1,4 @@
+// Author: Shiddu Mageppa | SMK Solutions | https://smksolns.com
 /*
   BANAHATTI PRAJA SOUDHA MOVEMENT WEBSITE
   ---------------------------------------
@@ -25,6 +26,64 @@ const siteData = {
   phoneNumber: "+919880281879",
   ticker: "8 ಆಗಸ್ಟ್ 2026 · ಬನಹಟ್ಟಿಯಲ್ಲಿ ಬೃಹತ್ ಮೆರವಣಿಗೆ ನಡೆಯಿತು; ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಚಾಲನೆ ನೀಡಲಾಯಿತು. · 8 August 2026 · Banahatti's mega procession was held and the relay hunger Satyagraha began at Chennamma Circle.",
   initialPosts: [
+    {
+      id: "saradi-satyagraha-day-4-kuruhinashetti-11-08-2026",
+      type: "Satyagraha",
+      date: "2026-08-11",
+      title: "4th Day Relay Hunger Satyagraha — Kuruhinashetti Community Extends Support",
+      titleKn: "4ನೇ ದಿನದ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಸಮಸ್ತ ಕುರುಹಿನಶೆಟ್ಟಿ ಸಮಾಜದ ಬೆಂಬಲ",
+      text: "On the fourth day of the ongoing Praja Soudha construction movement in Banahatti, the entire Kuruhinashetti community of Banahatti extended its support.",
+      textKn: "ಬನಹಟ್ಟಿ ನಗರದಲ್ಲಿ ನಡೆಯುತ್ತಿರುವ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣದ ಹೋರಾಟದ 4ನೇ ದಿನದ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಬನಹಟ್ಟಿ ನಗರದ ಸಮಸ್ತ ಕುರುಹಿನಶೆಟ್ಟಿ ಸಮಾಜದ ವತಿಯಿಂದ ಬೆಂಬಲ ವ್ಯಕ್ತಪಡಿಸಲಾಯಿತು. 🙏",
+      mediaKind: "image",
+      mediaUrl: "assets/saradi-satyagraha-day-4-kuruhinashetti-11-08-2026.jpeg",
+      link: "#satyagraha",
+      local: false
+    },
+    {
+      id: "news-2026-08-11-taluk-prajasoudha-support",
+      type: "Paper Cut",
+      date: "2026-08-11",
+      title: "Support for the Taluk Praja Soudha movement",
+      titleKn: "ತಾಲೂಕಾ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣ ಹೋರಾಟಕ್ಕೆ ವೈದ್ಯರ ಬಳಗ ಬೆಂಬಲ",
+      text: "Newspaper coverage supporting the ongoing movement for construction of the Taluk Praja Soudha in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ತಾಲೂಕಾ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕಾಗಿ ನಡೆಯುತ್ತಿರುವ ಹೋರಾಟಕ್ಕೆ ಬೆಂಬಲ ವ್ಯಕ್ತಪಡಿಸಿರುವ ಕುರಿತು ಪತ್ರಿಕಾ ವರದಿ.",
+      mediaKind: "image",
+      mediaUrl: "assets/news-2026-08-11-taluk-prajasoudha-support.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "whatsapp-1001-members-2026-08-11",
+      type: "Community",
+      date: "2026-08-11",
+      title: "Praja Soudha movement WhatsApp group reaches 1,001 members",
+      titleKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿಯ ವಾಟ್ಸಪ್ ಗುಂಪು 1001 ಸದಸ್ಯರನ್ನು ತಲುಪಿದೆ",
+      text: "The Praja Soudha Horata Samiti WhatsApp group has reached 1,001 members. Heartfelt thanks to everyone for the continued support.",
+      textKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿಯ ವಾಟ್ಸಪ್ ಗುಂಪಿನ ಸದಸ್ಯರ ಸಂಖ್ಯೆ 1001 ಕ್ಕೆ ತಲುಪಿದೆ 🙏 ತಮ್ಮೆಲ್ಲರ ಸಹಕಾರಕ್ಕಾಗಿ ಅನಂತ ಅನಂತ ಧನ್ಯವಾದಗಳು 🙏",
+      mediaKind: "image",
+      mediaUrl: "assets/whatsapp-1001-members-2026-08-11.png",
+      link: "",
+      local: false
+    },
+    {
+      id: "news-coverage-2026-08-11",
+      type: "Paper Cut",
+      date: "2026-08-11",
+      title: "11 August 2026 media coverage: third day of relay Satyagraha",
+      titleKn: "11 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ: ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಮೂರನೇ ದಿನ",
+      text: "Selected 11 August 2026 newspaper coverage related to the Praja Soudha movement and the third day of the relay Satyagraha.",
+      textKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಮೂರನೇ ದಿನಕ್ಕೆ ಸಂಬಂಧಿಸಿದ 11 ಆಗಸ್ಟ್ 2026ರ ಆಯ್ದ ಪತ್ರಿಕಾ ವರದಿಗಳು.",
+      mediaKind: "gallery",
+      mediaUrls: [
+        "assets/news-2026-08-11-third-day-01.jpeg",
+        "assets/news-2026-08-11-support-01.png",
+        "assets/news-2026-08-11-third-day-02.jpeg",
+        "assets/news-2026-08-11-third-day-03.jpeg"
+      ],
+      mediaUrl: "assets/news-2026-08-11-third-day-01.jpeg",
+      link: "",
+      local: false
+    },
     {
       id: "kadasiddeshwara-pooje-2026-08-10",
       type: "Community",

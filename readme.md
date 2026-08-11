@@ -1,3 +1,5 @@
+<!-- Author: Shiddu Mageppa | SMK Solutions | https://smksolns.com -->
+
 # Banahatti Abhivruddhi – Praja Soudha Movement Website
 
 ## Committee editor authentication
