@@ -27,6 +27,41 @@ const siteData = {
   ticker: "8 ಆಗಸ್ಟ್ 2026 · ಬನಹಟ್ಟಿಯಲ್ಲಿ ಬೃಹತ್ ಮೆರವಣಿಗೆ ನಡೆಯಿತು; ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಚಾಲನೆ ನೀಡಲಾಯಿತು. · 8 August 2026 · Banahatti's mega procession was held and the relay hunger Satyagraha began at Chennamma Circle.",
   initialPosts: [
     {
+      id: "news-coverage-2026-08-12",
+      type: "Paper Cut",
+      date: "2026-08-12",
+      title: "12 August 2026 newspaper coverage: Praja Soudha movement",
+      titleKn: "12 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ",
+      text: "Today's selected newspaper coverage on the continuing Praja Soudha movement, relay Satyagraha and public support in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ಮುಂದುವರಿದಿರುವ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ, ಸರದಿ ಸತ್ಯಾಗ್ರಹ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಬೆಂಬಲದ ಕುರಿತು ಇಂದಿನ ಆಯ್ದ ಪತ್ರಿಕಾ ವರದಿಗಳು.",
+      mediaKind: "gallery",
+      mediaUrls: [
+        "assets/news-2026-08-12-01.jpeg",
+        "assets/news-2026-08-12-02.jpeg",
+        "assets/news-2026-08-12-03.jpeg",
+        "assets/news-2026-08-12-04.jpeg",
+        "assets/news-2026-08-12-05.jpeg",
+        "assets/news-2026-08-12-06.png",
+        "assets/news-2026-08-12-07.jpeg"
+      ],
+      mediaUrl: "assets/news-2026-08-12-01.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "youtube-update-2026-08-12",
+      type: "Video",
+      date: "2026-08-12",
+      title: "Latest Praja Soudha movement video",
+      titleKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಇತ್ತೀಚಿನ ವಿಡಿಯೋ",
+      text: "Watch the latest video and subscribe for upcoming news.",
+      textKn: "ಮುಂದಿನ ಎಲ್ಲಾ ಸುದ್ದಿಗಳಿಗಾಗಿ ಈ ವಿಡಿಯೋವನ್ನು ವೀಕ್ಷಿಸಿ ಮತ್ತು ಕೂಡಲೇ ಸಬ್ಸ್ಕ್ರೈಬ್ ಮಾಡಿ.",
+      mediaKind: "video",
+      mediaUrl: "https://youtu.be/T2xHaZty_p4?si=JPJJIVtEQRoEr22l",
+      link: "https://youtu.be/T2xHaZty_p4?si=JPJJIVtEQRoEr22l",
+      local: false
+    },
+    {
       id: "saradi-satyagraha-day-4-kuruhinashetti-11-08-2026",
       type: "Satyagraha",
       date: "2026-08-11",
