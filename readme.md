@@ -1,50 +1,615 @@
+<!DOCTYPE html>
+
+
 <!-- Author: Shiddu Mageppa | SMK Solutions | https://smksolns.com -->
+<html lang="kn">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Banahatti Praja Soudha movement – mega procession, Saradi Satyagraha, committee announcements, photos, videos and public updates." name="description"/>
+<meta content="#961f33" name="theme-color"/>
+<title>Banahatti Praja Soudha Movement | ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟ</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<link href="assets/favicon.ico" rel="icon" sizes="any"/>
+<link href="assets/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="assets/apple-touch-icon.png" rel="apple-touch-icon"/>
+</head>
+<body>
+<a class="skip-link" href="#main">ಮುಖ್ಯ ವಿಷಯಕ್ಕೆ ಹೋಗಿ · Skip to content</a>
+<header class="site-header" id="top">
+<div class="container nav-wrap">
+<a aria-label="Banahatti Praja Soudha movement home" class="brand" href="#top">
+<img alt="Banahatti Abhivruddhi logo" src="assets/logo-praja-soudha.png"/>
+<span>
+<strong>ಬನಹಟ್ಟಿ ಅಭಿವೃದ್ಧಿ</strong>
+<small>Banahatti Abhivruddhi</small>
+</span>
+</a>
+<button aria-expanded="false" aria-label="Open navigation" class="menu-toggle">
+<span></span><span></span><span></span>
+</button>
+<nav aria-label="Primary navigation" class="main-nav">
+<a href="#movement">ಹೋರಾಟ<br/><small>The Movement</small></a>
+<a href="#procession">ಮೆರವಣಿಗೆ<br/><small>Procession</small></a>
+<a href="#satyagraha">ಸತ್ಯಾಗ್ರಹ<br/><small>Satyagraha</small></a>
+<a href="#updates">ನವೀಕರಣಗಳು<br/><small>Updates</small></a>
+<a href="#committee">ಸಮಿತಿ<br/><small>Committee</small></a>
+<a class="nav-cta" href="#join">ಹೋರಾಟಕ್ಕೆ ಸೇರಿ<br/><small>Join the Movement</small></a>
+</nav>
+</div>
+</header>
+<main id="main">
 
-# Banahatti Abhivruddhi – Praja Soudha Movement Website
+<section class="first-view-satyagraha" id="first-view-satyagraha" aria-labelledby="firstViewSatyagrahaTitle">
+  <div class="container">
+    <div class="first-view-satyagraha-card">
+      <figure class="first-view-satyagraha-image">
+        <img src="assets/praja-soudha-saradi-upavasa-satyagraha-08-08-2026.jpeg" alt="ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಪ್ರಕಟಣೆ" fetchpriority="high"/>
+      </figure>
+      <div class="first-view-satyagraha-copy">
+        <span class="first-view-kicker">ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ · Relay Hunger Satyagraha</span>
+        <h2 id="firstViewSatyagrahaTitle">ಬೇಡಿಕೆ ಈಡೇರುವವರೆಗೆ ಶಾಂತಿಯುತ ಹೋರಾಟ</h2>
+        <p class="kn-text"><strong>08 ಆಗಸ್ಟ್ 2026, ಶನಿವಾರ ಸಂಜೆ 6:00 ಗಂಟೆಯಿಂದ</strong> ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭವಾಗಲಿದೆ. ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣವಾಗುವವರೆಗೆ ಈ ಶಾಂತಿಯುತ ಹೋರಾಟವನ್ನು ಮುಂದುವರಿಸಲು ಸಮಿತಿ ಕರೆ ನೀಡಿದೆ.</p>
+        <p class="event-banner-en">The relay hunger Satyagraha begins at <strong>6:00 PM on Saturday, 08 August 2026</strong>, at Chennamma Circle. The committee has called for the peaceful campaign to continue until the demand for a Praja Soudha in Banahatti is fulfilled.</p>
+        <a class="first-view-link" href="#satyagraha">ಸತ್ಯಾಗ್ರಹದ ವಿವರಗಳು · Satyagraha details →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-## Committee editor authentication
+<section class="today-updates" id="today-updates">
+  <div class="container">
+    <div class="today-updates-head">
+      <span class="latest-highlight-badge">ಇಂದಿನ ನವೀಕರಣ · Today's Update</span>
+      <h2>13 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳು</h2>
+    </div>
+    <div class="today-updates-grid">
+      <a class="today-update-card" href="#updates">
+        <img src="assets/news-2026-08-13-01.png" alt="13 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ"/>
+        <span>13 ಆಗಸ್ಟ್ ಪತ್ರಿಕಾ ವರದಿಗಳು · 13 August news coverage</span>
+      </a>
+      <a class="today-update-card today-video-card" href="https://youtu.be/T2xHaZty_p4?si=JPJJIVtEQRoEr22l" target="_blank" rel="noopener noreferrer">
+        <span class="today-video-icon">▶</span>
+        <span>ಇತ್ತೀಚಿನ ವಿಡಿಯೋ ವೀಕ್ಷಿಸಿ · Watch latest video</span>
+        <small></small>
+      </a>
+    </div>
+  </div>
+</section>
 
-The photo/video/update editor is hidden until the authorised account signs in.
-
-**Authorised email:** `shiddu@gmail.com`
-
-Authentication uses Supabase email OTP / magic-link login. No password is stored in the website.
-
-### One-time setup
-
-1. Create a Supabase project.
-2. In Supabase, open **Authentication → Providers → Email** and enable email OTP/magic-link login.
-3. Under **Authentication → URL Configuration**, add the website's final public URL to the allowed redirect URLs.
-4. Open `script.js` and replace:
-
-```js
-const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-```
-
-Use the Project URL and public anon key found in **Project Settings → API**.
-
-### Access behaviour
-
-- Only `shiddu@gmail.com` is accepted by the website editor.
-- A login code or secure sign-in link is sent to that inbox.
-- Any other authenticated Supabase account is automatically signed out and denied access.
-- The editor becomes visible only after successful authentication.
-
-### Important security note
-
-The client-side email check protects the editor interface, but server-side security must also be enforced before public cloud publishing is added. When posts are moved to Supabase Database/Storage, enable Row Level Security and write policies that permit insert/update/delete only when `auth.jwt()->>'email' = 'shiddu@gmail.com'`.
-
-The present version stores newly added posts in IndexedDB on the signed-in browser only. They are not automatically visible on other devices.
-
-## Other edits
-
-- Replace WhatsApp and phone placeholders in `script.js`.
-- Edit `siteData.initialPosts` for permanent public posts.
-- Photos are stored under `assets/`.
+<section class="today-saradi" id="today-saradi">
+  <div class="container">
+    <div class="today-saradi-card">
+      <img src="assets/saradi-satyagraha-day-6-auto-banagar-2026-08-13-01.jpeg" alt="ಇಂದಿನ ಸರದಿ ಸತ್ಯಾಗ್ರಹ — ಆಟೋ ಚಾಲಕರು ಮತ್ತು ಬಣಗಾರ ಸಮಾಜದ ಬೆಂಬಲ"/>
+      <div class="today-saradi-copy">
+        <span class="latest-highlight-badge">ಇಂದಿನ ಸರದಿ · Today's Saradi</span>
+        <h2>ಆಟೋ ಚಾಲಕರು ಮತ್ತು ಬಣಗಾರ ಸಮಾಜದ ಬೆಂಬಲ</h2>
+        <p>ಇಂದಿನ ಸರದಿ ಸತ್ಯಾಗ್ರಹದಲ್ಲಿ ಆಟೋ ಚಾಲಕರು ಮತ್ತು ಬಣಗಾರ ಸಮಾಜದವರು ಭಾಗವಹಿಸಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟಕ್ಕೆ ಬೆಂಬಲ ಸೂಚಿಸಿದರು.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 
-## Terms and Conditions pages
-- `terms-en.html` — English Terms and Conditions
-- `terms-kn.html` — Kannada Terms and Conditions
-- Both pages are linked in the website footer.
+
+
+<section class="latest-highlight" id="latest-information" aria-labelledby="latestInfoTitle">
+  <div class="container">
+    <div class="latest-strip-head">
+      <span class="latest-highlight-badge">ಇತ್ತೀಚಿನ ಮಾಹಿತಿ · Latest Information</span>
+      <h2 id="latestInfoTitle">ಬನಹಟ್ಟಿ — ಇಂದಿನ ಪ್ರಮುಖ ಚಿತ್ರಗಳು</h2>
+    </div>
+    <div class="latest-photo-grid">
+      <figure class="latest-photo-item">
+        <img src="assets/kadasiddeshwara-pooje-2026-08-10.png" alt="ಬನಹಟ್ಟಿ ನಗರದ ಆರಾಧ್ಯ ದೈವ ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರರ ಪೂಜೆ, 10 ಆಗಸ್ಟ್ 2026" fetchpriority="high"/>
+        <figcaption>ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರರ ಇವತ್ತಿನ ಪೂಜೆ · 10-08-2026</figcaption>
+      </figure>
+      <figure class="latest-photo-item">
+        <img src="assets/satyagraha-day-3-latest.jpeg" alt="ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಮೂರನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹದಲ್ಲಿ ಮೇಧಾರ ಮತ್ತು ಬುರುಡ ಸಮಾಜದ ಬೆಂಬಲ"/>
+        <figcaption>ಮೂರನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಮೇಧಾರ ಮತ್ತು ಬುರುಡ ಸಮಾಜದ ಬೆಂಬಲ</figcaption>
+      </figure>
+
+      <figure class="latest-photo-item" id="whatsapp-1001-highlight">
+        <img src="assets/whatsapp-1001-members-2026-08-11.png" alt="ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿಯ ವಾಟ್ಸಪ್ ಗುಂಪು 1001 ಸದಸ್ಯರನ್ನು ತಲುಪಿದೆ"/>
+        <figcaption>WhatsApp ಗುಂಪು 1001 ಸದಸ್ಯರನ್ನು ತಲುಪಿದೆ · 11-08-2026</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="eventBannersTitle" class="event-banners">
+<div class="container">
+<div class="event-banners-heading">
+<span class="event-banners-label">ಮುಖ್ಯ ಪ್ರಕಟಣೆಗಳು · Important Announcements</span>
+<h2 id="eventBannersTitle">ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟ — 08 ಆಗಸ್ಟ್ 2026</h2>
+<p>ಬನಹಟ್ಟಿ ಬಂದ್, ಬೃಹತ್ ಮೆರವಣಿಗೆ ಮತ್ತು ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹದ ಅಧಿಕೃತ ಮಾಹಿತಿ</p>
+</div>
+<div class="event-banners-list">
+<article class="event-banner-row">
+<figure class="event-banner-card">
+<img alt="08 ಆಗಸ್ಟ್ 2026 ಬನಹಟ್ಟಿ ಬಂದ್ ಮತ್ತು ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣಕ್ಕಾಗಿ ಶಾಂತಿಯುತ ಹೋರಾಟದ ಪ್ರಕಟಣೆ" fetchpriority="high" height="1280" src="assets/praja-soudha-banahatti-bandh-08-08-2026.jpeg" width="1169"/>
+</figure>
+<div class="event-banner-copy">
+<span class="event-banner-number">01</span>
+<p class="event-banner-kicker">ಬನಹಟ್ಟಿ ಬಂದ್ · Banahatti Bandh</p>
+<h3>ಪ್ರಜಾ ಸೌಧಕ್ಕಾಗಿ ಬನಹಟ್ಟಿ ಒಂದಾಗಿದೆ</h3>
+<p class="kn-text">ಬನಹಟ್ಟಿಯಲ್ಲಿ ತಾಲೂಕು ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಿಸಬೇಕು ಎಂಬ ಜನರ ಒಕ್ಕೊರಲ ಬೇಡಿಕೆಗೆ ಬೆಂಬಲವಾಗಿ <strong>08 ಆಗಸ್ಟ್ 2026, ಶನಿವಾರ</strong> ಬನಹಟ್ಟಿ ಬಂದ್‌ಗೆ ಕರೆ ನೀಡಲಾಗಿದೆ. ಎಲ್ಲ ನಾಗರಿಕರು, ವ್ಯಾಪಾರಸ್ಥರು, ಸಂಘ-ಸಂಸ್ಥೆಗಳು ಮತ್ತು ಯುವಕರು ಶಾಂತಿಯುತ ಜನಹೋರಾಟಕ್ಕೆ ಬೆಂಬಲ ನೀಡುವಂತೆ ವಿನಂತಿ.</p>
+<p class="event-banner-en">A Banahatti bandh has been called on <strong>Saturday, 08 August 2026</strong>, in support of the united public demand to construct the Taluk Praja Soudha in Banahatti. Citizens, traders, organisations and youth are requested to support this peaceful people’s movement.</p>
+<a class="event-banner-link" href="#procession">ಮೆರವಣಿಗೆಯ ವಿವರಗಳು · Procession details →</a>
+</div>
+</article>
+<article class="event-banner-row event-banner-row-reverse">
+<div class="event-banner-copy">
+<span class="event-banner-number">02</span>
+<p class="event-banner-kicker">ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ · Relay Hunger Satyagraha</p>
+<h3>ಬೇಡಿಕೆ ಈಡೇರುವವರೆಗೆ ಶಾಂತಿಯುತ ಹೋರಾಟ</h3>
+<p class="kn-text"><strong>08 ಆಗಸ್ಟ್ 2026, ಶನಿವಾರ ಸಂಜೆ 6:00 ಗಂಟೆಯಿಂದ</strong> ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭವಾಗಲಿದೆ. ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣವಾಗುವವರೆಗೆ ಈ ಶಾಂತಿಯುತ ಹೋರಾಟವನ್ನು ಮುಂದುವರಿಸಲು ಸಮಿತಿ ಕರೆ ನೀಡಿದೆ.</p>
+<p class="event-banner-en">The relay hunger Satyagraha begins at <strong>6:00 PM on Saturday, 08 August 2026</strong>, at Chennamma Circle. The committee has called for the peaceful campaign to continue until the demand for a Praja Soudha in Banahatti is fulfilled.</p>
+<a class="event-banner-link" href="#satyagraha">ಸತ್ಯಾಗ್ರಹದ ವಿವರಗಳು · Satyagraha details →</a>
+</div>
+<figure class="event-banner-card">
+<img alt="08 ಆಗಸ್ಟ್ 2026 ಸಂಜೆ 6 ಗಂಟೆಗೆ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಮತ್ತು ಬನಹಟ್ಟಿ ಬಂದ್ ಪ್ರಕಟಣೆ" height="1024" loading="eager" src="assets/praja-soudha-saradi-upavasa-satyagraha-08-08-2026.jpeg" width="1280"/>
+</figure>
+</article>
+<article class="event-banner-row">
+<figure class="event-banner-card">
+<img alt="08 ಆಗಸ್ಟ್ 2026 ಸಂಜೆ 6 ಗಂಟೆಯಿಂದ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಮತ್ತು ಬನಹಟ್ಟಿ ಬಂದ್ ಪ್ರಕಟಣೆ" decoding="async" height="1045" loading="eager" src="assets/praja-soudha-saradi-upavasa-satyagraha-banner-08-08-2026.jpeg" width="1320"/>
+</figure>
+<div class="event-banner-copy">
+<span class="event-banner-number">03</span>
+<p class="event-banner-kicker">ಜನತೆಯ ಒಗ್ಗಟ್ಟಿನ ಹೋರಾಟ · United People’s Movement</p>
+<h3>ಬನಹಟ್ಟಿಯಲ್ಲೇ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ಒತ್ತಾಯ</h3>
+<p class="kn-text">ಬನಹಟ್ಟಿ ಹಾಗೂ ಸುತ್ತಮುತ್ತಲಿನ ಗ್ರಾಮಗಳ ಜನತೆಯ ಒಗ್ಗಟ್ಟಿನ ಬೇಡಿಕೆಯಾಗಿ, ಬನಹಟ್ಟಿಯಲ್ಲೇ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಿಸಬೇಕು ಎಂದು ಒತ್ತಾಯಿಸಿ <strong>08 ಆಗಸ್ಟ್ 2026, ಶನಿವಾರ ಸಂಜೆ 6:00 ಗಂಟೆಯಿಂದ</strong> ಬಸ್ ನಿಲ್ದಾಣದ ಹತ್ತಿರದ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭವಾಗಲಿದೆ. ಶನಿವಾರ ಸಂಪೂರ್ಣ ಬನಹಟ್ಟಿ ಬಂದ್‌ಗೆ ಕರೆ ನೀಡಲಾಗಿದೆ.</p>
+<p class="event-banner-en">As a united demand of Banahatti and the surrounding villages, a relay hunger Satyagraha will begin at <strong>6:00 PM on Saturday, 08 August 2026</strong>, at Chennamma Circle near the bus stand, urging that the Praja Soudha be constructed in Banahatti. A complete Banahatti bandh has also been called for Saturday.</p>
+<a class="event-banner-link" href="#satyagraha">ಕಾರ್ಯಕ್ರಮದ ವಿವರಗಳು · Event details →</a>
+</div>
+</article>
+<article class="event-banner-row event-banner-row-reverse">
+<div class="event-banner-copy">
+<span class="event-banner-number">04</span>
+<p class="event-banner-kicker">ನಮ್ಮ ಹಕ್ಕಿನ ಹೋರಾಟ · A Movement for Our Right</p>
+<h3>ಪ್ರಜಾ ಸೌಧಕ್ಕಾಗಿ ನಮ್ಮ ಹೋರಾಟ</h3>
+<p class="kn-text">ಬನಹಟ್ಟಿ ಹಾಗೂ ಸುತ್ತಮುತ್ತಲಿನ ಗ್ರಾಮಗಳ ಜನತೆಯ ಒಕ್ಕೊರಲ ಆಗ್ರಹದಂತೆ, ಪ್ರಜಾ ಸೌಧವನ್ನು ಬನಹಟ್ಟಿಯಲ್ಲಿಯೇ ನಿರ್ಮಿಸಬೇಕು ಎಂಬ ಬೇಡಿಕೆಯೊಂದಿಗೆ <strong>08 ಆಗಸ್ಟ್ 2026, ಶನಿವಾರ</strong> ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ನಡೆಯಲಿದೆ. ಎಲ್ಲರೂ ಭಾಗವಹಿಸಿ ನಮ್ಮ ಹಕ್ಕಿನ ಹೋರಾಟವನ್ನು ಯಶಸ್ವಿಗೊಳಿಸೋಣ.</p>
+<p class="event-banner-en">Responding to the united demand of Banahatti and neighbouring villages, the relay hunger Satyagraha at <strong>Chennamma Circle on Saturday, 08 August 2026</strong>, calls for the Praja Soudha to be constructed in Banahatti. Everyone is invited to participate and strengthen this peaceful movement.</p>
+<a class="event-banner-link" href="#join">ಭಾಗವಹಿಸಿ · Join the movement →</a>
+</div>
+<figure class="event-banner-card">
+<img alt="ಪ್ರಜಾ ಸೌಧಕ್ಕಾಗಿ ನಮ್ಮ ಹೋರಾಟ ಮತ್ತು 08 ಆಗಸ್ಟ್ 2026ರ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹದ ಪ್ರಕಟಣೆ" decoding="async" height="640" loading="lazy" src="assets/praja-soudha-namma-horata-banner-08-08-2026.jpeg" width="1280"/>
+</figure>
+</article>
+<article class="event-banner-row">
+<figure class="event-banner-card">
+<img alt="ಬನಹಟ್ಟಿ ನಗರದಲ್ಲಿಯೇ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣಕ್ಕಾಗಿ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಪ್ರಕಟಣೆ" decoding="async" height="384" loading="lazy" src="assets/praja-soudha-saradi-satyagraha-wide-banner-08-08-2026.png" width="1280"/>
+</figure>
+<div class="event-banner-copy">
+<span class="event-banner-number">05</span>
+<p class="event-banner-kicker">ಬನಹಟ್ಟಿಯಲ್ಲಿಯೇ ಪ್ರಜಾ ಸೌಧ · Praja Soudha in Banahatti</p>
+<h3>ಜನತೆಯ ಒಕ್ಕೊರಲ ಆಗ್ರಹ</h3>
+<p class="kn-text">ಬನಹಟ್ಟಿ ನಗರದಲ್ಲಿಯೇ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಿಸಬೇಕು ಎಂಬ ಜನತೆಯ ಬೇಡಿಕೆಯನ್ನು ಬೆಂಬಲಿಸಿ <strong>08 ಆಗಸ್ಟ್ 2026, ಶನಿವಾರ</strong> ಬನಹಟ್ಟಿ ಬಸ್ ನಿಲ್ದಾಣದ ಹತ್ತಿರದ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಕರೆ ನೀಡಲಾಗಿದೆ. ಬನಹಟ್ಟಿ ಹಾಗೂ ಸುತ್ತಮುತ್ತಲಿನ ಗ್ರಾಮಗಳ ನಾಗರಿಕರು ಶಾಂತಿಯುತವಾಗಿ ಭಾಗವಹಿಸುವಂತೆ ವಿನಂತಿ.</p>
+<p class="event-banner-en">The public announcement supports the demand to build the Praja Soudha within Banahatti and calls citizens of Banahatti and surrounding villages to join the peaceful relay Satyagraha at <strong>Chennamma Circle on Saturday, 08 August 2026</strong>.</p>
+<a class="event-banner-link" href="#satyagraha">ಸತ್ಯಾಗ್ರಹದ ವಿವರಗಳು · Satyagraha details →</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+<section class="hero">
+<div class="hero-glow hero-glow-one"></div>
+<div class="hero-glow hero-glow-two"></div>
+<div class="container hero-grid">
+<div class="hero-copy reveal">
+<span class="campaign-label"><span class="live-dot"></span> ಬನಹಟ್ಟಿಯ ಜನಹೋರಾಟ · People’s movement for Banahatti</span>
+<p class="hero-kannada">ಪ್ರಜಾ ಸೌಧಕ್ಕಾಗಿ ಬನಹಟ್ಟಿ ಒಂದಾಗಿದೆ</p>
+<h2 class="kn-heading">ಬನಹಟ್ಟಿಗೆ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಿಸಬೇಕು ಎಂಬುದು ಜನರ ಒಕ್ಕೊರಲ ಬೇಡಿಕೆ.</h2><h1>Banahatti demands its <em>Praja Soudha.</em></h1>
+<p class="kn-text">ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣವಾಗಬೇಕು ಎಂಬ ಬೇಡಿಕೆಗೆ ಪಟ್ಟಣದ ಜನರು ಒಂದಾಗಿದ್ದಾರೆ. ಬೃಹತ್ ಮೆರವಣಿಗೆಯಿಂದ ಆರಂಭವಾಗುವ ಈ ಹೋರಾಟ, ಬೇಡಿಕೆ ಈಡೇರುವವರೆಗೆ ಶಾಂತಿಯುತ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಮೂಲಕ ಮುಂದುವರಿಯಲಿದೆ.</p><p class="hero-intro">The people of Banahatti have come together under a common committee to seek the construction of a Praja Soudha in the town. The movement begins with a mega procession and continues through peaceful Saradi Satyagraha until the demand is fulfilled.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="#procession">ಶನಿವಾರ ಬೃಹತ್ ಮೆರವಣಿಗೆ<br/><small>Saturday Mega Procession</small></a>
+<a class="btn btn-secondary" href="#updates">ಹೋರಾಟದ ನವೀಕರಣಗಳು<br/><small>See Movement Updates</small></a>
+</div>
+<div class="hero-points">
+<span>ಒಂದೇ ಪಟ್ಟಣ · One town</span>
+<span>ಒಂದೇ ಬೇಡಿಕೆ · One demand</span>
+<span>ಶಾಂತಿಯುತ ಹೋರಾಟ · Peaceful movement</span>
+</div>
+</div>
+<aside aria-label="Main movement announcement" class="campaign-card reveal delay-1">
+<div class="campaign-card-top">
+<span>ಮುಖ್ಯ ಪ್ರಕಟಣೆ</span>
+<strong>ಬೃಹತ್ ಮೆರವಣಿಗೆ · MEGA PROCESSION</strong>
+</div>
+<div class="campaign-date">
+<strong>08</strong>
+<div><span>ಆಗಸ್ಟ್ 2026 · AUGUST 2026</span><b>ಶನಿವಾರ · SATURDAY</b></div>
+</div>
+<h2>ಬೃಹತ್ ಮೆರವಣಿಗೆ</h2>
+<p class="kn-text">ಬನಹಟ್ಟಿಯ ನಾಗರಿಕರು, ಸಂಘ-ಸಂಸ್ಥೆಗಳು, ವ್ಯಾಪಾರಿಗಳು, ಯುವಕರು, ಮಹಿಳೆಯರು ಹಾಗೂ ಹಿತೈಷಿಗಳು ಭಾಗವಹಿಸಲು ವಿನಂತಿ.</p><p>All citizens, organisations, traders, youth, women and well-wishers of Banahatti are invited to participate.</p>
+<dl class="event-facts">
+<div><dt>ಸಮಯ · Time</dt><dd><strong class="kn-fact">ಬೆಳಿಗ್ಗೆ 9:00</strong><small class="en-fact">9:00 AM</small></dd></div>
+<div><dt>ಆರಂಭ ಸ್ಥಳ · Starting point</dt><dd><strong class="kn-fact">ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನ</strong><small class="en-fact">Shri Kadasiddeshwar Temple</small></dd></div>
+<div><dt>ಬೇಡಿಕೆ · Demand</dt><dd><strong class="kn-fact">ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣ</strong><small class="en-fact">Praja Soudha construction</small></dd></div>
+</dl>
+<a class="btn btn-light full" href="#join">ಭಾಗವಹಿಸಿ · Participate</a>
+</aside>
+</div>
+</section>
+<section aria-label="Latest movement announcement" class="ticker">
+<div class="container ticker-inner">
+<strong>ಇತ್ತೀಚಿನದು · Latest</strong>
+<div class="ticker-window"><span id="tickerText"></span></div>
+<a href="#updates">ಎಲ್ಲವನ್ನೂ ನೋಡಿ · View all →</a>
+</div>
+</section>
+<section class="section section-pad" id="movement">
+<div class="container">
+<div class="section-heading split reveal">
+<div>
+<span class="eyebrow">ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟ · ಪ್ರಸ್ತುತ ಸ್ಥಿತಿ<small>Praja Soudha Movement · Current Status</small></span>
+<h3 class="kn-heading">ಒಂದೇ ಬೇಡಿಕೆಗೆ ಬನಹಟ್ಟಿ ಒಂದಾಗಿದೆ</h3><h2>Banahatti has united around one common demand</h2>
+</div>
+<div class="section-copy-bilingual">
+<p class="kn-text">ಬನಹಟ್ಟಿಯಲ್ಲೇ ತಾಲೂಕು ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಿಸಬೇಕು ಎಂಬ ಬೇಡಿಕೆಗೆ <strong>ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟ ಸಮಿತಿ</strong> ನೇತೃತ್ವದಲ್ಲಿ ಜನರು ಒಂದಾಗಿದ್ದಾರೆ. ನಾಗರಿಕರು, ವ್ಯಾಪಾರಿಗಳು, ಯುವಕರು, ಸಂಘ-ಸಂಸ್ಥೆಗಳು ಮತ್ತು ಜನಪ್ರತಿನಿಧಿಗಳು ಈ ಶಾಂತಿಯುತ, ಪ್ರಜಾಸತ್ತಾತ್ಮಕ ಮತ್ತು ಪಕ್ಷಾತೀತ ಹೋರಾಟಕ್ಕೆ ಬೆಂಬಲ ನೀಡಿದ್ದಾರೆ.</p>
+<p class="en-text">The people of Banahatti have come together under the <strong>Banahatti Praja Soudha Horata Samiti</strong> to demand construction of the Taluk Praja Soudha in Banahatti. Citizens, traders, youth, social organisations and public representatives have extended strong support to this peaceful, democratic and non-political public campaign.</p>
+</div>
+</div>
+<section aria-labelledby="movementLaunchTitle" class="movement-launch reveal" id="movement-launch">
+<div class="movement-launch-header">
+<div>
+<span class="movement-launch-label">08 ಆಗಸ್ಟ್ 2026 · ಹೋರಾಟಕ್ಕೆ ಚಾಲನೆ</span>
+<h3 id="movementLaunchTitle">ಬೃಹತ್ ಮೆರವಣಿಗೆ ಮತ್ತು ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಚಾಲನೆ</h3>
+<p class="movement-launch-en-title">Mega procession and relay hunger Satyagraha begin</p>
+</div>
+<div class="movement-launch-summary">
+<p class="kn-text">ಬನಹಟ್ಟಿಯಲ್ಲೇ ತಾಲೂಕು ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಿಸಬೇಕು ಎಂದು ಆಗ್ರಹಿಸಿ 2026ರ ಆಗಸ್ಟ್ 8ರಂದು ಬೃಹತ್ ಮೆರವಣಿಗೆ ನಡೆಯಿತು. ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ನಡೆದ ಸಾರ್ವಜನಿಕ ಸಭೆಯೊಂದಿಗೆ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಚಾಲನೆ ನೀಡಲಾಯಿತು. ಮಹಿಳೆಯರು, ಹಿರಿಯರು, ವ್ಯಾಪಾರಿಗಳು, ಯುವಕರು, ವಿವಿಧ ಸಂಘ-ಸಂಸ್ಥೆಗಳ ಪ್ರತಿನಿಧಿಗಳು ಹಾಗೂ ನಾಗರಿಕರು ದೊಡ್ಡ ಸಂಖ್ಯೆಯಲ್ಲಿ ಭಾಗವಹಿಸಿ ಹೋರಾಟಕ್ಕೆ ಬೆಂಬಲ ವ್ಯಕ್ತಪಡಿಸಿದರು.</p>
+<p>The mega procession was held on 8 August 2026, demanding that the Taluk Praja Soudha be constructed in Banahatti. A public gathering at Chennamma Circle marked the start of the relay hunger Satyagraha. Women, elders, traders, youth, organisation representatives and citizens participated in large numbers and expressed their support for the movement.</p>
+</div>
+</div>
+<div aria-label="Photographs from the procession and commencement of the relay hunger Satyagraha on 8 August 2026" class="movement-launch-gallery">
+<figure class="movement-launch-photo movement-launch-photo-featured">
+<a href="assets/procession-satyagraha-launch-main-08-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಬನಹಟ್ಟಿಯ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಬೃಹತ್ ಸಂಖ್ಯೆಯಲ್ಲಿ ಸೇರಿರುವ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದ ಬೆಂಬಲಿಗರು" decoding="async" height="1023" loading="lazy" src="assets/procession-satyagraha-launch-main-08-08-2026.jpeg" width="1536"/>
+</a>
+<figcaption><strong>ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಜನರ ಬೃಹತ್ ಸಮಾವೇಶ</strong><span>Large public gathering at Chennamma Circle</span></figcaption>
+</figure>
+<figure class="movement-launch-photo">
+<a href="assets/procession-satyagraha-launch-support-08-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಬೆಂಬಲವಾಗಿ ಕುಳಿತು ಭಾಗವಹಿಸಿದ ನಾಗರಿಕರು" decoding="async" height="1023" loading="lazy" src="assets/procession-satyagraha-launch-support-08-08-2026.jpeg" width="1536"/>
+</a>
+<figcaption><strong>ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಸಾರ್ವಜನಿಕ ಬೆಂಬಲ</strong><span>Public support for the relay Satyagraha</span></figcaption>
+</figure>
+<figure class="movement-launch-photo">
+<a href="assets/procession-satyagraha-launch-stage-08-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಚೆನ್ನಮ್ಮ ವೃತ್ತದ ವೇದಿಕೆಯ ಮುಂದೆ ಸೇರಿರುವ ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದ ಜನಸ್ತೋಮ" decoding="async" height="1023" loading="lazy" src="assets/procession-satyagraha-launch-stage-08-08-2026.jpeg" width="1536"/>
+</a>
+<figcaption><strong>ಹೋರಾಟದ ಚಾಲನಾ ಸಭೆ</strong><span>Opening gathering of the movement</span></figcaption>
+</figure>
+<figure class="movement-launch-photo">
+<a href="assets/procession-satyagraha-launch-participation-08-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದಲ್ಲಿ ಮಹಿಳೆಯರು ಹಿರಿಯರು ಯುವಕರು ಮತ್ತು ವಿವಿಧ ಸಮುದಾಯಗಳ ನಾಗರಿಕರ ಭಾಗವಹಿಸುವಿಕೆ" decoding="async" height="1152" loading="lazy" src="assets/procession-satyagraha-launch-participation-08-08-2026.jpeg" width="1536"/>
+</a>
+<figcaption><strong>ಎಲ್ಲ ವರ್ಗದ ನಾಗರಿಕರ ಭಾಗವಹಿಸುವಿಕೆ</strong><span>Citizens from across the community participate</span></figcaption>
+</figure>
+<figure class="movement-launch-photo">
+<a href="assets/procession-satyagraha-launch-leaders-08-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದ ಮೆರವಣಿಗೆಯಲ್ಲಿ ಮುಖಂಡರು ಹಿರಿಯರು ಮತ್ತು ಸ್ವಾಮೀಜಿಯವರ ಭಾಗವಹಿಸುವಿಕೆ" decoding="async" height="864" loading="lazy" src="assets/procession-satyagraha-launch-leaders-08-08-2026.jpeg" width="1536"/>
+</a>
+<figcaption><strong>ಮುಖಂಡರು ಮತ್ತು ಹಿರಿಯರ ಒಗ್ಗಟ್ಟಿನ ಬೆಂಬಲ</strong><span>Leaders and elders stand united with the movement</span></figcaption>
+</figure>
+<figure class="movement-launch-photo">
+<a href="assets/procession-satyagraha-launch-street-08-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಬನಹಟ್ಟಿಯ ರಸ್ತೆಗಳಲ್ಲಿ ಸಾಗುತ್ತಿರುವ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದ ಬೃಹತ್ ಮೆರವಣಿಗೆ" decoding="async" height="1536" loading="lazy" src="assets/procession-satyagraha-launch-street-08-08-2026.jpeg" width="855"/>
+</a>
+<figcaption><strong>ಬನಹಟ್ಟಿಯ ರಸ್ತೆಗಳಲ್ಲಿ ಬೃಹತ್ ಮೆರವಣಿಗೆ</strong><span>The mega procession moves through Banahatti’s streets</span></figcaption>
+</figure>
+</div>
+<p class="movement-launch-note">ಚಿತ್ರವನ್ನು ಪೂರ್ಣ ಗಾತ್ರದಲ್ಲಿ ನೋಡಲು ಅದರ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ. <span>Tap any photograph to view it in full.</span></p>
+</section>
+<section aria-labelledby="decisionMeetingTitle" class="decision-meeting reveal">
+<div class="decision-meeting-header">
+<div>
+<span class="decision-meeting-label">06 ಆಗಸ್ಟ್ 2026 · ನಿರ್ಣಯ ಸಭೆ</span>
+<h3 id="decisionMeetingTitle">ಹೋರಾಟದ ನಿರ್ಣಯ ಕೈಗೊಂಡ ಜನಸಭೆ</h3>
+<p class="decision-meeting-en-title">The public gathering where the movement was resolved</p>
+</div>
+<div class="decision-meeting-summary">
+<p class="kn-text">2026ರ ಆಗಸ್ಟ್ 6ರಂದು ಬನಹಟ್ಟಿಯಲ್ಲಿ ನಡೆದ ಸಾರ್ವಜನಿಕ ಸಭೆಯಲ್ಲಿ, ತಾಲೂಕು ಪ್ರಜಾ ಸೌಧವನ್ನು ಬನಹಟ್ಟಿಯಲ್ಲೇ ನಿರ್ಮಿಸಬೇಕು ಎಂಬ ಬೇಡಿಕೆಗಾಗಿ ಒಗ್ಗಟ್ಟಿನ ಹೋರಾಟ ಆರಂಭಿಸಲು ನಿರ್ಣಯ ಕೈಗೊಳ್ಳಲಾಯಿತು. ನಾಗರಿಕರು, ಹಿರಿಯರು, ಸಂಘ-ಸಂಸ್ಥೆಗಳ ಪ್ರತಿನಿಧಿಗಳು ಮತ್ತು ಹೋರಾಟ ಸಮಿತಿಯ ಮುಖಂಡರು ಶಾಂತಿಯುತ, ಪ್ರಜಾಸತ್ತಾತ್ಮಕ ಹೋರಾಟಕ್ಕೆ ಬೆಂಬಲದ ಸಂಕಲ್ಪ ಕೈಗೊಂಡರು.</p>
+<p>At the public gathering held in Banahatti on 6 August 2026, participants resolved to launch a united movement demanding that the Taluk Praja Soudha be constructed in Banahatti. Citizens, elders, organisation representatives and movement leaders pledged their support for a peaceful, democratic campaign.</p>
+</div>
+</div>
+<div aria-label="Photographs from the 6 August 2026 decision meeting" class="decision-gallery">
+<figure class="decision-photo decision-photo-emphasis">
+<a href="assets/decision-meeting-audience-06-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಬನಹಟ್ಟಿಯ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದ ನಿರ್ಣಯ ಸಭೆಯಲ್ಲಿ ಭಾಗವಹಿಸಿದ ನಾಗರಿಕರು" decoding="async" height="1510" loading="lazy" src="assets/decision-meeting-audience-06-08-2026.jpeg" width="960"/>
+</a>
+<figcaption><strong>ಸಭೆಗೆ ಆಗಮಿಸಿದ ನಾಗರಿಕರು</strong><span>Citizens gathered for the decision meeting</span></figcaption>
+</figure>
+<figure class="decision-photo decision-photo-emphasis">
+<a href="assets/decision-meeting-pledge-06-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟಕ್ಕೆ ಒಗ್ಗಟ್ಟಿನ ಸಂಕಲ್ಪ ವ್ಯಕ್ತಪಡಿಸಿದ ಸಭಿಕರು" decoding="async" height="1488" loading="lazy" src="assets/decision-meeting-pledge-06-08-2026.jpeg" width="960"/>
+</a>
+<figcaption><strong>ಹೋರಾಟಕ್ಕೆ ಒಗ್ಗಟ್ಟಿನ ಸಂಕಲ್ಪ</strong><span>Participants affirm their united support</span></figcaption>
+</figure>
+<figure class="decision-photo">
+<a href="assets/decision-meeting-declaration-06-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದ ಸಂಕಲ್ಪ ಘೋಷಣೆಯ ಕ್ಷಣ" decoding="async" height="1120" loading="lazy" src="assets/decision-meeting-declaration-06-08-2026.jpeg" width="709"/>
+</a>
+<figcaption><strong>ಹೋರಾಟದ ಸಂಕಲ್ಪ ಘೋಷಣೆ</strong><span>Declaration of the movement decision</span></figcaption>
+</figure>
+<figure class="decision-photo">
+<a href="assets/decision-meeting-address-1-06-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಸಭೆಯನ್ನು ಉದ್ದೇಶಿಸಿ ಮಾತನಾಡುತ್ತಿರುವ ಹೋರಾಟದ ಮುಖಂಡರು" decoding="async" height="1501" loading="lazy" src="assets/decision-meeting-address-1-06-08-2026.jpeg" width="960"/>
+</a>
+<figcaption><strong>ಸಭೆಯನ್ನು ಉದ್ದೇಶಿಸಿ ಮಾತು</strong><span>Addressing the gathering</span></figcaption>
+</figure>
+<figure class="decision-photo">
+<a href="assets/decision-meeting-address-2-06-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದ ಕುರಿತು ಸಭೆಯಲ್ಲಿ ಅಭಿಪ್ರಾಯ ಮಂಡನೆ" decoding="async" height="1444" loading="lazy" src="assets/decision-meeting-address-2-06-08-2026.jpeg" width="960"/>
+</a>
+<figcaption><strong>ಹೋರಾಟದ ಕುರಿತು ಅಭಿಪ್ರಾಯ ಮಂಡನೆ</strong><span>Views presented during the meeting</span></figcaption>
+</figure>
+<figure class="decision-photo">
+<a href="assets/decision-meeting-stage-06-08-2026.jpeg" rel="noopener" target="_blank">
+<img alt="ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದ ನಿರ್ಣಯ ಸಭೆಯ ವೇದಿಕೆ ಮತ್ತು ಮುಖಂಡರು" decoding="async" height="1508" loading="lazy" src="assets/decision-meeting-stage-06-08-2026.jpeg" width="960"/>
+</a>
+<figcaption><strong>ನಿರ್ಣಯ ಸಭೆಯ ವೇದಿಕೆ</strong><span>Leaders and representatives on the dais</span></figcaption>
+</figure>
+</div>
+<p class="decision-gallery-note">ಚಿತ್ರವನ್ನು ಪೂರ್ಣ ಗಾತ್ರದಲ್ಲಿ ನೋಡಲು ಅದರ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ. <span>Tap any photograph to view it in full.</span></p>
+</section>
+<div class="reason-grid reason-grid-four">
+<article class="reason-card reveal">
+<span>01</span>
+<h4 class="kn-card-title">ಪ್ರಮುಖ ನಗರ ಕೇಂದ್ರ</h4><h3>Major urban centre</h3>
+<p class="kn-text">ಬನಹಟ್ಟಿ ತಾಲೂಕಿನ ಪ್ರಮುಖ ಮತ್ತು ದೊಡ್ಡ ನಗರ ಕೇಂದ್ರಗಳಲ್ಲಿ ಒಂದಾಗಿದೆ.</p><p>Banahatti is one of the largest and most important urban centres in the taluk.</p>
+</article>
+<article class="reason-card reveal delay-1">
+<span>02</span>
+<h4 class="kn-card-title">16 ನಗರಸಭೆ ವಾರ್ಡ್‌ಗಳು</h4><h3>16 municipal wards</h3>
+<p class="kn-text">ಬನಹಟ್ಟಿಯಲ್ಲಿ 16 ನಗರಸಭೆ ವಾರ್ಡ್‌ಗಳಿದ್ದು, ರಬಕವಿಯಲ್ಲಿ 9 ವಾರ್ಡ್‌ಗಳಿವೆ.</p><p>Banahatti has 16 municipal wards, compared with 9 wards in Rabakavi.</p>
+</article>
+<article class="reason-card reveal delay-2">
+<span>03</span>
+<h4 class="kn-card-title">ಸಾವಿರಾರು ಜನರಿಗೆ ಸರ್ಕಾರಿ ಸೇವೆಗಳ ಅಗತ್ಯ</h4><h3>Thousands need services</h3>
+<p class="kn-text">ಅಗತ್ಯ ಸರ್ಕಾರಿ ಸೇವೆಗಳಿಗಾಗಿ ಪ್ರತಿವರ್ಷ ಸಾವಿರಾರು ಜನರು ಸರ್ಕಾರಿ ಕಚೇರಿಗಳಿಗೆ ಭೇಟಿ ನೀಡುತ್ತಾರೆ.</p><p>Thousands of residents visit government offices every year for essential public services.</p>
+</article>
+<article class="reason-card reveal delay-2">
+<span>04</span>
+<h4 class="kn-card-title">ಸುತ್ತಮುತ್ತಲ ಪ್ರದೇಶಕ್ಕೂ ಅನುಕೂಲ</h4><h3>Regional accessibility</h3>
+<p class="kn-text">ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣವಾದರೆ ಪಟ್ಟಣ ಮತ್ತು ಸುತ್ತಮುತ್ತಲ ಗ್ರಾಮಗಳ ಜನರಿಗೆ ಸರ್ಕಾರಿ ಸೇವೆಗಳು ಸುಲಭವಾಗಿ ಲಭ್ಯವಾಗುತ್ತವೆ.</p><p>A Praja Soudha here would improve access for Banahatti and surrounding villages.</p>
+</article>
+</div>
+<div class="status-panels">
+<article class="status-panel reveal">
+<span class="eyebrow">ವ್ಯಾಪಕ ಜನಬೆಂಬಲ<small>Overwhelming public support</small></span>
+<h4 class="kn-card-title">ಇಡೀ ಪಟ್ಟಣದ ಭಾಗವಹಿಸುವಿಕೆ</h4><h3>The whole town is participating</h3>
+<div aria-label="Supporters of the movement" class="support-tags">
+<span><strong class="kn-inline">ಸ್ಥಳೀಯ ನಾಗರಿಕರು</strong><small class="en-inline">Local citizens</small></span><span><strong class="kn-inline">ವ್ಯಾಪಾರಿಗಳು</strong><small class="en-inline">Business community</small></span><span><strong class="kn-inline">ಯುವ ಸ್ವಯಂಸೇವಕರು</strong><small class="en-inline">Youth volunteers</small></span><span><strong class="kn-inline">ಸಾಮಾಜಿಕ ಸಂಘಗಳು</strong><small class="en-inline">Social organisations</small></span><span><strong class="kn-inline">ಹಿರಿಯ ನಾಗರಿಕರು</strong><small class="en-inline">Senior citizens</small></span><span><strong class="kn-inline">ಮಾಧ್ಯಮ ಪ್ರತಿನಿಧಿಗಳು</strong><small class="en-inline">Media representatives</small></span>
+</div>
+<p class="kn-text">ಬೇಡಿಕೆ ಈಡೇರುವವರೆಗೆ ಹೋರಾಟದ ಪ್ರತಿಯೊಂದು ಹಂತಕ್ಕೂ ಬೆಂಬಲ ನೀಡುವುದಾಗಿ ಅನೇಕರು ತಿಳಿಸಿದ್ದಾರೆ.</p><p>Many participants have pledged to support every stage of the movement until the demand is fulfilled.</p>
+</article>
+<article class="status-panel status-panel-accent reveal delay-1">
+<span class="eyebrow light">Key message · ಮುಖ್ಯ ಸಂದೇಶ</span>
+<blockquote>“Praja Soudha should be constructed in Banahatti for the benefit of the people and the future development of the town.”<br/><span class="kn-quote">“ಜನರ ಅನುಕೂಲ ಮತ್ತು ಬನಹಟ್ಟಿಯ ಭವಿಷ್ಯದ ಅಭಿವೃದ್ಧಿಗಾಗಿ ಪ್ರಜಾ ಸೌಧವನ್ನು ಬನಹಟ್ಟಿಯಲ್ಲೇ ನಿರ್ಮಿಸಬೇಕು.”</span></blockquote>
+</article>
+</div>
+</div>
+</section>
+<section class="section section-red section-pad" id="procession">
+<div class="container procession-grid">
+<div class="procession-copy reveal">
+<span class="eyebrow light">ಶನಿವಾರ · 8 ಆಗಸ್ಟ್ 2026<small>ಶನಿವಾರ · 8 ಆಗಸ್ಟ್ 2026</small></span>
+<h3 class="kn-heading light-text">ಪ್ರಜಾ ಸೌಧಕ್ಕಾಗಿ ಬೃಹತ್ ಮೆರವಣಿಗೆ</h3><h2>Mega procession for Praja Soudha</h2>
+<p class="kannada-line">ಬನಹಟ್ಟಿಯ ಸಮಗ್ರ ಅಭಿವೃದ್ಧಿಗಾಗಿ — ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ಒತ್ತಾಯಿಸಿ ಬೃಹತ್ ಮೆರವಣಿಗೆ</p>
+<p class="kn-text light-text">ಶಾಂತಿಯುತ ಮೆರವಣಿಗೆ ಬೆಳಿಗ್ಗೆ 9:00ಕ್ಕೆ ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ ಆರಂಭವಾಗಿ ಬನಹಟ್ಟಿಯ ಮುಖ್ಯ ರಸ್ತೆಗಳಲ್ಲಿ ಸಾಗುತ್ತದೆ. ಮೆರವಣಿಗೆ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿರುವ ಸತ್ಯಾಗ್ರಹ ಸ್ಥಳದಲ್ಲಿ ಮುಕ್ತಾಯವಾಗುತ್ತದೆ. ಎಲ್ಲರೂ ಸಮಿತಿಯ ಅಧಿಕೃತ ಸೂಚನೆಗಳನ್ನು ಪಾಲಿಸಬೇಕು.</p><p>The peaceful procession will begin at 9:00 AM from Shri Kadasiddeshwar Temple, travel through Banahatti’s main roads and conclude at the Satyagraha venue at Chennamma Circle. Citizens are requested to follow the committee’s official instructions.</p>
+<div class="procession-actions">
+<a class="btn btn-light" href="#join">ನಾನು ಭಾಗವಹಿಸುತ್ತೇನೆ · I will participate</a>
+<a class="text-link-light" href="#" id="shareMovement">ವಾಟ್ಸ್ಆಪ್‌ನಲ್ಲಿ ಹಂಚಿ · Share on WhatsApp →</a>
+</div>
+</div>
+<div class="participation-card reveal delay-1">
+<h4 class="kn-card-title">ಯಾರು ಭಾಗವಹಿಸಬಹುದು?</h4><h3>Who can participate?</h3>
+<div class="participation-list">
+<span><strong class="kn-inline">ಬನಹಟ್ಟಿ ಮತ್ತು ಸುತ್ತಮುತ್ತಲ ಗ್ರಾಮಗಳ ಜನರು</strong><small class="en-inline">Residents of Banahatti and nearby villages</small></span>
+<span><strong class="kn-inline">ವ್ಯಾಪಾರಿಗಳು ಮತ್ತು ವ್ಯಾಪಾರ ಸಂಘಗಳು</strong><small class="en-inline">Traders and business associations</small></span>
+<span><strong class="kn-inline">ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ಯುವಕ ಸಂಘಗಳು</strong><small class="en-inline">Students and youth groups</small></span>
+<span><strong class="kn-inline">ಮಹಿಳಾ ಸಂಘಟನೆಗಳು</strong><small class="en-inline">Women’s organisations</small></span>
+<span><strong class="kn-inline">ಸಾಮಾಜಿಕ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಸಂಘಟನೆಗಳು</strong><small class="en-inline">Social and cultural organisations</small></span>
+<span><strong class="kn-inline">ಹಿರಿಯ ನಾಗರಿಕರು ಮತ್ತು ಹಿತೈಷಿಗಳು</strong><small class="en-inline">Senior citizens and well-wishers</small></span>
+</div>
+<p class="kn-text">ಹೋರಾಟಕ್ಕೆ ಬೆಂಬಲವಾಗಿ ಬನಹಟ್ಟಿ ಬಂದ್‌ಗೆ ಕರೆ ನೀಡಲಾಗಿದೆ. ಆಂಬ್ಯುಲೆನ್ಸ್, ಅಗ್ನಿಶಾಮಕ ವಾಹನಗಳು ಮತ್ತು ಇತರೆ ತುರ್ತು ಸೇವೆಗಳಿಗೆ ವಿನಾಯಿತಿ ಇರುತ್ತದೆ.</p><p>A complete Banahatti bandh has been called in support of the movement. Ambulances, fire-service vehicles and other essential emergency services will remain exempt.</p>
+</div>
+</div>
+</section>
+<section class="section section-pad" id="satyagraha">
+<div class="container satyagraha-grid">
+<div aria-hidden="true" class="satyagraha-visual reveal">
+<div class="rings"><span></span><span></span><span></span></div>
+<strong>ಸರದಿ<br/>ಸತ್ಯಾಗ್ರಹ</strong>
+<small>ಶಾಂತಿಯುತ · ಏಕತೆ · ದೃಢನಿಶ್ಚಯ<br/><span class="en-visual">Peaceful · United · Determined</span></small>
+</div>
+<div class="satyagraha-copy reveal delay-1">
+<span class="eyebrow">ಮೆರವಣಿಗೆಯ ನಂತರ · After the procession</span>
+<h3 class="kn-heading">ಬೇಡಿಕೆ ಈಡೇರುವವರೆಗೆ ಸರದಿ ಸತ್ಯಾಗ್ರಹ ಮುಂದುವರಿಯುತ್ತದೆ</h3><h2>Saradi Satyagraha will continue until the demand is fulfilled</h2>
+<p class="kn-text">ಬೃಹತ್ ಮೆರವಣಿಗೆಯ ನಂತರ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸಂಘಟನೆಗಳ ಮುಖಂಡರು, ನಾಗರಿಕರು ಮತ್ತು ಹೋರಾಟಗಾರರ ಸಮ್ಮುಖದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭವಾಗುತ್ತದೆ. ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ಸ್ಪಷ್ಟ ಕ್ರಮ ಕೈಗೊಳ್ಳುವವರೆಗೆ ಯೋಜಿತ ಸರದಿಗಳಲ್ಲಿ ಸತ್ಯಾಗ್ರಹ ಮುಂದುವರಿಯುತ್ತದೆ.</p><p>Following the mega procession, the Saradi hunger Satyagraha will be inaugurated at Chennamma Circle in the presence of organisation leaders, citizens and movement participants. It will continue in planned shifts until concrete action is secured for construction of the Praja Soudha in Banahatti.</p>
+<div class="movement-steps">
+<div><strong>1</strong><span><b><span class="kn-step-title">ಪಟ್ಟಣ ಒಂದಾಗುತ್ತದೆ</span><small class="en-step-title">Town unites</small></b><small><span class="kn-step-text">ಒಂದೇ ಸಮಿತಿ ನಾಗರಿಕರು ಮತ್ತು ಸಂಘಟನೆಗಳನ್ನು ಒಟ್ಟುಗೂಡಿಸುತ್ತದೆ.</span><span class="en-step-text">A common committee brings citizens and organisations together.</span></small></span></div>
+<div><strong>2</strong><span><b><span class="kn-step-title">ಬೃಹತ್ ಮೆರವಣಿಗೆ</span><small class="en-step-title">Mega procession</small></b><small><span class="kn-step-text">ಬನಹಟ್ಟಿಯ ಒಗ್ಗಟ್ಟಿನ ಬೇಡಿಕೆಯನ್ನು ಶಾಂತಿಯುತವಾಗಿ ಪ್ರದರ್ಶಿಸುವ ಮೆರವಣಿಗೆ.</span><span class="en-step-text">A peaceful public demonstration of Banahatti’s united demand.</span></small></span></div>
+<div><strong>3</strong><span><b><span class="kn-step-title">ಸರದಿ ಸತ್ಯಾಗ್ರಹ</span><small class="en-step-title">Saradi Satyagraha</small></b><small><span class="kn-step-text">ಭಾಗವಹಿಸುವವರು ಯೋಜಿತ ಸರದಿಗಳಲ್ಲಿ ಹೋರಾಟ ಮುಂದುವರಿಸುತ್ತಾರೆ.</span><span class="en-step-text">Participants continue the movement in organised shifts.</span></small></span></div>
+<div><strong>4</strong><span><b><span class="kn-step-title">ಸಾಧನೆವರೆಗೆ</span><small class="en-step-title">Until achievement</small></b><small><span class="kn-step-text">ಪ್ರಜಾ ಸೌಧದ ಬೇಡಿಕೆ ಈಡೇರುವವರೆಗೆ ಹೋರಾಟ ಮುಂದುವರಿಯುತ್ತದೆ.</span><span class="en-step-text">The campaign continues until the Praja Soudha demand is fulfilled.</span></small></span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section section-soft section-pad" id="updates">
+<div class="container">
+<div class="section-heading split reveal">
+<div>
+<span class="eyebrow">ಚಿತ್ರಗಳು, ವೀಡಿಯೊಗಳು ಮತ್ತು ಪ್ರಕಟಣೆಗಳು<small>Photos, videos and announcements</small></span>
+<h3 class="kn-heading">ಹೋರಾಟದ ನವೀಕರಣಗಳು</h3><h2>Movement updates</h2>
+</div>
+<div class="section-copy-bilingual">
+<p class="kn-text">ಮೆರವಣಿಗೆ ಸಿದ್ಧತೆ, ಸಮಿತಿಯ ಪ್ರಕಟಣೆಗಳು, ಸತ್ಯಾಗ್ರಹದ ಮಾಹಿತಿ, ಪತ್ರಿಕಾ ಕತ್ತರಣೆಗಳು ಮತ್ತು ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮದ ಸುದ್ದಿಗಳನ್ನು ಒಂದೇ ಕ್ರಮದಲ್ಲಿ ಇಲ್ಲಿ ನೋಡಬಹುದು.</p>
+<p class="en-text">Publish procession preparations, committee announcements, Satyagraha updates, newspaper cuts and social-media coverage in one chronological feed.</p>
+</div>
+</div>
+<section aria-labelledby="editorAccessTitle" class="editor-access reveal" hidden="" id="editorAccess">
+<div class="editor-access-copy">
+<span class="eyebrow" id="editorAccessEyebrow">ಸಮಿತಿ ಪ್ರವೇಶ · Committee access</span>
+<h3 id="editorAccessTitle">ಸಮಿತಿ ಸಂಪಾದಕ · Committee editor</h3>
+<p id="editorAccessMessage">ಅನುಮತಿಸಿದ Google ಖಾತೆಯಿಂದ ಲಾಗಿನ್ ಮಾಡಿ. · Sign in with the authorised Google account.<br/><span class="kn-text">ಪೋಸ್ಟ್ ಮಾಡುವ ಫಾರ್ಮ್ ತೆರೆಯಲು ಅನುಮತಿಸಿದ Google ಖಾತೆಯಿಂದ ಲಾಗಿನ್ ಮಾಡಿ. shiddu@gmail.com ಖಾತೆಗೆ ಮಾತ್ರ ಅನುಮತಿ ಇದೆ.</span></p>
+</div>
+<div class="otp-form" id="otpForm">
+<div>
+<strong>ಅನುಮತಿಸಿದ ಖಾತೆ · Authorised account</strong>
+<span>shiddu@gmail.com</span>
+</div>
+<button class="google-signin" id="googleSignInButton" type="button"><span aria-hidden="true" class="google-g">G</span><span>Google ಮೂಲಕ ಪ್ರವೇಶಿಸಿ</span><small>Sign in with Google</small></button>
+<span id="authStatus" role="status"></span>
+</div>
+<div class="auth-session" hidden="" id="authSession">
+<span>Signed in as · ಲಾಗಿನ್ ಖಾತೆ: <strong id="signedInEmail"></strong></span>
+<button class="btn btn-secondary" id="signOutButton" type="button">Sign out · ಲಾಗ್ ಔಟ್</button>
+</div>
+</section>
+<details class="publisher-panel reveal" hidden="" id="publisherPanel">
+<summary><span>＋</span> Committee editor: post a photo, video or update · ಚಿತ್ರ, ವೀಡಿಯೊ ಅಥವಾ ಮಾಹಿತಿ ಪ್ರಕಟಿಸಿ</summary>
+<form class="publisher-form" id="postForm">
+<div class="publisher-note">
+<strong>Simple website editor · ಸರಳ ವೆಬ್‌ಸೈಟ್ ಸಂಪಾದಕ</strong>
+<span>Posts added here are saved in this browser for preview. Public publishing for all visitors requires connecting the site to hosting/database storage.<br/>ಇಲ್ಲಿ ಸೇರಿಸಿದ ಪೋಸ್ಟ್‌ಗಳು ಪೂರ್ವವೀಕ್ಷಣೆಗೆ ಈ ಬ್ರೌಸರ್‌ನಲ್ಲೇ ಉಳಿಯುತ್ತವೆ. ಎಲ್ಲರಿಗೂ ಕಾಣುವಂತೆ ಪ್ರಕಟಿಸಲು ಸರ್ವರ್/ಡೇಟಾಬೇಸ್ ಸಂಪರ್ಕ ಅಗತ್ಯ.</span>
+</div>
+<div class="field-row three">
+<label>Post title · ಪೋಸ್ಟ್ ಶೀರ್ಷಿಕೆ<input id="postTitle" placeholder="Example: Procession route announced" required="" type="text"/></label>
+<label>Date · ದಿನಾಂಕ<input id="postDate" required="" type="date"/></label>
+<label>Post type · ಪೋಸ್ಟ್ ಪ್ರಕಾರ
+                <select id="postType" required="">
+<option value="Announcement">Announcement · ಪ್ರಕಟಣೆ</option>
+<option value="Photo">Photo · ಚಿತ್ರ</option>
+<option value="Video">Video · ವೀಡಿಯೊ</option>
+<option value="Paper Cut">Paper Cut · ಪತ್ರಿಕಾ ಕತ್ತರಣೆ</option>
+<option value="Instagram">Instagram · ಇನ್‌ಸ್ಟಾಗ್ರಾಮ್</option>
+<option value="Facebook">Facebook · ಫೇಸ್‌ಬುಕ್</option>
+</select>
+</label>
+</div>
+<label>Text related to the photo or video · ಚಿತ್ರ/ವೀಡಿಯೊಗೆ ಸಂಬಂಧಿಸಿದ ಮಾಹಿತಿ<textarea id="postText" placeholder="Describe what happened, who participated and why this update matters" required="" rows="4"></textarea></label>
+<div class="field-row">
+<label>Upload photo or video · ಚಿತ್ರ ಅಥವಾ ವೀಡಿಯೊ ಅಪ್ಲೋಡ್ ಮಾಡಿ<input accept="image/*,video/*" id="postMedia" type="file"/></label>
+<label>Original post link (optional) · ಮೂಲ ಲಿಂಕ್ (ಐಚ್ಛಿಕ)<input id="postLink" placeholder="https://instagram.com/..." type="url"/></label>
+</div>
+<div class="upload-preview" hidden="" id="uploadPreview"></div>
+<div class="publisher-actions">
+<button class="btn btn-primary" type="submit">Publish Update · ಪ್ರಕಟಿಸಿ</button>
+<button class="btn btn-secondary" type="reset">Clear · ತೆರವುಗೊಳಿಸಿ</button>
+<span id="postStatus" role="status"></span>
+</div>
+</form>
+</details>
+<div aria-label="Movement update filters" class="updates-filter" id="updatesFilter"></div>
+<div class="updates-feed" id="updatesFeed"></div>
+<div class="empty-state" hidden="" id="emptyState">No updates are available in this category. · ಈ ವಿಭಾಗದಲ್ಲಿ ಇನ್ನೂ ಯಾವುದೇ ಮಾಹಿತಿ ಇಲ್ಲ.</div>
+</div>
+</section>
+<section class="section principles-section section-pad" id="principles">
+<div class="container principles-grid">
+<div class="section-heading reveal">
+<span class="eyebrow">ಶಾಂತಿಯುತ ಪ್ರಜಾಸತ್ತಾತ್ಮಕ ಹೋರಾಟ<small>Peaceful democratic movement</small></span>
+<h3 class="kn-heading">ಏಕತೆ, ಶಿಸ್ತು ಮತ್ತು ಜವಾಬ್ದಾರಿ</h3><h2>Unity, discipline and responsibility</h2>
+<p class="kn-text">ಹೋರಾಟವು ಕಾನೂನುಬದ್ಧವಾಗಿ, ಶಾಂತಿಯುತವಾಗಿ ಮತ್ತು ಬನಹಟ್ಟಿಯ ಅಭಿವೃದ್ಧಿಯ ಮೇಲೆಯೇ ಕೇಂದ್ರೀಕೃತವಾಗಿರಲಿ ಎಂದು ಸಮಿತಿ ಎಲ್ಲರಿಗೂ ಮನವಿ ಮಾಡಿದೆ.</p><p>The committee has repeatedly appealed to citizens to keep the campaign lawful, peaceful and focused only on Banahatti’s development.</p>
+</div>
+<div class="principles-list reveal delay-1">
+<div><strong>01</strong><span><strong class="kn-inline">ಎಲ್ಲ ಕಾರ್ಯಕ್ರಮಗಳಲ್ಲಿ ಶಾಂತಿ ಕಾಪಾಡಿ</strong><small class="en-inline">Maintain peace throughout all programmes</small></span></div>
+<div><strong>02</strong><span><strong class="kn-inline">ಜವಾಬ್ದಾರಿಯಿಂದ ಭಾಗವಹಿಸಿ ಮತ್ತು ಸಮಿತಿಯ ಸೂಚನೆ ಪಾಲಿಸಿ</strong><small class="en-inline">Participate responsibly and follow committee instructions</small></span></div>
+<div><strong>03</strong><span><strong class="kn-inline">ರಾಜಕೀಯ ಭಿನ್ನಾಭಿಪ್ರಾಯಗಳನ್ನು ಹೋರಾಟದಿಂದ ದೂರವಿಡಿ</strong><small class="en-inline">Keep political differences outside the movement</small></span></div>
+<div><strong>04</strong><span><strong class="kn-inline">ಬನಹಟ್ಟಿಯ ಅಭಿವೃದ್ಧಿಗಾಗಿ ಎಲ್ಲರೂ ಒಟ್ಟಾಗಿ ಕೆಲಸ ಮಾಡಿ</strong><small class="en-inline">Work together for Banahatti’s development</small></span></div>
+<div><strong>05</strong><span><strong class="kn-inline">ಜನರ ಏಕತೆಯನ್ನು ಬಲಪಡಿಸಿ ಮತ್ತು ದೃಢೀಕೃತ ಮಾಹಿತಿಯನ್ನೇ ಹಂಚಿ</strong><small class="en-inline">Strengthen public unity and share verified information</small></span></div>
+</div>
+</div>
+</section>
+<section class="section section-pad" id="committee">
+<div class="container committee-layout">
+<div class="committee-intro reveal">
+<span class="eyebrow">ಪಟ್ಟಣದ ಒಗ್ಗಟ್ಟಿನ ಸಮಿತಿ · United town committee</span>
+<p class="committee-kannada">ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟ ಸಮಿತಿ</p><h2>Banahatti Praja Soudha Horata Samiti</h2>
+<p class="kn-text">ಈ ಒಂದೇ ಅಭಿವೃದ್ಧಿ ಬೇಡಿಕೆಗೆ ನಾಗರಿಕರು, ವ್ಯಾಪಾರಿಗಳು, ಯುವಕರು, ಸಾಮಾಜಿಕ ಸಂಘಟನೆಗಳು, ಹಿರಿಯ ನಾಗರಿಕರು, ಮಾಧ್ಯಮ ಪ್ರತಿನಿಧಿಗಳು ಮತ್ತು ಜನಪ್ರತಿನಿಧಿಗಳನ್ನು ಸಮಿತಿ ಒಂದಾಗಿ ತಂದಿದೆ. ಈ ಹೋರಾಟ ಪಕ್ಷಾತೀತ, ಪ್ರಜಾಸತ್ತಾತ್ಮಕ ಮತ್ತು ಶಾಂತಿಯುತವಾಗಿದೆ. ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣವಾಗುವವರೆಗೆ ಹೋರಾಟ ಮುಂದುವರಿಯುತ್ತದೆ ಎಂದು ಸಮಿತಿ ಅಧ್ಯಕ್ಷ ಶಂಕರ ಸೊರಗಾವಿ ತಿಳಿಸಿದ್ದಾರೆ.</p><p>The committee has brought citizens, traders, youth, social organisations, senior citizens, media representatives and public representatives together around this single development demand. The campaign is non-political, democratic and peaceful. Committee president Shankar Soragavi has stated that the struggle will continue until the Praja Soudha is constructed in Banahatti.</p>
+</div>
+<div class="committee-card reveal delay-1">
+<div class="committee-mark">ಸಮಿತಿ</div>
+<div>
+<span>ಪ್ರಸ್ತುತ ಜವಾಬ್ದಾರಿ · Current responsibility</span>
+<h4 class="kn-card-title">ಹೋರಾಟದ ಸಮನ್ವಯ</h4><h3>Coordinate the movement</h3>
+<ul>
+<li><strong class="kn-inline">ದೃಢೀಕೃತ ಸಾರ್ವಜನಿಕ ಪ್ರಕಟಣೆಗಳನ್ನು ನೀಡುವುದು</strong><small class="en-inline">Issue verified public announcements</small></li>
+<li><strong class="kn-inline">ಬೃಹತ್ ಮೆರವಣಿಗೆಯನ್ನು ಆಯೋಜಿಸುವುದು</strong><small class="en-inline">Organise the mega procession</small></li>
+<li><strong class="kn-inline">ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಪಾಳಿಗಳನ್ನು ಸಿದ್ಧಪಡಿಸುವುದು</strong><small class="en-inline">Prepare Saradi Satyagraha shifts</small></li>
+<li><strong class="kn-inline">ಅಧಿಕಾರಿಗಳ ಮುಂದೆ ಬೇಡಿಕೆಯನ್ನು ಮಂಡಿಸುವುದು</strong><small class="en-inline">Represent the demand before authorities</small></li>
+<li><strong class="kn-inline">ಶಾಂತಿಯುತ ಜನಭಾಗವಹಿಸುವಿಕೆಯನ್ನು ಕಾಪಾಡುವುದು</strong><small class="en-inline">Maintain peaceful public participation</small></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="section join-section section-pad" id="join">
+<div class="container join-grid">
+<div class="join-copy reveal">
+<span class="eyebrow light">ಬನಹಟ್ಟಿಯ ಒಗ್ಗಟ್ಟಿನ ಧ್ವನಿ<small>Banahatti’s collective voice</small></span>
+<h3 class="kn-heading light-text">ಪ್ರಜಾ ಸೌಧಕ್ಕಾಗಿ ಒಂದಾಗಿ ನಿಲ್ಲೋಣ</h3><h2>Stand together for Praja Soudha</h2>
+<p class="kn-text light-text">ಮೆರವಣಿಗೆಯಲ್ಲಿ ಭಾಗವಹಿಸಿ, ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಬೆಂಬಲ ನೀಡಿ ಮತ್ತು ಸಮಿತಿಯ ದೃಢೀಕೃತ ಪ್ರಕಟಣೆಗಳನ್ನೇ ಹಂಚಿಕೊಳ್ಳಿ.</p><p>Participate in the procession, support the Saradi Satyagraha and share only verified committee announcements.</p>
+<div class="join-actions">
+<a class="btn btn-light" href="#" id="joinWhatsApp">ವಾಟ್ಸ್ಆಪ್ ಮೂಲಕ ಸೇರಿ · Join through WhatsApp</a>
+<a class="text-link-light" href="tel:+919880281879">ಸಮಿತಿಗೆ ಕರೆ ಮಾಡಿ · Call committee →</a>
+</div>
+</div>
+<div class="join-message reveal delay-1">
+<span>ಹೋರಾಟದ ಸಂದೇಶ · Campaign message</span>
+<strong>“ಬನಹಟ್ಟಿಗೆ ಪ್ರಜಾ ಸೌಧ ಬೇಕು”</strong>
+<p class="kn-text light-text">ಒಂದೇ ಪಟ್ಟಣ. ಒಂದೇ ಬೇಡಿಕೆ. ಶಾಂತಿಯುತ ಮತ್ತು ದೃಢ ಹೋರಾಟ.</p><p>One town. One demand. A peaceful and determined movement.</p>
+</div>
+</div>
+</section>
+</main>
+<button aria-label="Committee access" class="committee-access-trigger" id="committeeAccessTrigger" title="" type="button">
+<span aria-hidden="true">●</span>
+</button>
+<footer class="site-footer">
+<div class="container footer-main footer-main-clean">
+<a class="brand footer-brand" href="#top">
+<img alt="ಬನಹಟ್ಟಿ ಅಭಿವೃದ್ಧಿ ಸಮಿತಿ" src="assets/logo-praja-soudha.png"/>
+<span><strong>ಬನಹಟ್ಟಿ ಅಭಿವೃದ್ಧಿ</strong><small>Banahatti Abhivruddhi</small></span>
+</a>
+<div class="footer-about">
+<strong>ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದ ಸಾರ್ವಜನಿಕ ಮಾಹಿತಿ</strong>
+<small>Public updates for the Banahatti Praja Soudha movement</small>
+</div>
+<nav aria-label="Footer navigation" class="footer-links">
+<a href="#movement">ಹೋರಾಟ <small>Movement</small></a>
+<a href="#procession">ಮೆರವಣಿಗೆ <small>Procession</small></a>
+<a href="#satyagraha">ಸತ್ಯಾಗ್ರಹ <small>Satyagraha</small></a>
+<a href="#updates">ನವೀಕರಣಗಳು <small>Updates</small></a>
+<a href="terms-kn.html">ನಿಯಮಗಳು <small>Kannada Terms</small></a>
+<a href="terms-en.html">Terms <small>English</small></a>
+</nav>
+</div>
+<div class="container footer-bottom footer-bottom-clean">
+<span>© <span id="year"></span> ಬನಹಟ್ಟಿ ಅಭಿವೃದ್ಧಿ</span>
+<span class="footer-trust"><strong>ಶಾಂತಿಯುತ ಜನಹೋರಾಟ · ದೃಢೀಕೃತ ಮಾಹಿತಿ</strong><small>Peaceful public movement · Verified committee communication</small></span>
+<span class="developer-credit">Developed by <a href="https://smksolns.com" target="_blank" rel="noopener noreferrer"><strong>SMK Solutions</strong></a></span>
+</div>
+</footer>
+<dialog class="post-modal" id="postModal">
+<button aria-label="Close" class="modal-close">×</button>
+<div class="modal-media" id="modalMedia"></div>
+<div class="modal-copy">
+<div class="post-meta"><span id="modalType"></span><time id="modalDate"></time></div>
+<h3 id="modalTitle"></h3>
+<p id="modalText"></p>
+<a href="#" id="modalLink" rel="noopener" target="_blank">Open original post · ಮೂಲ ಪೋಸ್ಟ್ ತೆರೆಯಿರಿ ↗</a>
+</div>
+</dialog>
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-auth-compat.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

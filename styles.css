@@ -1,1304 +1,959 @@
-/* Author: Shiddu Mageppa | SMK Solutions | https://smksolns.com */
-:root {
-  --red-950: #4b0d18;
-  --red-900: #6f1424;
-  --red-800: #961f33;
-  --red-700: #b52b43;
-  --red-600: #c93c53;
-  --red-100: #f9e5e9;
-  --red-50: #fff7f8;
-  --gold: #d89a35;
-  --gold-light: #ffe8b9;
-  --ink: #28171b;
-  --muted: #736368;
-  --line: #ead9dd;
-  --soft: #fcf7f8;
-  --white: #fff;
-  --green: #168b5b;
-  --shadow: 0 20px 55px rgba(75, 13, 24, .14);
-  --radius-lg: 30px;
-  --radius-md: 20px;
-  --radius-sm: 13px;
-  --container: 1180px;
-}
+// Author: Shiddu Mageppa | SMK Solutions | https://smksolns.com
+/*
+  BANAHATTI PRAJA SOUDHA MOVEMENT WEBSITE
+  ---------------------------------------
+  1. Replace the WhatsApp and phone numbers below.
+  2. Edit the initialPosts list for posts visible to every website visitor.
+  3. Add your Firebase web-app configuration below.
+  4. Google sign-in is restricted to shiddu@gmail.com.
+  5. Posts are still stored in this browser using IndexedDB. Public multi-device
+     publishing requires cloud database/storage with server-side access rules.
+*/
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  font-family: Inter, "Noto Sans Kannada", system-ui, sans-serif;
-  color: var(--ink);
-  background: var(--white);
-  line-height: 1.65;
-}
-img, video { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
-button, input, textarea, select { font: inherit; }
-button { cursor: pointer; }
-.container { width: min(calc(100% - 36px), var(--container)); margin-inline: auto; }
-.section-pad { padding: 68px 0; }
-.section-soft { background: var(--soft); }
-.skip-link { position: absolute; left: -999px; top: 10px; z-index: 999; background: #fff; padding: 10px; }
-.skip-link:focus { left: 10px; }
+const AUTHORIZED_EDITOR_EMAIL = "shiddu@gmail.com";
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAYWEeL1wwZIaTBYXedYewlRq9z3Fbe_9E",
+  authDomain: "banahattiabhivruddhi.firebaseapp.com",
+  projectId: "banahattiabhivruddhi",
+  storageBucket: "banahattiabhivruddhi.firebasestorage.app",
+  messagingSenderId: "761371982615",
+  appId: "1:761371982615:web:03b4763122b4c21b7a5552",
+  measurementId: "G-TMBFE8NV43"
+};
 
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(255,255,255,.93);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(111,20,36,.09);
-}
-.nav-wrap { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
-.brand { display: inline-flex; align-items: center; gap: 12px; }
-.brand img { width: 78px; height: 58px; object-fit: contain; border-radius: 10px; }
-.brand span { display: grid; line-height: 1.15; }
-.brand strong { font-size: 1rem; letter-spacing: -.02em; }
-.brand small { color: var(--red-800); font-weight: 700; margin-top: 4px; }
-.main-nav { display: flex; align-items: center; gap: 25px; font-size: .9rem; font-weight: 700; }
-.main-nav a { transition: color .2s; }
-.main-nav a:hover { color: var(--red-700); }
-.nav-cta { color: #fff !important; background: var(--red-800); padding: 11px 18px; border-radius: 999px; }
-.menu-toggle { display: none; border: 0; background: transparent; width: 42px; height: 42px; padding: 9px; }
-.menu-toggle span { display: block; height: 2px; background: var(--ink); margin: 5px 0; }
+const siteData = {
+  whatsappNumber: "919880281879",
+  phoneNumber: "+919880281879",
+  ticker: "8 ಆಗಸ್ಟ್ 2026 · ಬನಹಟ್ಟಿಯಲ್ಲಿ ಬೃಹತ್ ಮೆರವಣಿಗೆ ನಡೆಯಿತು; ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಚಾಲನೆ ನೀಡಲಾಯಿತು. · 8 August 2026 · Banahatti's mega procession was held and the relay hunger Satyagraha began at Chennamma Circle.",
+  initialPosts: [
+    {
+      id: "saradi-satyagraha-day-6-auto-banagar-2026-08-13",
+      type: "Satyagraha",
+      date: "2026-08-13",
+      title: "Today's relay Satyagraha — support from auto drivers and Banagar Samaj",
+      titleKn: "ಇಂದಿನ ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಆಟೋ ಚಾಲಕರು ಮತ್ತು ಬಣಗಾರ ಸಮಾಜದ ಬೆಂಬಲ",
+      text: "Auto drivers and members of the Banagar Samaj participated in today's relay Satyagraha and extended their support to the ongoing Praja Soudha movement in Banahatti.",
+      textKn: "ಇಂದಿನ ಸರದಿ ಸತ್ಯಾಗ್ರಹದಲ್ಲಿ ಆಟೋ ಚಾಲಕರು ಮತ್ತು ಬಣಗಾರ ಸಮಾಜದವರು ಭಾಗವಹಿಸಿ ಬನಹಟ್ಟಿಯಲ್ಲಿ ನಡೆಯುತ್ತಿರುವ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣ ಹೋರಾಟಕ್ಕೆ ಬೆಂಬಲ ಸೂಚಿಸಿದರು.",
+      mediaKind: "gallery",
+      mediaUrls: [
+        "assets/saradi-satyagraha-day-6-auto-banagar-2026-08-13-01.jpeg",
+        "assets/saradi-satyagraha-day-6-auto-banagar-2026-08-13-02.jpeg",
+        "assets/saradi-satyagraha-day-6-auto-banagar-2026-08-13-03.png"
+      ],
+      mediaUrl: "assets/saradi-satyagraha-day-6-auto-banagar-2026-08-13-01.jpeg",
+      link: "#satyagraha",
+      local: false
+    },
+    {
+      id: "news-coverage-2026-08-13",
+      type: "Paper Cut",
+      date: "2026-08-13",
+      title: "13 August 2026 newspaper coverage: Praja Soudha movement",
+      titleKn: "13 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ",
+      text: "Selected newspaper coverage from 13 August 2026 on the continuing Praja Soudha movement and public support in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ಮುಂದುವರಿದಿರುವ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಬೆಂಬಲದ ಕುರಿತು 13 ಆಗಸ್ಟ್ 2026ರ ಆಯ್ದ ಪತ್ರಿಕಾ ವರದಿಗಳು.",
+      mediaKind: "gallery",
+      mediaUrls: [
+        "assets/news-2026-08-13-01.png",
+        "assets/news-2026-08-13-02.jpeg",
+        "assets/news-2026-08-13-03.png",
+        "assets/news-2026-08-13-04.png",
+        "assets/news-2026-08-13-05.png"
+      ],
+      mediaUrl: "assets/news-2026-08-13-01.png",
+      link: "",
+      local: false
+    },
+    {
+      id: "shop-support-2026-08-13",
+      type: "Photo",
+      date: "2026-08-13",
+      title: "Banahatti shops display support for the Praja Soudha demand",
+      titleKn: "ಪ್ರಜಾಸೌಧ ಬೇಡಿಕೆಗೆ ಬನಹಟ್ಟಿ ಅಂಗಡಿಗಳ ಬೆಂಬಲ",
+      text: "Shops and business establishments in Banahatti are displaying printed notices supporting the public demand for construction of the Praja Soudha in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯ ವಿವಿಧ ಅಂಗಡಿಗಳು ಮತ್ತು ವ್ಯಾಪಾರ ಸಂಸ್ಥೆಗಳು ‘ಪ್ರಜಾಸೌಧ ನಮ್ಮ ಹಕ್ಕು’ ಎಂಬ ಬೇಡಿಕೆಗೆ ಬೆಂಬಲ ಸೂಚಿಸುವ ಮುದ್ರಿತ ಫಲಕಗಳನ್ನು ತಮ್ಮ ಅಂಗಡಿಗಳಲ್ಲಿ ಪ್ರದರ್ಶಿಸುತ್ತಿವೆ.",
+      mediaKind: "gallery",
+      mediaUrls: [
+        "assets/praja-soudha-shop-support-2026-08-13-01.jpeg",
+        "assets/praja-soudha-shop-support-2026-08-13-02.jpeg",
+        "assets/praja-soudha-shop-support-2026-08-13-03.jpeg",
+        "assets/praja-soudha-shop-support-2026-08-13-04.jpeg",
+        "assets/praja-soudha-shop-support-2026-08-13-05.jpeg",
+        "assets/praja-soudha-shop-support-2026-08-13-06.jpeg",
+        "assets/praja-soudha-shop-support-2026-08-13-07.jpeg"
+      ],
+      mediaUrl: "assets/praja-soudha-shop-support-2026-08-13-01.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "photos-2026-08-12",
+      type: "Photo",
+      date: "2026-08-12",
+      title: "12 August 2026: Praja Soudha movement — Day 5",
+      titleKn: "12 ಆಗಸ್ಟ್ 2026: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ — 5ನೇ ದಿನ",
+      text: "Photographs from the fifth day of the ongoing Praja Soudha movement in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ನಡೆಯುತ್ತಿರುವ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣ ಹೋರಾಟದ 5ನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಬೆಂಬಲದ ಛಾಯಾಚಿತ್ರಗಳು.",
+      mediaKind: "gallery",
+      mediaUrls: [
+        "assets/photo-2026-08-12-01.jpeg",
+        "assets/photo-2026-08-12-02.jpeg",
+        "assets/photo-2026-08-12-03.jpeg",
+        "assets/photo-2026-08-12-04.jpeg"
+      ],
+      mediaUrl: "assets/photo-2026-08-12-01.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "news-coverage-2026-08-12",
+      type: "Paper Cut",
+      date: "2026-08-12",
+      title: "12 August 2026 newspaper coverage: Praja Soudha movement",
+      titleKn: "12 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ",
+      text: "Today's selected newspaper coverage on the continuing Praja Soudha movement, relay Satyagraha and public support in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ಮುಂದುವರಿದಿರುವ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ, ಸರದಿ ಸತ್ಯಾಗ್ರಹ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಬೆಂಬಲದ ಕುರಿತು ಇಂದಿನ ಆಯ್ದ ಪತ್ರಿಕಾ ವರದಿಗಳು.",
+      mediaKind: "gallery",
+      mediaUrls: [
+        "assets/news-2026-08-12-01.jpeg",
+        "assets/news-2026-08-12-02.jpeg",
+        "assets/news-2026-08-12-03.jpeg",
+        "assets/news-2026-08-12-04.jpeg",
+        "assets/news-2026-08-12-05.jpeg",
+        "assets/news-2026-08-12-06.png",
+        "assets/news-2026-08-12-07.jpeg",
+        "assets/news-2026-08-12-08.jpeg",
+        "assets/news-2026-08-12-09.jpeg",
+        "assets/news-2026-08-12-10.jpeg",
+        "assets/news-2026-08-12-11.jpeg",
+        "assets/news-2026-08-12-12.jpeg"
+      ],
+      mediaUrl: "assets/news-2026-08-12-01.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "youtube-update-2026-08-12",
+      type: "Video",
+      date: "2026-08-12",
+      title: "Latest Praja Soudha movement video",
+      titleKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಇತ್ತೀಚಿನ ವಿಡಿಯೋ",
+      text: "Watch the latest Praja Soudha movement video.",
+      textKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಇತ್ತೀಚಿನ ವಿಡಿಯೋವನ್ನು ವೀಕ್ಷಿಸಿ.",
+      mediaKind: "video",
+      mediaUrl: "https://youtu.be/T2xHaZty_p4?si=JPJJIVtEQRoEr22l",
+      link: "https://youtu.be/T2xHaZty_p4?si=JPJJIVtEQRoEr22l",
+      local: false
+    },
+    {
+      id: "saradi-satyagraha-day-4-kuruhinashetti-11-08-2026",
+      type: "Satyagraha",
+      date: "2026-08-11",
+      title: "4th Day Relay Hunger Satyagraha — Kuruhinashetti Community Extends Support",
+      titleKn: "4ನೇ ದಿನದ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಸಮಸ್ತ ಕುರುಹಿನಶೆಟ್ಟಿ ಸಮಾಜದ ಬೆಂಬಲ",
+      text: "On the fourth day of the ongoing Praja Soudha construction movement in Banahatti, the entire Kuruhinashetti community of Banahatti extended its support.",
+      textKn: "ಬನಹಟ್ಟಿ ನಗರದಲ್ಲಿ ನಡೆಯುತ್ತಿರುವ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣದ ಹೋರಾಟದ 4ನೇ ದಿನದ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಬನಹಟ್ಟಿ ನಗರದ ಸಮಸ್ತ ಕುರುಹಿನಶೆಟ್ಟಿ ಸಮಾಜದ ವತಿಯಿಂದ ಬೆಂಬಲ ವ್ಯಕ್ತಪಡಿಸಲಾಯಿತು. 🙏",
+      mediaKind: "image",
+      mediaUrl: "assets/saradi-satyagraha-day-4-kuruhinashetti-11-08-2026.jpeg",
+      link: "#satyagraha",
+      local: false
+    },
+    {
+      id: "news-2026-08-11-taluk-prajasoudha-support",
+      type: "Paper Cut",
+      date: "2026-08-11",
+      title: "Support for the Taluk Praja Soudha movement",
+      titleKn: "ತಾಲೂಕಾ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣ ಹೋರಾಟಕ್ಕೆ ವೈದ್ಯರ ಬಳಗ ಬೆಂಬಲ",
+      text: "Newspaper coverage supporting the ongoing movement for construction of the Taluk Praja Soudha in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ತಾಲೂಕಾ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕಾಗಿ ನಡೆಯುತ್ತಿರುವ ಹೋರಾಟಕ್ಕೆ ಬೆಂಬಲ ವ್ಯಕ್ತಪಡಿಸಿರುವ ಕುರಿತು ಪತ್ರಿಕಾ ವರದಿ.",
+      mediaKind: "image",
+      mediaUrl: "assets/news-2026-08-11-taluk-prajasoudha-support.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "whatsapp-1001-members-2026-08-11",
+      type: "Community",
+      date: "2026-08-11",
+      title: "Praja Soudha movement WhatsApp group reaches 1,001 members",
+      titleKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿಯ ವಾಟ್ಸಪ್ ಗುಂಪು 1001 ಸದಸ್ಯರನ್ನು ತಲುಪಿದೆ",
+      text: "The Praja Soudha Horata Samiti WhatsApp group has reached 1,001 members. Heartfelt thanks to everyone for the continued support.",
+      textKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿಯ ವಾಟ್ಸಪ್ ಗುಂಪಿನ ಸದಸ್ಯರ ಸಂಖ್ಯೆ 1001 ಕ್ಕೆ ತಲುಪಿದೆ 🙏 ತಮ್ಮೆಲ್ಲರ ಸಹಕಾರಕ್ಕಾಗಿ ಅನಂತ ಅನಂತ ಧನ್ಯವಾದಗಳು 🙏",
+      mediaKind: "image",
+      mediaUrl: "assets/whatsapp-1001-members-2026-08-11.png",
+      link: "",
+      local: false
+    },
+    {
+      id: "news-coverage-2026-08-11",
+      type: "Paper Cut",
+      date: "2026-08-11",
+      title: "11 August 2026 media coverage: third day of relay Satyagraha",
+      titleKn: "11 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ: ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಮೂರನೇ ದಿನ",
+      text: "Selected 11 August 2026 newspaper coverage related to the Praja Soudha movement and the third day of the relay Satyagraha.",
+      textKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಮೂರನೇ ದಿನಕ್ಕೆ ಸಂಬಂಧಿಸಿದ 11 ಆಗಸ್ಟ್ 2026ರ ಆಯ್ದ ಪತ್ರಿಕಾ ವರದಿಗಳು.",
+      mediaKind: "gallery",
+      mediaUrls: [
+        "assets/news-2026-08-11-third-day-01.jpeg",
+        "assets/news-2026-08-11-support-01.png",
+        "assets/news-2026-08-11-third-day-02.jpeg",
+        "assets/news-2026-08-11-third-day-03.jpeg"
+      ],
+      mediaUrl: "assets/news-2026-08-11-third-day-01.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "kadasiddeshwara-pooje-2026-08-10",
+      type: "Community",
+      date: "2026-08-10",
+      title: "Today's pooja of Banahatti's revered deity Shri Kadasiddeshwara",
+      titleKn: "ಬನಹಟ್ಟಿ ನಗರದ ಆರಾಧ್ಯ ದೈವ ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರರ ಇವತ್ತಿನ ಪೂಜೆ",
+      text: "Pooja of Banahatti city's revered deity Shri Kadasiddeshwara — Monday, 10 August 2026.",
+      textKn: "ಬನಹಟ್ಟಿ ನಗರದ ಆರಾಧ್ಯ ದೈವ ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರರ ಇವತ್ತಿನ ಪೂಜೆ — 10-08-2026 ಸೋಮವಾರ 🙏🙏",
+      mediaKind: "image",
+      mediaUrl: "assets/kadasiddeshwara-pooje-2026-08-10.png",
+      link: "",
+      local: false
+    },
+    {
+      id: "satyagraha-day-3-2026-08-11",
+      type: "Satyagraha",
+      date: "2026-08-11",
+      title: "Third day of relay Satyagraha receives support from Medhara and Buruda communities",
+      titleKn: "ಮೂರನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಮೇಧಾರ ಮತ್ತು ಬುರುಡ ಸಮಾಜದ ಬೆಂಬಲ",
+      text: "On the third day of the Praja Soudha relay Satyagraha, elders and members of the Medhara and Buruda communities participated and extended their support. Banahatti Nagara Abhivruddhi Samiti and Praja Soudha Horata Samiti expressed heartfelt thanks for their participation and support.",
+      textKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಮೂರನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹದಲ್ಲಿ ಭಾಗಿಯಾಗಿ ಬೆಂಬಲ ಸೂಚಿಸಿದ ಮೇಧಾರ ಮತ್ತು ಬುರುಡ ಸಮಾಜದ ಹಿರಿಯರಿಗೆ ಬನಹಟ್ಟಿ ನಗರ ಅಭಿವೃದ್ಧಿ ಸಮಿತಿ ಹಾಗೂ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿಯಿಂದ ಹೃತ್ಪೂರ್ವಕ ಧನ್ಯವಾದಗಳು.",
+      mediaKind: "image",
+      mediaUrl: "assets/satyagraha-day-3-2026-08-11-01.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "news-2026-08-10-01",
+      type: "Paper Cut",
+      date: "2026-08-10",
+      title: "10 August newspaper coverage: Demand for Praja Soudha in Banahatti",
+      titleKn: "10 ಆಗಸ್ಟ್ ಪತ್ರಿಕಾ ವರದಿ: ಬನಹಟ್ಟಿಯಲ್ಲೇ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ಆಗ್ರಹ",
+      text: "The 10 August 2026 newspaper report covers the continuing public demand that the Taluk Praja Soudha be constructed in Banahatti.",
+      textKn: "10 ಆಗಸ್ಟ್ 2026ರ ಈ ಪತ್ರಿಕಾ ವರದಿ ತಾಲೂಕು ಪ್ರಜಾಸೌಧವನ್ನು ಬನಹಟ್ಟಿಯಲ್ಲಿಯೇ ನಿರ್ಮಿಸಬೇಕು ಎಂಬ ಮುಂದುವರಿದ ಜನರ ಬೇಡಿಕೆಯನ್ನು ದಾಖಲಿಸಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/news-2026-08-10-01.png",
+      link: "",
+      local: false
+    },
+    {
+      id: "news-2026-08-10-02",
+      type: "Paper Cut",
+      date: "2026-08-10",
+      title: "10 August newspaper coverage: Complete Banahatti bandh for Praja Soudha",
+      titleKn: "10 ಆಗಸ್ಟ್ ಪತ್ರಿಕಾ ವರದಿ: ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಬನಹಟ್ಟಿ ಸಂಪೂರ್ಣ ಬಂದ್",
+      text: "This 10 August 2026 report documents the complete Banahatti bandh and the ongoing movement demanding construction of the Praja Soudha in Banahatti.",
+      textKn: "10 ಆಗಸ್ಟ್ 2026ರ ಈ ವರದಿ ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ನಡೆದ ಬನಹಟ್ಟಿ ಸಂಪೂರ್ಣ ಬಂದ್ ಹಾಗೂ ಬನಹಟ್ಟಿಯಲ್ಲೇ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ಆಗ್ರಹಿಸಿದ ಮುಂದುವರಿದ ಹೋರಾಟವನ್ನು ದಾಖಲಿಸಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/news-2026-08-10-02.png",
+      link: "",
+      local: false
+    },
+    {
+      id: "satyagraha-day-2-2026-08-10",
+      type: "Satyagraha",
+      date: "2026-08-10",
+      title: "Second day of relay Satyagraha receives support from local Daiva Mandalis",
+      titleKn: "ಎರಡನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಸ್ಥಳೀಯ ದೈವ ಮಂಡಳಿಗಳ ಬೆಂಬಲ",
+      text: "On the second day of the relay Satyagraha, elders and members of Mangalwar Peth Hatagar Daiva Mandali and Somwar Peth Samasta Daiva Mandali participated and extended their support to the Praja Soudha movement. Banahatti Nagara Abhivruddhi Samiti and Praja Soudha Horata Samiti expressed heartfelt thanks for their support.",
+      textKn: "ಇಂದು ಎರಡನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹದಲ್ಲಿ ಭಾಗಿಯಾಗಿ ಬೆಂಬಲ ಸೂಚಿಸಿದ ಮಂಗಳವಾರ ಪೇಟೆ ಹಟಗಾರ ದೈವ ಮಂಡಳಿ ಹಾಗೂ ಸೋಮವಾರ ಪೇಟೆ ಸಮಸ್ತ ದೈವ ಮಂಡಳಿ ಹಿರಿಯರಿಗೆ ಅನಂತ ಅನಂತ ಧನ್ಯವಾದಗಳು. ಬನಹಟ್ಟಿ ನಗರ ಅಭಿವೃದ್ಧಿ ಸಮಿತಿ ಹಾಗೂ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿ ಅವರ ಬೆಂಬಲಕ್ಕೆ ಹೃತ್ಪೂರ್ವಕ ಕೃತಜ್ಞತೆ ಸಲ್ಲಿಸಿದೆ.",
+      mediaKind: "gallery",
+      mediaUrls: [
+        "assets/satyagraha-day-2-2026-08-10-01.jpeg",
+        "assets/satyagraha-day-2-2026-08-10-02.jpeg",
+        "assets/satyagraha-day-2-2026-08-10-03.jpeg",
+        "assets/satyagraha-day-2-2026-08-10-04.jpeg"
+      ],
+      mediaUrl: "assets/satyagraha-day-2-2026-08-10-01.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "sunday-news-2026-08-09-02",
+      type: "Paper Cut",
+      date: "2026-08-09",
+      title: "Thousands participate in massive protest demanding Praja Soudha in Banahatti",
+      titleKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾಸೌಧಕ್ಕೆ ಆಗ್ರಹಿಸಿ ಸಾವಿರಾರು ಜನರ ಬೃಹತ್ ಪ್ರತಿಭಟನೆ",
+      text: "The report documents the large public protest, the bandh and widespread participation in support of constructing the Taluk Praja Soudha in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ತಾಲೂಕು ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ಒತ್ತಾಯಿಸಿ ನಡೆದ ಬೃಹತ್ ಪ್ರತಿಭಟನೆ, ಬಂದ್ ಮತ್ತು ವ್ಯಾಪಕ ಜನಭಾಗವಹಿಸುವಿಕೆಯನ್ನು ವರದಿ ದಾಖಲಿಸಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/news-2026-08-09-sunday-02.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "sunday-news-2026-08-09-viswas",
+      type: "Paper Cut",
+      date: "2026-08-09",
+      title: "Vishwas: Banahatti comes to a standstill for Praja Soudha movement",
+      titleKn: "ವಿಶ್ವಾಸ್: ಪ್ರಜಾಸೌಧ ಹೋರಾಟಕ್ಕೆ ಬನಹಟ್ಟಿ ಸ್ತಬ್ಧ",
+      text: "Vishwas Kannada Daily reports widespread support for the complete Banahatti bandh and the public movement demanding the Praja Soudha in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿ ಸಂಪೂರ್ಣ ಬಂದ್‌ಗೆ ದೊರೆತ ವ್ಯಾಪಕ ಬೆಂಬಲ ಹಾಗೂ ಬನಹಟ್ಟಿಯಲ್ಲೇ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಿಸಬೇಕು ಎಂಬ ಜನಹೋರಾಟವನ್ನು ವಿಶ್ವಾಸ್ ಕನ್ನಡ ದಿನಪತ್ರಿಕೆ ವರದಿ ಮಾಡಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/news-2026-08-09-viswas.png",
+      link: "",
+      local: false
+    },
+    {
+      id: "sunday-news-2026-08-09-04",
+      type: "Paper Cut",
+      date: "2026-08-09",
+      title: "Banahatti bandh successful in support of Praja Soudha construction",
+      titleKn: "ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣ: ಬನಹಟ್ಟಿ ಬಂದ್ ಯಶಸ್ವಿ",
+      text: "The newspaper report highlights the successful bandh and the large gathering of citizens supporting construction of the Praja Soudha in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ಬೆಂಬಲವಾಗಿ ನಡೆದ ಯಶಸ್ವಿ ಬಂದ್ ಮತ್ತು ದೊಡ್ಡ ಪ್ರಮಾಣದ ಜನಸಮಾವೇಶವನ್ನು ಈ ಪತ್ರಿಕಾ ವರದಿ ದಾಖಲಿಸಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/news-2026-08-09-sunday-04.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "sunday-news-2026-08-09-samyukta",
+      type: "Paper Cut",
+      date: "2026-08-09",
+      title: "Samyukta Karnataka: Construct the Praja Soudha in Banahatti itself",
+      titleKn: "ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ: ಬನಹಟ್ಟಿಯಲ್ಲೇ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣ ಮಾಡಿ",
+      text: "Samyukta Karnataka reports the public demand, protest, bandh, participation of women and citizens, and the movement seeking construction of the Praja Soudha in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲೇ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಿಸಬೇಕು ಎಂಬ ಜನರ ಬೇಡಿಕೆ, ಪ್ರತಿಭಟನೆ, ಬಂದ್ ಹಾಗೂ ಮಹಿಳೆಯರು ಮತ್ತು ನಾಗರಿಕರ ಭಾಗವಹಿಸುವಿಕೆಯನ್ನು ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ವರದಿ ಮಾಡಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/news-2026-08-09-samyukta-karnataka.png",
+      link: "",
+      local: false
+    },
+    {
+      id: "sunday-news-2026-08-09-kannada-prabha",
+      type: "Paper Cut",
+      date: "2026-08-09",
+      title: "Kannada Prabha: Demand to construct Praja Soudha in Banahatti",
+      titleKn: "ಕನ್ನಡಪ್ರಭ: ಬನಹಟ್ಟಿಯಲ್ಲೇ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ಆಗ್ರಹ",
+      text: "Kannada Prabha, Bagalkote Edition, 9 August 2026, reports the public demand and participation in the Banahatti Praja Soudha movement.",
+      textKn: "ಕನ್ನಡಪ್ರಭ ಬಾಗಲಕೋಟೆ ಆವೃತ್ತಿ, 9 ಆಗಸ್ಟ್ 2026, ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಜನರ ಬೇಡಿಕೆ ಮತ್ತು ವ್ಯಾಪಕ ಭಾಗವಹಿಸುವಿಕೆಯನ್ನು ವರದಿ ಮಾಡಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/news-2026-08-09-kannada-prabha.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "sunday-news-2026-08-09-udayavani",
+      type: "Paper Cut",
+      date: "2026-08-09",
+      title: "Udayavani: Banahatti bandh for Praja Soudha",
+      titleKn: "ಉದಯವಾಣಿ: ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಬನಹಟ್ಟಿ ಬಂದ್",
+      text: "Udayavani reports the bandh, large public gathering and participation in the movement demanding construction of the Praja Soudha in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ಒತ್ತಾಯಿಸಿ ನಡೆದ ಬಂದ್, ಬೃಹತ್ ಜನಸಮಾವೇಶ ಮತ್ತು ಹೋರಾಟದ ಜನಭಾಗವಹಿಸುವಿಕೆಯನ್ನು ಉದಯವಾಣಿ ವರದಿ ಮಾಡಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/news-2026-08-09-udayavani.jpeg",
+      link: "",
+      local: false
+    },
+    {
+      id: "paper-cut-2",
+      type: "Paper Cut",
+      date: "2026-08-07",
+      title: "Newspaper coverage: Banahatti bandh for Praja Soudha demand",
+      titleKn: "ಪ್ರಜಾ ಸೌಧ ಬೇಡಿಕೆಗೆ ಬನಹಟ್ಟಿ ಬಂದ್ — ಪತ್ರಿಕಾ ವರದಿ",
+      text: "This newspaper clipping reports on the Banahatti Praja Soudha movement, the call for a bandh and the public campaign demanding that the Praja Soudha be constructed in Banahatti. The clipping is published here as part of the movement's media record.",
+      textKn: "ಈ ಪತ್ರಿಕಾ ಕತ್ತರಣೆಯಲ್ಲಿ ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟ, ಬಂದ್ ಕರೆ ಮತ್ತು ಪ್ರಜಾ ಸೌಧವನ್ನು ಬನಹಟ್ಟಿಯಲ್ಲೇ ನಿರ್ಮಿಸಬೇಕು ಎಂಬ ಜನರ ಬೇಡಿಕೆಯ ಬಗ್ಗೆ ವರದಿ ಮಾಡಲಾಗಿದೆ. ಹೋರಾಟದ ಮಾಧ್ಯಮ ದಾಖಲೆಯಾಗಿ ಇದನ್ನು ಇಲ್ಲಿ ಪ್ರಕಟಿಸಲಾಗಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/praja-soudha-paper-cut-2.jpg",
+      link: "",
+      local: false
+    },
+    {
+      id: "whatsapp-status-1",
+      type: "Announcement",
+      date: "2026-08-06",
+      title: "WhatsApp group shows town-wide support for the movement",
+      titleKn: "ವಾಟ್ಸ್ಆಪ್ ಗುಂಪಿನಲ್ಲಿ ಪಟ್ಟಣದ ವ್ಯಾಪಕ ಬೆಂಬಲ",
+      text: "The Banahatti Praja Soudha Horata Samiti's group discussion reflects strong participation from citizens, traders, youth volunteers, social organisations, senior citizens, media representatives and public representatives. Members have appealed for a peaceful, democratic and non-political campaign and pledged to continue until the demand is fulfilled.",
+      textKn: "ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟ ಸಮಿತಿಯ ವಾಟ್ಸ್ಆಪ್ ಚರ್ಚೆಯಲ್ಲಿ ನಾಗರಿಕರು, ವ್ಯಾಪಾರಿಗಳು, ಯುವ ಸ್ವಯಂಸೇವಕರು, ಸಾಮಾಜಿಕ ಸಂಘಟನೆಗಳು, ಹಿರಿಯ ನಾಗರಿಕರು, ಮಾಧ್ಯಮ ಪ್ರತಿನಿಧಿಗಳು ಮತ್ತು ಜನಪ್ರತಿನಿಧಿಗಳ ಬೆಂಬಲ ಸ್ಪಷ್ಟವಾಗಿದೆ. ಹೋರಾಟವನ್ನು ಶಾಂತಿಯುತ, ಪ್ರಜಾಸತ್ತಾತ್ಮಕ ಮತ್ತು ಪಕ್ಷಾತೀತವಾಗಿ ನಡೆಸಿ, ಬೇಡಿಕೆ ಈಡೇರುವವರೆಗೆ ಮುಂದುವರಿಸಲು ಸದಸ್ಯರು ಕರೆ ನೀಡಿದ್ದಾರೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/whatsapp-town-support.png",
+      link: "",
+      local: false
+    },
+    {
+      id: "official-news-1",
+      type: "Paper Cut",
+      date: "2026-08-06",
+      title: "Samyukta Karnataka reports major Praja Soudha struggle",
+      titleKn: "ಬನಹಟ್ಟಿಯ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟಕ್ಕೆ ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ವರದಿ",
+      text: "The report states that Banahatti has called for a complete bandh on Saturday. A mega protest procession will begin at 9:00 AM from Shri Kadasiddeshwar Temple, travel through the town’s main roads and reach Chennamma Circle, where the Saradi hunger Satyagraha will begin.",
+      textKn: "ವರದಿಯ ಪ್ರಕಾರ ಶನಿವಾರ ಬನಹಟ್ಟಿ ಸಂಪೂರ್ಣ ಬಂದ್‌ಗೆ ಕರೆ ನೀಡಲಾಗಿದೆ. ಬೆಳಿಗ್ಗೆ 9:00ಕ್ಕೆ ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ ಬೃಹತ್ ಪ್ರತಿಭಟನಾ ಮೆರವಣಿಗೆ ಆರಂಭವಾಗಿ ಪಟ್ಟಣದ ಮುಖ್ಯ ರಸ್ತೆಗಳಲ್ಲಿ ಸಾಗುತ್ತಾ ಚೆನ್ನಮ್ಮ ವೃತ್ತ ತಲುಪಲಿದೆ. ಅಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭವಾಗಲಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/praja-soudha-committee-meeting.jpg",
+      link: "https://samyuktakarnataka.in/districts/baglkot/a-major-struggle-for-the-construction-of-the-prajasoudha-in-banahatti-itself/",
+      local: false
+    },
+    {
+      id: "official-1",
+      type: "Announcement",
+      date: "2026-08-06",
+      title: "Complete Banahatti bandh in support of Praja Soudha",
+      titleKn: "ಪ್ರಜಾ ಸೌಧ ಬೆಂಬಲಕ್ಕೆ ಸಂಪೂರ್ಣ ಬನಹಟ್ಟಿ ಬಂದ್",
+      text: "Shops, weaving industries, banks, private and public transport, school vehicles, the weekly market and most commercial and public activities are expected to support the bandh. Ambulance and fire-service movement will be permitted.",
+      textKn: "ಅಂಗಡಿಗಳು, ನೇಕಾರಿಕೆ ಉದ್ಯಮಗಳು, ಬ್ಯಾಂಕುಗಳು, ಖಾಸಗಿ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಸಾರಿಗೆ, ಶಾಲಾ ವಾಹನಗಳು, ವಾರದ ಸಂತೆ ಹಾಗೂ ಬಹುತೇಕ ವ್ಯಾಪಾರ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಚಟುವಟಿಕೆಗಳು ಬಂದ್‌ಗೆ ಬೆಂಬಲ ನೀಡುವ ನಿರೀಕ್ಷೆಯಿದೆ. ಆಂಬ್ಯುಲೆನ್ಸ್ ಮತ್ತು ಅಗ್ನಿಶಾಮಕ ವಾಹನಗಳಿಗೆ ಸಂಚಾರಕ್ಕೆ ಅವಕಾಶ ಇರುತ್ತದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/banahatti-bandh-visual.png",
+      link: "https://samyuktakarnataka.in/districts/baglkot/a-major-struggle-for-the-construction-of-the-prajasoudha-in-banahatti-itself/",
+      local: false
+    },
+    {
+      id: "official-2",
+      type: "Announcement",
+      date: "2026-08-06",
+      title: "Mega procession route and time announced",
+      titleKn: "ಬೃಹತ್ ಮೆರವಣಿಗೆಯ ಸಮಯ ಮತ್ತು ಮಾರ್ಗ ಪ್ರಕಟಣೆ",
+      text: "The peaceful procession is scheduled for Saturday, 8 August 2026 at 9:00 AM. It will start from Shri Kadasiddeshwar Temple, pass through the main roads of Banahatti and conclude at Chennamma Circle.",
+      textKn: "ಶಾಂತಿಯುತ ಬೃಹತ್ ಮೆರವಣಿಗೆ ಶನಿವಾರ, 8 ಆಗಸ್ಟ್ 2026 ರಂದು ಬೆಳಿಗ್ಗೆ 9:00ಕ್ಕೆ ನಡೆಯಲಿದೆ. ಇದು ಶ್ರೀ ಕಡಸಿದ್ದೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ ಆರಂಭವಾಗಿ ಬನಹಟ್ಟಿಯ ಮುಖ್ಯ ರಸ್ತೆಗಳಲ್ಲಿ ಸಾಗುತ್ತಾ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಮುಕ್ತಾಯವಾಗಲಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/mega-procession-route.png",
+      link: "https://samyuktakarnataka.in/districts/baglkot/a-major-struggle-for-the-construction-of-the-prajasoudha-in-banahatti-itself/",
+      local: false
+    },
+    {
+      id: "official-3",
+      type: "Announcement",
+      date: "2026-08-06",
+      title: "Saradi hunger Satyagraha begins at Chennamma Circle",
+      titleKn: "ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹ ಆರಂಭ",
+      text: "After the procession, leaders of different organisations, citizens and movement participants will formally begin the Saradi hunger Satyagraha. The committee says the struggle will continue until the Praja Soudha is constructed in Banahatti.",
+      textKn: "ಮೆರವಣಿಗೆಯ ನಂತರ ವಿವಿಧ ಸಂಘಟನೆಗಳ ಮುಖಂಡರು, ನಾಗರಿಕರು ಮತ್ತು ಹೋರಾಟಗಾರರು ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹವನ್ನು ಅಧಿಕೃತವಾಗಿ ಆರಂಭಿಸಲಿದ್ದಾರೆ. ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾ ಸೌಧ ನಿರ್ಮಾಣವಾಗುವವರೆಗೆ ಹೋರಾಟ ಮುಂದುವರಿಯುತ್ತದೆ ಎಂದು ಸಮಿತಿ ತಿಳಿಸಿದೆ.",
+      mediaKind: "image",
+      mediaUrl: "assets/saradi-satyagraha-stage.png",
+      link: "https://samyuktakarnataka.in/districts/baglkot/a-major-struggle-for-the-construction-of-the-prajasoudha-in-banahatti-itself/",
+      local: false
+    }
+  ]
+};
 
-.event-banners {
-  position: relative;
-  overflow: hidden;
-  padding: 38px 0 42px;
-  color: #fff;
-  background:
-    radial-gradient(circle at 100% 0, rgba(216,154,53,.22), transparent 34%),
-    linear-gradient(135deg, var(--red-950), #74182a 62%, var(--red-900));
-}
-.event-banners::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: .12;
-  background-image: radial-gradient(#fff 1px, transparent 1px);
-  background-size: 22px 22px;
-  pointer-events: none;
-}
-.event-banners > .container { position: relative; z-index: 1; }
-.event-banners-heading { max-width: 880px; margin-bottom: 20px; }
-.event-banners-label {
-  display: inline-flex;
-  margin-bottom: 10px;
-  color: var(--gold-light);
-  font: 800 .78rem/1.4 "Noto Sans Kannada", sans-serif;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.event-banners-heading h2 {
-  margin: 0 0 7px;
-  font: 800 clamp(1.75rem, 3.7vw, 3.15rem)/1.2 "Noto Sans Kannada", sans-serif;
-  letter-spacing: -.035em;
-}
-.event-banners-heading p {
-  margin: 0;
-  color: rgba(255,255,255,.78);
-  font-family: "Noto Sans Kannada", sans-serif;
-}
-.event-banners-list { display: grid; gap: 26px; }
-.event-banner-row {
-  display: grid;
-  grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
-  gap: 30px;
-  align-items: center;
-}
-.event-banner-row-reverse { grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); }
-.event-banner-card {
-  margin: 0;
-  padding: 8px;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-  aspect-ratio: 4 / 3;
-  border: 1px solid rgba(255,255,255,.22);
-  border-radius: 24px;
-  background: linear-gradient(145deg, #fffdf5, #f2e7c9);
-  box-shadow: 0 24px 56px rgba(28,4,10,.32);
-}
-.event-banner-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 17px;
-}
-.event-banner-copy {
-  position: relative;
-  padding: 28px 30px;
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 24px;
-  background: rgba(255,255,255,.09);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
-}
-.event-banner-number {
-  position: absolute;
-  top: 19px;
-  right: 23px;
-  color: rgba(255,255,255,.14);
-  font-size: 3.25rem;
-  font-weight: 800;
-  line-height: 1;
-}
-.event-banner-kicker {
-  margin: 0 54px 8px 0;
-  color: var(--gold-light);
-  font: 800 .78rem/1.5 "Noto Sans Kannada", sans-serif;
-  letter-spacing: .05em;
-}
-.event-banner-copy h3 {
-  margin: 0 45px 14px 0;
-  font: 800 clamp(1.45rem, 2.6vw, 2.25rem)/1.28 "Noto Sans Kannada", sans-serif;
-  letter-spacing: -.025em;
-}
-.event-banner-copy p { margin: 0 0 12px; }
-.event-banner-copy .kn-text { color: rgba(255,255,255,.94); }
-.event-banner-en { color: rgba(255,255,255,.73); font-size: .92rem; }
-.event-banner-link {
-  display: inline-flex;
-  margin-top: 6px;
-  color: var(--gold-light);
-  font-weight: 800;
-  font-size: .88rem;
-}
-.event-banner-link:hover { color: #fff; }
+const DB_NAME = "banahattiAbhivruddhiDB";
+const DB_VERSION = 1;
+const STORE_NAME = "movementPosts";
+let activeFilter = "All";
+let localPosts = [];
+let previewUrl = "";
+let modalObjectUrl = "";
+let firebaseAuth = null;
+let authenticatedUser = null;
 
-.hero {
-  min-height: 760px;
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  align-items: center;
-  padding: 72px 0;
-  background:
-    linear-gradient(115deg, rgba(255,255,255,.98) 0%, rgba(255,247,248,.95) 56%, rgba(255,237,240,.94) 100%);
-}
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: .2;
-  background-image: radial-gradient(var(--red-700) .7px, transparent .7px);
-  background-size: 19px 19px;
-  mask-image: linear-gradient(to right, transparent, #000);
-}
-.hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.15fr .85fr; gap: 66px; align-items: center; }
-.campaign-label { display: inline-flex; align-items: center; gap: 10px; color: var(--red-900); background: #fff; border: 1px solid #ecd3d8; border-radius: 999px; padding: 8px 14px; font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; box-shadow: 0 8px 26px rgba(75,13,24,.07); }
-.live-dot { width: 9px; height: 9px; background: var(--red-700); border-radius: 50%; box-shadow: 0 0 0 6px rgba(181,43,67,.13); }
-.hero-kannada { margin: 27px 0 8px; color: var(--red-800); font: 800 1.25rem/1.5 "Noto Sans Kannada", sans-serif; }
-.hero-copy h1 { max-width: 760px; font-size: clamp(3rem, 6vw, 5.7rem); line-height: .98; letter-spacing: -.064em; margin: 0 0 25px; }
-.hero-copy h1 em { color: var(--red-800); font-style: normal; }
-.hero-intro { max-width: 710px; font-size: 1.08rem; color: var(--muted); }
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin: 35px 0 37px; }
-.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; border: 1px solid transparent; border-radius: 999px; padding: 0 23px; font-weight: 800; transition: transform .2s, box-shadow .2s, background .2s; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(75,13,24,.18); }
-.btn-primary { background: var(--red-800); color: #fff; }
-.btn-secondary { background: rgba(255,255,255,.8); border-color: #dcbfc5; color: var(--red-900); }
-.btn-light { background: #fff; color: var(--red-900); }
-.btn.full { width: 100%; }
-.hero-points { display: flex; flex-wrap: wrap; gap: 12px; }
-.hero-points span { color: var(--red-900); background: var(--red-100); border-radius: 999px; padding: 8px 13px; font-size: .84rem; font-weight: 750; }
-.hero-glow { position: absolute; border-radius: 50%; filter: blur(2px); opacity: .5; }
-.hero-glow-one { width: 420px; height: 420px; background: #f5d8de; top: -210px; right: 8%; }
-.hero-glow-two { width: 260px; height: 260px; background: #ffe6b3; bottom: -140px; left: 4%; }
+const $ = (selector, scope = document) => scope.querySelector(selector);
+const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 
-.campaign-card { background: linear-gradient(145deg, var(--red-900), var(--red-800)); color: #fff; border-radius: var(--radius-lg); padding: 32px; box-shadow: 0 30px 70px rgba(75,13,24,.25); position: relative; overflow: hidden; }
-.campaign-card::after { content: ""; position: absolute; width: 230px; height: 230px; border: 36px solid rgba(255,255,255,.05); border-radius: 50%; top: -100px; right: -100px; }
-.campaign-card-top { display: flex; align-items: center; justify-content: space-between; gap: 20px; position: relative; z-index: 1; }
-.campaign-card-top span { color: var(--gold-light); font-family: "Noto Sans Kannada", sans-serif; font-weight: 700; }
-.campaign-card-top strong { font-size: .72rem; letter-spacing: .13em; background: rgba(255,255,255,.12); padding: 8px 11px; border-radius: 999px; }
-.campaign-date { display: flex; align-items: center; gap: 19px; margin: 31px 0 22px; position: relative; z-index: 1; }
-.campaign-date > strong { font-size: 5.2rem; line-height: .8; letter-spacing: -.08em; color: #fff; }
-.campaign-date div { display: grid; border-left: 1px solid rgba(255,255,255,.24); padding-left: 19px; }
-.campaign-date span { font-size: .77rem; color: #f4cfd6; letter-spacing: .11em; }
-.campaign-date b { font-size: 1.15rem; color: var(--gold-light); }
-.campaign-card h2 { font: 800 2rem/1.3 "Noto Sans Kannada", sans-serif; margin: 4px 0 9px; position: relative; z-index: 1; }
-.campaign-card > p { color: #f6dce1; margin: 0 0 24px; position: relative; z-index: 1; }
-.event-facts { margin: 0 0 26px; position: relative; z-index: 1; }
-.event-facts div { display: grid; grid-template-columns: 120px 1fr; gap: 10px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.13); }
-.event-facts dt { color: #efb9c3; font-size: .82rem; }
-.event-facts dd { margin: 0; font-weight: 700; }
-
-.ticker { background: var(--red-950); color: #fff; }
-.ticker-inner { min-height: 58px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px; font-size: .9rem; }
-.ticker-inner > strong { background: var(--gold); color: var(--red-950); padding: 4px 10px; border-radius: 999px; font-size: .73rem; text-transform: uppercase; letter-spacing: .08em; }
-.ticker-window { overflow: hidden; white-space: nowrap; }
-.ticker-window span { display: inline-block; color: #f7d9df; }
-.ticker a { color: var(--gold-light); font-weight: 800; }
-
-.eyebrow { color: var(--red-700); text-transform: uppercase; letter-spacing: .14em; font-size: .76rem; font-weight: 850; }
-.eyebrow.light { color: #f4bec8; }
-.section-heading { margin-bottom: 32px; }
-.section-heading.split { display: grid; grid-template-columns: 1fr .74fr; align-items: end; gap: 55px; }
-.section-heading h2, .committee-intro h2, .satyagraha-copy h2, .procession-copy h2, .join-copy h2 { font-size: clamp(2.2rem, 4.5vw, 3.7rem); line-height: 1.07; letter-spacing: -.05em; margin: 13px 0 16px; }
-.section-heading p, .committee-intro > p, .satyagraha-copy > p { color: var(--muted); margin: 0; }
-
-.movement-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 64px; align-items: start; }
-.reason-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.reason-card { min-height: 280px; padding: 27px; border: 1px solid var(--line); border-radius: var(--radius-md); background: #fff; }
-.reason-card > span { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; background: var(--red-100); color: var(--red-800); font-weight: 850; }
-.reason-card h3 { margin: 53px 0 11px; line-height: 1.2; }
-.reason-card p { color: var(--muted); margin: 0; font-size: .93rem; }
-
-.section-red { position: relative; overflow: hidden; color: #fff; background: linear-gradient(130deg, var(--red-950), var(--red-800)); }
-.section-red::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 85% 12%, rgba(255,255,255,.11), transparent 35%); pointer-events: none; }
-.procession-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: center; }
-.procession-copy h2 { max-width: 720px; }
-.kannada-line { color: var(--gold-light); font: 700 1.15rem/1.7 "Noto Sans Kannada", sans-serif; }
-.procession-copy > p:not(.kannada-line) { color: #f3d8dd; max-width: 680px; }
-.procession-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 30px; }
-.text-link-light { color: var(--gold-light); font-weight: 800; }
-.participation-card { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius-lg); padding: 35px; backdrop-filter: blur(8px); }
-.participation-card h3 { font-size: 1.45rem; margin: 0 0 20px; }
-.participation-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.participation-list span { background: rgba(255,255,255,.09); border-radius: 12px; padding: 13px; color: #fff; font-weight: 650; font-size: .9rem; }
-.participation-card p { margin: 23px 0 0; color: #f2ced5; font-size: .9rem; }
-
-.satyagraha-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 75px; align-items: center; }
-.satyagraha-visual { min-height: 500px; border-radius: var(--radius-lg); background: var(--red-50); border: 1px solid var(--line); display: grid; place-items: center; align-content: center; text-align: center; position: relative; overflow: hidden; }
-.satyagraha-visual strong { color: var(--red-900); font: 850 clamp(2.5rem, 5vw, 4.4rem)/1.12 "Noto Sans Kannada", sans-serif; position: relative; z-index: 2; }
-.satyagraha-visual small { color: var(--red-700); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-top: 15px; position: relative; z-index: 2; }
-.rings span { position: absolute; border-radius: 50%; border: 1px solid rgba(150,31,51,.13); inset: 50%; transform: translate(-50%, -50%); }
-.rings span:nth-child(1) { width: 250px; height: 250px; }
-.rings span:nth-child(2) { width: 370px; height: 370px; }
-.rings span:nth-child(3) { width: 500px; height: 500px; }
-.movement-steps { display: grid; gap: 14px; margin-top: 31px; }
-.movement-steps > div { display: flex; gap: 17px; align-items: flex-start; padding: 16px; border: 1px solid var(--line); border-radius: 15px; }
-.movement-steps > div > strong { flex: 0 0 39px; width: 39px; height: 39px; display: grid; place-items: center; border-radius: 11px; background: var(--red-100); color: var(--red-800); }
-.movement-steps span { display: grid; }
-.movement-steps b { line-height: 1.3; }
-.movement-steps small { color: var(--muted); margin-top: 3px; }
-
-.publisher-panel { border: 1px solid #e5c8ce; border-radius: var(--radius-md); background: #fff; margin-bottom: 35px; box-shadow: 0 12px 35px rgba(75,13,24,.06); }
-.publisher-panel summary { list-style: none; cursor: pointer; padding: 19px 23px; color: var(--red-900); font-weight: 800; display: flex; align-items: center; gap: 10px; }
-.publisher-panel summary::-webkit-details-marker { display: none; }
-.publisher-panel summary span { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--red-100); color: var(--red-800); }
-.publisher-form { padding: 4px 23px 24px; border-top: 1px solid var(--line); }
-.publisher-note { display: flex; gap: 12px; align-items: baseline; padding: 16px; background: #fff8e9; border: 1px solid #f1deb5; border-radius: 13px; margin: 20px 0; }
-.publisher-note strong { white-space: nowrap; color: #80510c; }
-.publisher-note span { color: #806d4d; font-size: .86rem; }
-.field-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.field-row.three { grid-template-columns: 1.2fr .65fr .8fr; }
-.publisher-form label { display: grid; gap: 7px; color: var(--ink); font-size: .86rem; font-weight: 750; margin-bottom: 15px; }
-.publisher-form input, .publisher-form textarea, .publisher-form select { width: 100%; border: 1px solid #dac6cb; border-radius: 11px; padding: 12px 13px; color: var(--ink); background: #fff; outline: none; }
-.publisher-form input:focus, .publisher-form textarea:focus, .publisher-form select:focus { border-color: var(--red-700); box-shadow: 0 0 0 4px rgba(181,43,67,.1); }
-.upload-preview { max-width: 430px; border: 1px dashed #d8b9c0; background: var(--red-50); border-radius: 15px; padding: 12px; margin-bottom: 18px; }
-.upload-preview img, .upload-preview video { max-height: 260px; width: 100%; object-fit: contain; border-radius: 10px; background: #27171b; }
-.upload-preview small { display: block; color: var(--muted); margin-top: 8px; }
-.publisher-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
-#postStatus { color: var(--green); font-size: .88rem; font-weight: 700; }
-
-.updates-filter { display: flex; gap: 9px; flex-wrap: wrap; margin: 0 0 25px; }
-.filter-btn { border: 1px solid #dfc5cb; background: #fff; color: var(--red-900); border-radius: 999px; padding: 9px 15px; font-size: .83rem; font-weight: 750; }
-.filter-btn.active { background: var(--red-800); color: #fff; border-color: var(--red-800); }
-.updates-feed { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.post-card { text-align: left; border: 1px solid var(--line); border-radius: 20px; background: #fff; overflow: hidden; padding: 0; color: inherit; transition: transform .2s, box-shadow .2s; position: relative; }
-.post-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-.post-media { aspect-ratio: 16/10; background: linear-gradient(145deg, #f4dce1, #fff0d1); display: grid; place-items: center; overflow: hidden; position: relative; }
-.post-media img, .post-media video { width: 100%; height: 100%; object-fit: cover; }
-.post-media video { pointer-events: none; }
-.video-badge { position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); width: 58px; height: 58px; display: grid; place-items: center; border-radius: 50%; background: rgba(255,255,255,.9); color: var(--red-800); font-size: 1.25rem; box-shadow: 0 8px 22px rgba(0,0,0,.15); }
-.text-post-mark { display: grid; place-items: center; width: 82px; height: 82px; border-radius: 24px; background: var(--red-800); color: #fff; font: 850 1.5rem "Noto Sans Kannada", sans-serif; transform: rotate(-4deg); box-shadow: 0 18px 35px rgba(150,31,51,.23); }
-.post-body { padding: 20px; }
-.post-meta { display: flex; justify-content: space-between; gap: 12px; align-items: center; color: var(--muted); font-size: .75rem; }
-.post-meta span { color: var(--red-800); background: var(--red-100); border-radius: 999px; padding: 5px 9px; font-weight: 800; }
-.post-body h3 { margin: 13px 0 8px; line-height: 1.25; font-size: 1.16rem; }
-.post-body p { color: var(--muted); margin: 0; font-size: .91rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.post-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 16px; }
-.read-more { color: var(--red-800); font-size: .82rem; font-weight: 800; }
-.delete-post { position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border-radius: 50%; border: 0; background: rgba(75,13,24,.86); color: #fff; z-index: 3; font-size: 1rem; }
-.empty-state { text-align: center; padding: 35px; color: var(--muted); border: 1px dashed #d7bec4; border-radius: 18px; background: #fff; }
-
-.committee-layout { display: grid; grid-template-columns: .92fr 1.08fr; gap: 70px; align-items: center; }
-.committee-kannada { color: var(--red-800) !important; font: 750 1.1rem/1.6 "Noto Sans Kannada", sans-serif; margin: -5px 0 18px !important; }
-.committee-card { display: grid; grid-template-columns: 150px 1fr; gap: 28px; background: var(--red-50); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 34px; }
-.committee-mark { min-height: 210px; display: grid; place-items: center; border-radius: 22px; color: #fff; background: linear-gradient(145deg, var(--red-900), var(--red-700)); font: 850 1.45rem "Noto Sans Kannada", sans-serif; }
-.committee-card span { color: var(--red-700); font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 850; }
-.committee-card h3 { margin: 7px 0 14px; font-size: 1.55rem; }
-.committee-card ul { margin: 0; padding-left: 19px; color: var(--muted); }
-.committee-card li { margin: 7px 0; }
-
-.join-section { background: var(--red-950); color: #fff; }
-.join-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 70px; align-items: center; }
-.join-copy p { color: #efccd3; max-width: 650px; }
-.join-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; margin-top: 28px; }
-.join-message { padding: 35px; border-radius: var(--radius-lg); background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); }
-.join-message span { color: #efb7c2; text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 800; }
-.join-message strong { display: block; color: var(--gold-light); font: 850 2rem/1.5 "Noto Sans Kannada", sans-serif; margin: 15px 0 8px; }
-.join-message p { color: #f1d2d8; margin: 0; }
-
-.site-footer { background: #281116; color: #dcbfc5; padding: 50px 0 0; }
-.footer-main { display: grid; grid-template-columns: auto 1fr auto; gap: 45px; align-items: center; padding-bottom: 35px; }
-.footer-brand strong { color: #fff; }
-.footer-brand small { color: #ef9faf; }
-.footer-main p { margin: 0; }
-.footer-main nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: .85rem; font-weight: 700; }
-.footer-main nav a:hover { color: #fff; }
-.footer-bottom { min-height: 62px; border-top: 1px solid rgba(255,255,255,.09); display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: .78rem; }
-
-.post-modal { width: min(920px, calc(100% - 28px)); padding: 0; border: 0; border-radius: 22px; overflow: visible; box-shadow: 0 30px 90px rgba(0,0,0,.28); }
-.post-modal::backdrop { background: rgba(32,10,15,.78); backdrop-filter: blur(4px); }
-.modal-close { position: absolute; right: -13px; top: -13px; z-index: 5; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #fff; color: var(--red-900); font-size: 1.4rem; box-shadow: var(--shadow); }
-.modal-media { max-height: 68vh; background: #1f1518; display: grid; place-items: center; overflow: hidden; border-radius: 22px 22px 0 0; }
-.modal-media:empty { display: none; }
-.modal-media img, .modal-media video { max-height: 68vh; width: 100%; object-fit: contain; }
-.modal-copy { padding: 27px; }
-.modal-copy h3 { font-size: 1.6rem; line-height: 1.2; margin: 14px 0 8px; }
-.modal-copy p { color: var(--muted); white-space: pre-wrap; }
-.modal-copy > a { color: var(--red-800); font-weight: 800; }
-
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
-.reveal.visible { opacity: 1; transform: none; }
-.delay-1 { transition-delay: .1s; }
-.delay-2 { transition-delay: .2s; }
-
-@media (max-width: 1050px) {
-  .main-nav { gap: 16px; font-size: .82rem; }
-  .hero-grid, .procession-grid, .satyagraha-grid, .committee-layout, .join-grid { gap: 42px; }
-  .reason-grid { grid-template-columns: 1fr; }
-  .reason-card { min-height: auto; }
-  .reason-card h3 { margin-top: 25px; }
-  .updates-feed { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 840px) {
-  .menu-toggle { display: block; }
-  .main-nav { position: absolute; top: 76px; left: 0; right: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; background: #fff; border-bottom: 1px solid var(--line); box-shadow: 0 18px 30px rgba(75,13,24,.09); padding: 10px 18px 18px; }
-  .main-nav.open { display: flex; }
-  .main-nav a { padding: 12px 6px; }
-  .nav-cta { text-align: center; margin-top: 7px; }
-  .hero { padding: 56px 0; }
-  .event-banners { padding: 32px 0 36px; }
-  .event-banner-row, .event-banner-row-reverse { grid-template-columns: 1fr; gap: 18px; }
-  .event-banner-row-reverse .event-banner-card { grid-row: 1; }
-  .event-banner-row-reverse .event-banner-copy { grid-row: 2; }
-  .hero-grid, .movement-grid, .procession-grid, .satyagraha-grid, .committee-layout, .join-grid { grid-template-columns: 1fr; }
-  .campaign-card { max-width: 620px; }
-  .section-heading.split { grid-template-columns: 1fr; gap: 14px; }
-  .field-row, .field-row.three { grid-template-columns: 1fr; gap: 0; }
-  .footer-main { grid-template-columns: 1fr; gap: 18px; }
-  .footer-bottom { align-items: flex-start; flex-direction: column; justify-content: center; padding: 17px 0; }
-}
-
-@media (max-width: 580px) {
-  .container { width: min(calc(100% - 24px), var(--container)); }
-  .section-pad { padding: 48px 0; }
-  .event-banners { padding: 24px 0 28px; }
-  .event-banners-heading { margin-bottom: 16px; }
-  .event-banners-heading h2 { font-size: 1.65rem; }
-  .event-banners-heading p { font-size: .9rem; line-height: 1.65; }
-  .event-banner-card { padding: 5px; border-radius: 17px; }
-  .event-banner-card img { border-radius: 12px; }
-  .event-banners-list { gap: 22px; }
-  .event-banner-copy { padding: 23px 20px; border-radius: 17px; }
-  .event-banner-number { top: 17px; right: 17px; font-size: 2.65rem; }
-  .event-banner-copy h3 { margin-right: 32px; font-size: 1.42rem; }
-  .event-banner-copy .kn-text, .event-banner-en { font-size: .88rem; }
-  .brand strong { font-size: .9rem; }
-  .brand small { font-size: .72rem; }
-  .hero-copy h1 { font-size: clamp(2.65rem, 14vw, 4rem); }
-  .hero-intro { font-size: .98rem; }
-  .campaign-card { padding: 24px; }
-  .campaign-card-top { align-items: flex-start; flex-direction: column; gap: 9px; }
-  .campaign-date > strong { font-size: 4.4rem; }
-  .campaign-date div { padding-left: 14px; }
-  .event-facts div { grid-template-columns: 100px 1fr; }
-  .ticker-inner {
-    min-height: 0;
-    grid-template-columns: 1fr;
-    gap: 7px;
-    padding-block: 12px;
-    font-size: .82rem;
-    line-height: 1.55;
-  }
-  .ticker-inner > strong {
-    justify-self: start;
-    padding: 4px 9px;
-    font-size: .68rem;
-  }
-  .ticker-window {
-    grid-column: 1;
-    grid-row: 2;
-    overflow: visible;
-    white-space: normal;
-  }
-  .ticker-window span { display: block; }
-  .ticker a {
-    display: inline-flex;
-    grid-column: 1;
-    grid-row: 3;
-    align-items: center;
-    justify-self: start;
-    font-size: .76rem;
-    white-space: nowrap;
-  }
-  .participation-list { grid-template-columns: 1fr; }
-  .satyagraha-visual { min-height: 390px; }
-  .updates-feed { grid-template-columns: 1fr; }
-  .publisher-note { align-items: flex-start; flex-direction: column; gap: 3px; }
-  .committee-card { grid-template-columns: 1fr; }
-  .committee-mark { min-height: 120px; }
-  .join-message strong { font-size: 1.6rem; }
-  .post-modal { border-radius: 16px; }
-  .modal-media { border-radius: 16px 16px 0 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-}
-
-
-/* Ensure authentication states are mutually exclusive.
-   Author display rules otherwise override the browser's hidden attribute. */
-#otpForm[hidden],
-#authSession[hidden],
-#publisherPanel[hidden] {
-  display: none !important;
-}
-
-/* Restricted committee editor authentication */
-.editor-access {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr);
-  gap: 28px;
-  align-items: center;
-  padding: 24px;
-  margin-bottom: 22px;
-  border: 1px solid #e5c8ce;
-  border-radius: var(--radius-md);
-  background: #fff;
-  box-shadow: 0 12px 35px rgba(75,13,24,.06);
-}
-.editor-access h3 { margin: 4px 0 7px; color: var(--red-900); font-size: 1.35rem; }
-.editor-access p { margin: 0; color: var(--muted); }
-.otp-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: end; }
-.otp-form label { display: grid; gap: 7px; color: var(--ink); font-size: .86rem; font-weight: 750; }
-.otp-form input { width: 100%; border: 1px solid #dac6cb; border-radius: 11px; padding: 12px 13px; color: var(--ink); background: #fdf9fa; }
-.otp-form #authStatus { grid-column: 1 / -1; color: var(--muted); font-size: .86rem; min-height: 1.2em; }
-.auth-session { display: flex; justify-content: flex-end; align-items: center; gap: 14px; flex-wrap: wrap; }
-.auth-session span { color: var(--muted); }
-.editor-access.authenticated { border-color: #b9d7c0; background: #fbfffc; }
-button:disabled { opacity: .58; cursor: not-allowed; }
-@media (max-width: 760px) {
-  .editor-access { grid-template-columns: 1fr; }
-  .otp-form { grid-template-columns: 1fr; }
-  .otp-form #authStatus { grid-column: auto; }
-  .auth-session { justify-content: flex-start; }
-}
-
-/* Current-status content added from the movement's WhatsApp discussion */
-.reason-grid-four { grid-template-columns: repeat(4, 1fr); margin-bottom: 26px; }
-.status-panels { display: grid; grid-template-columns: 1.18fr .82fr; gap: 18px; margin-top: 18px; }
-.status-panel { padding: 32px; border: 1px solid var(--line); border-radius: 24px; background: var(--white); }
-.status-panel h3 { margin: 10px 0 14px; font-size: 1.45rem; }
-.status-panel p { color: var(--muted); margin: 17px 0 0; }
-.status-panel-accent {
-  background: linear-gradient(145deg, var(--red-950), var(--red-800));
-  color: var(--white);
-  border-color: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.status-panel-accent blockquote { margin: 15px 0 0; font-size: clamp(1.35rem, 2.4vw, 2rem); line-height: 1.38; font-weight: 700; }
-.support-tags { display: flex; flex-wrap: wrap; gap: 9px; }
-.support-tags span { border: 1px solid var(--line); border-radius: 999px; padding: 8px 13px; font-size: .9rem; font-weight: 650; background: var(--soft); }
-.principles-section { background: #fff8f5; }
-.principles-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 64px; align-items: start; }
-.principles-list { background: var(--white); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
-.principles-list div { display: grid; grid-template-columns: 54px 1fr; align-items: center; gap: 15px; padding: 19px 24px; border-bottom: 1px solid var(--line); }
-.principles-list div:last-child { border-bottom: 0; }
-.principles-list strong { color: var(--red); }
-.principles-list span { font-weight: 650; }
-@media (max-width: 1050px) { .reason-grid-four { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 760px) {
-  .reason-grid-four, .status-panels, .principles-grid { grid-template-columns: 1fr; }
-  .status-panels { gap: 12px; margin-top: 12px; }
-  .status-panel { padding: 20px; }
-  .status-panel p { margin-top: 11px; }
-  .status-panel-accent blockquote { margin-top: 10px; }
+function setupCommitteeAccessTrigger() {
+  const trigger = $("#committeeAccessTrigger");
+  const access = $("#editorAccess");
+  if (!trigger || !access) return;
+  trigger.addEventListener("click", () => {
+    access.hidden = !access.hidden;
+    if (!access.hidden) {
+      access.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(() => $("#googleSignInButton")?.focus(), 350);
+    }
+  });
 }
 
 
-/* Terms and Conditions pages */
-.legal-nav { display:flex; align-items:center; gap:1.25rem; }
-.legal-nav a { color:var(--ink); font-weight:700; text-decoration:none; }
-.legal-nav a:hover { color:var(--primary); }
-.legal-main { background:#fffaf9; min-height:70vh; }
-.legal-hero { padding:5.5rem 0 3rem; background:linear-gradient(135deg,#fff 0%,#f9e9ec 100%); border-bottom:1px solid #ead4d8; }
-.legal-hero-inner { max-width:900px; }
-.legal-hero h1 { margin:.55rem 0 1rem; font-size:clamp(2.2rem,5vw,4.4rem); line-height:1.05; color:#74182a; }
-.legal-hero p { max-width:760px; font-size:1.08rem; color:#654b50; }
-.legal-updated { margin-top:1.25rem; font-size:.95rem !important; }
-.legal-layout { display:grid; grid-template-columns:260px minmax(0,820px); gap:3.5rem; align-items:start; padding-top:3.5rem; padding-bottom:5rem; }
-.legal-note { position:sticky; top:100px; padding:1.35rem; border:1px solid #e6c3ca; border-radius:18px; background:#fff; box-shadow:0 12px 30px rgba(83,19,32,.07); }
-.legal-note strong { display:block; color:#961f33; margin-bottom:.5rem; }
-.legal-note p { margin:0; color:#6f565b; font-size:.92rem; line-height:1.65; }
-.legal-content { background:#fff; border:1px solid #edd8dc; border-radius:24px; padding:clamp(1.4rem,4vw,3rem); box-shadow:0 18px 50px rgba(83,19,32,.06); }
-.legal-section + .legal-section { margin-top:2rem; padding-top:2rem; border-top:1px solid #f0dfe2; }
-.legal-section h2 { margin:0 0 .75rem; color:#74182a; font-size:1.3rem; }
-.legal-section p { margin:0; color:#4f4245; line-height:1.8; }
-html[lang="kn"] .legal-content, html[lang="kn"] .legal-hero { font-family:"Noto Sans Kannada",sans-serif; }
-@media (max-width:800px) {
-  .legal-layout { grid-template-columns:1fr; gap:1.5rem; padding-top:2rem; }
-  .legal-note { position:static; }
-  .legal-nav { gap:.8rem; font-size:.88rem; }
-  .legal-hero { padding:3.5rem 0 2.4rem; }
+function isFirebaseConfigured() {
+  return FIREBASE_CONFIG.apiKey &&
+    !FIREBASE_CONFIG.apiKey.includes("YOUR_FIREBASE") &&
+    FIREBASE_CONFIG.authDomain &&
+    !FIREBASE_CONFIG.authDomain.includes("YOUR_PROJECT") &&
+    FIREBASE_CONFIG.projectId &&
+    !FIREBASE_CONFIG.projectId.includes("YOUR_PROJECT") &&
+    FIREBASE_CONFIG.appId &&
+    !FIREBASE_CONFIG.appId.includes("YOUR_FIREBASE");
 }
 
-/* Bilingual Kannada additions */
-.kn-text,
-.kn-heading,
-.kn-card-title,
-.kn-quote,
-.main-nav small,
-.eyebrow small,
-.participation-list small,
-.committee-card small,
-.principles-list small {
-  font-family: "Noto Sans Kannada", sans-serif;
-}
-.kn-text {
-  margin-top: .45rem;
-  line-height: 1.75;
-  color: #6f5558;
-}
-.kn-heading {
-  margin-top: .35rem;
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
-  line-height: 1.55;
-  color: #8b1d31;
-}
-.kn-card-title {
-  margin: .15rem 0 .5rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #8b1d31;
-}
-.kn-quote {
-  display: block;
-  margin-top: .65rem;
-  font-size: .92em;
-  line-height: 1.7;
-}
-.light-text { color: rgba(255,255,255,.94) !important; }
-.main-nav a small {
-  display: block;
-  font-size: .68rem;
-  line-height: 1.2;
-  margin-top: 2px;
-  opacity: .78;
-  font-weight: 500;
-}
-.nav-cta small { color: inherit; opacity: .9 !important; }
-.eyebrow small { font-size: .78em; font-weight: 600; }
-.participation-list small,
-.committee-card li small,
-.principles-list small {
-  display: block;
-  margin-top: 3px;
-  line-height: 1.55;
-  opacity: .82;
-  font-weight: 500;
-}
-.post-title-kn {
-  margin: .3rem 0 .45rem;
-  font-family: "Noto Sans Kannada", sans-serif;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #8b1d31;
-  font-weight: 700;
-}
-.post-text-kn {
-  margin-top: .45rem !important;
-  font-family: "Noto Sans Kannada", sans-serif;
-  line-height: 1.75 !important;
-  color: #6f5558;
-}
-.modal-copy .post-title-kn { font-size: 1.08rem; }
-@media (max-width: 860px) {
-  .main-nav a small { display: inline; margin-left: .35rem; }
+function isAuthorisedEmail(email) {
+  return String(email || "").trim().toLowerCase() === AUTHORIZED_EDITOR_EMAIL;
 }
 
+function updateEditorAccess(user) {
+  authenticatedUser = user || null;
+  const authorised = Boolean(user && isAuthorisedEmail(user.email));
+  const access = $("#editorAccess");
+  const loginBox = $("#otpForm");
+  const session = $("#authSession");
+  const editor = $("#publisherPanel");
 
+  editor.hidden = !authorised;
+  loginBox.hidden = authorised;
+  session.hidden = !authorised;
+  access.classList.toggle("authenticated", authorised);
 
-/* =========================================================
-   KANNADA-FIRST BILINGUAL DESIGN — FINAL
-   Kannada is the primary reading layer; English is supporting.
-   ========================================================= */
-html [hidden] { display:none !important; }
-body { font-family:"Noto Sans Kannada", Inter, sans-serif; }
+  const eyebrow = $("#editorAccessEyebrow");
+  const title = $("#editorAccessTitle");
+  const message = $("#editorAccessMessage");
 
-.kn-heading,.kn-card-title,.kn-text,.kn-quote,.kannada-line,.committee-kannada,.hero-kannada,.kn-inline { font-family:"Noto Sans Kannada",sans-serif; }
-.kn-heading { color:var(--red-950); font-size:clamp(1.7rem,3vw,2.55rem); line-height:1.28; font-weight:800; margin:0 0 .35rem; letter-spacing:-.015em; }
-.kn-card-title { color:var(--red-900); font-size:1.2rem; line-height:1.45; font-weight:800; margin:0 0 .25rem; }
-.kn-text { color:#3d3235; font-size:1rem; line-height:1.78; font-weight:550; margin:0 0 .35rem; }
-.kn-quote { display:block; font-size:1.14em; line-height:1.65; font-weight:800; }
-.kn-inline { display:block; color:inherit; font-size:.98rem; line-height:1.45; font-weight:750; }
-.en-inline { display:block; margin-top:2px; font:500 .75rem/1.4 Inter,sans-serif; opacity:.67; }
-
-/* English translations — deliberately smaller and quieter */
-.hero-copy > h1,.section-heading h2,.reason-card > h3,.status-panel > h3,.procession-copy > h2,.satyagraha-copy > h2,.committee-intro > h2,.join-copy > h2,.participation-card > h3,.committee-card h3 {
-  font:600 .84rem/1.45 Inter,sans-serif; color:#877a7d; margin:0 0 1.05rem;
-}
-.hero-intro,.section-heading.split > p:not(.kn-text),.reason-card > p:not(.kn-text),.status-panel > p:not(.kn-text),.procession-copy > p:not(.kn-text):not(.kannada-line),.satyagraha-copy > p:not(.kn-text),.committee-intro > p:not(.kn-text):not(.committee-kannada),.participation-card > p:not(.kn-text),.join-copy > p:not(.kn-text),.join-message > p:not(.kn-text),.campaign-card > p:not(.kn-text) {
-  font:400 .80rem/1.55 Inter,sans-serif; color:#8f8285; margin:0 0 1.2rem;
-}
-
-/* Labels: Kannada on top, English beneath */
-.eyebrow { display:flex; flex-direction:column; gap:2px; font-family:"Noto Sans Kannada",sans-serif; font-weight:800; letter-spacing:.05em; }
-.eyebrow small { font:600 .66rem/1.25 Inter,sans-serif; opacity:.60; letter-spacing:.08em; text-transform:uppercase; }
-.brand strong { font-family:"Noto Sans Kannada",sans-serif; font-weight:800; }
-.brand small { font:500 .68rem/1.2 Inter,sans-serif; opacity:.62; }
-.main-nav > a { font-family:"Noto Sans Kannada",sans-serif; font-size:.91rem; font-weight:800; line-height:1.12; }
-.main-nav > a small { display:block; margin-top:3px; font:500 .60rem/1.15 Inter,sans-serif; opacity:.55; }
-.btn { font-family:"Noto Sans Kannada",sans-serif; }
-.btn small { display:block; margin-top:2px; font:500 .66rem/1.15 Inter,sans-serif; opacity:.66; }
-
-/* Hero — Kannada is unmistakably the headline */
-.hero-copy { max-width:720px; }
-.hero-kannada { color:var(--red-700); font-size:1.08rem; line-height:1.5; font-weight:800; margin-bottom:10px; }
-.hero-copy .kn-heading { font-size:clamp(2.45rem,5.1vw,4.65rem); line-height:1.08; max-width:760px; margin-bottom:.4rem; }
-.hero-copy > h1 { font-size:.88rem; margin-bottom:1.15rem; }
-.hero-copy .kn-text { max-width:680px; font-size:1.06rem; }
-.hero-intro { max-width:650px; }
-.hero-points span { font-family:"Noto Sans Kannada",sans-serif; font-weight:700; }
-
-/* Main cards */
-.reason-card,.status-panel,.participation-card,.committee-card { overflow:hidden; }
-.reason-card .kn-text,.status-panel .kn-text { margin-bottom:.3rem; }
-.support-tags span { display:flex; flex-direction:column; gap:1px; }
-
-/* Campaign announcement */
-.campaign-card .kn-text { color:#fff; font-size:1rem; }
-.campaign-card > p:not(.kn-text) { color:rgba(255,255,255,.68); }
-.campaign-card .event-facts dt { font-family:"Noto Sans Kannada",sans-serif; }
-.campaign-card .event-facts dd { color:#fff; }
-.campaign-card .event-facts small { font-family:"Noto Sans Kannada",sans-serif; color:rgba(255,255,255,.88); }
-
-/* Dark procession area — correct the contrast */
-.section-red { color:#fff; }
-.section-red .kn-heading,.section-red .kn-card-title,.section-red .kn-text,.section-red .kannada-line,.section-red .kn-inline { color:#fff !important; }
-.section-red .procession-copy > h2,.section-red .procession-copy > p:not(.kn-text):not(.kannada-line),.section-red .participation-card > h3,.section-red .participation-card > p:not(.kn-text),.section-red .en-inline { color:rgba(255,255,255,.68)!important; }
-.section-red .eyebrow { color:#ffd977; }
-.section-red .eyebrow small { color:rgba(255,255,255,.68); }
-.section-red .kannada-line { font-size:1.13rem; line-height:1.75; font-weight:750; margin:0 0 1.3rem; }
-.participation-card { background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.20); backdrop-filter:blur(4px); }
-.participation-card .kn-card-title { font-size:1.5rem; margin-bottom:.9rem; }
-.participation-list span { color:#fff; background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.13); }
-.participation-list .en-inline { color:rgba(255,255,255,.68)!important; }
-
-/* Key message red card */
-.status-panel-accent .eyebrow,.status-panel-accent .kn-quote { color:#fff; }
-.status-panel-accent blockquote { color:rgba(255,255,255,.68); font:500 .86rem/1.55 Inter,sans-serif; }
-.status-panel-accent .kn-quote { margin-bottom:.5rem; font-size:1.35rem; line-height:1.55; }
-
-/* Principles */
-.principles-list span { display:flex; flex-direction:column; }
-.principles-list .kn-inline { color:var(--ink); font-size:1rem; }
-.principles-list .en-inline { color:#7e7275; }
-.principles-list div { min-height:88px; }
-
-/* Satyagraha steps */
-.movement-steps b { display:block; }
-.kn-step-title { display:block; font:750 1rem/1.45 "Noto Sans Kannada",sans-serif; color:var(--ink); }
-.en-step-title { display:block; font:500 .72rem/1.35 Inter,sans-serif; color:#8a7e81; margin-top:2px; }
-.kn-step-text { display:block; font:550 .88rem/1.55 "Noto Sans Kannada",sans-serif; color:#514548; }
-.en-step-text { display:block; font:400 .70rem/1.45 Inter,sans-serif; color:#94888b; margin-top:3px; }
-
-/* Feed posts */
-.post-card h3:not(.post-title-kn),.modal-copy > h3:not(.post-title-kn) { font:600 .76rem/1.4 Inter,sans-serif; color:#8b7d80; margin:.15rem 0 .25rem; }
-.post-title-kn,.modal-copy .post-title-kn { font:800 1.16rem/1.48 "Noto Sans Kannada",sans-serif; color:var(--red-900); margin:0 0 .4rem; }
-.post-card p:not(.post-text-kn),.modal-copy > p:not(.post-text-kn) { font:400 .75rem/1.5 Inter,sans-serif; color:#8c7f82; }
-.post-text-kn { font:550 .92rem/1.68 "Noto Sans Kannada",sans-serif; color:#463a3d; margin:.15rem 0 0!important; }
-
-/* Committee */
-.committee-kannada { color:var(--red-900)!important; font-size:clamp(1.65rem,2.8vw,2.3rem)!important; line-height:1.35!important; font-weight:800!important; margin:0 0 .3rem!important; }
-.committee-intro > h2 { margin-bottom:1rem; }
-.committee-card .kn-card-title { margin-bottom:.7rem; }
-.committee-card li { color:#3f3437; font-family:"Noto Sans Kannada",sans-serif; }
-.committee-card li small { display:block; color:#8b7e81; font:500 .72rem/1.45 Inter,sans-serif; margin-top:2px; }
-
-/* Join section */
-.join-section .kn-heading,.join-section .kn-text { color:#fff!important; }
-.join-section .join-copy > h2,.join-section .join-copy > p:not(.kn-text),.join-message > p:not(.kn-text) { color:rgba(255,255,255,.66); }
-.join-section .eyebrow { color:#ffd977; }
-.join-message span { font-family:"Noto Sans Kannada",sans-serif; }
-
-/* Discreet committee access and elegant Google sign-in */
-.committee-access-trigger { position:fixed; right:9px; bottom:9px; z-index:70; width:16px; height:16px; border:0; padding:0; border-radius:50%; background:transparent; color:rgba(150,31,51,.18); cursor:pointer; font-size:8px; line-height:16px; }
-.committee-access-trigger:hover,.committee-access-trigger:focus-visible { color:var(--red-700); outline:2px solid rgba(150,31,51,.18); outline-offset:3px; }
-.editor-access { margin-top:18px; }
-.google-signin { display:grid; grid-template-columns:38px auto; grid-template-rows:auto auto; column-gap:10px; align-items:center; min-width:230px; padding:10px 16px 10px 10px; border:1px solid #e4d8da; border-radius:14px; background:#fff; color:#2d2527; box-shadow:0 7px 20px rgba(73,38,45,.08); cursor:pointer; text-align:left; }
-.google-g { grid-row:1/3; display:grid; place-items:center; width:36px; height:36px; border-radius:50%; background:#f5f6f7; font:700 1rem Inter,sans-serif; color:#4285f4; }
-.google-signin > span:not(.google-g) { font:750 .92rem/1.25 "Noto Sans Kannada",sans-serif; }
-.google-signin > small { font:500 .67rem/1.2 Inter,sans-serif; color:#8b7d80; }
-
-/* Footer — wide, balanced columns, no squeezed paragraph */
-.site-footer { padding-top:0; }
-.footer-main-clean { display:grid; grid-template-columns:260px minmax(260px,1fr); grid-template-areas:"brand about" "brand links"; column-gap:70px; row-gap:18px; align-items:center; padding:44px 0 34px; }
-.footer-main-clean .footer-brand { grid-area:brand; }
-.footer-about { grid-area:about; display:flex; flex-direction:column; gap:4px; max-width:620px; }
-.footer-about strong { color:#fff; font:750 1rem/1.55 "Noto Sans Kannada",sans-serif; }
-.footer-about small { color:#bfa5aa; font:400 .77rem/1.5 Inter,sans-serif; }
-.footer-links { grid-area:links; display:flex!important; flex-wrap:wrap; gap:12px 22px!important; }
-.footer-links a { display:flex; flex-direction:column; color:#f2dce1; font:700 .88rem/1.3 "Noto Sans Kannada",sans-serif; }
-.footer-links a small { color:#9f858a; font:500 .65rem/1.3 Inter,sans-serif; margin-top:2px; }
-.footer-bottom-clean { min-height:72px; display:grid; grid-template-columns:1fr 1.4fr 1fr; gap:28px; align-items:center; }
-.footer-trust { display:flex; flex-direction:column; text-align:center; }
-.footer-trust strong { color:#e6cbd0; font:650 .77rem/1.45 "Noto Sans Kannada",sans-serif; }
-.footer-trust small { color:#947b80; font:400 .64rem/1.35 Inter,sans-serif; margin-top:2px; }
-.footer-bottom-clean .developer-credit { text-align:right; }
-
-/* Prevent narrow text columns in bilingual sections */
-.section-heading.split { grid-template-columns:minmax(320px,.85fr) minmax(360px,1.15fr); }
-.procession-grid { grid-template-columns:minmax(0,1.05fr) minmax(410px,.95fr); }
-.principles-grid { grid-template-columns:minmax(300px,.76fr) minmax(470px,1.24fr); }
-
-@media (max-width:1050px) {
-  .section-heading.split,.procession-grid,.principles-grid { grid-template-columns:1fr; gap:28px; }
-  .footer-main-clean { grid-template-columns:220px 1fr; column-gap:40px; }
-}
-@media (max-width:840px) {
-  .main-nav a small { display:inline; margin-left:.35rem; }
-  .footer-main-clean { grid-template-columns:1fr; grid-template-areas:"brand" "about" "links"; gap:18px; }
-  .footer-bottom-clean { grid-template-columns:1fr; gap:8px; padding:18px 0; }
-  .footer-trust { text-align:left; }
-  .footer-bottom-clean .developer-credit { text-align:left; }
-}
-@media (max-width:580px) {
-  .hero-copy .kn-heading { font-size:clamp(2.05rem,11vw,3.3rem); }
-  .kn-heading { font-size:1.7rem; }
-  .kn-text { font-size:.96rem; }
-  .participation-card .kn-card-title { font-size:1.3rem; }
-  .footer-links { gap:14px 20px!important; }
-  .google-signin { min-width:100%; }
-}
-.kn-fact { display:block; font:750 .92rem/1.35 "Noto Sans Kannada",sans-serif; color:#fff; }
-.en-fact { display:block; margin-top:2px; font:500 .67rem/1.3 Inter,sans-serif; color:rgba(255,255,255,.67)!important; }
-.satyagraha-visual > small { font-family:"Noto Sans Kannada",sans-serif; font-weight:700; }
-.satyagraha-visual .en-visual { font:500 .68rem/1.3 Inter,sans-serif; opacity:.68; }
-
-/* 8 August 2026 procession and relay Satyagraha launch */
-.movement-launch {
-  margin: 0 0 30px;
-  padding: 30px;
-  border: 1px solid #7d2030;
-  border-radius: 28px;
-  color: #fff;
-  background:
-    radial-gradient(circle at 92% 7%, rgba(238,190,77,.2), transparent 30%),
-    linear-gradient(145deg, var(--red-950), #6f1426 62%, #8f2034);
-  box-shadow: 0 22px 52px rgba(75,13,24,.18);
-}
-.movement-launch-header {
-  display: grid;
-  grid-template-columns: minmax(280px,.86fr) minmax(360px,1.14fr);
-  gap: 44px;
-  align-items: start;
-  margin-bottom: 24px;
-}
-.movement-launch-label {
-  display: inline-flex;
-  margin-bottom: 10px;
-  padding: 6px 11px;
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 999px;
-  color: var(--gold-light);
-  background: rgba(255,255,255,.07);
-  font: 800 .75rem/1.4 "Noto Sans Kannada",sans-serif;
-  letter-spacing: .04em;
-}
-.movement-launch h3 {
-  margin: 0 0 7px;
-  color: #fff;
-  font: 800 clamp(1.7rem,2.8vw,2.5rem)/1.28 "Noto Sans Kannada",sans-serif;
-  letter-spacing: -.02em;
-}
-.movement-launch-en-title {
-  margin: 0;
-  color: rgba(255,255,255,.68);
-  font: 600 .82rem/1.45 Inter,sans-serif;
-}
-.movement-launch-summary .kn-text { margin: 0 0 8px; color: rgba(255,255,255,.94); }
-.movement-launch-summary > p:not(.kn-text) {
-  margin: 0;
-  color: rgba(255,255,255,.68);
-  font: 400 .8rem/1.6 Inter,sans-serif;
-}
-.movement-launch-gallery {
-  display: grid;
-  grid-template-columns: repeat(6,minmax(0,1fr));
-  gap: 13px;
-}
-.movement-launch-photo {
-  grid-column: span 2;
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 18px;
-  background: rgba(255,255,255,.08);
-  box-shadow: 0 10px 26px rgba(28,4,10,.2);
-}
-.movement-launch-photo-featured { grid-column: 1 / -1; }
-.movement-launch-photo:nth-last-child(2),
-.movement-launch-photo:last-child { grid-column: span 3; }
-.movement-launch-photo a {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 3 / 2;
-  overflow: hidden;
-  background: #2d0710;
-  cursor: zoom-in;
-}
-.movement-launch-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: transform .28s ease;
-}
-.movement-launch-photo a:hover img { transform: scale(1.018); }
-.movement-launch-photo figcaption { padding: 12px 13px 13px; }
-.movement-launch-photo figcaption strong {
-  display: block;
-  color: #fff;
-  font: 750 .88rem/1.5 "Noto Sans Kannada",sans-serif;
-}
-.movement-launch-photo figcaption span {
-  display: block;
-  margin-top: 2px;
-  color: rgba(255,255,255,.58);
-  font: 500 .68rem/1.4 Inter,sans-serif;
-}
-.movement-launch-note {
-  margin: 13px 2px 0;
-  color: rgba(255,255,255,.76);
-  font: 600 .76rem/1.5 "Noto Sans Kannada",sans-serif;
-}
-.movement-launch-note span {
-  margin-left: 5px;
-  color: rgba(255,255,255,.5);
-  font: 400 .68rem/1.4 Inter,sans-serif;
-}
-@media (max-width:840px) {
-  .movement-launch-header { grid-template-columns: 1fr; gap: 13px; }
-  .movement-launch-gallery { grid-template-columns: repeat(2,minmax(0,1fr)); }
-  .movement-launch-photo { grid-column: auto; }
-  .movement-launch-photo-featured { grid-column: 1 / -1; }
-  .movement-launch-photo:nth-last-child(2) { grid-column: auto; }
-  .movement-launch-photo:last-child { grid-column: 1 / -1; }
-}
-@media (max-width:580px) {
-  .movement-launch { margin-bottom: 22px; padding: 16px; border-radius: 19px; }
-  .movement-launch-header { margin-bottom: 16px; }
-  .movement-launch h3 { font-size: 1.55rem; }
-  .movement-launch-gallery { grid-template-columns: 1fr; gap: 9px; }
-  .movement-launch-photo-featured,
-  .movement-launch-photo:last-child { grid-column: auto; }
-  .movement-launch-photo { border-radius: 13px; }
-  .movement-launch-photo figcaption { padding: 9px 10px 10px; }
-  .movement-launch-photo figcaption strong { font-size: .78rem; line-height: 1.45; }
-  .movement-launch-photo figcaption span { font-size: .61rem; }
-  .movement-launch-note { margin-top: 10px; }
-}
-
-/* 6 August 2026 public decision-meeting photo record */
-.decision-meeting {
-  margin: 0 0 30px;
-  padding: 28px;
-  border: 1px solid #ead7da;
-  border-radius: 26px;
-  background: linear-gradient(145deg, #fffaf8, #fff 62%);
-  box-shadow: 0 18px 44px rgba(75,13,24,.07);
-}
-.decision-meeting-header {
-  display: grid;
-  grid-template-columns: minmax(280px,.78fr) minmax(360px,1.22fr);
-  gap: 42px;
-  align-items: start;
-  margin-bottom: 22px;
-}
-.decision-meeting-label {
-  display: inline-flex;
-  margin-bottom: 10px;
-  color: var(--red-700);
-  font: 800 .76rem/1.4 "Noto Sans Kannada",sans-serif;
-  letter-spacing: .05em;
-}
-.decision-meeting h3 {
-  margin: 0 0 6px;
-  color: var(--red-950);
-  font: 800 clamp(1.65rem,2.8vw,2.45rem)/1.28 "Noto Sans Kannada",sans-serif;
-  letter-spacing: -.02em;
-}
-.decision-meeting-en-title {
-  margin: 0;
-  color: #887b7e;
-  font: 600 .8rem/1.45 Inter,sans-serif;
-}
-.decision-meeting-summary .kn-text { margin: 0 0 7px; }
-.decision-meeting-summary > p:not(.kn-text) {
-  margin: 0;
-  color: #8c7f82;
-  font: 400 .78rem/1.55 Inter,sans-serif;
-}
-.decision-gallery {
-  display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  gap: 13px;
-}
-.decision-photo {
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid #ead7da;
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 9px 24px rgba(75,13,24,.06);
-}
-.decision-photo-emphasis { border-color: #d7a9b2; }
-.decision-photo a {
-  display: block;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  background: #efe5e7;
-  cursor: zoom-in;
-}
-.decision-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 38%;
-  transition: transform .28s ease;
-}
-.decision-photo a:hover img { transform: scale(1.025); }
-.decision-photo figcaption { padding: 12px 13px 13px; }
-.decision-photo figcaption strong {
-  display: block;
-  color: var(--ink);
-  font: 750 .88rem/1.5 "Noto Sans Kannada",sans-serif;
-}
-.decision-photo figcaption span {
-  display: block;
-  margin-top: 2px;
-  color: #928589;
-  font: 500 .68rem/1.4 Inter,sans-serif;
-}
-.decision-gallery-note {
-  margin: 13px 2px 0;
-  color: #74676a;
-  font: 600 .76rem/1.5 "Noto Sans Kannada",sans-serif;
-}
-.decision-gallery-note span {
-  margin-left: 5px;
-  color: #9b8f91;
-  font: 400 .68rem/1.4 Inter,sans-serif;
-}
-@media (max-width:840px) {
-  .decision-meeting-header { grid-template-columns: 1fr; gap: 12px; }
-  .decision-gallery { grid-template-columns: repeat(2,minmax(0,1fr)); }
-}
-@media (max-width:580px) {
-  .decision-meeting { margin-bottom: 22px; padding: 16px; border-radius: 19px; }
-  .decision-meeting-header { margin-bottom: 15px; }
-  .decision-meeting h3 { font-size: 1.55rem; }
-  .decision-gallery { gap: 8px; }
-  .decision-photo { border-radius: 13px; }
-  .decision-photo figcaption { padding: 9px 9px 10px; }
-  .decision-photo figcaption strong { font-size: .76rem; line-height: 1.45; }
-  .decision-photo figcaption span { font-size: .60rem; }
-  .decision-gallery-note { margin-top: 10px; }
-}
-
-/* =========================================================
-   BILINGUAL SPACING & RHYTHM REFINEMENT
-   ========================================================= */
-/* Give each language layer its own visual breathing room */
-.eyebrow { margin-bottom: 14px; }
-.kn-heading { margin: 0 0 10px; }
-.kn-heading + h2 { margin-top: 0; margin-bottom: 24px; }
-.kn-card-title + h3 { margin-top: 0; margin-bottom: 14px; }
-.kn-text + p:not(.kn-text),
-.kn-text + .en-text { margin-top: 8px; }
-
-/* Split headings: keep Kannada + English body copy together in one column */
-.section-heading.split {
-  align-items: start;
-  column-gap: clamp(42px, 5vw, 78px);
-  row-gap: 18px;
-}
-.section-copy-bilingual {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-top: 5px;
-  max-width: 650px;
-}
-.section-copy-bilingual .kn-text,
-.section-copy-bilingual .en-text { margin: 0; }
-.section-copy-bilingual .kn-text {
-  font-size: 1.03rem;
-  line-height: 1.78;
-}
-.section-copy-bilingual .en-text {
-  color: #8f8285;
-  font: 400 .79rem/1.58 Inter, sans-serif;
-}
-
-/* Section title blocks */
-.section-heading:not(.split) .eyebrow { margin-bottom: 16px; }
-.section-heading:not(.split) .kn-heading { margin-bottom: 9px; }
-.section-heading:not(.split) .kn-heading + h2 { margin-bottom: 26px; }
-.section-heading:not(.split) .kn-text { margin-bottom: 10px; }
-
-/* Updates title: avoid an unnecessarily tall two-line block */
-#updates .section-heading .kn-heading {
-  font-size: clamp(2rem, 3.4vw, 3rem);
-  line-height: 1.18;
-  max-width: 560px;
-}
-
-/* Principles: clear separation between heading and explanatory copy */
-.principles-grid .section-heading { margin-bottom: 0; padding-top: 4px; }
-.principles-grid .section-heading .kn-heading {
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  line-height: 1.18;
-}
-.principles-grid .section-heading > h2 { margin-bottom: 26px; }
-.principles-grid .section-heading .kn-text { margin-bottom: 10px; }
-.principles-list div { padding-top: 22px; padding-bottom: 22px; }
-.principles-list .kn-inline { margin-bottom: 5px; }
-
-/* Dark procession/join sections need larger vertical gaps */
-.section-red .eyebrow,
-.join-section .eyebrow { margin-bottom: 16px; }
-.procession-copy .kn-heading,
-.join-copy .kn-heading { margin-bottom: 10px; }
-.procession-copy .kn-heading + h2,
-.join-copy .kn-heading + h2 { margin-bottom: 26px; }
-.procession-copy .kannada-line { margin-top: 2px; margin-bottom: 24px; }
-.procession-copy .kn-text,
-.join-copy .kn-text { margin-bottom: 10px; }
-.procession-actions,
-.join-actions { margin-top: 30px; }
-
-/* Join block: avoid the headline sitting against its English translation */
-.join-copy .kn-heading {
-  font-size: clamp(2.15rem, 4vw, 3.35rem);
-  line-height: 1.15;
-}
-.join-copy > h2 { margin-bottom: 26px !important; }
-.join-message > strong { margin: 10px 0 14px; }
-
-/* Cards: a little more horizontal room for Kannada */
-.reason-card,
-.status-panel,
-.participation-card,
-.committee-card { padding-left: clamp(22px, 2.2vw, 32px); padding-right: clamp(22px, 2.2vw, 32px); }
-
-@media (max-width:1050px) {
-  .section-copy-bilingual { max-width: 760px; padding-top: 0; }
-  .section-heading.split { row-gap: 4px; }
-}
-
-@media (max-width:580px) {
-  .section-pad { padding-top: 48px; padding-bottom: 48px; }
-  .section-heading { margin-bottom: 26px; }
-  .eyebrow { margin-bottom: 12px; }
-  .kn-heading + h2 { margin-bottom: 20px; }
-  .section-copy-bilingual { gap: 8px; }
-  #updates .section-heading .kn-heading,
-  .principles-grid .section-heading .kn-heading { font-size: 2rem; }
-  .join-copy .kn-heading { font-size: 2.15rem; }
-  .principles-list div { padding: 19px 18px; }
-}
-
-
-/* Compact latest information: designed to fit in the first page view */
-.latest-highlight {
-  padding: 12px 0 18px;
-  background: linear-gradient(180deg, #fff8e8 0%, #ffffff 100%);
-}
-.latest-strip-head {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
-}
-.latest-strip-head h2 {
-  margin: 0;
-  font-size: clamp(1.05rem, 2vw, 1.4rem);
-  line-height: 1.25;
-}
-.latest-highlight-badge {
-  display: inline-block;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #961f33;
-  color: #fff;
-  font-weight: 700;
-  font-size: .78rem;
-  white-space: nowrap;
-}
-.latest-photo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-.latest-photo-item {
-  margin: 0;
-  background: #fff;
-  border: 1px solid rgba(150,31,51,.15);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(56,34,20,.08);
-}
-.latest-photo-item img {
-  display: block;
-  width: 100%;
-  height: clamp(190px, 30vh, 290px);
-  object-fit: cover;
-  object-position: center;
-}
-.latest-photo-item figcaption {
-  padding: 8px 10px;
-  font-weight: 700;
-  font-size: .88rem;
-  line-height: 1.35;
-  text-align: center;
-}
-@media (max-width: 700px) {
-  .latest-strip-head {
-    display: block;
-  }
-  .latest-strip-head h2 {
-    margin-top: 7px;
-  }
-  .latest-photo-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .latest-photo-item img {
-    height: 150px;
-  }
-  .latest-photo-item figcaption {
-    padding: 7px 6px;
-    font-size: .72rem;
+  if (authorised) {
+    $("#signedInEmail").textContent = user.email;
+    $("#authStatus").textContent = "";
+    eyebrow.textContent = "ಅನುಮತಿಸಿದ ಸಮಿತಿ ಪ್ರವೇಶ · Authorised access";
+    title.textContent = "ಸಮಿತಿ ಸಂಪಾದಕ ತೆರೆಯಲಾಗಿದೆ · Editor unlocked";
+    message.textContent = "ನೀವು ಸುರಕ್ಷಿತವಾಗಿ ಲಾಗಿನ್ ಆಗಿದ್ದೀರಿ. ಕೆಳಗಿನ ಸಂಪಾದಕದಿಂದ ಚಿತ್ರ, ವೀಡಿಯೊ ಅಥವಾ ಹೋರಾಟದ ಮಾಹಿತಿ ಪ್ರಕಟಿಸಿ. · You are securely signed in.";
+  } else {
+    $("#signedInEmail").textContent = "";
+    eyebrow.textContent = "ಸಮಿತಿ ಪ್ರವೇಶ · Committee access";
+    title.textContent = "ಸಮಿತಿ ಸಂಪಾದಕ · Committee editor";
+    message.textContent = "ಪೋಸ್ಟ್ ಮಾಡಲು ಅನುಮತಿಸಿದ Google ಖಾತೆಯಿಂದ ಲಾಗಿನ್ ಮಾಡಿ. · Sign in with the authorised Google account.";
   }
 }
 
+async function setupAuthentication() {
+  const button = $("#googleSignInButton");
+  const status = $("#authStatus");
+  const signOutButton = $("#signOutButton");
 
-/* Keep the WhatsApp town-support illustration fully visible */
-img[src*="whatsapp-town-support"] {
-  object-fit: contain !important;
-  object-position: center !important;
-  height: auto !important;
-  max-height: none !important;
-  width: 100% !important;
-}
+  if (!window.firebase || !isFirebaseConfigured()) {
+    button.disabled = true;
+    status.textContent = "Google login setup is incomplete. Add the Firebase configuration in script.js.";
+    return;
+  }
 
+  if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+  firebaseAuth = firebase.auth();
+  const provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({ login_hint: AUTHORIZED_EDITOR_EMAIL, prompt: "select_account" });
 
-/* First-view relay hunger Satyagraha feature */
-.first-view-satyagraha {
-  padding: 18px 0 14px;
-  background: #fff;
-}
-.first-view-satyagraha-card {
-  display: grid;
-  grid-template-columns: minmax(420px, 1.15fr) minmax(0, 1fr);
-  gap: 28px;
-  align-items: stretch;
-  padding: 18px;
-  border: 1px solid rgba(150,31,51,.16);
-  border-radius: 20px;
-  background: linear-gradient(135deg, #fffaf0 0%, #ffffff 72%);
-  box-shadow: 0 10px 28px rgba(56,34,20,.09);
-}
-.first-view-satyagraha-image {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 360px;
-  background: #f8f5ef;
-  border-radius: 14px;
-  overflow: hidden;
-}
-.first-view-satyagraha-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-height: 430px;
-  object-fit: contain;
-  object-position: center;
-  padding: 8px;
-}
-.first-view-satyagraha-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8px 8px 8px 0;
-}
-.first-view-kicker {
-  display: inline-block;
-  margin-bottom: 10px;
-  font-weight: 800;
-  color: #961f33;
-  font-size: 1rem;
-}
-.first-view-satyagraha-copy h2 {
-  margin: 0 0 14px;
-  line-height: 1.28;
-  font-size: clamp(1.55rem, 2vw, 2.15rem);
-}
-.first-view-satyagraha-copy p {
-  margin: 9px 0;
-  line-height: 1.62;
-  font-size: 1rem;
-}
-.first-view-link {
-  display: inline-block;
-  margin-top: 14px;
-  font-weight: 800;
-  font-size: 1rem;
-}
-@media (max-width: 980px) {
-  .first-view-satyagraha-card {
-    grid-template-columns: minmax(340px, 1fr) minmax(0, 1fr);
-    gap: 20px;
-  }
-  .first-view-satyagraha-image {
-    min-height: 320px;
-  }
-}
-@media (max-width: 760px) {
-  .first-view-satyagraha-card {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 12px;
-  }
-  .first-view-satyagraha-image {
-    min-height: 0;
-  }
-  .first-view-satyagraha-image img {
-    width: 100%;
-    height: auto;
-    max-height: none;
-    padding: 0;
-  }
-  .first-view-satyagraha-copy {
-    padding: 4px 2px 2px;
-  }
-  .first-view-satyagraha-copy h2 {
-    font-size: 1.25rem;
-  }
-  .first-view-satyagraha-copy p {
-    font-size: .92rem;
-  }
+  firebaseAuth.onAuthStateChanged(async user => {
+    if (user && !isAuthorisedEmail(user.email)) {
+      await firebaseAuth.signOut();
+      updateEditorAccess(null);
+      status.textContent = "Access denied. Sign in only with shiddu@gmail.com.";
+      return;
+    }
+    updateEditorAccess(user || null);
+  });
+
+  button.addEventListener("click", async () => {
+    button.disabled = true;
+    status.textContent = "Opening Google sign-in…";
+    try {
+      await firebaseAuth.signInWithPopup(provider);
+    } catch (error) {
+      if (error.code === "auth/popup-blocked" || error.code === "auth/cancelled-popup-request") {
+        await firebaseAuth.signInWithRedirect(provider);
+      } else if (error.code === "auth/popup-closed-by-user") {
+        status.textContent = "Google sign-in was cancelled.";
+      } else {
+        status.textContent = `Could not sign in: ${error.message}`;
+      }
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  signOutButton.addEventListener("click", async () => {
+    await firebaseAuth.signOut();
+    updateEditorAccess(null);
+    status.textContent = "Signed out.";
+  });
 }
 
-/* 12 Aug updates */
-.today-updates{padding:8px 0 14px;background:#fff}.today-updates-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}.today-updates-head h2{margin:0;font-size:clamp(1.05rem,2vw,1.35rem)}.today-updates-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:12px}.today-update-card{text-decoration:none;color:inherit;background:#fff;border:1px solid rgba(150,31,51,.16);border-radius:14px;overflow:hidden;min-height:150px;display:flex;align-items:center;box-shadow:0 6px 18px rgba(56,34,20,.08)}.today-update-card img{width:42%;height:150px;object-fit:cover}.today-update-card>span:not(.today-video-icon){padding:14px;font-weight:800}.today-video-card{flex-direction:column;justify-content:center;text-align:center;padding:18px}.today-video-icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#961f33;color:#fff;font-size:1.25rem;margin-bottom:8px}.today-video-card small{margin-top:4px;opacity:.75}@media(max-width:700px){.today-updates-head{display:block}.today-updates-head h2{margin-top:6px}.today-updates-grid{grid-template-columns:1fr 1fr;gap:8px}.today-update-card{min-height:128px;flex-direction:column}.today-update-card img{width:100%;height:92px}.today-update-card>span:not(.today-video-icon){padding:8px;font-size:.78rem}.today-video-card{padding:10px}.today-video-icon{width:38px;height:38px;font-size:1rem}.today-video-card small{font-size:.7rem}}
+function openDatabase() {
+  return new Promise((resolve, reject) => {
+    if (!("indexedDB" in window)) {
+      reject(new Error("This browser does not support local post storage."));
+      return;
+    }
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: "id" });
+      }
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function getLocalPosts() {
+  const db = await openDatabase();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(STORE_NAME, "readonly");
+    const request = transaction.objectStore(STORE_NAME).getAll();
+    request.onsuccess = () => resolve(request.result || []);
+    request.onerror = () => reject(request.error);
+    transaction.oncomplete = () => db.close();
+  });
+}
+
+async function saveLocalPost(post) {
+  const db = await openDatabase();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(STORE_NAME, "readwrite");
+    transaction.objectStore(STORE_NAME).put(post);
+    transaction.oncomplete = () => { db.close(); resolve(); };
+    transaction.onerror = () => { db.close(); reject(transaction.error); };
+  });
+}
+
+async function removeLocalPost(id) {
+  const db = await openDatabase();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(STORE_NAME, "readwrite");
+    transaction.objectStore(STORE_NAME).delete(id);
+    transaction.oncomplete = () => { db.close(); resolve(); };
+    transaction.onerror = () => { db.close(); reject(transaction.error); };
+  });
+}
+
+function formatDate(value) {
+  if (!value) return "Date not added";
+  const date = new Date(`${value}T12:00:00`);
+  return new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "short", year: "numeric" }).format(date);
+}
+
+function safeExternalUrl(value) {
+  if (!value) return "";
+  try {
+    const url = new URL(value);
+    return ["http:", "https:"].includes(url.protocol) ? url.href : "";
+  } catch {
+    return "";
+  }
+}
+
+function allPosts() {
+  return [...localPosts, ...siteData.initialPosts].sort((a, b) => {
+    const dateDiff = new Date(b.date) - new Date(a.date);
+    if (dateDiff !== 0) return dateDiff;
+    return Number(b.createdAt || 0) - Number(a.createdAt || 0);
+  });
+}
+
+function getPostMedia(post, forModal = false) {
+  if (post.mediaBlob instanceof Blob) {
+    const objectUrl = URL.createObjectURL(post.mediaBlob);
+    if (forModal) {
+      if (modalObjectUrl) URL.revokeObjectURL(modalObjectUrl);
+      modalObjectUrl = objectUrl;
+    }
+    return objectUrl;
+  }
+  return post.mediaUrl || "";
+}
+
+function createMediaElement(post, forModal = false) {
+  const wrapper = document.createElement("div");
+  wrapper.className = forModal ? "" : "post-media";
+  const source = getPostMedia(post, forModal);
+
+  if (source && post.mediaKind === "video") {
+    const video = document.createElement("video");
+    video.src = source;
+    video.preload = "metadata";
+    video.controls = forModal;
+    video.playsInline = true;
+    wrapper.append(video);
+    if (!forModal) {
+      const badge = document.createElement("span");
+      badge.className = "video-badge";
+      badge.textContent = "▶";
+      wrapper.append(badge);
+    }
+  } else if (source) {
+    const image = document.createElement("img");
+    image.src = source;
+    image.alt = post.title;
+    wrapper.append(image);
+  } else if (!forModal) {
+    const mark = document.createElement("span");
+    mark.className = "text-post-mark";
+    mark.textContent = "ಪ್ರಜಾ";
+    wrapper.append(mark);
+  }
+  return wrapper;
+}
+
+function renderFilters() {
+  const types = ["All", ...new Set(allPosts().map(post => post.type))];
+  const filterLabels = { All: "All · ಎಲ್ಲ", Announcement: "Announcement · ಪ್ರಕಟಣೆ", Photo: "Photo · ಚಿತ್ರ", Video: "Video · ವೀಡಿಯೊ", "Paper Cut": "Paper Cut · ಪತ್ರಿಕಾ ಕತ್ತರಣೆ", Instagram: "Instagram", Facebook: "Facebook" };
+  const filter = $("#updatesFilter");
+  filter.replaceChildren();
+  types.forEach(type => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `filter-btn${activeFilter === type ? " active" : ""}`;
+    button.textContent = filterLabels[type] || type;
+    button.addEventListener("click", () => {
+      activeFilter = type;
+      renderFilters();
+      renderPosts();
+    });
+    filter.append(button);
+  });
+}
+
+function renderPosts() {
+  const feed = $("#updatesFeed");
+  const posts = activeFilter === "All" ? allPosts() : allPosts().filter(post => post.type === activeFilter);
+  feed.replaceChildren();
+  $("#emptyState").hidden = posts.length !== 0;
+
+  posts.forEach(post => {
+    const card = document.createElement("article");
+    card.className = "post-card reveal visible";
+
+    if (post.local) {
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.className = "delete-post";
+      deleteButton.setAttribute("aria-label", `Delete ${post.title}`);
+      deleteButton.textContent = "×";
+      deleteButton.addEventListener("click", async event => {
+        event.stopPropagation();
+        const confirmed = window.confirm("Delete this locally saved post?");
+        if (!confirmed) return;
+        await removeLocalPost(post.id);
+        localPosts = localPosts.filter(item => item.id !== post.id);
+        renderFilters();
+        renderPosts();
+      });
+      card.append(deleteButton);
+    }
+
+    card.append(createMediaElement(post));
+
+    const body = document.createElement("div");
+    body.className = "post-body";
+
+    const meta = document.createElement("div");
+    meta.className = "post-meta";
+    const type = document.createElement("span");
+    type.textContent = post.type;
+    const date = document.createElement("time");
+    date.dateTime = post.date;
+    date.textContent = formatDate(post.date);
+    meta.append(type, date);
+
+    const title = document.createElement("h3");
+    title.textContent = post.title;
+    const titleKn = document.createElement("div");
+    titleKn.className = "post-title-kn";
+    titleKn.textContent = post.titleKn || "";
+    titleKn.hidden = !post.titleKn;
+    const text = document.createElement("p");
+    text.textContent = post.text;
+    const textKn = document.createElement("p");
+    textKn.className = "post-text-kn";
+    textKn.textContent = post.textKn || "";
+    textKn.hidden = !post.textKn;
+
+    const actions = document.createElement("div");
+    actions.className = "post-actions";
+    const readMore = document.createElement("span");
+    readMore.className = "read-more";
+    readMore.textContent = post.mediaKind === "video" ? "Watch video · ವೀಡಿಯೊ ನೋಡಿ →" : "View update · ಮಾಹಿತಿ ನೋಡಿ →";
+    actions.append(readMore);
+
+    body.append(meta, titleKn, title, textKn, text, actions);
+    card.append(body);
+    card.addEventListener("click", () => openPostModal(post));
+    feed.append(card);
+  });
+}
+
+function openPostModal(post) {
+  const modalMedia = $("#modalMedia");
+  modalMedia.replaceChildren();
+  const media = createMediaElement(post, true);
+  while (media.firstChild) modalMedia.append(media.firstChild);
+  $("#modalType").textContent = post.type;
+  $("#modalDate").textContent = formatDate(post.date);
+  $("#modalDate").dateTime = post.date;
+  $("#modalTitle").textContent = post.title;
+  const modalTitle = $("#modalTitle");
+  let modalTitleKn = $("#modalTitleKn");
+  if (!modalTitleKn) {
+    modalTitleKn = document.createElement("div");
+    modalTitleKn.id = "modalTitleKn";
+    modalTitleKn.className = "post-title-kn";
+    modalTitle.insertAdjacentElement("beforebegin", modalTitleKn);
+  }
+  modalTitleKn.textContent = post.titleKn || "";
+  modalTitleKn.hidden = !post.titleKn;
+  $("#modalText").textContent = post.text;
+  const modalText = $("#modalText");
+  let modalTextKn = $("#modalTextKn");
+  if (!modalTextKn) {
+    modalTextKn = document.createElement("p");
+    modalTextKn.id = "modalTextKn";
+    modalTextKn.className = "post-text-kn";
+    modalText.insertAdjacentElement("beforebegin", modalTextKn);
+  }
+  modalTextKn.textContent = post.textKn || "";
+  modalTextKn.hidden = !post.textKn;
+  const link = safeExternalUrl(post.link);
+  $("#modalLink").href = link || "#";
+  $("#modalLink").hidden = !link;
+  $("#postModal").showModal();
+}
+
+function resetPreview() {
+  if (previewUrl) URL.revokeObjectURL(previewUrl);
+  previewUrl = "";
+  $("#uploadPreview").replaceChildren();
+  $("#uploadPreview").hidden = true;
+}
+
+function setupMediaPreview() {
+  $("#postMedia").addEventListener("change", event => {
+    resetPreview();
+    const file = event.target.files[0];
+    if (!file) return;
+    const preview = $("#uploadPreview");
+    preview.hidden = false;
+    previewUrl = URL.createObjectURL(file);
+    let media;
+    if (file.type.startsWith("video/")) {
+      media = document.createElement("video");
+      media.controls = true;
+    } else {
+      media = document.createElement("img");
+      media.alt = "Selected upload preview";
+    }
+    media.src = previewUrl;
+    const caption = document.createElement("small");
+    caption.textContent = `${file.name} · ${(file.size / 1024 / 1024).toFixed(1)} MB`;
+    preview.append(media, caption);
+  });
+}
+
+function setupPostForm() {
+  const form = $("#postForm");
+  const dateInput = $("#postDate");
+  dateInput.value = new Date().toISOString().slice(0, 10);
+
+  form.addEventListener("reset", () => {
+    window.setTimeout(() => {
+      dateInput.value = new Date().toISOString().slice(0, 10);
+      resetPreview();
+      $("#postStatus").textContent = "";
+    }, 0);
+  });
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    const status = $("#postStatus");
+    if (!authenticatedUser || !isAuthorisedEmail(authenticatedUser.email)) {
+      status.textContent = "Please sign in with the authorised committee email before publishing.";
+      return;
+    }
+    const file = $("#postMedia").files[0];
+    if (file && file.size > 80 * 1024 * 1024) {
+      status.textContent = "Please use a photo or video smaller than 80 MB.";
+      return;
+    }
+
+    const post = {
+      id: `local-${Date.now()}`,
+      type: $("#postType").value,
+      date: $("#postDate").value,
+      title: $("#postTitle").value.trim(),
+      text: $("#postText").value.trim(),
+      link: safeExternalUrl($("#postLink").value.trim()),
+      mediaKind: file ? (file.type.startsWith("video/") ? "video" : "image") : "none",
+      mediaBlob: file || null,
+      mediaName: file?.name || "",
+      createdAt: Date.now(),
+      local: true
+    };
+
+    try {
+      status.textContent = "Saving…";
+      await saveLocalPost(post);
+      localPosts.unshift(post);
+      activeFilter = "All";
+      renderFilters();
+      renderPosts();
+      form.reset();
+      status.textContent = "Update published in this browser.";
+      $("#updatesFeed").scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (error) {
+      console.error(error);
+      status.textContent = "Could not save the post in this browser.";
+    }
+  });
+}
+
+function setupNavigation() {
+  const toggle = $(".menu-toggle");
+  const nav = $(".main-nav");
+  toggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+  $$(".main-nav a").forEach(link => link.addEventListener("click", () => {
+    nav.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+  }));
+}
+
+function setupReveal() {
+  if (!("IntersectionObserver" in window)) {
+    $$(".reveal").forEach(element => element.classList.add("visible"));
+    return;
+  }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .1 });
+  $$(".reveal").forEach(element => observer.observe(element));
+}
+
+function setupLinks() {
+  const shareText = encodeURIComponent("ಬನಹಟ್ಟಿಗೆ ಪ್ರಜಾ ಸೌಧ ಬೇಕು. ಶನಿವಾರ, 8 ಆಗಸ್ಟ್ 2026: ಬೃಹತ್ ಮೆರವಣಿಗೆಯಲ್ಲಿ ಭಾಗವಹಿಸಿ. Banahatti needs its Praja Soudha. Please follow official committee announcements.");
+  $("#shareMovement").href = `https://wa.me/?text=${shareText}`;
+  $("#joinWhatsApp").href = `https://wa.me/${siteData.whatsappNumber}?text=${encodeURIComponent("I would like to participate in the Banahatti Praja Soudha movement. ಬನಹಟ್ಟಿ ಪ್ರಜಾ ಸೌಧ ಹೋರಾಟದಲ್ಲಿ ಭಾಗವಹಿಸಲು ಇಷ್ಟಪಡುತ್ತೇನೆ. ದಯವಿಟ್ಟು ಅಧಿಕೃತ ಮೆರವಣಿಗೆ ಮತ್ತು ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಮಾಹಿತಿಯನ್ನು ಹಂಚಿ.")}`;
+  $("#joinWhatsApp").target = "_blank";
+  $("#joinWhatsApp").rel = "noopener";
+  $$("a[href='tel:+919999999999']").forEach(link => { link.href = `tel:${siteData.phoneNumber}`; });
+}
+
+async function init() {
+  $("#tickerText").textContent = siteData.ticker;
+  $("#year").textContent = new Date().getFullYear();
+  setupNavigation();
+  setupReveal();
+  setupLinks();
+  setupMediaPreview();
+  setupPostForm();
+  await setupCommitteeAccessTrigger();
+  setupAuthentication();
+
+  try {
+    localPosts = (await getLocalPosts()).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
+  } catch (error) {
+    console.warn(error);
+    $("#postStatus").textContent = "Local upload storage is unavailable in this browser.";
+  }
+
+  renderFilters();
+  renderPosts();
+
+  $(".modal-close").addEventListener("click", () => $("#postModal").close());
+  $("#postModal").addEventListener("click", event => {
+    if (event.target === $("#postModal")) $("#postModal").close();
+  });
+  $("#postModal").addEventListener("close", () => {
+    if (modalObjectUrl) {
+      URL.revokeObjectURL(modalObjectUrl);
+      modalObjectUrl = "";
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", init);
