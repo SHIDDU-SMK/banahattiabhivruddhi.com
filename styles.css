@@ -1420,3 +1420,122 @@ img[src*="whatsapp-town-support"] {
   .modal-slide-prev { left: 8px; }
   .modal-slide-next { right: 8px; }
 }
+
+
+/* =========================================================
+   ROBUST POPUP SLIDESHOW — FULL IMAGE, NO CROPPING
+   ========================================================= */
+.post-modal {
+  width: min(980px, calc(100vw - 24px));
+  max-height: 94dvh;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.modal-media {
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+  display: block !important;
+  background: #171113;
+}
+
+.modal-media > .modal-slideshow {
+  width: 100%;
+}
+
+.modal-slideshow-stage {
+  position: relative;
+  width: 100%;
+  height: min(62dvh, 650px) !important;
+  min-height: 360px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #171113;
+}
+
+.modal-slideshow-stage .modal-slide-image,
+.modal-media .modal-slideshow-stage img.modal-slide-image {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  margin: 0 auto !important;
+}
+
+.modal-slide-nav {
+  z-index: 10;
+}
+
+.modal-slide-counter {
+  z-index: 10;
+}
+
+.modal-slide-dots {
+  position: relative;
+  z-index: 4;
+}
+
+/* Keep the descriptive copy compact so the photograph remains the focus. */
+.modal-copy {
+  padding: 18px 24px 22px;
+}
+.modal-copy h3 {
+  margin: 8px 0 6px;
+}
+.modal-copy p {
+  margin: 7px 0;
+}
+
+/* Portrait newspaper cuttings should still fit fully inside the popup. */
+@media (max-width: 700px) {
+  .post-modal {
+    width: calc(100vw - 12px);
+    max-height: 96dvh;
+    border-radius: 16px;
+  }
+
+  .modal-slideshow-stage {
+    height: 58dvh !important;
+    min-height: 300px;
+  }
+
+  .modal-slide-nav {
+    width: 42px;
+    height: 42px;
+    font-size: 1.7rem;
+  }
+
+  .modal-copy {
+    padding: 14px 16px 18px;
+  }
+}
+
+@media (max-height: 650px) {
+  .modal-slideshow-stage {
+    height: 52dvh !important;
+    min-height: 250px;
+  }
+}
+
+.modal-slide-open {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  z-index: 10;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.68);
+  color: #fff;
+  text-decoration: none;
+  font: 700 .75rem/1.2 Inter, sans-serif;
+}
+.modal-slide-open:hover,
+.modal-slide-open:focus-visible {
+  background: rgba(150,31,51,.94);
+}

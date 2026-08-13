@@ -669,6 +669,13 @@ function createModalSlideshow(post) {
   const counter = document.createElement("div");
   counter.className = "modal-slide-counter";
 
+  const openFull = document.createElement("a");
+  openFull.className = "modal-slide-open";
+  openFull.target = "_blank";
+  openFull.rel = "noopener noreferrer";
+  openFull.textContent = "↗ Full image";
+  openFull.setAttribute("aria-label", "Open current image full size");
+
   const dots = document.createElement("div");
   dots.className = "modal-slide-dots";
   dots.setAttribute("aria-label", "Photo navigation");
@@ -680,6 +687,7 @@ function createModalSlideshow(post) {
     current = (index + sources.length) % sources.length;
     image.src = sources[current];
     image.alt = `${post.title} — ${current + 1} of ${sources.length}`;
+    openFull.href = sources[current];
     counter.textContent = `${current + 1} / ${sources.length}`;
     dots.querySelectorAll("button").forEach((dot, dotIndex) => {
       dot.classList.toggle("active", dotIndex === current);
@@ -720,7 +728,7 @@ function createModalSlideshow(post) {
     }
   }, { passive: true });
 
-  stage.append(image, previous, next, counter);
+  stage.append(image, previous, next, counter, openFull);
   slideshow.append(stage, dots);
 
   modalGalleryController = {
