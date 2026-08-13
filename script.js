@@ -55,7 +55,8 @@ const siteData = {
       mediaKind: "gallery",
       mediaUrls: [
         "assets/news-2026-08-13-02.jpeg",
-        "assets/news-2026-08-13-06.jpeg"
+        "assets/news-2026-08-13-06.jpeg",
+        "assets/news-2026-08-13-07.jpeg"
       ],
       mediaUrl: "assets/news-2026-08-13-02.jpeg",
       link: "",
@@ -641,9 +642,30 @@ function getPostMedia(post, forModal = false) {
 
 function createMediaElement(post, forModal = false) {
   const wrapper = document.createElement("div");
+  const gallerySources = post.mediaKind === "gallery" && Array.isArray(post.mediaUrls)
+    ? post.mediaUrls.filter(Boolean)
+    : [];
+
+  if (gallerySources.length) {
+    wrapper.className = forModal ? "modal-gallery" : "post-media post-gallery";
+    gallerySources.forEach((src, index) => {
+      const image = document.createElement("img");
+      image.src = src;
+      image.alt = `${post.title} — ${index + 1} of ${gallerySources.length}`;
+      image.loading = "lazy";
+      wrapper.append(image);
+    });
+    if (!forModal && gallerySources.length > 1) {
+      const count = document.createElement("span");
+      count.className = "gallery-count";
+      count.textContent = `${gallerySources.length} photos`;
+      wrapper.append(count);
+    }
+    return wrapper;
+  }
+
   wrapper.className = forModal ? "" : "post-media";
   const source = getPostMedia(post, forModal);
-
   if (source && post.mediaKind === "video") {
     const video = document.createElement("video");
     video.src = source;
