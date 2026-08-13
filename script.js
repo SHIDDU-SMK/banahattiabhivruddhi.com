@@ -27,6 +27,26 @@ const siteData = {
   ticker: "8 ಆಗಸ್ಟ್ 2026 · ಬನಹಟ್ಟಿಯಲ್ಲಿ ಬೃಹತ್ ಮೆರವಣಿಗೆ ನಡೆಯಿತು; ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಚಾಲನೆ ನೀಡಲಾಯಿತು. · 8 August 2026 · Banahatti's mega procession was held and the relay hunger Satyagraha began at Chennamma Circle.",
   initialPosts: [
     {
+      id: "news-coverage-2026-08-13",
+      type: "Paper Cut",
+      date: "2026-08-13",
+      title: "13 August 2026 newspaper coverage: Praja Soudha movement",
+      titleKn: "13 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ",
+      text: "Selected newspaper coverage from 13 August 2026 on the continuing Praja Soudha movement and public support in Banahatti.",
+      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ಮುಂದುವರಿದಿರುವ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಬೆಂಬಲದ ಕುರಿತು 13 ಆಗಸ್ಟ್ 2026ರ ಆಯ್ದ ಪತ್ರಿಕಾ ವರದಿಗಳು.",
+      mediaKind: "gallery",
+      mediaUrls: [
+        "assets/news-2026-08-13-01.png",
+        "assets/news-2026-08-13-02.jpeg",
+        "assets/news-2026-08-13-03.png",
+        "assets/news-2026-08-13-04.png",
+        "assets/news-2026-08-13-05.png"
+      ],
+      mediaUrl: "assets/news-2026-08-13-01.png",
+      link: "",
+      local: false
+    },
+    {
       id: "news-coverage-2026-08-12",
       type: "Paper Cut",
       date: "2026-08-12",
@@ -42,7 +62,12 @@ const siteData = {
         "assets/news-2026-08-12-04.jpeg",
         "assets/news-2026-08-12-05.jpeg",
         "assets/news-2026-08-12-06.png",
-        "assets/news-2026-08-12-07.jpeg"
+        "assets/news-2026-08-12-07.jpeg",
+        "assets/news-2026-08-12-08.jpeg",
+        "assets/news-2026-08-12-09.jpeg",
+        "assets/news-2026-08-12-10.jpeg",
+        "assets/news-2026-08-12-11.jpeg",
+        "assets/news-2026-08-12-12.jpeg"
       ],
       mediaUrl: "assets/news-2026-08-12-01.jpeg",
       link: "",
@@ -54,8 +79,8 @@ const siteData = {
       date: "2026-08-12",
       title: "Latest Praja Soudha movement video",
       titleKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಇತ್ತೀಚಿನ ವಿಡಿಯೋ",
-      text: "Watch the latest video and subscribe for upcoming news.",
-      textKn: "ಮುಂದಿನ ಎಲ್ಲಾ ಸುದ್ದಿಗಳಿಗಾಗಿ ಈ ವಿಡಿಯೋವನ್ನು ವೀಕ್ಷಿಸಿ ಮತ್ತು ಕೂಡಲೇ ಸಬ್ಸ್ಕ್ರೈಬ್ ಮಾಡಿ.",
+      text: "Watch the latest Praja Soudha movement video.",
+      textKn: "ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಇತ್ತೀಚಿನ ವಿಡಿಯೋವನ್ನು ವೀಕ್ಷಿಸಿ.",
       mediaKind: "video",
       mediaUrl: "https://youtu.be/T2xHaZty_p4?si=JPJJIVtEQRoEr22l",
       link: "https://youtu.be/T2xHaZty_p4?si=JPJJIVtEQRoEr22l",
