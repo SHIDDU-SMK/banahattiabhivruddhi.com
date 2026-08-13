@@ -119,12 +119,10 @@ const siteData = {
         "assets/news-2026-08-12-04.jpeg",
         "assets/news-2026-08-12-05.jpeg",
         "assets/news-2026-08-12-06.png",
-        "assets/news-2026-08-12-07.jpeg",
         "assets/news-2026-08-12-08.jpeg",
         "assets/news-2026-08-12-09.jpeg",
         "assets/news-2026-08-12-10.jpeg",
         "assets/news-2026-08-12-11.jpeg",
-        "assets/news-2026-08-12-12.jpeg"
       ],
       mediaUrl: "assets/news-2026-08-12-01.jpeg",
       link: "",
