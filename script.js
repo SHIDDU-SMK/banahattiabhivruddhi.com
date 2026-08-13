@@ -27,20 +27,20 @@ const siteData = {
   ticker: "8 ಆಗಸ್ಟ್ 2026 · ಬನಹಟ್ಟಿಯಲ್ಲಿ ಬೃಹತ್ ಮೆರವಣಿಗೆ ನಡೆಯಿತು; ಚೆನ್ನಮ್ಮ ವೃತ್ತದಲ್ಲಿ ಸರದಿ ಉಪವಾಸ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಚಾಲನೆ ನೀಡಲಾಯಿತು. · 8 August 2026 · Banahatti's mega procession was held and the relay hunger Satyagraha began at Chennamma Circle.",
   initialPosts: [
     {
-      id: "saradi-auto-banagar-2026-08-13",
+      id: "saradi-satyagraha-day-6-auto-banagar-2026-08-13",
       type: "Satyagraha",
       date: "2026-08-13",
-      title: "Today's relay Satyagraha — Auto Drivers and Banagar Samaj",
+      title: "Today's relay Satyagraha — support from auto drivers and Banagar Samaj",
       titleKn: "ಇಂದಿನ ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಆಟೋ ಚಾಲಕರು ಮತ್ತು ಬಣಗಾರ ಸಮಾಜದ ಬೆಂಬಲ",
-      text: "Auto drivers and members of the Banagar Samaj participated in today's relay Satyagraha and extended their support to the Praja Soudha movement in Banahatti.",
+      text: "Auto drivers and members of the Banagar Samaj participated in today's relay Satyagraha and extended their support to the ongoing Praja Soudha movement in Banahatti.",
       textKn: "ಇಂದಿನ ಸರದಿ ಸತ್ಯಾಗ್ರಹದಲ್ಲಿ ಆಟೋ ಚಾಲಕರು ಮತ್ತು ಬಣಗಾರ ಸಮಾಜದವರು ಭಾಗವಹಿಸಿ ಬನಹಟ್ಟಿಯಲ್ಲಿ ನಡೆಯುತ್ತಿರುವ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣ ಹೋರಾಟಕ್ಕೆ ಬೆಂಬಲ ಸೂಚಿಸಿದರು.",
       mediaKind: "gallery",
       mediaUrls: [
-        "assets/saradi-satyagraha-auto-banagar-2026-08-13-01.jpeg",
-        "assets/saradi-satyagraha-auto-banagar-2026-08-13-02.jpeg",
-        "assets/saradi-satyagraha-auto-banagar-2026-08-13-03.png"
+        "assets/saradi-satyagraha-day-6-auto-banagar-2026-08-13-01.jpeg",
+        "assets/saradi-satyagraha-day-6-auto-banagar-2026-08-13-02.jpeg",
+        "assets/saradi-satyagraha-day-6-auto-banagar-2026-08-13-03.png"
       ],
-      mediaUrl: "assets/saradi-satyagraha-auto-banagar-2026-08-13-01.jpeg",
+      mediaUrl: "assets/saradi-satyagraha-day-6-auto-banagar-2026-08-13-01.jpeg",
       link: "#satyagraha",
       local: false
     },
@@ -54,12 +54,14 @@ const siteData = {
       textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ಮುಂದುವರಿದಿರುವ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಬೆಂಬಲದ ಕುರಿತು 13 ಆಗಸ್ಟ್ 2026ರ ಆಯ್ದ ಪತ್ರಿಕಾ ವರದಿಗಳು.",
       mediaKind: "gallery",
       mediaUrls: [
+        "assets/news-2026-08-13-01.png",
         "assets/news-2026-08-13-02.jpeg",
         "assets/news-2026-08-13-03.png",
         "assets/news-2026-08-13-04.png",
-        "assets/news-2026-08-13-05.png"
+        "assets/news-2026-08-13-05.png",
+        "assets/news-2026-08-13-06.jpeg"
       ],
-      mediaUrl: "assets/news-2026-08-13-02.jpeg",
+      mediaUrl: "assets/news-2026-08-13-01.png",
       link: "",
       local: false
     },
