@@ -54,7 +54,6 @@ const siteData = {
       textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ಮುಂದುವರಿದಿರುವ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಬೆಂಬಲದ ಕುರಿತು 13 ಆಗಸ್ಟ್ 2026ರ ಆಯ್ದ ಪತ್ರಿಕಾ ವರದಿಗಳು.",
       mediaKind: "gallery",
       mediaUrls: [
-        "assets/news-2026-08-13-01.png",
         "assets/news-2026-08-13-02.jpeg",
         "assets/news-2026-08-13-03.png",
         "assets/news-2026-08-13-04.png",
