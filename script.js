@@ -438,6 +438,7 @@ let activeFilter = "All";
 let localPosts = [];
 let previewUrl = "";
 let modalObjectUrl = "";
+let modalGalleryController = null;
 let firebaseAuth = null;
 let authenticatedUser = null;
 
@@ -640,6 +641,97 @@ function getPostMedia(post, forModal = false) {
   return post.mediaUrl || "";
 }
 
+
+function createModalSlideshow(post) {
+  const sources = Array.isArray(post.mediaUrls) ? post.mediaUrls.filter(Boolean) : [];
+  const slideshow = document.createElement("div");
+  slideshow.className = "modal-slideshow";
+
+  const stage = document.createElement("div");
+  stage.className = "modal-slideshow-stage";
+
+  const image = document.createElement("img");
+  image.className = "modal-slide-image";
+  image.loading = "eager";
+
+  const previous = document.createElement("button");
+  previous.type = "button";
+  previous.className = "modal-slide-nav modal-slide-prev";
+  previous.setAttribute("aria-label", "Previous photo");
+  previous.textContent = "‹";
+
+  const next = document.createElement("button");
+  next.type = "button";
+  next.className = "modal-slide-nav modal-slide-next";
+  next.setAttribute("aria-label", "Next photo");
+  next.textContent = "›";
+
+  const counter = document.createElement("div");
+  counter.className = "modal-slide-counter";
+
+  const dots = document.createElement("div");
+  dots.className = "modal-slide-dots";
+  dots.setAttribute("aria-label", "Photo navigation");
+
+  let current = 0;
+
+  function showSlide(index) {
+    if (!sources.length) return;
+    current = (index + sources.length) % sources.length;
+    image.src = sources[current];
+    image.alt = `${post.title} — ${current + 1} of ${sources.length}`;
+    counter.textContent = `${current + 1} / ${sources.length}`;
+    dots.querySelectorAll("button").forEach((dot, dotIndex) => {
+      dot.classList.toggle("active", dotIndex === current);
+      dot.setAttribute("aria-current", dotIndex === current ? "true" : "false");
+    });
+  }
+
+  sources.forEach((src, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "modal-slide-dot";
+    dot.setAttribute("aria-label", `Show photo ${index + 1}`);
+    dot.addEventListener("click", event => {
+      event.stopPropagation();
+      showSlide(index);
+    });
+    dots.append(dot);
+  });
+
+  previous.addEventListener("click", event => {
+    event.stopPropagation();
+    showSlide(current - 1);
+  });
+
+  next.addEventListener("click", event => {
+    event.stopPropagation();
+    showSlide(current + 1);
+  });
+
+  let touchStartX = 0;
+  stage.addEventListener("touchstart", event => {
+    touchStartX = event.changedTouches[0].clientX;
+  }, { passive: true });
+  stage.addEventListener("touchend", event => {
+    const diff = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(diff) > 45) {
+      showSlide(diff < 0 ? current + 1 : current - 1);
+    }
+  }, { passive: true });
+
+  stage.append(image, previous, next, counter);
+  slideshow.append(stage, dots);
+
+  modalGalleryController = {
+    next: () => showSlide(current + 1),
+    previous: () => showSlide(current - 1)
+  };
+
+  showSlide(0);
+  return slideshow;
+}
+
 function createMediaElement(post, forModal = false) {
   const wrapper = document.createElement("div");
   const gallerySources = post.mediaKind === "gallery" && Array.isArray(post.mediaUrls)
@@ -647,7 +739,10 @@ function createMediaElement(post, forModal = false) {
     : [];
 
   if (gallerySources.length) {
-    wrapper.className = forModal ? "modal-gallery" : "post-media post-gallery";
+    if (forModal) {
+      return createModalSlideshow(post);
+    }
+    wrapper.className = "post-media post-gallery";
     gallerySources.forEach((src, index) => {
       const image = document.createElement("img");
       image.src = src;
@@ -655,7 +750,7 @@ function createMediaElement(post, forModal = false) {
       image.loading = "lazy";
       wrapper.append(image);
     });
-    if (!forModal && gallerySources.length > 1) {
+    if (gallerySources.length > 1) {
       const count = document.createElement("span");
       count.className = "gallery-count";
       count.textContent = `${gallerySources.length} photos`;
@@ -784,8 +879,9 @@ function renderPosts() {
 function openPostModal(post) {
   const modalMedia = $("#modalMedia");
   modalMedia.replaceChildren();
+  modalGalleryController = null;
   const media = createMediaElement(post, true);
-  while (media.firstChild) modalMedia.append(media.firstChild);
+  modalMedia.append(media);
   $("#modalType").textContent = post.type;
   $("#modalDate").textContent = formatDate(post.date);
   $("#modalDate").dateTime = post.date;
@@ -964,6 +1060,19 @@ async function init() {
   renderPosts();
 
   $(".modal-close").addEventListener("click", () => $("#postModal").close());
+  document.addEventListener("keydown", event => {
+    if (!$("#postModal").open || !modalGalleryController) return;
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      modalGalleryController.next();
+    } else if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      modalGalleryController.previous();
+    }
+  });
+  $("#postModal").addEventListener("close", () => {
+    modalGalleryController = null;
+  });
   $("#postModal").addEventListener("click", event => {
     if (event.target === $("#postModal")) $("#postModal").close();
   });
