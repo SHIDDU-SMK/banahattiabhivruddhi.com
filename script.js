@@ -59,7 +59,7 @@ const siteData = {
         "assets/news-2026-08-13-04.png",
         "assets/news-2026-08-13-05.png"
       ],
-      mediaUrl: "assets/news-2026-08-13-01.png",
+      mediaUrl: "assets/news-2026-08-13-02.jpeg",
       link: "",
       local: false
     },
