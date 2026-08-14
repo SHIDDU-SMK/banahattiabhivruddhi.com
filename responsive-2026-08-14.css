@@ -1,0 +1,67 @@
+/* Banahatti Abhivruddhi — responsive polish, 14 Aug 2026 */
+.today-update-card img,
+.today-saradi-card img { background: #f6f1f2; }
+
+.today-update-card:focus-visible {
+  outline: 3px solid rgba(150,31,51,.28);
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .today-updates { padding: 10px 0 16px; }
+  .today-updates-grid { grid-template-columns: 1fr; gap: 10px; }
+
+  .today-update-card {
+    min-height: 118px;
+    flex-direction: row;
+  }
+  .today-update-card img {
+    width: 42%;
+    height: 118px;
+    object-fit: cover;
+  }
+  .today-update-card > span:not(.today-video-icon) {
+    padding: 10px 12px;
+    font-size: .82rem;
+    line-height: 1.45;
+  }
+  .today-video-card {
+    min-height: 92px;
+    flex-direction: row;
+    gap: 10px;
+    padding: 12px;
+  }
+  .today-video-icon {
+    margin: 0;
+    flex: 0 0 38px;
+  }
+
+  .today-saradi-card {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .today-saradi-card img {
+    height: auto;
+    max-height: 380px;
+    object-fit: cover;
+  }
+  .today-saradi-copy { padding: 12px 14px 14px; }
+  .today-saradi-copy h2 {
+    margin: 7px 0 5px;
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+  .today-saradi-copy p {
+    font-size: .84rem;
+    line-height: 1.55;
+  }
+
+  .post-card { border-radius: 16px; }
+  .post-body { padding: 15px; }
+}
+
+@media (min-width: 701px) and (max-width: 980px) {
+  .today-saradi-card {
+    grid-template-columns: minmax(230px,.9fr) minmax(0,1.1fr);
+  }
+}
