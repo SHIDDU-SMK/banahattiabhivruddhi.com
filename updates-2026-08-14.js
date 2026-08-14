@@ -1,10 +1,10 @@
 // Banahatti Abhivruddhi — dated content update: 14 Aug 2026
 (() => {
-  const FEATURED_EVENT_IMAGE = "assets/independence-day-praja-soudha-march-2026-08-14.jpeg";
+  const FEATURED_EVENT_IMAGE = "assets/independence-day-praja-soudha-march-2026-08-14.webp";
   const DAY7 = [
-    "assets/saradi-satyagraha-day-7-2026-08-14-01.jpeg",
-    "assets/saradi-satyagraha-day-7-2026-08-14-02.jpeg",
-    "assets/saradi-satyagraha-day-7-2026-08-14-03.jpeg"
+    "assets/saradi-satyagraha-day-7-2026-08-14-01.webp",
+    "assets/saradi-satyagraha-day-7-2026-08-14-02.webp",
+    "assets/saradi-satyagraha-day-7-2026-08-14-03.webp"
   ];
 
   const NEW_POSTS = [
