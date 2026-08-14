@@ -74,7 +74,7 @@
             <p>14 ಆಗಸ್ಟ್ · ಸಂಜೆ 6:00 · ಚೆನ್ನಮ್ಮ ವೃತ್ತದಿಂದ</p>
           </div>
         </div>
-        <a class="featured-event-poster" href="${FEATURED_EVENT_IMAGE}" target="_blank" rel="noopener" aria-label="ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವದ ವಿಶೇಷ ಪಂಜಿನ ಮೆರವಣಿಗೆ ಪ್ರಕಟಣೆಯನ್ನು ಪೂರ್ಣ ಗಾತ್ರದಲ್ಲಿ ನೋಡಿ">
+        <a class="featured-event-poster" href="${FEATURED_EVENT_IMAGE}" aria-label="ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವದ ವಿಶೇಷ ಪಂಜಿನ ಮೆರವಣಿಗೆ ಪ್ರಕಟಣೆಯನ್ನು ದೊಡ್ಡದಾಗಿ ನೋಡಿ">
           <img src="${FEATURED_EVENT_IMAGE}" alt="14 ಆಗಸ್ಟ್ ಸಂಜೆ 6 ಗಂಟೆಗೆ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಿಂದ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿಯ ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವದ ವಿಶೇಷ ಪಂಜಿನ ಮೆರವಣಿಗೆ ಮತ್ತು 15 ಆಗಸ್ಟ್ ಧ್ವಜಾರೋಹಣ ಕಾರ್ಯಕ್ರಮದ ಪ್ರಕಟಣೆ" fetchpriority="high" />
         </a>
         <div class="featured-event-footer">
@@ -93,8 +93,161 @@
     main.insertBefore(section, main.firstChild);
   }
 
+  function setupUnifiedImageLightbox() {
+    if (document.getElementById("siteImageLightbox")) return;
+
+    const dialog = document.createElement("dialog");
+    dialog.id = "siteImageLightbox";
+    dialog.className = "site-image-lightbox";
+    dialog.setAttribute("aria-label", "Image viewer");
+    dialog.innerHTML = `
+      <div class="site-lightbox-shell">
+        <button class="site-lightbox-close" type="button" aria-label="Close image">×</button>
+        <button class="site-lightbox-nav site-lightbox-prev" type="button" aria-label="Previous image">‹</button>
+        <figure class="site-lightbox-figure">
+          <div class="site-lightbox-stage">
+            <img class="site-lightbox-image" alt="" />
+          </div>
+          <figcaption class="site-lightbox-caption"></figcaption>
+          <div class="site-lightbox-counter" aria-live="polite"></div>
+        </figure>
+        <button class="site-lightbox-nav site-lightbox-next" type="button" aria-label="Next image">›</button>
+      </div>`;
+    document.body.append(dialog);
+
+    const image = dialog.querySelector(".site-lightbox-image");
+    const caption = dialog.querySelector(".site-lightbox-caption");
+    const counter = dialog.querySelector(".site-lightbox-counter");
+    const prev = dialog.querySelector(".site-lightbox-prev");
+    const next = dialog.querySelector(".site-lightbox-next");
+    const close = dialog.querySelector(".site-lightbox-close");
+
+    let items = [];
+    let current = 0;
+    let touchStartX = 0;
+
+    const imageHrefPattern = /\.(?:avif|webp|png|jpe?g|gif)(?:[?#].*)?$/i;
+
+    function captionFor(img) {
+      const figure = img.closest("figure");
+      const figcaption = figure?.querySelector("figcaption");
+      if (figcaption) {
+        return figcaption.innerText.trim().replace(/\s+/g, " ");
+      }
+      const section = img.closest("section");
+      const heading = section?.querySelector("h1,h2,h3");
+      return heading?.textContent?.trim() || img.alt || "";
+    }
+
+    function sourceFor(img) {
+      const anchor = img.closest("a[href]");
+      const href = anchor?.getAttribute("href") || "";
+      return imageHrefPattern.test(href) ? href : (img.currentSrc || img.src);
+    }
+
+    function itemFor(img) {
+      return {
+        src: sourceFor(img),
+        alt: img.alt || captionFor(img) || "Photo",
+        caption: captionFor(img)
+      };
+    }
+
+    function galleryItems(img) {
+      const gallery = img.closest(
+        ".movement-launch-gallery, .decision-gallery, .latest-photo-grid, .event-banners-list"
+      );
+      if (!gallery) return [itemFor(img)];
+      const galleryImages = [...gallery.querySelectorAll("img")].filter(candidate => {
+        const src = sourceFor(candidate);
+        return Boolean(src) && !candidate.closest(".post-card");
+      });
+      return galleryImages.length ? galleryImages.map(itemFor) : [itemFor(img)];
+    }
+
+    function render() {
+      if (!items.length) return;
+      current = (current + items.length) % items.length;
+      const item = items[current];
+      image.src = item.src;
+      image.alt = item.alt;
+      caption.textContent = item.caption;
+      caption.hidden = !item.caption;
+      counter.textContent = items.length > 1 ? `${current + 1} / ${items.length}` : "";
+      counter.hidden = items.length < 2;
+      prev.hidden = items.length < 2;
+      next.hidden = items.length < 2;
+    }
+
+    function openFor(img) {
+      items = galleryItems(img);
+      const selectedSrc = sourceFor(img);
+      current = Math.max(0, items.findIndex(item => item.src === selectedSrc));
+      render();
+      dialog.showModal();
+      close.focus({ preventScroll: true });
+    }
+
+    function move(delta) {
+      if (items.length < 2) return;
+      current += delta;
+      render();
+    }
+
+    document.addEventListener("click", event => {
+      const img = event.target.closest("main img");
+      if (!img || img.closest(".post-card, .post-modal, .today-update-card")) return;
+
+      const directImageLink = img.closest("a[href]");
+      const directHref = directImageLink?.getAttribute("href") || "";
+      const isDirectFile = imageHrefPattern.test(directHref);
+      const isGalleryPhoto = Boolean(img.closest(
+        ".movement-launch-gallery, .decision-gallery, .latest-photo-grid, .event-banner-card, .first-view-satyagraha-image, .featured-event-poster"
+      ));
+
+      if (!isDirectFile && !isGalleryPhoto) return;
+      event.preventDefault();
+      event.stopPropagation();
+      openFor(img);
+    }, true);
+
+    close.addEventListener("click", () => dialog.close());
+    prev.addEventListener("click", () => move(-1));
+    next.addEventListener("click", () => move(1));
+
+    dialog.addEventListener("click", event => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        move(-1);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        move(1);
+      }
+    });
+
+    dialog.addEventListener("touchstart", event => {
+      touchStartX = event.changedTouches[0]?.clientX || 0;
+    }, { passive: true });
+    dialog.addEventListener("touchend", event => {
+      const endX = event.changedTouches[0]?.clientX || 0;
+      const diff = endX - touchStartX;
+      if (Math.abs(diff) > 55) move(diff < 0 ? 1 : -1);
+    }, { passive: true });
+
+    // Keep the Updates/news modal self-contained too: no raw-file escape link.
+    document.addEventListener("click", event => {
+      const rawLink = event.target.closest(".modal-slide-open");
+      if (rawLink) event.preventDefault();
+    }, true);
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     insertFeaturedEvent();
+    setupUnifiedImageLightbox();
 
     const heading = document.querySelector(".today-updates-head h2");
     const card = document.querySelector(".today-update-card:not(.today-video-card)");
