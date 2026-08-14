@@ -1,5 +1,7 @@
 // Banahatti Abhivruddhi — dated content update: 14 Aug 2026
 (() => {
+  const FEATURED_EVENT_IMAGE = "assets/independence-day-praja-soudha-march-2026-08-14.jpeg";
+
   const NEW_POSTS = [
     {
       id: "news-coverage-2026-08-14",
@@ -50,10 +52,50 @@
     }
 
     siteData.ticker =
-      "14 ಆಗಸ್ಟ್ 2026 · ಪ್ರಜಾಸೌಧ ಹೋರಾಟಕ್ಕೆ ಆಟೋ ಚಾಲಕರು ಮತ್ತು ವಿವಿಧ ಸಮಾಜ-ಸಂಘಟನೆಗಳ ಬೆಂಬಲ ಮುಂದುವರಿದಿದೆ; ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳು ನವೀಕರಣಗಳಲ್ಲಿ ಲಭ್ಯ. · 14 August 2026 · Public support for the Praja Soudha movement continues; today's newspaper coverage is available in Updates.";
+      "14 ಆಗಸ್ಟ್ 2026 · ಸಂಜೆ 6 ಗಂಟೆಗೆ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಿಂದ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿಯ ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವದ ವಿಶೇಷ ಪಂಜಿನ ಮೆರವಣಿಗೆ. · 14 August 2026 · Independence Day special torch procession from Chennamma Circle at 6 PM; newspaper coverage is also available in Updates.";
+  }
+
+  function insertFeaturedEvent() {
+    if (document.getElementById("featured-independence-event")) return;
+
+    const main = document.querySelector("main#main");
+    if (!main) return;
+
+    const section = document.createElement("section");
+    section.id = "featured-independence-event";
+    section.className = "featured-event featured-event-pending";
+    section.setAttribute("aria-labelledby", "featuredEventTitle");
+    section.innerHTML = `
+      <div class="container">
+        <div class="featured-event-head">
+          <span class="featured-event-badge">ಇಂದಿನ ವಿಶೇಷ ಕಾರ್ಯಕ್ರಮ · Featured Event</span>
+          <div>
+            <h1 id="featuredEventTitle">ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವದ ವಿಶೇಷ ಪಂಜಿನ ಮೆರವಣಿಗೆ</h1>
+            <p>14 ಆಗಸ್ಟ್ · ಸಂಜೆ 6:00 · ಚೆನ್ನಮ್ಮ ವೃತ್ತದಿಂದ</p>
+          </div>
+        </div>
+        <a class="featured-event-poster" href="${FEATURED_EVENT_IMAGE}" target="_blank" rel="noopener" aria-label="ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವದ ವಿಶೇಷ ಪಂಜಿನ ಮೆರವಣಿಗೆ ಪ್ರಕಟಣೆಯನ್ನು ಪೂರ್ಣ ಗಾತ್ರದಲ್ಲಿ ನೋಡಿ">
+          <img src="${FEATURED_EVENT_IMAGE}" alt="14 ಆಗಸ್ಟ್ ಸಂಜೆ 6 ಗಂಟೆಗೆ ಚೆನ್ನಮ್ಮ ವೃತ್ತದಿಂದ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿಯ ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವದ ವಿಶೇಷ ಪಂಜಿನ ಮೆರವಣಿಗೆ ಮತ್ತು 15 ಆಗಸ್ಟ್ ಧ್ವಜಾರೋಹಣ ಕಾರ್ಯಕ್ರಮದ ಪ್ರಕಟಣೆ" fetchpriority="high" />
+        </a>
+        <div class="featured-event-footer">
+          <strong>ಬನಹಟ್ಟಿ–ಹೊಸೂರು–ರಾಮಪುರ ಹಾಗೂ ಸುತ್ತಲಿನ ಗ್ರಾಮಗಳ ಸಮಸ್ತ ಜನತೆಗೆ ಪಾಲ್ಗೊಳ್ಳಲು ಮನವಿ.</strong>
+          <span>ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವದ ಸಂಭ್ರಮದೊಂದಿಗೆ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಒಗ್ಗಟ್ಟಿನ ಸಂದೇಶ.</span>
+        </div>
+      </div>`;
+
+    const img = section.querySelector("img");
+    img.addEventListener("load", () => {
+      section.classList.remove("featured-event-pending");
+      section.classList.add("featured-event-ready");
+    });
+    img.addEventListener("error", () => section.remove());
+
+    main.insertBefore(section, main.firstChild);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    insertFeaturedEvent();
+
     const heading = document.querySelector(".today-updates-head h2");
     const card = document.querySelector(".today-update-card:not(.today-video-card)");
     if (heading) heading.textContent = "14 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳು";
