@@ -3,7 +3,8 @@
   const FEATURED_EVENT_IMAGE = "assets/independence-day-praja-soudha-march-2026-08-14.jpeg";
   const DAY7 = [
     "assets/saradi-satyagraha-day-7-2026-08-14-01.jpeg",
-    "assets/saradi-satyagraha-day-7-2026-08-14-02.jpeg"
+    "assets/saradi-satyagraha-day-7-2026-08-14-02.jpeg",
+    "assets/saradi-satyagraha-day-7-2026-08-14-03.jpeg"
   ];
 
   const NEW_POSTS = [
@@ -86,9 +87,9 @@
   function updateTodaySaradi() {
     const card = document.querySelector(".today-saradi-card");
     if (!card) return;
-    card.innerHTML = `<div class="day7-today-gallery"><img src="${DAY7[0]}" alt="7ನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ"><img src="${DAY7[1]}" alt="7ನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ"></div><div class="today-saradi-copy"><span class="latest-highlight-badge">ಇಂದಿನ ಸರದಿ · Today's Saradi</span><h2>7ನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ</h2><p>14 ಆಗಸ್ಟ್ 2026 · ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣದ ಬೇಡಿಕೆಗೆ ಬೆಂಬಲವಾಗಿ ನಡೆಯುತ್ತಿರುವ ಶಾಂತಿಯುತ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ 7ನೇ ದಿನ.</p><a class="first-view-link" href="#updates">ಇನ್ನಷ್ಟು ನೋಡಿ · View update →</a></div>`;
+    card.innerHTML = `<div class="day7-today-gallery"><img src="${DAY7[0]}" alt="7ನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ"><img src="${DAY7[1]}" alt="7ನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ"><img src="${DAY7[2]}" alt="7ನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ"></div><div class="today-saradi-copy"><span class="latest-highlight-badge">ಇಂದಿನ ಸರದಿ · Today's Saradi</span><h2>7ನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ</h2><p>14 ಆಗಸ್ಟ್ 2026 · ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣದ ಬೇಡಿಕೆಗೆ ಬೆಂಬಲವಾಗಿ ನಡೆಯುತ್ತಿರುವ ಶಾಂತಿಯುತ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ 7ನೇ ದಿನ.</p><a class="first-view-link" href="#updates">ಇನ್ನಷ್ಟು ನೋಡಿ · View update →</a></div>`;
     const style = document.createElement("style");
-    style.textContent = `.day7-today-gallery{display:grid;grid-template-columns:1fr 1fr;gap:6px;min-width:0}.day7-today-gallery img{width:100%;height:100%;min-height:220px;object-fit:cover;border-radius:10px;cursor:zoom-in}@media(max-width:700px){.day7-today-gallery{grid-template-columns:1fr}.day7-today-gallery img{min-height:0;height:auto}.day7-today-gallery img+img{display:none}}`;
+    style.textContent = `.day7-today-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;min-width:0}.day7-today-gallery img{width:100%;height:100%;min-height:220px;object-fit:cover;border-radius:10px;cursor:zoom-in}@media(max-width:700px){.day7-today-gallery{grid-template-columns:1fr}.day7-today-gallery img{min-height:0;height:auto}.day7-today-gallery img+img{display:none}}`;
     document.head.appendChild(style);
   }
 
