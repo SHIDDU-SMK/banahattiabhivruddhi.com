@@ -1,0 +1,148 @@
+name: Optimize website images to WebP
+
+on:
+  push:
+    paths:
+      - '.github/workflows/optimize-images-webp.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  optimize-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Install Pillow
+        run: python -m pip install --upgrade pillow
+
+      - name: Convert raster assets and rewrite references
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          import re
+
+          root = Path('.')
+          assets = root / 'assets'
+
+          # These formats/files are intentionally retained for browser/PWA compatibility.
+          keep = {
+              'favicon-32.png',
+              'apple-touch-icon.png',
+              'icon-192.png',
+          }
+
+          converted = {}
+          failures = []
+
+          for src in sorted(assets.rglob('*')):
+              if not src.is_file():
+                  continue
+              if src.suffix.lower() not in {'.jpg', '.jpeg', '.png'}:
+                  continue
+              if src.name in keep:
+                  continue
+
+              dst = src.with_suffix('.webp')
+              try:
+                  with Image.open(src) as im:
+                      im = ImageOps.exif_transpose(im)
+                      has_alpha = im.mode in ('RGBA', 'LA') or ('transparency' in im.info)
+                      if has_alpha:
+                          im = im.convert('RGBA')
+                          im.save(dst, 'WEBP', lossless=True, method=6)
+                      else:
+                          im = im.convert('RGB')
+                          im.save(dst, 'WEBP', quality=84, method=6)
+                  converted[src.as_posix()] = dst.as_posix()
+              except Exception as exc:
+                  failures.append((src.as_posix(), str(exc)))
+
+          # Rewrite only exact asset paths that were successfully converted.
+          text_exts = {'.html', '.css', '.js', '.json', '.md', '.txt', '.webmanifest', '.xml'}
+          for path in root.rglob('*'):
+              if not path.is_file() or path.suffix.lower() not in text_exts:
+                  continue
+              if '.git' in path.parts:
+                  continue
+              try:
+                  text = path.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              new = text
+              for old, replacement in converted.items():
+                  new = new.replace(old, replacement)
+              if new != text:
+                  path.write_text(new, encoding='utf-8')
+
+          # Remove only originals that were converted successfully.
+          for old in converted:
+              Path(old).unlink()
+
+          print(f'Converted {len(converted)} images to WebP.')
+          if failures:
+              print('Skipped files that could not be converted:')
+              for filename, error in failures:
+                  print(f'  {filename}: {error}')
+
+          # Guard: no converted paths should remain referenced.
+          leftovers = []
+          for path in root.rglob('*'):
+              if not path.is_file() or path.suffix.lower() not in text_exts or '.git' in path.parts:
+                  continue
+              try:
+                  text = path.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              for old in converted:
+                  if old in text:
+                      leftovers.append((path.as_posix(), old))
+          if leftovers:
+              raise SystemExit(f'Old raster references remain: {leftovers[:20]}')
+          PY
+
+      - name: Verify referenced local assets exist
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          import re
+
+          root = Path('.')
+          files = [Path('index.html'), Path('script.js'), Path('styles.css'), Path('responsive-2026-08-14.css'), Path('updates-2026-08-14.js'), Path('terms-en.html'), Path('terms-kn.html')]
+          missing = set()
+          pattern = re.compile(r'assets/[A-Za-z0-9_./() -]+\.(?:webp|png|jpe?g|svg|ico)', re.I)
+          for f in files:
+              if not f.exists():
+                  continue
+              text = f.read_text(encoding='utf-8')
+              for ref in pattern.findall(text):
+                  if not (root / ref).exists():
+                      missing.add(ref)
+          if missing:
+              print('Missing referenced assets:')
+              for ref in sorted(missing):
+                  print(ref)
+              raise SystemExit(1)
+          print('All checked local asset references resolve.')
+          PY
+
+      - name: Commit optimized media
+        shell: bash
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            echo 'No image optimization changes required.'
+            exit 0
+          fi
+          git config user.name 'Shiddu'
+          git config user.email '30692292+shiddugmail@users.noreply.github.com'
+          git add -A
+          git commit -m 'Optimize website images to WebP'
+          git push origin HEAD:main
