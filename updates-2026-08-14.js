@@ -138,11 +138,3 @@
     if (typeof renderFilters === "function" && typeof renderPosts === "function") { renderFilters(); renderPosts(); }
   });
 })();
-
-// Load the 15 August dated update without changing the main HTML file.
-(() => {
-  const s = document.createElement("script");
-  s.src = "updates-2026-08-15.js";
-  s.defer = true;
-  document.head.appendChild(s);
-})();
