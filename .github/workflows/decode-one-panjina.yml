@@ -1,10 +1,10 @@
-name: Decode one Panjina image
+name: Decode one staged WebP image
 
 on:
   push:
     branches: [main]
     paths:
-      - 'staging/panjina-*.b64'
+      - 'staging/*.b64'
       - '.github/workflows/decode-one-panjina.yml'
 
 permissions:
@@ -18,10 +18,10 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-      - name: Decode exactly one staged image
+      - name: Decode exactly one staged WebP
         run: |
           set -euo pipefail
-          file=$(find staging -maxdepth 1 -type f -name 'panjina-*.b64' | sort | head -n 1)
+          file=$(find staging -maxdepth 1 -type f -name '*.b64' | sort | head -n 1)
           test -n "$file"
           base=$(basename "$file" .b64)
           mkdir -p assets
