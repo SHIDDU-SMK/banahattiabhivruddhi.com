@@ -1,0 +1,42 @@
+name: Decode one Panjina image
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'staging/panjina-*.b64'
+
+permissions:
+  contents: write
+
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Decode exactly one staged image
+        run: |
+          set -euo pipefail
+          file=$(find staging -maxdepth 1 -type f -name 'panjina-*.b64' | sort | head -n 1)
+          test -n "$file"
+          base=$(basename "$file" .b64)
+          mkdir -p assets
+          base64 -d "$file" > "assets/${base}.webp"
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import glob
+          p = Path(sorted(glob.glob('assets/panjina-*-v7.webp'))[-1])
+          with Image.open(p) as im:
+              im.verify()
+          print(f'Validated {p} ({p.stat().st_size} bytes)')
+          PY
+          git config user.name "ChatGPT Website Update"
+          git config user.email "actions@users.noreply.github.com"
+          git add "assets/${base}.webp"
+          git rm "$file"
+          git commit -m "Add ${base} WebP"
+          git push origin main
