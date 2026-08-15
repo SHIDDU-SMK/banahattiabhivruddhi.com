@@ -1,0 +1,38 @@
+name: Decode chunked WebP
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'staging/chunked/*.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Decode one ready WebP
+        shell: bash
+        run: |
+          set -euo pipefail
+          ready=$(find staging/chunked -maxdepth 1 -type f -name '*.ready' | sort | head -n 1)
+          test -n "$ready"
+          base=$(basename "$ready" .ready)
+          expected_sha=$(cat "$ready" | tr -d '\r\n ')
+          mkdir -p assets
+          cat staging/chunked/${base}.part* | base64 -d > "assets/${base}.webp"
+          file "assets/${base}.webp" | grep -qi 'webp'
+          actual_sha=$(sha256sum "assets/${base}.webp" | awk '{print $1}')
+          test "$actual_sha" = "$expected_sha"
+          git config user.name "ChatGPT Website Update"
+          git config user.email "actions@users.noreply.github.com"
+          git add "assets/${base}.webp"
+          git rm staging/chunked/${base}.part* "$ready"
+          git commit -m "Add ${base} WebP"
+          git push origin main
