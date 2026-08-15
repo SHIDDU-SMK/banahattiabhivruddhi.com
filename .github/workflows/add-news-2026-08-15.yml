@@ -1,0 +1,136 @@
+name: Add 15 August 2026 news
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/add-news-2026-08-15.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Decode WebP assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .webp-upload/news-2026-08-15-01.part1 \
+              .webp-upload/news-2026-08-15-01.part2 \
+              .webp-upload/news-2026-08-15-01.part3 | base64 -d > assets/news-2026-08-15-01.webp
+          base64 -d .webp-upload/news-2026-08-15-02.b64 > assets/news-2026-08-15-02.webp
+          python - <<'PY'
+          from pathlib import Path
+          for name in ['assets/news-2026-08-15-01.webp','assets/news-2026-08-15-02.webp']:
+              b=Path(name).read_bytes()
+              assert len(b) > 100000, (name, len(b))
+              assert b[:4] == b'RIFF' and b[8:12] == b'WEBP', name
+              print(name, len(b))
+          PY
+
+      - name: Add 15 August update script
+        shell: bash
+        run: |
+          cat > updates-2026-08-15.js <<'EOF'
+          // Banahatti Abhivruddhi — dated content update: 15 Aug 2026
+          (() => {
+            const NEWS15 = [
+              "assets/news-2026-08-15-01.webp",
+              "assets/news-2026-08-15-02.webp"
+            ];
+
+            const POST = {
+              id: "news-coverage-2026-08-15",
+              type: "Paper Cut",
+              date: "2026-08-15",
+              title: "15 August 2026 newspaper coverage: Praja Soudha movement",
+              titleKn: "15 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ",
+              text: "Newspaper reports dated 15 August 2026 cover the continuing Banahatti Praja Soudha movement and relay Satyagraha, including calls for the government to respond to the public demand.",
+              textKn: "15 ಆಗಸ್ಟ್ 2026ರ ಪತ್ರಿಕಾ ವರದಿಗಳು ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣದ ಬೇಡಿಕೆ ಮತ್ತು ಮುಂದುವರಿದ ಸರದಿ ಸತ್ಯಾಗ್ರಹವನ್ನು ದಾಖಲಿಸುತ್ತವೆ. ಜನರ ಬೇಡಿಕೆಗೆ ಸರ್ಕಾರ ಸ್ಪಂದಿಸಬೇಕೆಂಬ ಒತ್ತಾಯವೂ ವರದಿಯಾಗಿದೆ.",
+              mediaKind: "gallery",
+              mediaUrls: NEWS15,
+              mediaUrl: NEWS15[0],
+              link: "",
+              local: false,
+              createdAt: 4
+            };
+
+            if (typeof siteData !== "undefined" && Array.isArray(siteData.initialPosts)) {
+              if (!siteData.initialPosts.some(post => post.id === POST.id)) {
+                siteData.initialPosts.unshift(POST);
+              }
+              siteData.ticker = "15 ಆಗಸ್ಟ್ 2026 · ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳು ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಮುಂದುವರಿದ ಸರದಿ ಸತ್ಯಾಗ್ರಹವನ್ನು ದಾಖಲಿಸುತ್ತವೆ. · 15 August 2026 · Today’s newspapers report on the continuing Praja Soudha movement and relay Satyagraha.";
+            }
+
+            function updateTodayNews() {
+              const heading = document.querySelector(".today-updates-head h2");
+              const card = document.querySelector(".today-update-card:not(.today-video-card)");
+              if (heading) heading.textContent = "15 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳು";
+              if (card) {
+                card.href = "#updates";
+                const img = card.querySelector("img");
+                const text = card.querySelector("span");
+                if (img) {
+                  img.src = NEWS15[0];
+                  img.alt = "15 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ";
+                }
+                if (text) text.textContent = "15 ಆಗಸ್ಟ್ ಪತ್ರಿಕಾ ವರದಿಗಳು · 15 August news coverage";
+              }
+            }
+
+            document.addEventListener("DOMContentLoaded", () => {
+              updateTodayNews();
+              if (typeof renderFilters === "function" && typeof renderPosts === "function") {
+                renderFilters();
+                renderPosts();
+              }
+            });
+          })();
+          EOF
+
+      - name: Load 15 August update from index
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          new='<script src="updates-2026-08-15.js" defer></script>'
+          if new not in s:
+              old='<script src="updates-2026-08-14.js" defer></script>'
+              assert old in s
+              s=s.replace(old, old+'\n'+new)
+              p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Verify references
+        shell: bash
+        run: |
+          grep -q 'updates-2026-08-15.js' index.html
+          grep -q 'news-2026-08-15-01.webp' updates-2026-08-15.js
+          grep -q 'news-2026-08-15-02.webp' updates-2026-08-15.js
+          test -s assets/news-2026-08-15-01.webp
+          test -s assets/news-2026-08-15-02.webp
+
+      - name: Clean staging and one-time workflow
+        shell: bash
+        run: |
+          rm -rf .webp-upload
+          rm -f .github/workflows/add-news-2026-08-15.yml
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          git config user.name "Shiddu"
+          git config user.email "30692292+shiddugmail@users.noreply.github.com"
+          git add -A
+          git commit -m "Add 15 August 2026 newspaper coverage"
+          git push origin main
