@@ -1,8 +1,8 @@
 // Banahatti Abhivruddhi — dated content update: 15 Aug 2026
 (() => {
   const NEWS15 = [
-    "assets/news-2026-08-15-01.webp",
-    "assets/news-2026-08-15-02.webp"
+    "assets/news-2026-08-15-01-v2.webp",
+    "assets/news-2026-08-15-02-v2.webp"
   ];
   const PANJINA14 = [
     "assets/panjina-01-v8.webp",
@@ -38,7 +38,7 @@
       text: "Photograph from the 14 August visit of the AC and Tahasildar to the Banahatti Praja Soudha relay Satyagraha stage.",
       textKn: "14 ಆಗಸ್ಟ್ 2026ರಂದು ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ವೇದಿಕೆಗೆ ಎಸಿ ಮತ್ತು ತಹಶೀಲ್ದಾರ್ ಭೇಟಿ ನೀಡಿದ ಸಂದರ್ಭದ ಚಿತ್ರ.",
       mediaKind: "image",
-      mediaUrl: "assets/ac-tahasildar-visit-2026-08-14.webp",
+      mediaUrl: "assets/ac-tahasildar-visit-2026-08-14-v2.webp",
       link: "#satyagraha",
       local: false,
       createdAt: 5
