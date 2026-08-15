@@ -84,11 +84,14 @@
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function boot() {
     updateTodayNews();
     if (typeof renderFilters === "function" && typeof renderPosts === "function") {
       renderFilters();
       renderPosts();
     }
-  });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
 })();
