@@ -2,7 +2,9 @@
 (() => {
   const NEWS15 = [
     "assets/news-2026-08-15-01-v4.webp",
-    "assets/news-2026-08-15-02-v4.webp"
+    "assets/news-2026-08-15-02-v4.webp",
+    "assets/news-2026-08-15-udayavani-01.webp",
+    "assets/news-2026-08-15-udayavani-02.webp"
   ];
   const PANJINA14 = [
     "assets/panjina-01-v8.webp",
