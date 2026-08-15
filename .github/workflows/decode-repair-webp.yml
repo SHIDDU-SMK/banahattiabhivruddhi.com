@@ -1,0 +1,37 @@
+name: Decode repaired WebP
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'staging-repair/**'
+      - '.github/workflows/decode-repair-webp.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Join chunks, decode and validate exactly one image
+        run: |
+          set -euo pipefail
+          first=$(find staging-repair -maxdepth 1 -type f -name '*.part01' | sort | head -n 1)
+          test -n "$first"
+          base=$(basename "$first" .part01)
+          cat staging-repair/${base}.part* > /tmp/${base}.b64
+          mkdir -p assets
+          base64 -d /tmp/${base}.b64 > assets/${base}.webp
+          file assets/${base}.webp | grep -qi 'webp'
+          echo "Validated assets/${base}.webp ($(stat -c%s assets/${base}.webp) bytes)"
+          git config user.name "ChatGPT Website Update"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets/${base}.webp
+          git rm staging-repair/${base}.part*
+          git commit -m "Add validated ${base} WebP"
+          git push origin main
