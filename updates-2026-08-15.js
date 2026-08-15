@@ -5,12 +5,12 @@
     "assets/news-2026-08-15-02.webp"
   ];
   const PANJINA14 = [
-    "assets/panjina-meranige-2026-08-14-01.webp",
-    "assets/panjina-meranige-2026-08-14-02.webp",
-    "assets/panjina-meranige-2026-08-14-03.webp",
-    "assets/panjina-meranige-2026-08-14-04.webp",
-    "assets/panjina-meranige-2026-08-14-05.webp",
-    "assets/panjina-meranige-2026-08-14-06.webp"
+    "assets/panjina-meranige-2026-08-14-01-v3.webp",
+    "assets/panjina-meranige-2026-08-14-02-v3.webp",
+    "assets/panjina-meranige-2026-08-14-03-v3.webp",
+    "assets/panjina-meranige-2026-08-14-04-v3.webp",
+    "assets/panjina-meranige-2026-08-14-05-v3.webp",
+    "assets/panjina-meranige-2026-08-14-06-v3.webp"
   ];
 
   const NEW_POSTS = [
