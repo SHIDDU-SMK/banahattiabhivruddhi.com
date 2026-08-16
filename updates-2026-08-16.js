@@ -46,9 +46,39 @@
     siteData.ticker = "16 ಆಗಸ್ಟ್ 2026 · ಇಂದಿನ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು ಸೇರಿಸಲಾಗಿದೆ. 15 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಚಿತ್ರವೂ ಸೇರಿಸಲಾಗಿದೆ. · 16 August 2026 · Two newspaper reports have been added, along with a 15 August Saradi Satyagraha photo.";
   }
 
+  function featureNews16() {
+    const main = document.querySelector("main#main");
+    if (!main) return;
+    document.getElementById("featured-independence-event")?.remove();
+    document.getElementById("featured-news-16")?.remove();
+
+    const section = document.createElement("section");
+    section.id = "featured-news-16";
+    section.className = "today-updates";
+    section.setAttribute("aria-labelledby", "featuredNews16Title");
+    section.innerHTML = `
+      <div class="container">
+        <div class="today-updates-head">
+          <span class="latest-highlight-badge">ಇತ್ತೀಚಿನ ಪತ್ರಿಕಾ ವರದಿ · Latest Newspaper Coverage</span>
+          <h2 id="featuredNews16Title">16 ಆಗಸ್ಟ್ 2026 — ಎರಡು ಪ್ರಮುಖ ಪತ್ರಿಕಾ ವರದಿಗಳು</h2>
+        </div>
+        <div class="today-updates-grid">
+          <a class="today-update-card" href="#updates">
+            <img src="${NEWS16[0]}" alt="16 ಆಗಸ್ಟ್ 2026 — ಪಂಜಿನ ಮೆರವಣಿಗೆ ಪತ್ರಿಕಾ ವರದಿ">
+            <span>ಬನಹಟ್ಟಿ: ಗಮನ ಸೆಳೆದ ಪಂಜಿನ ಮೆರವಣಿಗೆ · 16 August</span>
+          </a>
+          <a class="today-update-card" href="#updates">
+            <img src="${NEWS16[1]}" alt="16 ಆಗಸ್ಟ್ 2026 — ಕನ್ನಡಪ್ರಭ ಪತ್ರಿಕಾ ವರದಿ">
+            <span>ರಬಕವಿ-ಬನಹಟ್ಟಿಯಲ್ಲಿ ಅದ್ದೂರಿ ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವ · 16 August</span>
+          </a>
+        </div>
+      </div>`;
+    main.insertBefore(section, main.firstChild);
+  }
+
   function updateTodayNews() {
-    const heading = document.querySelector(".today-updates-head h2");
-    const card = document.querySelector(".today-update-card:not(.today-video-card)");
+    const heading = document.querySelector("#today-updates .today-updates-head h2");
+    const card = document.querySelector("#today-updates .today-update-card:not(.today-video-card)");
     if (heading) heading.textContent = "16 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳು";
     if (card) {
       card.href = "#updates";
@@ -69,6 +99,7 @@
   }
 
   function boot() {
+    featureNews16();
     updateTodayNews();
     updateTodaySaradi();
     if (typeof renderFilters === "function" && typeof renderPosts === "function") {
