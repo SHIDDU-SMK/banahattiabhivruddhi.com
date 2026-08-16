@@ -1,9 +1,24 @@
 // Banahatti Abhivruddhi — dated content update: 16 Aug 2026
 (() => {
   const NEWS16 = "assets/news-2026-08-16-panjina-meravanige.webp";
+  const KULAHALLI16 = "assets/kulahalli-prajasoudha-2026-08-16.webp";
   const SARADI15 = "assets/saradi-satyagraha-2026-08-15.webp";
 
   const NEW_POSTS = [
+    {
+      id: "kulahalli-support-2026-08-16",
+      type: "Update",
+      date: "2026-08-16",
+      title: "Kulahalli extends support for Praja Soudha in Banahatti",
+      titleKn: "ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧಕ್ಕೆ ಕುಲಹಳ್ಳಿ ಗ್ರಾಮದಿಂದ ಬೆಂಬಲ",
+      text: "Senior citizens, organisations and residents of Kulahalli passed a resolution supporting construction of the Praja Soudha in Banahatti and handed it over to the Banahatti Praja Soudha Horata Samiti.",
+      textKn: "ಕುಲಹಳ್ಳಿ ಸಮಸ್ತ ಹಿರಿಯರು ಹಾಗೂ ಸಂಘ ಸಂಸ್ಥೆಗಳಿಂದ ಹಾಗೂ ಊರಿನ ಸಂಪೂರ್ಣ ಜನರಿಂದ ಬನಹಟ್ಟಿ ನಗರಕ್ಕೆ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಿಸಬೇಕೆಂದು ಠರಾವು ಪಾಸ್ ಮಾಡಿ ಇವತ್ತು ಬನಹಟ್ಟಿ ನಗರದ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿಗೆ ನೀಡಲಾಯಿತು.",
+      mediaKind: "image",
+      mediaUrl: KULAHALLI16,
+      link: "#updates",
+      local: false,
+      createdAt: 10
+    },
     {
       id: "news-coverage-2026-08-16",
       type: "Paper Cut",
@@ -39,7 +54,7 @@
     NEW_POSTS.slice().reverse().forEach(post => {
       if (!ids.has(post.id)) siteData.initialPosts.unshift(post);
     });
-    siteData.ticker = "16 ಆಗಸ್ಟ್ 2026 · ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿ ಸೇರಿಸಲಾಗಿದೆ. 15 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಚಿತ್ರವೂ ಸೇರಿಸಲಾಗಿದೆ. · 16 August 2026 · Today's newspaper report has been added, along with a 15 August Saradi Satyagraha photo.";
+    siteData.ticker = "16 ಆಗಸ್ಟ್ 2026 · ಕುಲಹಳ್ಳಿ ಗ್ರಾಮದಿಂದ ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧಕ್ಕೆ ಬೆಂಬಲದ ಠರಾವು ಹಸ್ತಾಂತರಿಸಲಾಯಿತು. ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಯೂ ಸೇರಿಸಲಾಗಿದೆ. · 16 August 2026 · Kulahalli support resolution and today's newspaper report added.";
   }
 
   function featureNews16() {
@@ -55,13 +70,17 @@
     section.innerHTML = `
       <div class="container">
         <div class="today-updates-head">
-          <span class="latest-highlight-badge">ಇತ್ತೀಚಿನ ಪತ್ರಿಕಾ ವರದಿ · Latest Newspaper Coverage</span>
-          <h2 id="featuredNews16Title">16 ಆಗಸ್ಟ್ 2026 — ಪ್ರಮುಖ ಪತ್ರಿಕಾ ವರದಿ</h2>
+          <span class="latest-highlight-badge">16 ಆಗಸ್ಟ್ 2026 · Latest Updates</span>
+          <h2 id="featuredNews16Title">16 ಆಗಸ್ಟ್ 2026 — ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಇಂದಿನ ಬೆಳವಣಿಗೆಗಳು</h2>
         </div>
         <div class="today-updates-grid">
           <a class="today-update-card" href="#updates">
             <img src="${NEWS16}" alt="16 ಆಗಸ್ಟ್ 2026 — ಪಂಜಿನ ಮೆರವಣಿಗೆ ಪತ್ರಿಕಾ ವರದಿ">
-            <span>ಬನಹಟ್ಟಿ: ಗಮನ ಸೆಳೆದ ಪಂಜಿನ ಮೆರವಣಿಗೆ · 16 August</span>
+            <span>ಬನಹಟ್ಟಿ: ಗಮನ ಸೆಳೆದ ಪಂಜಿನ ಮೆರವಣಿಗೆ · 16 August newspaper report</span>
+          </a>
+          <a class="today-update-card" href="#updates">
+            <img src="${KULAHALLI16}" alt="16 ಆಗಸ್ಟ್ 2026 — ಕುಲಹಳ್ಳಿ ಗ್ರಾಮದಿಂದ ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧಕ್ಕೆ ಬೆಂಬಲ">
+            <span><strong>ಕುಲಹಳ್ಳಿಯಿಂದ ಪ್ರಜಾಸೌಧಕ್ಕೆ ಬೆಂಬಲ</strong><br>ಕುಲಹಳ್ಳಿ ಸಮಸ್ತ ಹಿರಿಯರು ಹಾಗೂ ಸಂಘ ಸಂಸ್ಥೆಗಳಿಂದ ಹಾಗೂ ಊರಿನ ಸಂಪೂರ್ಣ ಜನರಿಂದ ಬನಹಟ್ಟಿ ನಗರಕ್ಕೆ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಿಸಬೇಕೆಂದು ಠರಾವು ಪಾಸ್ ಮಾಡಿ ಇವತ್ತು ಬನಹಟ್ಟಿ ನಗರದ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಸಮಿತಿಗೆ ನೀಡಲಾಯಿತು.</span>
           </a>
         </div>
       </div>`;
