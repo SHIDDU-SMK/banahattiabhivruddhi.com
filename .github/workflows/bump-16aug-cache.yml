@@ -21,11 +21,11 @@ jobs:
           from pathlib import Path
           p=Path('index.html')
           s=p.read_text()
-          s=s.replace('updates-2026-08-16.js?v=20260816-1', 'updates-2026-08-16.js?v=20260816-4')
+          s=s.replace('updates-2026-08-16.js?v=20260816-4', 'updates-2026-08-16.js?v=20260816-6')
           p.write_text(s)
           PY
           git config user.name "ChatGPT Website Update"
           git config user.email "actions@users.noreply.github.com"
           git add index.html
-          git commit -m "Force refresh 16 Aug website update" || exit 0
+          git commit -m "Force refresh final 16 Aug website content" || exit 0
           git push origin main
