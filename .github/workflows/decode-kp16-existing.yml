@@ -20,7 +20,6 @@ jobs:
           head -c 65416 staging/chunked/news-2026-08-16-kannadaprabha.part01 | base64 -d > assets/news-2026-08-16-kannadaprabha.webp
           file assets/news-2026-08-16-kannadaprabha.webp | grep -qi webp
           echo "decoded-size=$(stat -c%s assets/news-2026-08-16-kannadaprabha.webp)"
-          ffmpeg -v error -i assets/news-2026-08-16-kannadaprabha.webp -f null -
           git config user.name "ChatGPT Website Update"
           git config user.email "actions@users.noreply.github.com"
           git add assets/news-2026-08-16-kannadaprabha.webp
