@@ -1,0 +1,41 @@
+name: Patch index for 16 Aug
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'staging/patch-index-16aug.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Add 16 Aug update script to index
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          tag = '<script src="updates-2026-08-16.js?v=20260816-1" defer></script>'
+          if tag not in s:
+              anchor = '<script src="updates-2026-08-15.js?v=20260815-5" defer></script>'
+              if anchor not in s:
+                  raise SystemExit('15 Aug script anchor not found')
+              s = s.replace(anchor, anchor + '\n' + tag)
+              p.write_text(s)
+          PY
+          git config user.name "ChatGPT Website Update"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          git rm staging/patch-index-16aug.ready
+          git commit -m "Load 16 Aug website update"
+          git push origin main
