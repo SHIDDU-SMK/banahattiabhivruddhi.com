@@ -1,9 +1,6 @@
 // Banahatti Abhivruddhi — dated content update: 16 Aug 2026
 (() => {
-  const NEWS16 = [
-    "assets/news-2026-08-16-panjina-meravanige.webp",
-    "assets/news-2026-08-16-kannadaprabha.webp"
-  ];
+  const NEWS16 = "assets/news-2026-08-16-panjina-meravanige.webp";
   const SARADI15 = "assets/saradi-satyagraha-2026-08-15.webp";
 
   const NEW_POSTS = [
@@ -12,12 +9,11 @@
       type: "Paper Cut",
       date: "2026-08-16",
       title: "16 August 2026 newspaper coverage: Praja Soudha movement",
-      titleKn: "16 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ",
-      text: "Two newspaper reports dated 16 August 2026 cover the Banahatti Praja Soudha movement, including the Panjina Meravanige and Independence Day coverage.",
-      textKn: "16 ಆಗಸ್ಟ್ 2026ರ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ, ಪಂಜಿನ ಮೆರವಣಿಗೆ ಮತ್ತು ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವದ ಚಟುವಟಿಕೆಗಳನ್ನು ದಾಖಲಿಸುತ್ತವೆ.",
-      mediaKind: "gallery",
-      mediaUrls: NEWS16,
-      mediaUrl: NEWS16[0],
+      titleKn: "16 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ",
+      text: "The 16 August 2026 newspaper report covers the Banahatti Praja Soudha movement and the Panjina Meravanige.",
+      textKn: "16 ಆಗಸ್ಟ್ 2026ರ ಪತ್ರಿಕಾ ವರದಿ ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಪಂಜಿನ ಮೆರವಣಿಗೆಯನ್ನು ದಾಖಲಿಸುತ್ತದೆ.",
+      mediaKind: "image",
+      mediaUrl: NEWS16,
       link: "",
       local: false,
       createdAt: 9
@@ -43,7 +39,7 @@
     NEW_POSTS.slice().reverse().forEach(post => {
       if (!ids.has(post.id)) siteData.initialPosts.unshift(post);
     });
-    siteData.ticker = "16 ಆಗಸ್ಟ್ 2026 · ಇಂದಿನ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು ಸೇರಿಸಲಾಗಿದೆ. 15 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಚಿತ್ರವೂ ಸೇರಿಸಲಾಗಿದೆ. · 16 August 2026 · Two newspaper reports have been added, along with a 15 August Saradi Satyagraha photo.";
+    siteData.ticker = "16 ಆಗಸ್ಟ್ 2026 · ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿ ಸೇರಿಸಲಾಗಿದೆ. 15 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಚಿತ್ರವೂ ಸೇರಿಸಲಾಗಿದೆ. · 16 August 2026 · Today's newspaper report has been added, along with a 15 August Saradi Satyagraha photo.";
   }
 
   function featureNews16() {
@@ -60,16 +56,12 @@
       <div class="container">
         <div class="today-updates-head">
           <span class="latest-highlight-badge">ಇತ್ತೀಚಿನ ಪತ್ರಿಕಾ ವರದಿ · Latest Newspaper Coverage</span>
-          <h2 id="featuredNews16Title">16 ಆಗಸ್ಟ್ 2026 — ಎರಡು ಪ್ರಮುಖ ಪತ್ರಿಕಾ ವರದಿಗಳು</h2>
+          <h2 id="featuredNews16Title">16 ಆಗಸ್ಟ್ 2026 — ಪ್ರಮುಖ ಪತ್ರಿಕಾ ವರದಿ</h2>
         </div>
         <div class="today-updates-grid">
           <a class="today-update-card" href="#updates">
-            <img src="${NEWS16[0]}" alt="16 ಆಗಸ್ಟ್ 2026 — ಪಂಜಿನ ಮೆರವಣಿಗೆ ಪತ್ರಿಕಾ ವರದಿ">
+            <img src="${NEWS16}" alt="16 ಆಗಸ್ಟ್ 2026 — ಪಂಜಿನ ಮೆರವಣಿಗೆ ಪತ್ರಿಕಾ ವರದಿ">
             <span>ಬನಹಟ್ಟಿ: ಗಮನ ಸೆಳೆದ ಪಂಜಿನ ಮೆರವಣಿಗೆ · 16 August</span>
-          </a>
-          <a class="today-update-card" href="#updates">
-            <img src="${NEWS16[1]}" alt="16 ಆಗಸ್ಟ್ 2026 — ಕನ್ನಡಪ್ರಭ ಪತ್ರಿಕಾ ವರದಿ">
-            <span>ರಬಕವಿ-ಬನಹಟ್ಟಿಯಲ್ಲಿ ಅದ್ದೂರಿ ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವ · 16 August</span>
           </a>
         </div>
       </div>`;
@@ -79,16 +71,16 @@
   function updateTodayNews() {
     const heading = document.querySelector("#today-updates .today-updates-head h2");
     const card = document.querySelector("#today-updates .today-update-card:not(.today-video-card)");
-    if (heading) heading.textContent = "16 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳು";
+    if (heading) heading.textContent = "16 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿ";
     if (card) {
       card.href = "#updates";
       const img = card.querySelector("img");
       const text = card.querySelector("span");
       if (img) {
-        img.src = NEWS16[0];
+        img.src = NEWS16;
         img.alt = "16 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ";
       }
-      if (text) text.textContent = "16 ಆಗಸ್ಟ್ — 2 ಪತ್ರಿಕಾ ವರದಿಗಳು · 16 August — 2 news reports";
+      if (text) text.textContent = "16 ಆಗಸ್ಟ್ — ಪತ್ರಿಕಾ ವರದಿ · 16 August — Newspaper report";
     }
   }
 
