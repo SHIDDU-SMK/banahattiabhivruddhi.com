@@ -1,0 +1,26 @@
+name: Decode 16 Aug Kannada Prabha existing chunks
+on:
+  push:
+    paths:
+      - 'staging/decode-kp16-existing.trigger'
+permissions:
+  contents: write
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Decode and publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat staging/chunked/news-2026-08-16-kannadaprabha.part01 staging/chunked/news-2026-08-16-kannadaprabha.part02 | base64 -d > assets/news-2026-08-16-kannadaprabha.webp
+          file assets/news-2026-08-16-kannadaprabha.webp | grep -qi webp
+          git config user.name "ChatGPT Website Update"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets/news-2026-08-16-kannadaprabha.webp
+          git commit -m "Add 16 Aug Kannada Prabha newspaper" || exit 0
+          git push origin main
