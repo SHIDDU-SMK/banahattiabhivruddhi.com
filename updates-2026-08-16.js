@@ -1,8 +1,10 @@
 // Banahatti Abhivruddhi — dated content update: 16 Aug 2026
 (() => {
   const NEWS16 = [
-    "assets/news-2026-08-16-panjina-meravanige.webp"
+    "assets/news-2026-08-16-panjina-meravanige.webp",
+    "assets/news-2026-08-16-kannadaprabha.webp"
   ];
+  const SARADI15 = "assets/saradi-satyagraha-2026-08-15.webp";
 
   const NEW_POSTS = [
     {
@@ -10,15 +12,29 @@
       type: "Paper Cut",
       date: "2026-08-16",
       title: "16 August 2026 newspaper coverage: Praja Soudha movement",
-      titleKn: "16 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ",
-      text: "Newspaper coverage dated 16 August 2026 on the Banahatti Praja Soudha movement, including the Panjina Meravanige report.",
-      textKn: "16 ಆಗಸ್ಟ್ 2026ರ ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಪತ್ರಿಕಾ ವರದಿ — ಪಂಜಿನ ಮೆರವಣಿಗೆ ವರದಿಯೊಂದಿಗೆ.",
+      titleKn: "16 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ",
+      text: "Two newspaper reports dated 16 August 2026 cover the Banahatti Praja Soudha movement, including the Panjina Meravanige and Independence Day coverage.",
+      textKn: "16 ಆಗಸ್ಟ್ 2026ರ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ, ಪಂಜಿನ ಮೆರವಣಿಗೆ ಮತ್ತು ಸ್ವಾತಂತ್ರ್ಯೋತ್ಸವದ ಚಟುವಟಿಕೆಗಳನ್ನು ದಾಖಲಿಸುತ್ತವೆ.",
       mediaKind: "gallery",
       mediaUrls: NEWS16,
       mediaUrl: NEWS16[0],
       link: "",
       local: false,
-      createdAt: 7
+      createdAt: 9
+    },
+    {
+      id: "saradi-satyagraha-2026-08-15",
+      type: "Satyagraha",
+      date: "2026-08-15",
+      title: "15 August 2026 relay Satyagraha",
+      titleKn: "15 ಆಗಸ್ಟ್ 2026: ಸರದಿ ಸತ್ಯಾಗ್ರಹ",
+      text: "A photograph from the 15 August relay Satyagraha and public mobilisation for the Banahatti Praja Soudha movement.",
+      textKn: "15 ಆಗಸ್ಟ್ 2026ರ ಸರದಿ ಸತ್ಯಾಗ್ರಹ ಮತ್ತು ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಜನಜಾಗೃತಿ ಕಾರ್ಯಕ್ರಮದ ಚಿತ್ರ.",
+      mediaKind: "image",
+      mediaUrl: SARADI15,
+      link: "#satyagraha",
+      local: false,
+      createdAt: 8
     }
   ];
 
@@ -27,7 +43,7 @@
     NEW_POSTS.slice().reverse().forEach(post => {
       if (!ids.has(post.id)) siteData.initialPosts.unshift(post);
     });
-    siteData.ticker = "16 ಆಗಸ್ಟ್ 2026 · ಇಂದಿನ ಪತ್ರಿಕೆಯಲ್ಲಿ ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಪಂಜಿನ ಮೆರವಣಿಗೆ ವರದಿ ಸೇರಿಸಲಾಗಿದೆ. · 16 August 2026 · Today's newspaper coverage of the Banahatti Praja Soudha movement and Panjina Meravanige has been added.";
+    siteData.ticker = "16 ಆಗಸ್ಟ್ 2026 · ಇಂದಿನ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು ಸೇರಿಸಲಾಗಿದೆ. 15 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಚಿತ್ರವೂ ಸೇರಿಸಲಾಗಿದೆ. · 16 August 2026 · Two newspaper reports have been added, along with a 15 August Saradi Satyagraha photo.";
   }
 
   function updateTodayNews() {
@@ -42,12 +58,19 @@
         img.src = NEWS16[0];
         img.alt = "16 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ";
       }
-      if (text) text.textContent = "16 ಆಗಸ್ಟ್ ಪತ್ರಿಕಾ ವರದಿಗಳು · 16 August news coverage";
+      if (text) text.textContent = "16 ಆಗಸ್ಟ್ — 2 ಪತ್ರಿಕಾ ವರದಿಗಳು · 16 August — 2 news reports";
     }
+  }
+
+  function updateTodaySaradi() {
+    const card = document.querySelector(".today-saradi-card");
+    if (!card) return;
+    card.innerHTML = `<img src="${SARADI15}" alt="15 ಆಗಸ್ಟ್ 2026 ಸರದಿ ಸತ್ಯಾಗ್ರಹ"><div class="today-saradi-copy"><span class="latest-highlight-badge">ಸರದಿ ಸತ್ಯಾಗ್ರಹ · Saradi Satyagraha</span><h2>15 ಆಗಸ್ಟ್ 2026 — ಸರದಿ ಸತ್ಯಾಗ್ರಹ</h2><p>ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ 15 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹ ಮತ್ತು ಜನಜಾಗೃತಿ ಕಾರ್ಯಕ್ರಮದ ಚಿತ್ರ.</p><a class="first-view-link" href="#updates">ಇನ್ನಷ್ಟು ನೋಡಿ · View update →</a></div>`;
   }
 
   function boot() {
     updateTodayNews();
+    updateTodaySaradi();
     if (typeof renderFilters === "function" && typeof renderPosts === "function") {
       renderFilters();
       renderPosts();
