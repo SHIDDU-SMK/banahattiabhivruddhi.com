@@ -1,24 +1,30 @@
 // Banahatti Abhivruddhi — dated content update: 17 Aug 2026
 (() => {
-  const NEWS17 = "assets/news-2026-08-17-samyukta-karnataka.webp";
+  const NEWS17 = [
+    "assets/news-2026-08-17-samyukta-karnataka.webp",
+    "assets/news-2026-08-17-samyukta-karnataka-2.webp"
+  ];
   const POST17 = {
     id: "news-coverage-2026-08-17",
     type: "Paper Cut",
     date: "2026-08-17",
     title: "17 August 2026 newspaper coverage: Praja Soudha movement",
-    titleKn: "17 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ: ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಹೋರಾಟ ತೀವ್ರ",
-    text: "Samyukta Karnataka reported on the ninth day of the relay Satyagraha and the continuing campaign demanding construction of the Praja Soudha in Banahatti.",
-    textKn: "ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ಪತ್ರಿಕೆಯಲ್ಲಿ 9ನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ ಹಾಗೂ ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕಾಗಿ ನಡೆಯುತ್ತಿರುವ ಹೋರಾಟದ ವರದಿ ಪ್ರಕಟವಾಗಿದೆ.",
-    mediaKind: "image",
-    mediaUrl: NEWS17,
+    titleKn: "17 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಹೋರಾಟ ತೀವ್ರ",
+    text: "Two newspaper reports dated 17 August 2026 cover the continuing relay Satyagraha and the campaign demanding construction of the Praja Soudha in Banahatti.",
+    textKn: "17 ಆಗಸ್ಟ್ 2026ರ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು ಸರದಿ ಸತ್ಯಾಗ್ರಹ ಮತ್ತು ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕಾಗಿ ನಡೆಯುತ್ತಿರುವ ಹೋರಾಟವನ್ನು ದಾಖಲಿಸುತ್ತವೆ.",
+    mediaKind: "gallery",
+    mediaUrls: NEWS17,
+    mediaUrl: NEWS17[0],
     link: "",
     local: false,
     createdAt: 11
   };
 
   if (typeof siteData !== "undefined" && Array.isArray(siteData.initialPosts)) {
-    if (!siteData.initialPosts.some(post => post.id === POST17.id)) siteData.initialPosts.unshift(POST17);
-    siteData.ticker = "17 ಆಗಸ್ಟ್ 2026 · ಸಂಯುಕ್ತ ಕರ್ನಾಟಕದಲ್ಲಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ವರದಿ ಪ್ರಕಟವಾಗಿದೆ. · 17 August 2026 · Samyukta Karnataka coverage of the Praja Soudha movement has been added.";
+    const existing = siteData.initialPosts.find(post => post.id === POST17.id);
+    if (existing) Object.assign(existing, POST17);
+    else siteData.initialPosts.unshift(POST17);
+    siteData.ticker = "17 ಆಗಸ್ಟ್ 2026 · ಇಂದಿನ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು ಸೇರಿಸಲಾಗಿದೆ. · 17 August 2026 · Two newspaper reports on the Praja Soudha movement have been added.";
   }
 
   function featureNews17() {
@@ -33,12 +39,16 @@
       <div class="container">
         <div class="today-updates-head">
           <span class="latest-highlight-badge">ಇತ್ತೀಚಿನ ಪತ್ರಿಕಾ ವರದಿ · Latest Newspaper Coverage</span>
-          <h2>17 ಆಗಸ್ಟ್ 2026 — ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಹೋರಾಟ ತೀವ್ರ</h2>
+          <h2>17 ಆಗಸ್ಟ್ 2026 — ಎರಡು ಪ್ರಮುಖ ಪತ್ರಿಕಾ ವರದಿಗಳು</h2>
         </div>
         <div class="today-updates-grid">
           <a class="today-update-card" href="#updates">
-            <img src="${NEWS17}" alt="17 ಆಗಸ್ಟ್ 2026 ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ಪತ್ರಿಕಾ ವರದಿ">
-            <span>ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಹೋರಾಟ ತೀವ್ರ · ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ · 17 August 2026</span>
+            <img src="${NEWS17[0]}" alt="17 ಆಗಸ್ಟ್ 2026 ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ಪತ್ರಿಕಾ ವರದಿ">
+            <span>ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಹೋರಾಟ ತೀವ್ರ · 17 August 2026</span>
+          </a>
+          <a class="today-update-card" href="#updates">
+            <img src="${NEWS17[1]}" alt="17 ಆಗಸ್ಟ್ 2026 ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ಎರಡನೇ ಪತ್ರಿಕಾ ವರದಿ">
+            <span>9ನೇ ದಿನದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ · ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಹೋರಾಟ ತೀವ್ರ · 17 August 2026</span>
           </a>
         </div>
       </div>`;
@@ -49,16 +59,16 @@
   function updateTodayNews() {
     const heading = document.querySelector("#today-updates .today-updates-head h2");
     const card = document.querySelector("#today-updates .today-update-card:not(.today-video-card)");
-    if (heading) heading.textContent = "17 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿ";
+    if (heading) heading.textContent = "17 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು";
     if (card) {
       card.href = "#updates";
       const img = card.querySelector("img");
       const text = card.querySelector("span");
       if (img) {
-        img.src = NEWS17;
+        img.src = NEWS17[0];
         img.alt = "17 ಆಗಸ್ಟ್ 2026 ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ಪತ್ರಿಕಾ ವರದಿ";
       }
-      if (text) text.textContent = "17 ಆಗಸ್ಟ್ — ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಹೋರಾಟ ತೀವ್ರ · 17 August";
+      if (text) text.textContent = "17 ಆಗಸ್ಟ್ — 2 ಪತ್ರಿಕಾ ವರದಿಗಳು · 17 August — 2 news reports";
     }
   }
 
