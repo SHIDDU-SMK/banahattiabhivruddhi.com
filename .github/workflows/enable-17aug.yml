@@ -1,0 +1,33 @@
+name: Enable 17 Aug update
+on:
+  push:
+    paths:
+      - 'staging/enable-17aug.trigger'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Add 17 Aug script
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          tag='<script src="updates-2026-08-17.js?v=20260817-1" defer></script>'
+          if tag not in s:
+              s=s.replace('</body>', tag+'\n</body>')
+          p.write_text(s)
+          PY
+          git config user.name "ChatGPT Website Update"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          git commit -m "Enable 17 Aug website update" || exit 0
+          git push origin main
