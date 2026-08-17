@@ -1,8 +1,8 @@
 // Banahatti Abhivruddhi — dated content update: 17 Aug 2026
 (() => {
   const NEWS17 = [
-    "assets/news-2026-08-17-samyukta-karnataka.webp?v=20260817-4",
-    "assets/news-2026-08-17-samyukta-karnataka-2.webp?v=20260817-4"
+    "assets/news-2026-08-17-samyukta-karnataka.webp?v=20260817-5",
+    "assets/news-2026-08-17-samyukta-karnataka-2.webp?v=20260817-5"
   ];
   const POST17 = {
     id: "news-coverage-2026-08-17",
@@ -43,11 +43,11 @@
         </div>
         <div class="today-updates-grid">
           <a class="today-update-card" href="#updates">
-            <img src="${NEWS17[0]}" alt="17 ಆಗಸ್ಟ್ 2026 ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ಪತ್ರಿಕಾ ವರದಿ">
+            <img src="${NEWS17[0]}" alt="17 ಆಗಸ್ಟ್ 2026 ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ಪತ್ರಿಕಾ ವರದಿ" loading="eager">
             <span>ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಹೋರಾಟ ತೀವ್ರ · 17 August 2026</span>
           </a>
           <a class="today-update-card" href="#updates">
-            <img src="${NEWS17[1]}" alt="17 ಆಗಸ್ಟ್ 2026 ಕನ್ನಡಪ್ರಭ ಪತ್ರಿಕಾ ವರದಿ">
+            <img src="${NEWS17[1]}" alt="17 ಆಗಸ್ಟ್ 2026 ಕನ್ನಡಪ್ರಭ ಪತ್ರಿಕಾ ವರದಿ" loading="eager">
             <span>ಪ್ರಜಾಸೌಧ ಹೋರಾಟಕ್ಕೆ ಇಬ್ಬರು ರಾಜೀನಾಮೆ · 17 August 2026</span>
           </a>
         </div>
