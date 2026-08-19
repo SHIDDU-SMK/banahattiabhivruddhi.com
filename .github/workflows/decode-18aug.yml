@@ -1,0 +1,38 @@
+name: Decode 17-18 Aug media
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'staging/18aug/.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Decode staged media
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+          shopt -s nullglob
+          files=(staging/18aug/*.b64)
+          test ${#files[@]} -gt 0
+          for f in "${files[@]}"; do
+            base=$(basename "$f" .b64)
+            base64 -d "$f" > "assets/$base"
+            file "assets/$base" | grep -qi 'webp'
+            git add "assets/$base"
+          done
+          git config user.name "ChatGPT Website Update"
+          git config user.email "actions@users.noreply.github.com"
+          git rm staging/18aug/*.b64 staging/18aug/.ready
+          git commit -m "Add 17-18 Aug Saradi and newspaper media"
+          git push origin main
