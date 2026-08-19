@@ -27,7 +27,7 @@ jobs:
       - name: Decode all staged media
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
           mkdir -p assets
           mapfile -t files < <(find staging -type f -name '*.b64' -print | sort)
           if [ ${#files[@]} -eq 0 ]; then
@@ -35,26 +35,71 @@ jobs:
             exit 0
           fi
 
+          failed=0
           for f in "${files[@]}"; do
             base=$(basename "$f" .b64)
             out="assets/$base"
-            base64 -d "$f" > "$out"
+            tmp="${out}.tmp"
+            echo "Processing $f -> $out"
+
+            python3 - "$f" "$tmp" <<'PY'
+import base64, pathlib, re, struct, sys
+src = pathlib.Path(sys.argv[1])
+out = pathlib.Path(sys.argv[2])
+raw = src.read_bytes()
+# Remove whitespace and tolerate accidental non-base64 characters from transport.
+clean = re.sub(rb'[^A-Za-z0-9+/=]', b'', raw)
+clean += b'=' * ((-len(clean)) % 4)
+try:
+    data = base64.b64decode(clean, validate=False)
+except Exception as e:
+    print(f'ERROR decoding {src}: {e}', file=sys.stderr)
+    sys.exit(2)
+
+# Validate WebP container before publishing it.
+if len(data) < 12 or data[:4] != b'RIFF' or data[8:12] != b'WEBP':
+    print(f'ERROR {src}: decoded data is not a WebP file', file=sys.stderr)
+    sys.exit(3)
+expected = struct.unpack('<I', data[4:8])[0] + 8
+if len(data) < expected:
+    print(f'ERROR {src}: truncated WebP ({len(data)} bytes, expected at least {expected})', file=sys.stderr)
+    sys.exit(4)
+out.write_bytes(data[:expected])
+print(f'OK {src}: {expected} bytes')
+PY
+            rc=$?
+            if [ $rc -ne 0 ]; then
+              echo "::error file=$f::Could not decode/validate staged media; leaving it in staging"
+              rm -f "$tmp" "$out"
+              failed=1
+              continue
+            fi
+
+            mv "$tmp" "$out"
             file "$out"
             git add "$out"
             git rm "$f"
           done
 
-          while IFS= read -r marker; do
-            git rm "$marker"
-          done < <(find staging -type f -name '.ready' -print)
+          # Remove ready markers only when all staged files were processed successfully.
+          if [ $failed -eq 0 ]; then
+            while IFS= read -r marker; do
+              git rm "$marker"
+            done < <(find staging -type f -name '.ready' -print)
+          else
+            echo 'One or more staged files are invalid; valid files will still be committed.'
+          fi
 
           git config user.name 'ChatGPT Website Update'
           git config user.email 'actions@users.noreply.github.com'
 
-          if git diff --cached --quiet; then
-            echo 'Nothing to commit.'
-            exit 0
+          if ! git diff --cached --quiet; then
+            git commit -m 'Process valid staged website media'
+            git push origin main
+          else
+            echo 'Nothing valid to commit.'
           fi
 
-          git commit -m 'Process staged website media'
-          git push origin main
+          if [ $failed -ne 0 ]; then
+            exit 1
+          fi
