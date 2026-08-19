@@ -1,13 +1,19 @@
-name: Decode 17-18 Aug media
+name: Process staged website media
 
 on:
   push:
     branches: [main]
     paths:
-      - 'staging/18aug/.ready'
+      - 'staging/**/*.b64'
+      - 'staging/**/.ready'
+  workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: staged-media-main
+  cancel-in-progress: false
 
 jobs:
   decode:
@@ -17,22 +23,38 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-      - name: Decode staged media
+
+      - name: Decode all staged media
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p assets
-          shopt -s nullglob
-          files=(staging/18aug/*.b64)
-          test ${#files[@]} -gt 0
+          mapfile -t files < <(find staging -type f -name '*.b64' -print | sort)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo 'No staged media found.'
+            exit 0
+          fi
+
           for f in "${files[@]}"; do
             base=$(basename "$f" .b64)
-            base64 -d "$f" > "assets/$base"
-            file "assets/$base" | grep -qi 'webp'
-            git add "assets/$base"
+            out="assets/$base"
+            base64 -d "$f" > "$out"
+            file "$out"
+            git add "$out"
+            git rm "$f"
           done
-          git config user.name "ChatGPT Website Update"
-          git config user.email "actions@users.noreply.github.com"
-          git rm staging/18aug/*.b64 staging/18aug/.ready
-          git commit -m "Add 17-18 Aug Saradi and newspaper media"
+
+          while IFS= read -r marker; do
+            git rm "$marker"
+          done < <(find staging -type f -name '.ready' -print)
+
+          git config user.name 'ChatGPT Website Update'
+          git config user.email 'actions@users.noreply.github.com'
+
+          if git diff --cached --quiet; then
+            echo 'Nothing to commit.'
+            exit 0
+          fi
+
+          git commit -m 'Process staged website media'
           git push origin main
