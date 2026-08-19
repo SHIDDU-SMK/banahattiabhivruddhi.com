@@ -1,0 +1,30 @@
+name: Export complete website
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/export-complete-site.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Prepare website ZIP
+        run: |
+          mkdir -p export
+          zip -r export/banahattiabhivruddhi-complete-2026-08-19.zip . \
+            -x '.git/*' 'export/*'
+      - name: Upload ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: banahattiabhivruddhi-complete-2026-08-19
+          path: export/banahattiabhivruddhi-complete-2026-08-19.zip
+          retention-days: 7
