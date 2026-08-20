@@ -1,6 +1,6 @@
 // Banahatti Abhivruddhi — consolidated update through 20 Aug 2026
 (() => {
-  const V = '?v=20260820-3';
+  const V = '?v=20260820-4';
   const NEWS20 = [
     'assets/news-2026-08-20-01.webp' + V,
     'assets/news-2026-08-20-02.webp' + V,
@@ -86,10 +86,185 @@
     }
   }
 
+  function installUnifiedImageViewer(){
+    if(!document.getElementById('unified-image-viewer-style')){
+      const style=document.createElement('style');
+      style.id='unified-image-viewer-style';
+      style.textContent=`
+        /* One consistent image viewer across the entire website */
+        .site-image-lightbox{
+          width:min(1040px,calc(100vw - 32px))!important;
+          max-width:1040px!important;
+          height:min(92dvh,900px)!important;
+          max-height:92dvh!important;
+          padding:0!important;
+          border:0!important;
+          border-radius:20px!important;
+          overflow:hidden!important;
+          background:#171113!important;
+          color:#fff!important;
+          box-shadow:0 32px 100px rgba(20,8,12,.48)!important;
+        }
+        .site-image-lightbox::backdrop{
+          background:rgba(24,10,14,.80)!important;
+          backdrop-filter:blur(8px) saturate(.9)!important;
+        }
+        .site-lightbox-shell{
+          position:relative!important;
+          width:100%!important;
+          height:100%!important;
+          min-height:0!important;
+          display:flex!important;
+          align-items:stretch!important;
+          justify-content:center!important;
+        }
+        .site-lightbox-figure{
+          width:100%!important;
+          height:100%!important;
+          margin:0!important;
+          padding:0 58px 14px!important;
+          display:flex!important;
+          flex-direction:column!important;
+          justify-content:center!important;
+          align-items:center!important;
+        }
+        .site-lightbox-stage{
+          width:100%!important;
+          min-height:0!important;
+          flex:1 1 auto!important;
+          display:flex!important;
+          justify-content:center!important;
+          align-items:center!important;
+          padding:22px 0 8px!important;
+          overflow:hidden!important;
+          background:transparent!important;
+        }
+        .site-lightbox-image{
+          display:block!important;
+          width:auto!important;
+          height:auto!important;
+          max-width:100%!important;
+          max-height:calc(92dvh - 86px)!important;
+          object-fit:contain!important;
+          margin:auto!important;
+          border-radius:5px!important;
+          box-shadow:0 12px 38px rgba(0,0,0,.30)!important;
+        }
+        .site-lightbox-caption{
+          flex:0 0 auto!important;
+          max-width:900px!important;
+          padding:6px 12px 2px!important;
+          color:rgba(255,255,255,.78)!important;
+          text-align:center!important;
+          font:600 .78rem/1.45 "Noto Sans Kannada",Inter,sans-serif!important;
+        }
+        .site-lightbox-close,
+        .modal-close{
+          border:0!important;
+          border-radius:0!important;
+          background:transparent!important;
+          box-shadow:none!important;
+          backdrop-filter:none!important;
+          color:#fff!important;
+          text-shadow:0 1px 5px rgba(0,0,0,.72)!important;
+        }
+        .site-lightbox-close{
+          position:absolute!important;
+          top:10px!important;
+          right:12px!important;
+          z-index:100!important;
+          width:36px!important;
+          height:36px!important;
+          padding:0!important;
+          display:grid!important;
+          place-items:center!important;
+          font:300 2.1rem/1 Inter,Arial,sans-serif!important;
+        }
+        .site-lightbox-close:hover,
+        .site-lightbox-close:active,
+        .modal-close:hover,
+        .modal-close:active{
+          background:transparent!important;
+          color:#fff!important;
+          transform:scale(1.08)!important;
+        }
+        .site-lightbox-close:focus-visible,
+        .modal-close:focus-visible{
+          outline:2px solid rgba(255,255,255,.9)!important;
+          outline-offset:2px!important;
+        }
+        main img{cursor:zoom-in;}
+        .post-card img,.today-video-card img{cursor:pointer;}
+        @media(max-width:700px){
+          .site-image-lightbox{
+            width:calc(100vw - 8px)!important;
+            height:97dvh!important;
+            max-height:97dvh!important;
+            border-radius:15px!important;
+          }
+          .site-lightbox-figure{padding:0 38px 10px!important;}
+          .site-lightbox-stage{padding:48px 0 5px!important;}
+          .site-lightbox-image{max-height:calc(97dvh - 94px)!important;}
+          .site-lightbox-close{
+            top:7px!important;
+            right:8px!important;
+            width:34px!important;
+            height:34px!important;
+            font-size:2rem!important;
+          }
+          .site-lightbox-caption{padding:5px 4px 0!important;font-size:.72rem!important;}
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    let dialog=document.getElementById('siteImageLightbox');
+    if(!dialog){
+      dialog=document.createElement('dialog');
+      dialog.id='siteImageLightbox';
+      dialog.className='site-image-lightbox';
+      dialog.innerHTML='<div class="site-lightbox-shell"><button class="site-lightbox-close" type="button" aria-label="Close">×</button><figure class="site-lightbox-figure"><div class="site-lightbox-stage"><img class="site-lightbox-image" alt=""></div><figcaption class="site-lightbox-caption"></figcaption></figure></div>';
+      document.body.appendChild(dialog);
+      dialog.querySelector('.site-lightbox-close').addEventListener('click',()=>dialog.close());
+      dialog.addEventListener('click',event=>{if(event.target===dialog) dialog.close();});
+    }
+
+    const viewerImage=dialog.querySelector('.site-lightbox-image');
+    const viewerCaption=dialog.querySelector('.site-lightbox-caption');
+    const close=dialog.querySelector('.site-lightbox-close');
+    if(close) close.textContent='×';
+
+    const isImageHref=href=>/\.(?:avif|webp|png|jpe?g|gif)(?:[?#].*)?$/i.test(href||'');
+
+    document.addEventListener('click',event=>{
+      const img=event.target.closest('main img');
+      if(!img) return;
+
+      // Movement Updates already uses the richer postModal with post text/gallery controls.
+      if(img.closest('.post-card')) return;
+
+      // Preserve genuine external links such as YouTube/video links.
+      const anchor=img.closest('a[href]');
+      const href=anchor?.getAttribute('href')||'';
+      if(href && !href.startsWith('#') && !isImageHref(href)) return;
+
+      const src=isImageHref(href) ? href : (img.currentSrc||img.src);
+      if(!src) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      viewerImage.src=src;
+      viewerImage.alt=img.alt||'Photo';
+      viewerCaption.textContent=img.alt||'';
+      if(!dialog.open) dialog.showModal();
+    },true);
+  }
+
   function boot(){
     syncPosts();
     featureLatest();
     updateToday();
+    installUnifiedImageViewer();
     if(typeof renderFilters==='function'&&typeof renderPosts==='function'){ renderFilters(); renderPosts(); }
   }
 
