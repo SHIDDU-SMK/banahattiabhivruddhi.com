@@ -684,3 +684,45 @@ body {
   .modal-copy { padding: 20px 17px 22px !important; }
   .modal-copy .post-title-kn { font-size: 1.15rem; }
 }
+
+/* Simple post modal close icon — 20 Aug 2026 */
+.modal-close {
+  position: sticky !important;
+  top: 8px !important;
+  z-index: 80 !important;
+  display: block !important;
+  width: 34px !important;
+  height: 34px !important;
+  margin: 8px 10px -42px auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  color: #fff !important;
+  font: 300 2rem/34px Inter, Arial, sans-serif !important;
+  text-align: center !important;
+  text-shadow: 0 1px 5px rgba(0,0,0,.65);
+  transform: none !important;
+}
+.modal-close:hover,
+.modal-close:active {
+  background: transparent !important;
+  color: #fff !important;
+  transform: scale(1.08) !important;
+}
+.modal-close:focus-visible {
+  outline: 2px solid rgba(255,255,255,.9) !important;
+  outline-offset: 2px !important;
+}
+@media (max-width: 700px) {
+  .modal-close {
+    top: 6px !important;
+    width: 32px !important;
+    height: 32px !important;
+    margin: 6px 8px -38px auto !important;
+    font-size: 1.9rem !important;
+    line-height: 32px !important;
+  }
+}
