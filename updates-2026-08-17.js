@@ -1,186 +1,29 @@
-// Banahatti Abhivruddhi — dated content update: 17 Aug 2026
+// Banahatti Abhivruddhi — consolidated update through 20 Aug 2026
 (() => {
+  const V = '?v=20260820-2';
+  const NEWS20 = 'assets/news-2026-08-20-all-cuttings.webp' + V;
+  const NEWS19 = 'assets/news-2026-08-19-prajasoudha.webp' + V;
+  const NEWS18 = 'assets/news-2026-08-18-prajavani.webp' + V;
+  const PROCESSION18 = 'assets/procession-saradi-2026-08-18.webp' + V;
+  const SARADI17 = 'assets/saradi-satyagraha-2026-08-17-collage.webp' + V;
   const NEWS17 = [
-    "assets/news-2026-08-17-samyukta-karnataka.webp?v=20260817-5",
-    "assets/news-2026-08-17-samyukta-karnataka-2.webp?v=20260817-5"
+    'assets/news-2026-08-17-samyukta-karnataka.webp' + V,
+    'assets/news-2026-08-17-samyukta-karnataka-2.webp' + V
   ];
-  const POST17 = {
-    id: "news-coverage-2026-08-17",
-    type: "Paper Cut",
-    date: "2026-08-17",
-    title: "17 August 2026 newspaper coverage: Praja Soudha movement",
-    titleKn: "17 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಹೋರಾಟ ತೀವ್ರ",
-    text: "Two newspaper reports dated 17 August 2026 cover the continuing relay Satyagraha and the campaign demanding construction of the Praja Soudha in Banahatti.",
-    textKn: "17 ಆಗಸ್ಟ್ 2026ರ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು ಸರದಿ ಸತ್ಯಾಗ್ರಹ ಮತ್ತು ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕಾಗಿ ನಡೆಯುತ್ತಿರುವ ಹೋರಾಟವನ್ನು ದಾಖಲಿಸುತ್ತವೆ.",
-    mediaKind: "gallery",
-    mediaUrls: NEWS17,
-    mediaUrl: NEWS17[0],
-    link: "",
-    local: false,
-    createdAt: 11
-  };
 
-  if (typeof siteData !== "undefined" && Array.isArray(siteData.initialPosts)) {
-    const existing = siteData.initialPosts.find(post => post.id === POST17.id);
-    if (existing) Object.assign(existing, POST17);
-    else siteData.initialPosts.unshift(POST17);
-    siteData.ticker = "17 ಆಗಸ್ಟ್ 2026 · ಇಂದಿನ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು ಸೇರಿಸಲಾಗಿದೆ. · 17 August 2026 · Two newspaper reports on the Praja Soudha movement have been added.";
-  }
-
-  function featureNews17() {
-    const main = document.querySelector("main#main");
-    if (!main) return;
-    document.getElementById("featured-news-17")?.remove();
-    const oldFeatured = document.getElementById("featured-news-16");
-    const section = document.createElement("section");
-    section.id = "featured-news-17";
-    section.className = "today-updates";
-    section.innerHTML = `
-      <div class="container">
-        <div class="today-updates-head">
-          <span class="latest-highlight-badge">ಇತ್ತೀಚಿನ ಪತ್ರಿಕಾ ವರದಿ · Latest Newspaper Coverage</span>
-          <h2>17 ಆಗಸ್ಟ್ 2026 — ಎರಡು ಪ್ರಮುಖ ಪತ್ರಿಕಾ ವರದಿಗಳು</h2>
-        </div>
-        <div class="today-updates-grid">
-          <a class="today-update-card" href="#updates">
-            <img src="${NEWS17[0]}" alt="17 ಆಗಸ್ಟ್ 2026 ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ಪತ್ರಿಕಾ ವರದಿ" loading="eager">
-            <span>ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಹೋರಾಟ ತೀವ್ರ · 17 August 2026</span>
-          </a>
-          <a class="today-update-card" href="#updates">
-            <img src="${NEWS17[1]}" alt="17 ಆಗಸ್ಟ್ 2026 ಕನ್ನಡಪ್ರಭ ಪತ್ರಿಕಾ ವರದಿ" loading="eager">
-            <span>ಪ್ರಜಾಸೌಧ ಹೋರಾಟಕ್ಕೆ ಇಬ್ಬರು ರಾಜೀನಾಮೆ · 17 August 2026</span>
-          </a>
-        </div>
-      </div>`;
-    if (oldFeatured) oldFeatured.insertAdjacentElement("beforebegin", section);
-    else main.insertBefore(section, main.firstChild);
-  }
-
-  function updateTodayNews() {
-    const heading = document.querySelector("#today-updates .today-updates-head h2");
-    const card = document.querySelector("#today-updates .today-update-card:not(.today-video-card)");
-    if (heading) heading.textContent = "17 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು";
-    if (card) {
-      card.href = "#updates";
-      const img = card.querySelector("img");
-      const text = card.querySelector("span");
-      if (img) {
-        img.src = NEWS17[0];
-        img.alt = "17 ಆಗಸ್ಟ್ 2026 ಸಂಯುಕ್ತ ಕರ್ನಾಟಕ ಪತ್ರಿಕಾ ವರದಿ";
-      }
-      if (text) text.textContent = "17 ಆಗಸ್ಟ್ — 2 ಪತ್ರಿಕಾ ವರದಿಗಳು · 17 August — 2 news reports";
-    }
-  }
-
-  function boot() {
-    featureNews17();
-    updateTodayNews();
-    if (typeof renderFilters === "function" && typeof renderPosts === "function") {
-      renderFilters();
-      renderPosts();
-    }
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
-  else boot();
-})();
-
-// 18 Aug 2026 update + 17 Aug Saradi Satyagraha photos
-(() => {
-  const NEWS18 = "assets/news-2026-08-18-prajavani.webp?v=20260819-1";
-  const PROCESSION18 = "assets/procession-saradi-2026-08-18.webp?v=20260819-1";
-  const SARADI17 = "assets/saradi-satyagraha-2026-08-17-collage.webp?v=20260819-1";
   const posts = [
-    {
-      id: "procession-saradi-2026-08-18",
-      type: "Photo",
-      date: "2026-08-18",
-      title: "Procession arrives for the 18 August Saradi Satyagraha",
-      titleKn: "18 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಮೆರವಣಿಗೆ ಆಗಮನ",
-      text: "Citizens arrived in a procession to join the day's Saradi Satyagraha demanding construction of the Praja Soudha in Banahatti.",
-      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕಾಗಿ ನಡೆಯುತ್ತಿರುವ ಸರದಿ ಸತ್ಯಾಗ್ರಹದಲ್ಲಿ ಭಾಗವಹಿಸಲು ನಾಗರಿಕರು ಮೆರವಣಿಗೆಯಲ್ಲಿ ಆಗಮಿಸಿದರು.",
-      mediaKind: "image",
-      mediaUrl: PROCESSION18,
-      link: "",
-      local: false,
-      createdAt: 14
-    },
-    {
-      id: "news-coverage-2026-08-18-prajavani",
-      type: "Paper Cut",
-      date: "2026-08-18",
-      title: "18 August 2026 Prajavani coverage: traders support Praja Soudha demand",
-      titleKn: "18 ಆಗಸ್ಟ್ 2026 ಪ್ರಜಾವಾಣಿ: ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ವ್ಯಾಪಾರಸ್ಥರ ಬೆಂಬಲ",
-      text: "Prajavani reported on the continuing public campaign and support for construction of the Praja Soudha in Banahatti.",
-      textKn: "ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣದ ಬೇಡಿಕೆಗೆ ಮುಂದುವರಿದ ಜನಹೋರಾಟ ಮತ್ತು ಬೆಂಬಲದ ಕುರಿತು ಪ್ರಜಾವಾಣಿ ವರದಿ ಮಾಡಿದೆ.",
-      mediaKind: "image",
-      mediaUrl: NEWS18,
-      link: "",
-      local: false,
-      createdAt: 13
-    },
-    {
-      id: "saradi-satyagraha-photos-2026-08-17",
-      type: "Photo",
-      date: "2026-08-17",
-      title: "17 August Saradi Satyagraha",
-      titleKn: "17 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಚಿತ್ರಗಳು",
-      text: "Scenes from the 17 August relay Satyagraha in support of the Banahatti Praja Soudha movement.",
-      textKn: "ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಬೆಂಬಲವಾಗಿ 17 ಆಗಸ್ಟ್ ನಡೆದ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಚಿತ್ರಗಳು.",
-      mediaKind: "image",
-      mediaUrl: SARADI17,
-      link: "",
-      local: false,
-      createdAt: 12
-    }
+    { id:'news-coverage-2026-08-20', type:'Paper Cut', date:'2026-08-20', title:'20 August 2026 newspaper coverage: Banahatti Praja Soudha movement', titleKn:'20 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ', text:'Six newspaper cuttings dated 20 August 2026 covering the continuing Praja Soudha campaign in Banahatti.', textKn:'20 ಆಗಸ್ಟ್ 2026ರಂದು ಪ್ರಕಟವಾದ ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಆರು ಪತ್ರಿಕಾ ವರದಿಗಳ ಸಂಗ್ರಹ.', mediaKind:'image', mediaUrl:NEWS20, link:'', local:false, createdAt:20 },
+    { id:'news-coverage-2026-08-19', type:'Paper Cut', date:'2026-08-19', title:'19 August 2026 newspaper coverage: Praja Soudha movement', titleKn:'19 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ', text:'Newspaper coverage dated 19 August 2026 on the Banahatti Praja Soudha movement.', textKn:'19 ಆಗಸ್ಟ್ 2026ರ ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಪತ್ರಿಕಾ ವರದಿ.', mediaKind:'image', mediaUrl:NEWS19, link:'', local:false, createdAt:19 },
+    { id:'procession-saradi-2026-08-18', type:'Photo', date:'2026-08-18', title:'Procession arrives for the 18 August Saradi Satyagraha', titleKn:'18 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಮೆರವಣಿಗೆ ಆಗಮನ', text:'Citizens arrived in a procession to join the Saradi Satyagraha demanding construction of the Praja Soudha in Banahatti.', textKn:'ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕಾಗಿ ನಡೆಯುತ್ತಿರುವ ಸರದಿ ಸತ್ಯಾಗ್ರಹದಲ್ಲಿ ಭಾಗವಹಿಸಲು ನಾಗರಿಕರು ಮೆರವಣಿಗೆಯಲ್ಲಿ ಆಗಮಿಸಿದರು.', mediaKind:'image', mediaUrl:PROCESSION18, link:'', local:false, createdAt:18 },
+    { id:'news-coverage-2026-08-18-prajavani', type:'Paper Cut', date:'2026-08-18', title:'18 August 2026 Prajavani coverage', titleKn:'18 ಆಗಸ್ಟ್ 2026 ಪ್ರಜಾವಾಣಿ: ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ವ್ಯಾಪಾರಸ್ಥರ ಬೆಂಬಲ', text:'Prajavani reported continuing public and traders support for construction of the Praja Soudha in Banahatti.', textKn:'ಬನಹಟ್ಟಿಯಲ್ಲಿ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ವ್ಯಾಪಾರಸ್ಥರು ಮತ್ತು ಸಾರ್ವಜನಿಕರ ಬೆಂಬಲದ ಕುರಿತು ಪ್ರಜಾವಾಣಿ ವರದಿ.', mediaKind:'image', mediaUrl:NEWS18, link:'', local:false, createdAt:17 },
+    { id:'saradi-satyagraha-photos-2026-08-17', type:'Photo', date:'2026-08-17', title:'17 August Saradi Satyagraha', titleKn:'17 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಚಿತ್ರಗಳು', text:'Scenes from the 17 August relay Satyagraha in support of the Banahatti Praja Soudha movement.', textKn:'ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಬೆಂಬಲವಾಗಿ 17 ಆಗಸ್ಟ್ ನಡೆದ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಚಿತ್ರಗಳು.', mediaKind:'image', mediaUrl:SARADI17, link:'', local:false, createdAt:16 },
+    { id:'news-coverage-2026-08-17', type:'Paper Cut', date:'2026-08-17', title:'17 August 2026 newspaper coverage', titleKn:'17 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಹೋರಾಟ ತೀವ್ರ', text:'Two newspaper reports dated 17 August 2026 on the continuing Praja Soudha movement.', textKn:'17 ಆಗಸ್ಟ್ 2026ರ ಎರಡು ಪತ್ರಿಕಾ ವರದಿಗಳು ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟವನ್ನು ದಾಖಲಿಸುತ್ತವೆ.', mediaKind:'gallery', mediaUrls:NEWS17, mediaUrl:NEWS17[0], link:'', local:false, createdAt:15 }
   ];
 
-  if (typeof siteData !== "undefined" && Array.isArray(siteData.initialPosts)) {
-    posts.slice().reverse().forEach(post => {
-      const existing = siteData.initialPosts.find(p => p.id === post.id);
-      if (existing) Object.assign(existing, post);
-      else siteData.initialPosts.unshift(post);
-    });
-    siteData.ticker = "18 ಆಗಸ್ಟ್ 2026 · ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಮೆರವಣಿಗೆ ಮತ್ತು ಪ್ರಜಾವಾಣಿ ವರದಿ ಸೇರಿಸಲಾಗಿದೆ. · 18 August 2026 · Procession and Prajavani coverage added.";
-  }
-
-  function feature18() {
-    const main = document.querySelector("main#main");
-    if (!main) return;
-    document.getElementById("featured-news-18")?.remove();
-    const anchor = document.getElementById("featured-news-17") || document.getElementById("featured-news-16");
-    const section = document.createElement("section");
-    section.id = "featured-news-18";
-    section.className = "today-updates";
-    section.innerHTML = `
-      <div class="container">
-        <div class="today-updates-head">
-          <span class="latest-highlight-badge">ಇತ್ತೀಚಿನ ಬೆಳವಣಿಗೆ · Latest Update</span>
-          <h2>18 ಆಗಸ್ಟ್ 2026 — ಮೆರವಣಿಗೆ ಮತ್ತು ಪತ್ರಿಕಾ ವರದಿ</h2>
-        </div>
-        <div class="today-updates-grid">
-          <a class="today-update-card" href="#updates">
-            <img src="${PROCESSION18}" alt="18 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಆಗಮಿಸಿದ ಮೆರವಣಿಗೆ" loading="eager">
-            <span>ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಮೆರವಣಿಗೆ ಆಗಮನ · Procession arrives for Saradi Satyagraha</span>
-          </a>
-          <a class="today-update-card" href="#updates">
-            <img src="${NEWS18}" alt="18 ಆಗಸ್ಟ್ 2026 ಪ್ರಜಾವಾಣಿ ಪತ್ರಿಕಾ ವರದಿ" loading="eager">
-            <span>ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ವ್ಯಾಪಾರಸ್ಥರ ಬೆಂಬಲ · Prajavani, 18 August</span>
-          </a>
-        </div>
-      </div>`;
-    if (anchor) anchor.insertAdjacentElement("beforebegin", section);
-    else main.insertBefore(section, main.firstChild);
-  }
-
-  function boot18() {
-    feature18();
-    if (typeof renderFilters === "function" && typeof renderPosts === "function") {
-      renderFilters();
-      renderPosts();
-    }
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot18);
-  else boot18();
+  function syncPosts(){ if(typeof siteData==='undefined'||!Array.isArray(siteData.initialPosts)) return; posts.slice().reverse().forEach(post=>{ const existing=siteData.initialPosts.find(p=>p.id===post.id); if(existing) Object.assign(existing,post); else siteData.initialPosts.unshift(post); }); siteData.ticker='20 ಆಗಸ್ಟ್ 2026 · ಇಂದಿನ ಆರು ಪತ್ರಿಕಾ ವರದಿಗಳು ಸೇರಿಸಲಾಗಿದೆ. · 20 August 2026 · Six latest newspaper cuttings added.'; }
+  function card(img,label){ return `<a class="today-update-card" href="${img}" target="_blank" rel="noopener noreferrer"><img src="${img}" alt="${label}" loading="eager"><span>${label}</span></a>`; }
+  function featureLatest(){ const main=document.querySelector('main#main'); if(!main) return; ['featured-news-20','featured-news-19','featured-news-18','featured-news-17'].forEach(id=>document.getElementById(id)?.remove()); const s20=document.createElement('section'); s20.id='featured-news-20'; s20.className='today-updates'; s20.innerHTML=`<div class="container"><div class="today-updates-head"><span class="latest-highlight-badge">ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳು · Today's Newspaper Coverage</span><h2>20 ಆಗಸ್ಟ್ 2026 — ಆರು ಪ್ರಮುಖ ಪತ್ರಿಕಾ ವರದಿಗಳು</h2><p>ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳ ಸಂಗ್ರಹ · Six newspaper cuttings from 20 August 2026</p></div><div class="today-updates-grid" style="grid-template-columns:minmax(0,1fr)">${card(NEWS20,'20 ಆಗಸ್ಟ್ 2026 · 6 ಪತ್ರಿಕಾ ವರದಿಗಳು · 20 August 2026 · 6 news cuttings')}</div></div>`; const s19=document.createElement('section'); s19.id='featured-news-19'; s19.className='today-updates'; s19.innerHTML=`<div class="container"><div class="today-updates-head"><span class="latest-highlight-badge">ಪತ್ರಿಕಾ ವರದಿ · Newspaper</span><h2>19 ಆಗಸ್ಟ್ 2026</h2></div><div class="today-updates-grid">${card(NEWS19,'19 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ · 19 August newspaper coverage')}</div></div>`; const s18=document.createElement('section'); s18.id='featured-news-18'; s18.className='today-updates'; s18.innerHTML=`<div class="container"><div class="today-updates-head"><span class="latest-highlight-badge">18 ಆಗಸ್ಟ್ · 18 August</span><h2>ಮೆರವಣಿಗೆ ಮತ್ತು ಪ್ರಜಾವಾಣಿ ವರದಿ</h2></div><div class="today-updates-grid">${card(PROCESSION18,'ಸರದಿ ಸತ್ಯಾಗ್ರಹಕ್ಕೆ ಮೆರವಣಿಗೆ ಆಗಮನ · Procession arrives for Saradi Satyagraha')}${card(NEWS18,'ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣಕ್ಕೆ ವ್ಯಾಪಾರಸ್ಥರ ಬೆಂಬಲ · Prajavani, 18 August')}</div></div>`; const s17=document.createElement('section'); s17.id='featured-news-17'; s17.className='today-updates'; s17.innerHTML=`<div class="container"><div class="today-updates-head"><span class="latest-highlight-badge">17 ಆಗಸ್ಟ್ · 17 August</span><h2>ಸರದಿ ಸತ್ಯಾಗ್ರಹ ಮತ್ತು ಪತ್ರಿಕಾ ವರದಿಗಳು</h2></div><div class="today-updates-grid">${card(SARADI17,'17 ಆಗಸ್ಟ್ ಸರದಿ ಸತ್ಯಾಗ್ರಹದ ಚಿತ್ರಗಳು · Saradi Satyagraha photos')}${card(NEWS17[0],'17 ಆಗಸ್ಟ್ ಪತ್ರಿಕಾ ವರದಿ · 17 August newspaper coverage')}</div></div>`; main.insertBefore(s17,main.firstChild); main.insertBefore(s18,main.firstChild); main.insertBefore(s19,main.firstChild); main.insertBefore(s20,main.firstChild); }
+  function updateToday(){ const heading=document.querySelector('#today-updates .today-updates-head h2'); const cardEl=document.querySelector('#today-updates .today-update-card:not(.today-video-card)'); if(heading) heading.textContent='20 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳು'; if(cardEl){ cardEl.href=NEWS20; cardEl.target='_blank'; const img=cardEl.querySelector('img'); const txt=cardEl.querySelector('span'); if(img){img.src=NEWS20;img.alt='20 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು';} if(txt) txt.textContent='20 ಆಗಸ್ಟ್ — 6 ಪತ್ರಿಕಾ ವರದಿಗಳು · 20 August — 6 news cuttings'; } }
+  function boot(){ syncPosts(); featureLatest(); updateToday(); if(typeof renderFilters==='function'&&typeof renderPosts==='function'){ renderFilters(); renderPosts(); } }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
