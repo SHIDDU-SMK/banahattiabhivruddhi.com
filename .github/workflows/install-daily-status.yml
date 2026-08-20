@@ -1,0 +1,41 @@
+name: Install Daily Top Status
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-daily-status.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Add daily status script to site
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          tag = '<script src="daily-status.js?v=20260820-1" defer></script>'
+          # Remove any older daily-status include, then insert the current one last.
+          import re
+          s = re.sub(r'\s*<script src="daily-status\.js[^\"]*" defer></script>', '', s)
+          s = s.replace('</body>', tag + '\n</body>')
+          p.write_text(s, encoding='utf-8')
+          PY
+          git config user.name "ChatGPT Website Update"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- index.html; then
+            echo "No index change needed"
+          else
+            git add index.html
+            git commit -m "Load daily top status after dated updates"
+            git push origin main
+          fi
