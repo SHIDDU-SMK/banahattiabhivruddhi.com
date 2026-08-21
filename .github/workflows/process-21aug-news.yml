@@ -1,0 +1,51 @@
+name: Process 21 Aug Newspaper Media
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'staging/21aug/.ready'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: process-21aug-news-main
+  cancel-in-progress: false
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Assemble and validate WebP files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+
+          cat staging/21aug/chunks/news-2026-08-21-01.webp.part* > /tmp/news01.b64
+          cat staging/21aug/chunks/news-2026-08-21-02.webp.part* > /tmp/news02.b64
+
+          base64 -d /tmp/news01.b64 > assets/news-2026-08-21-01.webp
+          base64 -d /tmp/news02.b64 > assets/news-2026-08-21-02.webp
+
+          for f in assets/news-2026-08-21-01.webp assets/news-2026-08-21-02.webp; do
+            test "$(head -c 4 "$f")" = "RIFF"
+            test "$(dd if="$f" bs=1 skip=8 count=4 2>/dev/null)" = "WEBP"
+            file "$f"
+          done
+
+          rm -rf staging/21aug/chunks staging/21aug/.ready
+
+          git config user.name 'ChatGPT Website Update'
+          git config user.email 'actions@users.noreply.github.com'
+          git add assets/news-2026-08-21-01.webp assets/news-2026-08-21-02.webp
+          git add -A staging/21aug
+          git commit -m 'Add 21 August newspaper WebP assets'
+          git push origin main
