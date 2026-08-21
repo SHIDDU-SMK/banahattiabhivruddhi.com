@@ -24,7 +24,7 @@ jobs:
           import re
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          tag = '<script src="daily-status.js?v=20260820-1" defer></script>'
+          tag = '<script src="daily-status.js?v=20260821-1" defer></script>'
           s = re.sub(r'\s*<script src="daily-status\.js[^\"]*" defer></script>', '', s)
           s = s.replace('</body>', tag + '\n</body>')
           p.write_text(s, encoding='utf-8')
@@ -35,7 +35,7 @@ jobs:
             echo "No index change needed"
           else
             git add index.html
-            git commit -m "Load daily top status after dated updates"
+            git commit -m "Refresh daily status cache for 21 Aug"
             git push origin main
           fi
-# Trigger refresh: 2026-08-20
+# Trigger refresh: 2026-08-21
