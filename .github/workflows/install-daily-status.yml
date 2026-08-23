@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/install-daily-status.yml'
+      - 'staging/status-cache-trigger.txt'
   workflow_dispatch:
 
 permissions:
