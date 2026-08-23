@@ -1,8 +1,8 @@
 // Keeps the top status/ticker current and applies the latest dated content.
 (() => {
-  const LATEST_CONTENT_DATE = '2026-08-22';
-  const LATEST_CONTENT_KN = '22 ಆಗಸ್ಟ್ 2026';
-  const LATEST_CONTENT_EN = '22 August 2026';
+  const LATEST_CONTENT_DATE = '2026-08-23';
+  const LATEST_CONTENT_KN = '23 ಆಗಸ್ಟ್ 2026';
+  const LATEST_CONTENT_EN = '23 August 2026';
 
   const NEWS21 = [
     'assets/news-2026-08-21-01.webp?v=20260821-1',
@@ -14,6 +14,16 @@
     'assets/news-2026-08-22-02.webp?v=20260822-1',
     'assets/news-2026-08-22-03.webp?v=20260822-1'
   ];
+
+  const NEWS23_PARTS = [
+    'assets/news-2026-08-23-01.part0?v=20260823-1',
+    'assets/news-2026-08-23-01.part1?v=20260823-1',
+    'assets/news-2026-08-23-01.part2?v=20260823-1',
+    'assets/news-2026-08-23-01.part3?v=20260823-1',
+    'assets/news-2026-08-23-01.part4?v=20260823-1',
+    'assets/news-2026-08-23-01.part5?v=20260823-1'
+  ];
+  let news23MediaUrl = '';
 
   const monthKn = {
     January:'ಜನವರಿ', February:'ಫೆಬ್ರವರಿ', March:'ಮಾರ್ಚ್', April:'ಏಪ್ರಿಲ್',
@@ -40,7 +50,7 @@
   function message() {
     const today = indiaDateParts();
     if (today.iso === LATEST_CONTENT_DATE) {
-      return `${today.kn} · ಇಂದಿನ ಮೂರು ಹೊಸ ಪತ್ರಿಕಾ ವರದಿಗಳು ಸೇರಿಸಲಾಗಿದೆ. · ${today.en} · Three new newspaper cuttings added today.`;
+      return `${today.kn} · ಇಂದಿನ ಹೊಸ ಪತ್ರಿಕಾ ವರದಿ ಸೇರಿಸಲಾಗಿದೆ. · ${today.en} · One new newspaper cutting added today.`;
     }
     return `${today.kn} · ವೆಬ್‌ಸೈಟ್‌ನ ಇತ್ತೀಚಿನ ವಿಷಯ ${LATEST_CONTENT_KN}ರವರೆಗೆ ನವೀಕರಿಸಲಾಗಿದೆ. · ${today.en} · Latest website content is updated through ${LATEST_CONTENT_EN}.`;
   }
@@ -57,6 +67,20 @@
     const existing = siteData.initialPosts.find(p => p.id === post.id);
     if (existing) Object.assign(existing, post);
     else siteData.initialPosts.unshift(post);
+  }
+
+  async function loadNews23MediaUrl() {
+    if (news23MediaUrl) return news23MediaUrl;
+    const chunks = await Promise.all(NEWS23_PARTS.map(async url => {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`Unable to load ${url}`);
+      return response.text();
+    }));
+    const binary = atob(chunks.join('').trim());
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+    news23MediaUrl = URL.createObjectURL(new Blob([bytes], { type: 'image/webp' }));
+    return news23MediaUrl;
   }
 
   function sync21AugPost() {
@@ -95,35 +119,46 @@
     });
   }
 
-  function feature22Aug() {
+  function sync23AugPost(mediaUrl) {
+    upsertPost({
+      id: 'news-coverage-2026-08-23',
+      type: 'Paper Cut',
+      date: '2026-08-23',
+      title: '23 August 2026 newspaper coverage: Praja Soudha Satyagraha enters its 15th day',
+      titleKn: '23 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ: ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಸತ್ಯಾಗ್ರಹ 15ನೇ ದಿನಕ್ಕೆ',
+      text: 'Newspaper coverage dated 23 August 2026 on the Banahatti Praja Soudha movement and the relay Satyagraha entering its 15th day.',
+      textKn: 'ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ 15ನೇ ದಿನಕ್ಕೆ ಕಾಲಿಟ್ಟಿರುವುದನ್ನು ದಾಖಲಿಸುವ 23 ಆಗಸ್ಟ್ 2026ರ ಪತ್ರಿಕಾ ವರದಿ.',
+      mediaKind: 'image',
+      mediaUrls: [mediaUrl],
+      mediaUrl,
+      link: '',
+      local: false,
+      createdAt: 23
+    });
+  }
+
+  function feature23Aug(mediaUrl) {
     const main = document.querySelector('main#main');
     if (!main) return;
 
     document.getElementById('featured-news-21')?.remove();
     document.getElementById('featured-news-22')?.remove();
+    document.getElementById('featured-news-23')?.remove();
 
     const section = document.createElement('section');
-    section.id = 'featured-news-22';
+    section.id = 'featured-news-23';
     section.className = 'today-updates';
     section.innerHTML = `
       <div class="container">
         <div class="today-updates-head">
-          <span class="latest-highlight-badge">22 ಆಗಸ್ಟ್ 2026 · Latest Newspaper Coverage</span>
-          <h2>22 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳು</h2>
-          <p>ಮೂರು ಪತ್ರಿಕಾ ವರದಿಗಳನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ವೀಕ್ಷಿಸಿ · View all three newspaper cuttings separately</p>
+          <span class="latest-highlight-badge">23 ಆಗಸ್ಟ್ 2026 · Latest Newspaper Coverage</span>
+          <h2>23 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿ</h2>
+          <p>ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಸತ್ಯಾಗ್ರಹ 15ನೇ ದಿನಕ್ಕೆ · Praja Soudha Satyagraha enters its 15th day</p>
         </div>
         <div class="today-updates-grid">
-          <a class="today-update-card" href="${NEWS22[0]}" target="_blank" rel="noopener noreferrer">
-            <img src="${NEWS22[0]}" alt="22 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ 1" loading="eager">
-            <span>ಪ್ರಜಾಸೌಧ ಹೋರಾಟಕ್ಕೆ ಮುಸ್ಲಿಂ ಸಮುದಾಯದ ಬೆಂಬಲ · Newspaper cutting 1</span>
-          </a>
-          <a class="today-update-card" href="${NEWS22[1]}" target="_blank" rel="noopener noreferrer">
-            <img src="${NEWS22[1]}" alt="22 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ 2" loading="eager">
-            <span>ಸರದಿ ಸತ್ಯಾಗ್ರಹದ 14ನೇ ದಿನದ ವರದಿ · Newspaper cutting 2</span>
-          </a>
-          <a class="today-update-card" href="${NEWS22[2]}" target="_blank" rel="noopener noreferrer">
-            <img src="${NEWS22[2]}" alt="22 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ 3" loading="eager">
-            <span>14ನೇ ದಿನದ ಪ್ರಜಾಸೌಧ ನಿರ್ಮಾಣ ಹೋರಾಟ · Newspaper cutting 3</span>
+          <a class="today-update-card" href="${mediaUrl}" target="_blank" rel="noopener noreferrer">
+            <img src="${mediaUrl}" alt="23 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ" loading="eager">
+            <span>ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಸತ್ಯಾಗ್ರಹ 15ನೇ ದಿನಕ್ಕೆ · Newspaper cutting</span>
           </a>
         </div>
       </div>`;
@@ -131,11 +166,18 @@
     main.insertBefore(section, main.firstChild);
   }
 
-  function applyLatest() {
+  async function applyLatest() {
     sync21AugPost();
     sync22AugPost();
-    feature22Aug();
     refreshTopStatus();
+
+    try {
+      const mediaUrl = await loadNews23MediaUrl();
+      sync23AugPost(mediaUrl);
+      feature23Aug(mediaUrl);
+    } catch (error) {
+      console.error('Could not load 23 August newspaper cutting:', error);
+    }
 
     if (typeof renderFilters === 'function' && typeof renderPosts === 'function') {
       renderFilters();
