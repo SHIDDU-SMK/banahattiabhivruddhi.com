@@ -1,0 +1,84 @@
+name: Install 25 August newspaper coverage
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/install-news-2026-08-25.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install-news:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Restore newspaper images and update homepage
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+          while read -r file sha; do
+            gh api "repos/${GITHUB_REPOSITORY}/git/blobs/${sha}" --jq '.content' | tr -d '\n' | base64 --decode > "assets/${file}"
+          done <<'EOF'
+          news-2026-08-25-01.webp 8db7f1e28143271b3fb9539de33f4e8121be3d0d
+          news-2026-08-25-02.webp 6ad43e84673e94c6aeef97c68411f5d5bb5f6eb3
+          news-2026-08-25-03.webp a54f1e8032b45f3081a353765e3f3a2d46d115be
+          news-2026-08-25-04.webp 0a491c7dc2e7aa6c09a8129050b2d7213618100b
+          news-2026-08-25-05.webp 40a9648ec5f1d227a3bdbcc0bf569dcebdab2ca9
+          news-2026-08-25-06.webp fa674750ee14b12f7b13e42e4b61b908a4c8ca6d
+          news-2026-08-25-07.webp 3ecac39c831ef76bda6c9c957fded286b55e7c3e
+          news-2026-08-25-08.webp c78a2c4ed70515b7217221816c1339511853c4f3
+          EOF
+
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          cards = '\n'.join(
+              f'''      <a class="today-update-card" href="assets/news-2026-08-25-{i:02d}.webp" target="_blank" rel="noopener noreferrer">
+        <img src="assets/news-2026-08-25-{i:02d}.webp" alt="25 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ಕತ್ತರಣೆ {i}" loading="lazy"/>
+        <span>ಪತ್ರಿಕಾ ಕತ್ತರಣೆ {i} · Newspaper cutting {i}</span>
+      </a>'''
+              for i in range(1, 9)
+          )
+          section = f'''<section class="today-updates" id="today-updates">
+  <div class="container">
+    <div class="today-updates-head">
+      <span class="latest-highlight-badge">ಇಂದಿನ ನವೀಕರಣ · Today's Update</span>
+      <h2>25 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿಗಳು</h2>
+      <p class="kn-text">ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಇಂದಿನ ಎಂಟು ಪತ್ರಿಕಾ ಕತ್ತರಣೆಗಳು</p>
+      <p class="en-text">Eight newspaper cuttings from today's coverage of the Banahatti Praja Soudha movement.</p>
+    </div>
+    <div class="today-updates-grid">
+{cards}
+    </div>
+  </div>
+</section>'''
+          pattern = r'<section class="today-updates" id="today-updates">.*?</section>'
+          updated, count = re.subn(pattern, section, s, count=1, flags=re.S)
+          if count != 1:
+              raise SystemExit('Could not find the existing today-updates section')
+          p.write_text(updated, encoding='utf-8')
+          PY
+
+      - name: Commit newspaper coverage
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/news-2026-08-25-*.webp
+          if git diff --cached --quiet; then
+            echo "Nothing to commit"
+            exit 0
+          fi
+          git commit -m "Add 25 August newspaper cuttings"
+          git push origin main
