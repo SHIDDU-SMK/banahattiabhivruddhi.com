@@ -1,27 +1,20 @@
 from pathlib import Path
-import base64
 import re
 
-# Decode four staged 24 August WebP images. The staged text may omit Base64 padding.
+# The four 24 August images are committed directly as WebP assets.
 for i in range(1, 5):
-    src = Path(f"staging/news24-0{i}.b64")
-    dst = Path(f"assets/news-2026-08-24-0{i}.webp")
-    if not src.exists():
-        raise SystemExit(f"Missing staged image: {src}")
-    data = re.sub(r"\s+", "", src.read_text())
-    data += "=" * (-len(data) % 4)
-    try:
-        raw = base64.b64decode(data, validate=False)
-    except Exception as exc:
-        raise SystemExit(f"Cannot decode {src}: {exc}")
+    f = Path(f"assets/news-2026-08-24-0{i}.webp")
+    if not f.exists() or f.stat().st_size == 0:
+        raise SystemExit(f"Missing 24 August image: {f}")
+    raw = f.read_bytes()
     if not (raw.startswith(b"RIFF") and b"WEBP" in raw[:16]):
-        raise SystemExit(f"Invalid WebP data in {src}")
-    dst.write_bytes(raw)
-    print(f"decoded {dst}: {len(raw)} bytes")
+        raise SystemExit(f"Invalid WebP asset: {f}")
+    print(f"verified {f}: {len(raw)} bytes")
 
 p = Path("daily-status.js")
 s = p.read_text()
 
+# Keep one canonical definition for each recent gallery.
 for name in ("NEWS24", "NEWS25", "NEWS26"):
     s = re.sub(rf"\n\s*const {name}\s*=\s*\[[\s\S]*?\];\s*", "\n", s, count=1)
 
@@ -32,26 +25,26 @@ if not anchor:
 constants = """
 
   const NEWS24 = [
-    'assets/news-2026-08-24-01.webp?v=20260826-8',
-    'assets/news-2026-08-24-02.webp?v=20260826-8',
-    'assets/news-2026-08-24-03.webp?v=20260826-8',
-    'assets/news-2026-08-24-04.webp?v=20260826-8'
+    'assets/news-2026-08-24-01.webp?v=20260826-9',
+    'assets/news-2026-08-24-02.webp?v=20260826-9',
+    'assets/news-2026-08-24-03.webp?v=20260826-9',
+    'assets/news-2026-08-24-04.webp?v=20260826-9'
   ];
 
   const NEWS25 = [
-    'assets/news-2026-08-25-01.webp?v=20260826-8',
-    'assets/news-2026-08-25-02.webp?v=20260826-8',
-    'assets/news-2026-08-25-03.webp?v=20260826-8',
-    'assets/news-2026-08-25-05.webp?v=20260826-8',
-    'assets/news-2026-08-25-06.webp?v=20260826-8',
-    'assets/news-2026-08-25-07.webp?v=20260826-8'
+    'assets/news-2026-08-25-01.webp?v=20260826-9',
+    'assets/news-2026-08-25-02.webp?v=20260826-9',
+    'assets/news-2026-08-25-03.webp?v=20260826-9',
+    'assets/news-2026-08-25-05.webp?v=20260826-9',
+    'assets/news-2026-08-25-06.webp?v=20260826-9',
+    'assets/news-2026-08-25-07.webp?v=20260826-9'
   ];
 
   const NEWS26 = [
-    'assets/news-2026-08-26-01.webp?v=20260826-8',
-    'assets/news-2026-08-26-02.webp?v=20260826-8',
-    'assets/news-2026-08-26-03.webp?v=20260826-8',
-    'assets/news-2026-08-26-04.webp?v=20260826-8'
+    'assets/news-2026-08-26-01.webp?v=20260826-9',
+    'assets/news-2026-08-26-02.webp?v=20260826-9',
+    'assets/news-2026-08-26-03.webp?v=20260826-9',
+    'assets/news-2026-08-26-04.webp?v=20260826-9'
   ];"""
 pos = anchor.end()
 s = s[:pos] + constants + s[pos:]
@@ -74,6 +67,7 @@ if "function sync24AugPost()" not in s:
 """
     s = s.replace(marker, fn + marker, 1)
 
+# Keep apply order explicit and chronological for recent news.
 if "sync24AugPost();" not in s:
     if "    sync23AugPost();\n" not in s:
         raise SystemExit("sync23AugPost call not found")
@@ -81,26 +75,17 @@ if "sync24AugPost();" not in s:
 
 p.write_text(s)
 
+# Force browsers/CDN to load the corrected data script.
 ip = Path("index.html")
 html = ip.read_text()
-html2, n = re.subn(r"daily-status\.js\?v=[^\"']+", "daily-status.js?v=20260826-8", html)
+html2, n = re.subn(r"daily-status\.js\?v=[^\"']+", "daily-status.js?v=20260826-9", html)
 if n == 0:
     raise SystemExit("daily-status.js script reference not found")
 ip.write_text(html2)
-
-for f in [Path(f"assets/news-2026-08-24-0{i}.webp") for i in range(1, 5)]:
-    if not f.exists() or f.stat().st_size == 0:
-        raise SystemExit(f"Missing output image: {f}")
 
 check = p.read_text()
 for token in ("const NEWS24", "const NEWS25", "const NEWS26", "sync24AugPost();"):
     if token not in check:
         raise SystemExit(f"Verification failed: {token}")
 
-for path in [
-    "staging/news24-placeholder.txt",
-    "staging/news24-01.b64", "staging/news24-02.b64", "staging/news24-03.b64", "staging/news24-04.b64",
-]:
-    Path(path).unlink(missing_ok=True)
-
-print("24 August gallery prepared successfully")
+print("24-26 August galleries prepared successfully")
