@@ -1,0 +1,146 @@
+name: Install 24 August newspaper gallery
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-news-2026-08-24.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Decode and validate 24 August images
+        shell: python
+        run: |
+          import base64
+          from pathlib import Path
+          for i in range(1, 5):
+              src = Path(f'staging/news24-small-0{i}.b64')
+              dst = Path(f'assets/news-2026-08-24-0{i}.webp')
+              raw = base64.b64decode(src.read_text().strip())
+              if not (raw.startswith(b'RIFF') and b'WEBP' in raw[:16]):
+                  raise SystemExit(f'Invalid WebP data in {src}')
+              dst.write_bytes(raw)
+              print(dst, len(raw))
+
+      - name: Repair recent newspaper data and add 24 August
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          p = Path('daily-status.js')
+          s = p.read_text()
+
+          # Remove any stale/partial definitions before inserting one canonical set.
+          for name in ('NEWS24', 'NEWS25', 'NEWS26'):
+              s = re.sub(rf'\n\s*const {name}\s*=\s*\[[\s\S]*?\];\s*', '\n', s, count=1)
+
+          anchor = re.search(r"(\s*const NEWS23\s*=\s*[^;]+;)", s)
+          if not anchor:
+              raise SystemExit('NEWS23 anchor not found')
+
+          constants = r'''
+
+  const NEWS24 = [
+    'assets/news-2026-08-24-01.webp?v=20260826-4',
+    'assets/news-2026-08-24-02.webp?v=20260826-4',
+    'assets/news-2026-08-24-03.webp?v=20260826-4',
+    'assets/news-2026-08-24-04.webp?v=20260826-4'
+  ];
+
+  const NEWS25 = [
+    'assets/news-2026-08-25-01.webp?v=20260826-4',
+    'assets/news-2026-08-25-02.webp?v=20260826-4',
+    'assets/news-2026-08-25-03.webp?v=20260826-4',
+    'assets/news-2026-08-25-05.webp?v=20260826-4',
+    'assets/news-2026-08-25-06.webp?v=20260826-4',
+    'assets/news-2026-08-25-07.webp?v=20260826-4'
+  ];
+
+  const NEWS26 = [
+    'assets/news-2026-08-26-01.webp?v=20260826-4',
+    'assets/news-2026-08-26-02.webp?v=20260826-4',
+    'assets/news-2026-08-26-03.webp?v=20260826-4',
+    'assets/news-2026-08-26-04.webp?v=20260826-4'
+  ];'''
+          pos = anchor.end()
+          s = s[:pos] + constants + s[pos:]
+
+          if 'function sync24AugPost()' not in s:
+              marker = '  function sync25AugPost() {'
+              if marker not in s:
+                  raise SystemExit('sync25AugPost marker not found')
+              fn = r'''  function sync24AugPost() {
+    upsertPost({
+      id: 'news-coverage-2026-08-24',
+      type: 'Paper Cut',
+      date: '2026-08-24',
+      title: '24 August 2026 newspaper coverage: Praja Soudha movement and community support',
+      titleKn: '24 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿಗಳು: ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಸಮುದಾಯದ ಬೆಂಬಲ',
+      text: 'Four newspaper cuttings dated 24 August 2026 covering the Banahatti Praja Soudha movement and community participation.',
+      textKn: 'ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಸಮುದಾಯದ ಭಾಗವಹಿಸುವಿಕೆಯನ್ನು ದಾಖಲಿಸುವ 24 ಆಗಸ್ಟ್ 2026ರ ನಾಲ್ಕು ಪತ್ರಿಕಾ ವರದಿಗಳು.',
+      mediaKind: 'gallery',
+      mediaUrls: NEWS24,
+      mediaUrl: NEWS24[0],
+      link: '',
+      local: false,
+      createdAt: 24
+    });
+  }
+
+'''
+              s = s.replace(marker, fn + marker, 1)
+
+          # Ensure 24 Aug is actually invoked, in chronological order.
+          if 'sync24AugPost();' not in s:
+              s = s.replace('    sync23AugPost();\n', '    sync23AugPost();\n    sync24AugPost();\n', 1)
+
+          p.write_text(s)
+
+          # Force browsers/CDN to load the repaired script.
+          ip = Path('index.html')
+          html = ip.read_text()
+          html2, n = re.subn(r'daily-status\.js\?v=[^"\']+', 'daily-status.js?v=20260826-4', html)
+          if n == 0:
+              raise SystemExit('daily-status.js script reference not found')
+          ip.write_text(html2)
+
+      - name: Verify references
+        shell: bash
+        run: |
+          set -e
+          for f in assets/news-2026-08-24-{01,02,03,04}.webp; do test -s "$f"; done
+          grep -q "const NEWS24" daily-status.js
+          grep -q "const NEWS25" daily-status.js
+          grep -q "const NEWS26" daily-status.js
+          grep -q "sync24AugPost();" daily-status.js
+          grep -q "daily-status.js?v=20260826-4" index.html
+
+      - name: Remove temporary staging files
+        shell: bash
+        run: |
+          rm -f staging/news24-placeholder.txt
+          rm -f staging/news24-01.b64 staging/news24-02.b64 staging/news24-03.b64 staging/news24-04.b64
+          rm -f staging/news24-small-01.b64 staging/news24-small-02.b64 staging/news24-small-03.b64 staging/news24-small-04.b64
+
+      - name: Commit repaired galleries
+        shell: bash
+        run: |
+          git config user.name "ChatGPT Website Update"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Add 24 August gallery and repair recent news"
+            git push origin main
+          fi
