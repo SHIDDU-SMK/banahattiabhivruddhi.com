@@ -1,17 +1,17 @@
-name: Install 24 August newspaper gallery
+name: Validate and repair recent newspaper galleries
 
 on:
   push:
+    branches: [main]
     paths:
       - '.github/workflows/install-news-2026-08-24.yml'
-      - 'scripts/install_news24.py'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  install:
+  validate-repair:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -19,17 +19,105 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run installer
-        run: python3 scripts/install_news24.py
+      - name: Install Pillow
+        run: python3 -m pip install --quiet pillow
 
-      - name: Commit website update
+      - name: Validate 23-26 August images and repair 24 August from staging when valid
+        shell: bash
         run: |
-          git config user.name "ChatGPT Website Update"
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import base64
+
+          root = Path('.')
+          assets = root / 'assets'
+
+          def check(path):
+              try:
+                  with Image.open(path) as im:
+                      im.verify()
+                  with Image.open(path) as im:
+                      print(f'VALID {path}: {im.format} {im.size[0]}x{im.size[1]} {path.stat().st_size} bytes')
+                  return True
+              except Exception as exc:
+                  print(f'INVALID {path}: {exc}')
+                  return False
+
+          print('=== Existing files ===')
+          targets = [assets/'news-2026-08-23-01.webp']
+          targets += [assets/f'news-2026-08-24-0{i}.webp' for i in range(1,5)]
+          targets += [assets/f'news-2026-08-25-0{i}.webp' for i in (1,2,3,5,6,7)]
+          targets += [assets/f'news-2026-08-26-0{i}.webp' for i in range(1,5)]
+          before = {str(p): check(p) if p.exists() else False for p in targets}
+
+          print('=== Attempt 24 Aug rebuild from staging ===')
+          parts = [root/'staging'/f'news24-0{i}.b64' for i in range(1,5)]
+          rebuilt = []
+          for i, src in enumerate(parts, 1):
+              if not src.exists():
+                  print('MISSING', src)
+                  continue
+              raw = ''.join(src.read_text(encoding='utf-8').split())
+              try:
+                  data = base64.b64decode(raw, validate=True)
+              except Exception as exc:
+                  print(f'BAD BASE64 {src}: {exc}')
+                  continue
+              out = assets/f'news-2026-08-24-0{i}.webp'
+              tmp = assets/f'.news24-{i}.tmp.webp'
+              tmp.write_bytes(data)
+              if check(tmp):
+                  out.write_bytes(data)
+                  rebuilt.append(out)
+                  print('REPAIRED', out)
+              tmp.unlink(missing_ok=True)
+
+          print('=== Final files ===')
+          final = {str(p): check(p) if p.exists() else False for p in targets}
+          bad = [p for p, ok in final.items() if not ok]
+          print('INVALID_COUNT', len(bad))
+          for p in bad:
+              print('STILL_INVALID', p)
+
+          # Do not fail solely because legacy 25 Aug source files may be bad;
+          # this run is diagnostic as well as repairing recoverable 24 Aug files.
+          PY
+
+      - name: Fix newspaper image cropping and bump cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('styles.css')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* Newspaper/document images: preserve the full clipping */'
+          rule = "\n\n/* Newspaper/document images: preserve the full clipping */\n.post-media img, .modal-slideshow-stage img, .today-update-card img { object-fit: contain; background: #fff; }\n"
+          if marker not in s:
+              s += rule
+          p.write_text(s, encoding='utf-8')
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          s = re.sub(r'daily-status\.js\?v=[0-9-]+', 'daily-status.js?v=20260826-11', s)
+          s = re.sub(r'styles\.css\?v=[0-9-]+', 'styles.css?v=20260826-11', s)
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit validated repairs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "ChatGPT Website Repair"
           git config user.email "actions@users.noreply.github.com"
-          git add -A
+          git add assets/news-2026-08-24-*.webp styles.css index.html
           if git diff --cached --quiet; then
-            echo "No changes to commit"
+            echo "No repair changes to commit"
           else
-            git commit -m "Add 24 August gallery and repair recent news"
+            git commit -m "Validate and repair recent newspaper galleries"
             git push origin main
           fi
