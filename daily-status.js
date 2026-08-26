@@ -1,8 +1,8 @@
 // Keeps the top status/ticker current and applies the latest dated content.
 (() => {
-  const LATEST_CONTENT_DATE = '2026-08-23';
-  const LATEST_CONTENT_KN = '23 ಆಗಸ್ಟ್ 2026';
-  const LATEST_CONTENT_EN = '23 August 2026';
+  const LATEST_CONTENT_DATE = '2026-08-26';
+  const LATEST_CONTENT_KN = '26 ಆಗಸ್ಟ್ 2026';
+  const LATEST_CONTENT_EN = '26 August 2026';
 
   const NEWS21 = [
     'assets/news-2026-08-21-01.webp?v=20260821-1',
@@ -23,6 +23,7 @@
     'assets/news-2026-08-23-01.part4?v=20260823-1',
     'assets/news-2026-08-23-01.part5?v=20260823-1'
   ];
+  const NEWS26 = 'assets/news-2026-08-26-01.webp?v=20260826-1';
   let news23MediaUrl = '';
 
   const monthKn = {
@@ -137,28 +138,47 @@
     });
   }
 
-  function feature23Aug(mediaUrl) {
+  function sync26AugPost() {
+    upsertPost({
+      id: 'news-coverage-2026-08-26',
+      type: 'Paper Cut',
+      date: '2026-08-26',
+      title: '26 August 2026 newspaper coverage: Banahatti Praja Soudha movement',
+      titleKn: '26 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ: ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ',
+      text: 'Newspaper cutting dated 26 August 2026 covering the continuing Banahatti Praja Soudha movement and public campaign.',
+      textKn: 'ಬನಹಟ್ಟಿಯಲ್ಲಿ ಮುಂದುವರಿದಿರುವ ಪ್ರಜಾಸೌಧ ಹೋರಾಟ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಅಭಿಯಾನದ ಕುರಿತು 26 ಆಗಸ್ಟ್ 2026ರ ಪತ್ರಿಕಾ ಕತ್ತರಣೆ.',
+      mediaKind: 'image',
+      mediaUrls: [NEWS26],
+      mediaUrl: NEWS26,
+      link: NEWS26,
+      local: false,
+      createdAt: 26
+    });
+  }
+
+  function feature26Aug() {
     const main = document.querySelector('main#main');
     if (!main) return;
 
     document.getElementById('featured-news-21')?.remove();
     document.getElementById('featured-news-22')?.remove();
     document.getElementById('featured-news-23')?.remove();
+    document.getElementById('featured-news-26')?.remove();
 
     const section = document.createElement('section');
-    section.id = 'featured-news-23';
+    section.id = 'featured-news-26';
     section.className = 'today-updates';
     section.innerHTML = `
       <div class="container">
         <div class="today-updates-head">
-          <span class="latest-highlight-badge">23 ಆಗಸ್ಟ್ 2026 · Latest Newspaper Coverage</span>
-          <h2>23 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿ</h2>
-          <p>ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಸತ್ಯಾಗ್ರಹ 15ನೇ ದಿನಕ್ಕೆ · Praja Soudha Satyagraha enters its 15th day</p>
+          <span class="latest-highlight-badge">26 ಆಗಸ್ಟ್ 2026 · Latest Newspaper Coverage</span>
+          <h2>26 ಆಗಸ್ಟ್ 2026 — ಇಂದಿನ ಪತ್ರಿಕಾ ವರದಿ</h2>
+          <p>ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಇಂದಿನ ಪತ್ರಿಕಾ ಕತ್ತರಣೆ · Today's newspaper cutting from the Banahatti Praja Soudha movement</p>
         </div>
         <div class="today-updates-grid">
-          <a class="today-update-card" href="${mediaUrl}" target="_blank" rel="noopener noreferrer">
-            <img src="${mediaUrl}" alt="23 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ" loading="eager">
-            <span>ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಸತ್ಯಾಗ್ರಹ 15ನೇ ದಿನಕ್ಕೆ · Newspaper cutting</span>
+          <a class="today-update-card" href="${NEWS26}" target="_blank" rel="noopener noreferrer">
+            <img src="${NEWS26}" alt="26 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ" loading="eager">
+            <span>26 ಆಗಸ್ಟ್ ಪತ್ರಿಕಾ ಕತ್ತರಣೆ · Newspaper cutting</span>
           </a>
         </div>
       </div>`;
@@ -174,10 +194,12 @@
     try {
       const mediaUrl = await loadNews23MediaUrl();
       sync23AugPost(mediaUrl);
-      feature23Aug(mediaUrl);
     } catch (error) {
       console.error('Could not load 23 August newspaper cutting:', error);
     }
+
+    sync26AugPost();
+    feature26Aug();
 
     if (typeof renderFilters === 'function' && typeof renderPosts === 'function') {
       renderFilters();
