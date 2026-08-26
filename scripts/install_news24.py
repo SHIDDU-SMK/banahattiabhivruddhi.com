@@ -1,15 +1,20 @@
 from pathlib import Path
 import re
 
-# The four 24 August images are committed directly as WebP assets.
-for i in range(1, 5):
-    f = Path(f"assets/news-2026-08-24-0{i}.webp")
-    if not f.exists() or f.stat().st_size == 0:
-        raise SystemExit(f"Missing 24 August image: {f}")
-    raw = f.read_bytes()
-    if not (raw.startswith(b"RIFF") and b"WEBP" in raw[:16]):
-        raise SystemExit(f"Invalid WebP asset: {f}")
-    print(f"verified {f}: {len(raw)} bytes")
+# The recent newspaper assets are managed separately from this data installer.
+# This workflow verifies that all expected files are present and non-empty,
+# then repairs the website data/ordering/cache references deterministically.
+expected = {
+    24: [1, 2, 3, 4],
+    25: [1, 2, 3, 5, 6, 7],
+    26: [1, 2, 3, 4],
+}
+for day, nums in expected.items():
+    for n in nums:
+        f = Path(f"assets/news-2026-08-{day:02d}-{n:02d}.webp")
+        if not f.exists() or f.stat().st_size == 0:
+            raise SystemExit(f"Missing newspaper asset: {f}")
+        print(f"found {f}: {f.stat().st_size} bytes")
 
 p = Path("daily-status.js")
 s = p.read_text()
@@ -25,26 +30,26 @@ if not anchor:
 constants = """
 
   const NEWS24 = [
-    'assets/news-2026-08-24-01.webp?v=20260826-9',
-    'assets/news-2026-08-24-02.webp?v=20260826-9',
-    'assets/news-2026-08-24-03.webp?v=20260826-9',
-    'assets/news-2026-08-24-04.webp?v=20260826-9'
+    'assets/news-2026-08-24-01.webp?v=20260826-10',
+    'assets/news-2026-08-24-02.webp?v=20260826-10',
+    'assets/news-2026-08-24-03.webp?v=20260826-10',
+    'assets/news-2026-08-24-04.webp?v=20260826-10'
   ];
 
   const NEWS25 = [
-    'assets/news-2026-08-25-01.webp?v=20260826-9',
-    'assets/news-2026-08-25-02.webp?v=20260826-9',
-    'assets/news-2026-08-25-03.webp?v=20260826-9',
-    'assets/news-2026-08-25-05.webp?v=20260826-9',
-    'assets/news-2026-08-25-06.webp?v=20260826-9',
-    'assets/news-2026-08-25-07.webp?v=20260826-9'
+    'assets/news-2026-08-25-01.webp?v=20260826-10',
+    'assets/news-2026-08-25-02.webp?v=20260826-10',
+    'assets/news-2026-08-25-03.webp?v=20260826-10',
+    'assets/news-2026-08-25-05.webp?v=20260826-10',
+    'assets/news-2026-08-25-06.webp?v=20260826-10',
+    'assets/news-2026-08-25-07.webp?v=20260826-10'
   ];
 
   const NEWS26 = [
-    'assets/news-2026-08-26-01.webp?v=20260826-9',
-    'assets/news-2026-08-26-02.webp?v=20260826-9',
-    'assets/news-2026-08-26-03.webp?v=20260826-9',
-    'assets/news-2026-08-26-04.webp?v=20260826-9'
+    'assets/news-2026-08-26-01.webp?v=20260826-10',
+    'assets/news-2026-08-26-02.webp?v=20260826-10',
+    'assets/news-2026-08-26-03.webp?v=20260826-10',
+    'assets/news-2026-08-26-04.webp?v=20260826-10'
   ];"""
 pos = anchor.end()
 s = s[:pos] + constants + s[pos:]
@@ -78,7 +83,7 @@ p.write_text(s)
 # Force browsers/CDN to load the corrected data script.
 ip = Path("index.html")
 html = ip.read_text()
-html2, n = re.subn(r"daily-status\.js\?v=[^\"']+", "daily-status.js?v=20260826-9", html)
+html2, n = re.subn(r"daily-status\.js\?v=[^\"']+", "daily-status.js?v=20260826-10", html)
 if n == 0:
     raise SystemExit("daily-status.js script reference not found")
 ip.write_text(html2)
