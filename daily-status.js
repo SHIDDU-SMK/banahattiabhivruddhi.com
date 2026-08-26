@@ -15,32 +15,7 @@
     'assets/news-2026-08-22-03.webp?v=20260822-1'
   ];
 
-  const NEWS23_PARTS = [
-    'assets/news-2026-08-23-01.part0?v=20260823-1',
-    'assets/news-2026-08-23-01.part1?v=20260823-1',
-    'assets/news-2026-08-23-01.part2?v=20260823-1',
-    'assets/news-2026-08-23-01.part3?v=20260823-1',
-    'assets/news-2026-08-23-01.part4?v=20260823-1',
-    'assets/news-2026-08-23-01.part5?v=20260823-1'
-  ];
-
-  const NEWS25 = [
-    'assets/news-2026-08-25-01.webp?v=20260826-2',
-    'assets/news-2026-08-25-02.webp?v=20260826-2',
-    'assets/news-2026-08-25-03.webp?v=20260826-2',
-    'assets/news-2026-08-25-05.webp?v=20260826-2',
-    'assets/news-2026-08-25-06.webp?v=20260826-2',
-    'assets/news-2026-08-25-07.webp?v=20260826-2'
-  ];
-
-  const NEWS26 = [
-    'assets/news-2026-08-26-01.webp?v=20260826-2',
-    'assets/news-2026-08-26-02.webp?v=20260826-2',
-    'assets/news-2026-08-26-03.webp?v=20260826-2',
-    'assets/news-2026-08-26-04.webp?v=20260826-2'
-  ];
-
-  let news23MediaUrl = '';
+  const NEWS23 = 'assets/news-2026-08-23-01.webp?v=20260826-4';
 
   const monthKn = {
     January:'ಜನವರಿ', February:'ಫೆಬ್ರವರಿ', March:'ಮಾರ್ಚ್', April:'ಏಪ್ರಿಲ್',
@@ -86,20 +61,6 @@
     else siteData.initialPosts.unshift(post);
   }
 
-  async function loadNews23MediaUrl() {
-    if (news23MediaUrl) return news23MediaUrl;
-    const chunks = await Promise.all(NEWS23_PARTS.map(async url => {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`Unable to load ${url}`);
-      return response.text();
-    }));
-    const binary = atob(chunks.join('').trim());
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
-    news23MediaUrl = URL.createObjectURL(new Blob([bytes], { type: 'image/webp' }));
-    return news23MediaUrl;
-  }
-
   function sync21AugPost() {
     upsertPost({
       id: 'news-coverage-2026-08-21', type: 'Paper Cut', date: '2026-08-21',
@@ -122,14 +83,14 @@
     });
   }
 
-  function sync23AugPost(mediaUrl) {
+  function sync23AugPost() {
     upsertPost({
       id: 'news-coverage-2026-08-23', type: 'Paper Cut', date: '2026-08-23',
       title: '23 August 2026 newspaper coverage: Praja Soudha Satyagraha enters its 15th day',
       titleKn: '23 ಆಗಸ್ಟ್ 2026 ಪತ್ರಿಕಾ ವರದಿ: ಪ್ರಜಾಸೌಧಕ್ಕಾಗಿ ಸತ್ಯಾಗ್ರಹ 15ನೇ ದಿನಕ್ಕೆ',
       text: 'Newspaper coverage dated 23 August 2026 on the Banahatti Praja Soudha movement and the relay Satyagraha entering its 15th day.',
       textKn: 'ಬನಹಟ್ಟಿ ಪ್ರಜಾಸೌಧ ಹೋರಾಟದ ಸರದಿ ಸತ್ಯಾಗ್ರಹ 15ನೇ ದಿನಕ್ಕೆ ಕಾಲಿಟ್ಟಿರುವುದನ್ನು ದಾಖಲಿಸುವ 23 ಆಗಸ್ಟ್ 2026ರ ಪತ್ರಿಕಾ ವರದಿ.',
-      mediaKind: 'image', mediaUrls: [mediaUrl], mediaUrl, link: '', local: false, createdAt: 23
+      mediaKind: 'image', mediaUrls: [NEWS23], mediaUrl: NEWS23, link: NEWS23, local: false, createdAt: 23
     });
   }
 
@@ -189,13 +150,7 @@
     sync26AugPost();
     refreshTopStatus();
 
-    try {
-      const mediaUrl = await loadNews23MediaUrl();
-      sync23AugPost(mediaUrl);
-    } catch (error) {
-      console.error('Could not load 23 August newspaper cutting:', error);
-    }
-
+    sync23AugPost();
     feature26Aug();
 
     if (typeof renderFilters === 'function' && typeof renderPosts === 'function') {
