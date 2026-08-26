@@ -2,13 +2,18 @@ from pathlib import Path
 import base64
 import re
 
-# Decode four staged 24 August WebP images.
+# Decode four staged 24 August WebP images. The staged text may omit Base64 padding.
 for i in range(1, 5):
     src = Path(f"staging/news24-0{i}.b64")
     dst = Path(f"assets/news-2026-08-24-0{i}.webp")
     if not src.exists():
         raise SystemExit(f"Missing staged image: {src}")
-    raw = base64.b64decode(src.read_text().strip())
+    data = re.sub(r"\s+", "", src.read_text())
+    data += "=" * (-len(data) % 4)
+    try:
+        raw = base64.b64decode(data, validate=False)
+    except Exception as exc:
+        raise SystemExit(f"Cannot decode {src}: {exc}")
     if not (raw.startswith(b"RIFF") and b"WEBP" in raw[:16]):
         raise SystemExit(f"Invalid WebP data in {src}")
     dst.write_bytes(raw)
@@ -27,26 +32,26 @@ if not anchor:
 constants = """
 
   const NEWS24 = [
-    'assets/news-2026-08-24-01.webp?v=20260826-7',
-    'assets/news-2026-08-24-02.webp?v=20260826-7',
-    'assets/news-2026-08-24-03.webp?v=20260826-7',
-    'assets/news-2026-08-24-04.webp?v=20260826-7'
+    'assets/news-2026-08-24-01.webp?v=20260826-8',
+    'assets/news-2026-08-24-02.webp?v=20260826-8',
+    'assets/news-2026-08-24-03.webp?v=20260826-8',
+    'assets/news-2026-08-24-04.webp?v=20260826-8'
   ];
 
   const NEWS25 = [
-    'assets/news-2026-08-25-01.webp?v=20260826-7',
-    'assets/news-2026-08-25-02.webp?v=20260826-7',
-    'assets/news-2026-08-25-03.webp?v=20260826-7',
-    'assets/news-2026-08-25-05.webp?v=20260826-7',
-    'assets/news-2026-08-25-06.webp?v=20260826-7',
-    'assets/news-2026-08-25-07.webp?v=20260826-7'
+    'assets/news-2026-08-25-01.webp?v=20260826-8',
+    'assets/news-2026-08-25-02.webp?v=20260826-8',
+    'assets/news-2026-08-25-03.webp?v=20260826-8',
+    'assets/news-2026-08-25-05.webp?v=20260826-8',
+    'assets/news-2026-08-25-06.webp?v=20260826-8',
+    'assets/news-2026-08-25-07.webp?v=20260826-8'
   ];
 
   const NEWS26 = [
-    'assets/news-2026-08-26-01.webp?v=20260826-7',
-    'assets/news-2026-08-26-02.webp?v=20260826-7',
-    'assets/news-2026-08-26-03.webp?v=20260826-7',
-    'assets/news-2026-08-26-04.webp?v=20260826-7'
+    'assets/news-2026-08-26-01.webp?v=20260826-8',
+    'assets/news-2026-08-26-02.webp?v=20260826-8',
+    'assets/news-2026-08-26-03.webp?v=20260826-8',
+    'assets/news-2026-08-26-04.webp?v=20260826-8'
   ];"""
 pos = anchor.end()
 s = s[:pos] + constants + s[pos:]
@@ -78,7 +83,7 @@ p.write_text(s)
 
 ip = Path("index.html")
 html = ip.read_text()
-html2, n = re.subn(r"daily-status\.js\?v=[^\"']+", "daily-status.js?v=20260826-7", html)
+html2, n = re.subn(r"daily-status\.js\?v=[^\"']+", "daily-status.js?v=20260826-8", html)
 if n == 0:
     raise SystemExit("daily-status.js script reference not found")
 ip.write_text(html2)
