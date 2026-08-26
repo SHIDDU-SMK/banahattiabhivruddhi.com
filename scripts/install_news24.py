@@ -4,7 +4,7 @@ import re
 
 # Decode four staged 24 August WebP images.
 for i in range(1, 5):
-    src = Path(f"staging/news24-small-0{i}.b64")
+    src = Path(f"staging/news24-0{i}.b64")
     dst = Path(f"assets/news-2026-08-24-0{i}.webp")
     if not src.exists():
         raise SystemExit(f"Missing staged image: {src}")
@@ -17,7 +17,6 @@ for i in range(1, 5):
 p = Path("daily-status.js")
 s = p.read_text()
 
-# Remove stale/partial constants so one canonical set is used.
 for name in ("NEWS24", "NEWS25", "NEWS26"):
     s = re.sub(rf"\n\s*const {name}\s*=\s*\[[\s\S]*?\];\s*", "\n", s, count=1)
 
@@ -28,26 +27,26 @@ if not anchor:
 constants = """
 
   const NEWS24 = [
-    'assets/news-2026-08-24-01.webp?v=20260826-6',
-    'assets/news-2026-08-24-02.webp?v=20260826-6',
-    'assets/news-2026-08-24-03.webp?v=20260826-6',
-    'assets/news-2026-08-24-04.webp?v=20260826-6'
+    'assets/news-2026-08-24-01.webp?v=20260826-7',
+    'assets/news-2026-08-24-02.webp?v=20260826-7',
+    'assets/news-2026-08-24-03.webp?v=20260826-7',
+    'assets/news-2026-08-24-04.webp?v=20260826-7'
   ];
 
   const NEWS25 = [
-    'assets/news-2026-08-25-01.webp?v=20260826-6',
-    'assets/news-2026-08-25-02.webp?v=20260826-6',
-    'assets/news-2026-08-25-03.webp?v=20260826-6',
-    'assets/news-2026-08-25-05.webp?v=20260826-6',
-    'assets/news-2026-08-25-06.webp?v=20260826-6',
-    'assets/news-2026-08-25-07.webp?v=20260826-6'
+    'assets/news-2026-08-25-01.webp?v=20260826-7',
+    'assets/news-2026-08-25-02.webp?v=20260826-7',
+    'assets/news-2026-08-25-03.webp?v=20260826-7',
+    'assets/news-2026-08-25-05.webp?v=20260826-7',
+    'assets/news-2026-08-25-06.webp?v=20260826-7',
+    'assets/news-2026-08-25-07.webp?v=20260826-7'
   ];
 
   const NEWS26 = [
-    'assets/news-2026-08-26-01.webp?v=20260826-6',
-    'assets/news-2026-08-26-02.webp?v=20260826-6',
-    'assets/news-2026-08-26-03.webp?v=20260826-6',
-    'assets/news-2026-08-26-04.webp?v=20260826-6'
+    'assets/news-2026-08-26-01.webp?v=20260826-7',
+    'assets/news-2026-08-26-02.webp?v=20260826-7',
+    'assets/news-2026-08-26-03.webp?v=20260826-7',
+    'assets/news-2026-08-26-04.webp?v=20260826-7'
   ];"""
 pos = anchor.end()
 s = s[:pos] + constants + s[pos:]
@@ -77,15 +76,13 @@ if "sync24AugPost();" not in s:
 
 p.write_text(s)
 
-# Force browsers/CDN to load the corrected script.
 ip = Path("index.html")
 html = ip.read_text()
-html2, n = re.subn(r"daily-status\.js\?v=[^\"']+", "daily-status.js?v=20260826-6", html)
+html2, n = re.subn(r"daily-status\.js\?v=[^\"']+", "daily-status.js?v=20260826-7", html)
 if n == 0:
     raise SystemExit("daily-status.js script reference not found")
 ip.write_text(html2)
 
-# Basic verification.
 for f in [Path(f"assets/news-2026-08-24-0{i}.webp") for i in range(1, 5)]:
     if not f.exists() or f.stat().st_size == 0:
         raise SystemExit(f"Missing output image: {f}")
@@ -95,11 +92,9 @@ for token in ("const NEWS24", "const NEWS25", "const NEWS26", "sync24AugPost();"
     if token not in check:
         raise SystemExit(f"Verification failed: {token}")
 
-# Clean staging only after successful preparation.
 for path in [
     "staging/news24-placeholder.txt",
     "staging/news24-01.b64", "staging/news24-02.b64", "staging/news24-03.b64", "staging/news24-04.b64",
-    "staging/news24-small-01.b64", "staging/news24-small-02.b64", "staging/news24-small-03.b64", "staging/news24-small-04.b64",
 ]:
     Path(path).unlink(missing_ok=True)
 
