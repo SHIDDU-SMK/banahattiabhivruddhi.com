@@ -1,0 +1,67 @@
+name: Repair newspaper image display
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/repair-news-images-28aug.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Validate images and repair display rules
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import re
+
+          # Validate every website image. Report broken files in the Actions log.
+          broken=[]
+          for p in Path('assets').glob('*'):
+              if p.suffix.lower() not in {'.webp','.png','.jpg','.jpeg'}:
+                  continue
+              try:
+                  with Image.open(p) as im:
+                      im.verify()
+              except Exception as e:
+                  broken.append((str(p),str(e)))
+          print('BROKEN IMAGE FILES:', broken)
+
+          # Newspaper cuttings must never be cropped or stretched in cards.
+          p=Path('styles.css')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('.post-media img, .post-media video { width: 100%; height: 100%; object-fit: cover; }',
+                      '.post-media img, .post-media video { width: 100%; height: 100%; object-fit: contain; }')
+          s += '''\n\n/* 28 Aug 2026: preserve newspaper/photo aspect ratios and prevent distortion */\n.post-media img, .today-update-card img { object-fit: contain !important; object-position: center center !important; }\n.post-media { background:#f7f4f3; }\n.post-card[data-type="Paper Cut"] .post-media { aspect-ratio: 4 / 3; }\n.post-card[data-type="Paper Cut"] .post-media img { padding:6px; }\n'''
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('responsive-2026-08-14.css')
+          s=p.read_text(encoding='utf-8')
+          s += '''\n\n/* 28 Aug 2026 newspaper/image safety overrides */\n.today-update-card img { object-fit: contain !important; object-position:center !important; background:#f7f4f3 !important; }\n@media (max-width:700px){ .today-update-card img { object-fit:contain !important; padding:4px; } }\n'''
+          p.write_text(s,encoding='utf-8')
+
+          # Make sure the recovered 25 Aug script is not accidentally loaded; daily-status is canonical for 21-26 Aug.
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r'responsive-2026-08-14\.css\?v=[^\"\']+', 'responsive-2026-08-14.css?v=20260828-1', s)
+          s=re.sub(r'daily-status\.js\?v=[^\"\']+', 'daily-status.js?v=20260828-1', s)
+          p.write_text(s,encoding='utf-8')
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add styles.css responsive-2026-08-14.css index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Fix distorted newspaper and gallery images"
+            git push origin main
+          fi
