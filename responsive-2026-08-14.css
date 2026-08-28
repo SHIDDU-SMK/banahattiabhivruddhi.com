@@ -726,3 +726,14 @@ body {
     line-height: 32px !important;
   }
 }
+
+/* Newspaper safety: preserve the full clipping on every screen. */
+.post-media img,
+.today-update-card img,
+.modal-media img {
+  object-fit: contain !important;
+  object-position: center center !important;
+  height: auto !important;
+  max-height: none !important;
+}
+.post-media { background: #f7f4ed; }
