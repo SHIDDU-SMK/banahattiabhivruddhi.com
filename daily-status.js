@@ -1,8 +1,8 @@
 // Keeps the top status/ticker current and applies the latest dated content.
 (() => {
-  const LATEST_CONTENT_DATE = '2026-08-26';
-  const LATEST_CONTENT_KN = '26 ಆಗಸ್ಟ್ 2026';
-  const LATEST_CONTENT_EN = '26 August 2026';
+  const LATEST_CONTENT_DATE = '2026-08-28';
+  const LATEST_CONTENT_KN = '28 ಆಗಸ್ಟ್ 2026';
+  const LATEST_CONTENT_EN = '28 August 2026';
 
   const NEWS21 = [
     'assets/news-2026-08-21-01.webp?v=20260821-1',
@@ -64,9 +64,6 @@
 
   function message() {
     const today = indiaDateParts();
-    if (today.iso === LATEST_CONTENT_DATE) {
-      return `${today.kn} · ಇಂದಿನ ನಾಲ್ಕು ಪತ್ರಿಕಾ ವರದಿಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ. · ${today.en} · Four newspaper cuttings added today.`;
-    }
     return `${today.kn} · ವೆಬ್‌ಸೈಟ್‌ನ ಇತ್ತೀಚಿನ ವಿಷಯ ${LATEST_CONTENT_KN}ರವರೆಗೆ ನವೀಕರಿಸಲಾಗಿದೆ. · ${today.en} · Latest website content is updated through ${LATEST_CONTENT_EN}.`;
   }
 
